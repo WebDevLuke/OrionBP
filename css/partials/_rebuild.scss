@@ -1,0 +1,167 @@
+/*
+|--------------------------------------------------------------------
+| REBUILD
+|--------------------------------------------------------------------
+*/
+
+html, body
+{
+    margin: 0;
+
+}
+
+h1,h2,h3,h4,h5,h6
+{ 
+font-weight: normal;
+clear: both;
+}
+
+hr
+{
+background-color: #000000;
+border:0;
+height: 1px;
+margin-bottom: 1.5em;
+}
+
+p
+{
+margin-bottom: 1.5em;
+}
+
+ul, dl
+{
+margin: 0 0 1.5em 2.5em;
+}
+
+ol
+{
+margin: 0 0 1.5em 2.5em;
+}
+
+dl
+{
+margin-left:0;
+}
+
+ul
+{
+list-style:disc;
+}
+
+ol
+{
+list-style-type: decimal;
+}
+
+ol ol
+{
+list-style:upper-alpha;
+}
+
+ol ol ol
+{
+list-style:lower-roman;
+}
+
+ol ol ol ol
+{
+list-style:lower-alpha;
+}
+
+ul ul, ol ol, ul ol, ol ul
+{
+margin-bottom:0;
+}
+
+dl dd:last-child
+{
+margin-bottom:0px;
+}
+
+dt
+{
+font-weight: bold;
+}
+
+dd
+{
+margin-bottom: 1.5em;
+}
+
+strong
+{
+font-weight: bold;
+}
+
+cite, em, i
+{
+font-style: italic;
+}
+
+blockquote
+{
+margin: 0 3em;
+}
+
+blockquote em, blockquote i, blockquote cite
+{
+font-style: normal;
+}
+
+pre
+{
+font: 11px Monaco, monospace;
+line-height: 1.5;
+margin-bottom: 1.5em;
+word-wrap:break-word;
+}
+
+code
+{
+font: 11px Monaco, monospace;
+}
+
+abbr, acronym
+{
+border-bottom: 1px dotted #000000;
+cursor: help;
+}
+
+ins
+{
+text-decoration: none;
+}
+
+sup, sub
+{
+height: 0;
+line-height: 1;
+vertical-align: baseline;
+position: relative;
+}
+
+sup
+{
+bottom: 1ex;
+}
+
+sub
+{
+top: .5ex;
+}
+
+form
+{
+position:relative;
+}
+
+address
+{
+font-style:normal;
+}
+
+textarea
+{
+resize:none;
+}

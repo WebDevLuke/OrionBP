@@ -1,0 +1,23 @@
+//--------------------------------------------------------------------
+// FRAMEWORK SETTINGS
+//--------------------------------------------------------------------
+
+// Should it be responsive?
+$responsive: true;
+
+// Should it be a responsive full width grid?
+$full-width: false;
+
+// Define Grid Parameters (1170gs default)
+$column-width: 70px;
+$gutter: 30px;
+$columns: 12;
+$padding: $gutter / 2;
+
+// Define Media Query Breakpoints
+$breakpoints: (
+	xlrg: 1280px,
+	lrg: 924px,
+	med: 640px,
+	sml: 480px
+);

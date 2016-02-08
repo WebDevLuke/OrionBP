@@ -1,0 +1,180 @@
+// Mixins
+
+//--------------------------------------------------------------------
+// BORDERBOX
+//--------------------------------------------------------------------
+
+@mixin border-box()
+{
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+//--------------------------------------------------------------------
+// COLOR FUNCTION
+//--------------------------------------------------------------------
+
+@function color($selection)
+{
+	// If the key exists in the map
+	@if $selection != null
+	{
+		@return map-get($colors, $selection);
+	}
+}
+
+//--------------------------------------------------------------------
+// SVG / PNG BACKGROUND FALLBACK
+//--------------------------------------------------------------------
+
+@mixin svg($name, $position: left top, $repeat: no-repeat, $color: transparent, $extension: png)
+{
+	background: url(../img/#{$name}.#{$extension}) $color $position $repeat;
+	background: $color url(../img/#{$name}.svg) $position $repeat;
+}
+
+//--------------------------------------------------------------------
+// CONTENT GRID
+//--------------------------------------------------------------------
+
+@mixin grid($numPerRow,$margin:10%)
+{
+width:(100% - ($margin * ($numPerRow - 1))) / $numPerRow;
+margin:0 $margin $margin 0;
+float:left;
+&:nth-child(#{$numPerRow}n)
+	{
+	margin-right:0;
+	}
+@include clearfix;
+}
+
+//--------------------------------------------------------------------
+// BORDER RADIUS
+//--------------------------------------------------------------------
+
+// Can define all borders or individual borders. If all borders, the rest default to first value
+@mixin border-radius($top-left, $top-right:$top-left, $bottom-right:$top-left, $bottom-left:$top-left)
+{
+-webkit-border-top-left-radius: $top-left;
+-webkit-border-top-right-radius: $top-right;
+-webkit-border-bottom-right-radius: $bottom-right;
+-webkit-border-bottom-left-radius: $bottom-left;
+-moz-border-radius-topleft: $top-left;
+-moz-border-radius-topright: $top-right;
+-moz-border-radius-bottomright: $bottom-right;
+-moz-border-radius-bottomleft: $bottom-left;
+border-top-left-radius: $top-left;
+border-top-right-radius: $top-right;
+border-bottom-right-radius: $bottom-right;
+border-bottom-left-radius: $bottom-left;
+}
+
+//--------------------------------------------------------------------
+// CSS3 TRANSITION
+//--------------------------------------------------------------------
+
+@mixin transition($time, $timing:ease, $target:all)
+{
+-webkit-transition: $target $time $timing;
+-moz-transition: $target $time $timing;
+-o-transition: $target $time $timing;
+-ms-transition: $target $time $timing;
+transition: $target $time $timing;
+}
+
+//--------------------------------------------------------------------
+// CLEARFIX
+//--------------------------------------------------------------------
+
+@mixin clearfix
+{
+	&:before, &:after
+	{
+        	content: "";
+        	display: table;
+    	}
+	&:after
+	{
+		clear: both;
+	}
+}
+
+//--------------------------------------------------------------------
+// OPACITY
+//--------------------------------------------------------------------
+
+@mixin opacity($value)
+{
+   filter: alpha(opactiy=($value * 100));
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$value * 100})";
+  -moz-opacity: $value;
+  -khtml-opacity: $value;
+  opacity: $value;
+}
+
+//--------------------------------------------------------------------
+// RESPONSIVE BREAKPOINTS
+//--------------------------------------------------------------------
+
+@mixin bp($breakpoint)
+{
+	// Only if Responsive Layout
+	@if $responsive == true
+	{
+		// Retrieves the value from the key
+		$value: map-get($breakpoints, $breakpoint);
+	 
+		// If the key exists in the map
+		@if $value != null
+		{
+			// Prints a media query based on the value
+			@media (max-width: $value)
+			{
+			@content;
+			}
+		}
+	}
+}
+
+@mixin bp-min($breakpoint)
+{
+	// Only if Responsive Layout
+	@if $responsive == true
+	{
+		// Retrieves the value from the key
+		$value: map-get($breakpoints, $breakpoint);
+	 
+		// If the key exists in the map
+		@if $value != null
+		{
+			// Prints a media query based on the value
+			@media (min-width: $value + 1)
+			{
+			@content;
+			}
+		}
+	}
+}
+
+@mixin bp-between($from, $to)
+{
+	// Only if Responsive Layout
+	@if $responsive == true
+	{
+		// Retrieves the value from the key
+		$from: map-get($breakpoints, $from);
+		$to: map-get($breakpoints, $to);
+	 
+		// If the key exists in the map
+		@if $from and $to != null
+		{
+			// Prints a media query based on the value
+			@media (min-width: $from) and (max-width: $to)
+			{
+			@content;
+			}
+		}
+	}
+}

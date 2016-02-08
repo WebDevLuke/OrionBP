@@ -1,0 +1,38 @@
+/*
+SASS 'Orion' Framework
+Author: Luke Harrison
+Web: www.lukeharrison.net
+Email: luke@lukeharrison.net
+*/
+
+// This is the the primary style sheet. Before you begin please review the config partial if you wish to tweak the settings and add default styles.
+
+// Import Standard Framework Components
+@import "partials/config";
+@import "partials/reset";
+@import "partials/rebuild";
+@import "partials/mixins";
+@import "partials/framework";
+
+// Import Optional Framework Modules
+@import "partials/modules/module-utilities"; // Utility Classes
+
+
+//--------------------------------------------------------------------
+// PROJECT STYLES
+//--------------------------------------------------------------------
+
+body
+{
+color:black;
+}
+
+.container
+{
+& div
+	{
+	background:#ccc;
+	@include transition(1.0s);
+	margin-bottom:30px;
+	}
+}

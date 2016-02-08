@@ -1,0 +1,219 @@
+//--------------------------------------------------------------------
+// FRAMEWORK
+//--------------------------------------------------------------------
+
+// This is where the magic happens
+// This generates grid classes based on the breakpoints defined in $breakpoints in config
+// Also creates breakpoint classes used for responsive elements
+
+//--------------------------------------------------------------------
+// SET VARIABLE DEFAULTS
+//--------------------------------------------------------------------
+
+$column-width: 70px !default;
+$gutter: 30px !default;
+$columns: 12 !default;
+$padding: $gutter / 2 !default;
+$responsive: true !default;
+$full-width: false !default;
+
+//--------------------------------------------------------------------
+// CHECK IF FULL WIDTH IS TRUE
+//--------------------------------------------------------------------
+
+@if $full-width == true
+{
+	$responsive: true;
+}
+
+//--------------------------------------------------------------------
+// CREATE BASE CONTAINER
+//--------------------------------------------------------------------
+
+$width: ($column-width * $columns) + ($gutter * ($columns - 1));
+
+// Set Base Container
+.container
+{
+@if $full-width == true
+{
+	max-width:100%;
+}
+@else if $responsive == true
+{
+	max-width:$width;
+}
+@else
+{
+	width:$width;
+}
+@include clearfix();
+margin:0px auto;
+position:relative;
+padding: 0 $padding 0 $padding;
+}
+
+//--------------------------------------------------------------------
+// CREATE GRID MIXIN
+//--------------------------------------------------------------------
+
+@mixin create_grid($prefix)
+{
+
+// Define Individual Grid Classes
+@for $i from 1 to $columns
+{
+	// Calculate grid size in pixels
+	$grid: ($column-width * $i) + ($gutter * ($i - 1));
+	
+	// Calculate responsive grid sizes if required
+	@if $responsive == true
+	{
+		// Calculate grid size in percentage
+		$grid: ($grid / $width) * 100%;
+
+		// Get Gutter Percentage for Grids
+		$gutter-percentage: ($gutter / $width) * 100%;
+
+		.#{$prefix}#{$i}
+			{
+			width: $grid;
+			float: left;
+			clear:none;
+			margin-left:$gutter-percentage;
+			}
+
+	}
+	@else
+	{
+		.grid#{$i}
+			{
+			width: $grid;
+			float: left;
+			margin-left:$gutter;
+			}
+	}
+}
+
+// Define Additional Full Width Variants & Clear Classes For Responsive Classes Only
+@if $prefix != "grid"
+{		
+	.#{$prefix}-full
+	{	
+	width:100%;
+	float:none;
+	clear:both;
+	margin-left:0;
+	}
+
+	.#{$prefix}-clear
+	{
+	margin-left: 0px;
+	clear: left;
+	}
+}
+@else
+{
+	.clear
+	{
+	margin-left: 0px;
+	clear: left;
+	}
+}
+
+}
+
+//--------------------------------------------------------------------
+// CREATE OFFSETS MIXIN
+//--------------------------------------------------------------------
+
+@mixin create_offsets($prefix)
+{
+
+	// Define Grid Offsets
+	@for $i from 1 to $columns
+	{
+		// Calculate grid size in pixels
+		$grid: ($column-width * $i) + ($gutter * ($i - 1));
+		
+		// Calculate responsive grid sizes if required
+		@if $responsive == true
+		{
+			// Calculate grid size in percentage
+			$grid: ($grid / $width) * 100%;
+
+			// Get Gutter Percentage for Grids
+			// We multiple by 2 to make up for the absent 30px due to clear
+			$gutter-percentage: (($gutter / $width) * 100%) * 2;
+
+			.#{$prefix}#{$i}
+				{
+				margin-left:$grid + $gutter-percentage;
+				}
+		}
+		@else
+		{
+			.offset#{$i}
+				{
+				margin-left:$grid + ($gutter * 2);
+				}
+		}
+	}
+
+}
+
+//--------------------------------------------------------------------
+// GENERATE GRID CLASSES
+//--------------------------------------------------------------------
+
+@include create_grid("grid");
+@include create_offsets("offset");
+
+
+//----------------------------------------------------------------------------------------------------
+// GENERATE BREAKPOINT CLASSES BASED ON MAP VALUES
+//----------------------------------------------------------------------------------------------------
+
+@if $responsive == true
+{
+	// Grab Breakpoints Map
+	@each $bp-name, $bp-value in $breakpoints
+	{
+		@include bp(#{$bp-name})
+		{
+			@include create_grid(#{$bp-name});
+			@include create_offsets(#{$bp-name}-offset);
+		}
+	}
+}
+
+//--------------------------------------------------------------------
+// GENERATE SHOW/HIDE BREAKPOINT CLASSES
+//--------------------------------------------------------------------
+
+@if $responsive == true
+{
+	// Grab Breakpoints Map
+	@each $bp-name, $bp-value in $breakpoints
+	{
+		@media (max-width: $bp-value)
+		{
+			.#{$bp-name}-hide {
+				display:none;
+			}
+			.#{$bp-name}-show {
+				display:block;
+			}
+			.#{$bp-name}-show--inline {
+				display:inline-block;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+

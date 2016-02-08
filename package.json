@@ -1,0 +1,18 @@
+{
+  "name": "Orion Framework",
+  "version": "0.1.0",
+  "author": "Luke Harrison",
+  "description": "A simple SASS-based framework which I'm developing for the hell of it",
+  "homepage": "http://www.lukeharrison.net",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Silveredge9/Orion-Framework.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-cache": "^0.4.2",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-sass": "^2.2.0"
+  }
+}
