@@ -5,19 +5,19 @@ var cache = require('gulp-cache');
 
 // SASS
 gulp.task('sass', function () {
-	gulp.src('sass/**/*.scss')
+	gulp.src('dev/sass/**/*.scss')
 	.pipe(sass({
 		outputStyle: 'compressed'
 	})
 	.on('error', sass.logError))
-	.pipe(gulp.dest('./css/'))
+	.pipe(gulp.dest('./dist/css/'))
 });
 
 // Image MIN & with CACHE to stop repeat compressed images
 gulp.task('images', function(){
-	return gulp.src('img/*.+(png|jpg|gif|svg)')
+	return gulp.src('dev/img/*.+(png|jpg|gif|svg)')
 	.pipe(cache(imagemin({optimizationLevel: 3, progressive: true})))
-	.pipe(gulp.dest('img/'))
+	.pipe(gulp.dest('dist/img/'))
 });
 
 // GULP DEFAULT
@@ -25,5 +25,5 @@ gulp.task('default',function() {
 	// Image MIN
 	gulp.start("images");
 	// SASS
-	gulp.watch('sass/**/*.scss',['sass']);
+	gulp.watch('dev/sass/**/*.scss',['sass']);
 });
