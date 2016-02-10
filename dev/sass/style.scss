@@ -21,18 +21,3 @@ Email: luke@lukeharrison.net
 //--------------------------------------------------------------------
 // PROJECT STYLES
 //--------------------------------------------------------------------
-
-body
-{
-color:orange;
-}
-
-.container
-{
-& div
-	{
-	background:#ccc;
-	@include transition(1.0s);
-	margin-bottom:30px;
-	}
-}
