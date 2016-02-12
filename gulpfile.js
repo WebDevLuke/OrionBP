@@ -11,20 +11,47 @@ var cache = require('gulp-cache');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require("gulp-rename");
+var gulpif = require('gulp-if');
+const del = require('del');
 
 /*
 |--------------------------------------------------------------------
-|  GULP FUNCTIONS
+| TO DO
 |--------------------------------------------------------------------
 */
+
+/*
+- How HTML is handled
+*/
+
+/*
+|--------------------------------------------------------------------
+| CONFIG
+|--------------------------------------------------------------------
+*/
+
+// If minify is true then css & js will be minified
+// This is in case the code needs to be maintained by a less-technical developer
+var minify = true;
+
+/*
+|--------------------------------------------------------------------
+|  FUNCTIONS
+|--------------------------------------------------------------------
+*/
+
+// Delete DIST folder
+gulp.task('delete', function(){
+	del('dist/').then(paths => {
+		console.log('Deleted files and folders:\n', paths.join('\n'));
+	});
+});
 
 // SASS
 gulp.task('sass', function () {
 	gulp.src('dev/sass/**/*.scss')
-	.pipe(sass({
-		outputStyle: 'compressed'
-	})
-	.on('error', sass.logError))
+    	.pipe(gulpif(minify, sass({outputStyle:'compressed'}), sass({outputStyle:'expanded'})))
+	.on('error', sass.logError)
 	.pipe(gulp.dest('./dist/css/'))
 });
 
@@ -50,36 +77,26 @@ gulp.task('copy', function() {
 	.pipe(gulp.dest('dist/'));
 });
 
-// Combine JS
-gulp.task('js-combine', function() {
+// Combine JS and minify
+gulp.task('js', function() {
 	return gulp.src([
 		'./dev/js/vendor/jquery-1.12.0.min.js',
 		'./dev/js/vendor/modernizr.js',
 		'./dev/js/global.js',
 	])
 	.pipe(concat('core.js'))
-	.pipe(gulp.dest('./dist/js'));
-});
-
-// Minify JS
-gulp.task('js-min', ['js-combine'], function() {
-	gulp.src('./dist/js/core.js')
-	.pipe(rename("core.min.js"))
-	.pipe(uglify())
-	.pipe(gulp.dest('./dist/js/'));
-});
-
-// Bring JS tasks together
-gulp.task('js', function() {
-	gulp.start("js-combine");
-	gulp.start("js-min");
+    	.pipe(gulpif(minify, rename("core.min.js"), gulp.dest('./dist/js')))
+    	.pipe(gulpif(minify, uglify()))
+    	.pipe(gulpif(minify, gulp.dest('./dist/js/')));
 });
 
 /*
 |--------------------------------------------------------------------
-|  GULP PRODUCTION FUNCTIONS
+|  PRODUCTION FUNCTIONS
 |--------------------------------------------------------------------
 */
+
+// Here we pull everything together into generic watch and build functions
 
 // WATCH FUNCTION
 gulp.task("watch", function() {
@@ -93,6 +110,8 @@ gulp.task("watch", function() {
 
 // BUILD FUNCTION
 gulp.task('build',function() {
+	// Delete Dist Folder
+	gulp.start("delete");
 	// Images
 	gulp.start("images");
 	// Copy Files
