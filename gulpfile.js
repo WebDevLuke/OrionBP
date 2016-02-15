@@ -22,6 +22,7 @@ const del = require('del');
 
 /*
 - How HTML is handled
+- Handle how Watch on misc files & html is dealt with
 */
 
 /*
@@ -51,6 +52,7 @@ gulp.task('delete', function(){
 gulp.task('sass', function () {
 	gulp.src('dev/sass/**/*.scss')
     	.pipe(gulpif(minify, sass({outputStyle:'compressed'}), sass({outputStyle:'expanded'})))
+    	.pipe(gulpif(minify, rename("style.min.css")))
 	.on('error', sass.logError)
 	.pipe(gulp.dest('./dist/css/'))
 });
