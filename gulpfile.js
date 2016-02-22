@@ -51,12 +51,22 @@ gulp.task('delete', function(){
 
 // SASS w. SASSPort
 gulp.task('sass', function () {
+	// Concat configs into temp file for export
+	gulp.src([
+		'./dev/js/configs/breakpoints.js',
+		'./dev/js/configs/export.js'
+	])
+	.pipe(concat('export-temp.js'))
+	.pipe(gulp.dest('./dev/js/configs/temp'))
+	// Run standard SASS job
 	gulp.src('dev/sass/**/*.scss')
 	// Replaced breakpoints.js with concat fine
-    	.pipe(gulpif(minify, sassport(['dev/js/configs/breakpoints.js'],{outputStyle:'compressed'}), sassport(['dev/js/configs/breakpoints.js'],{outputStyle:'expanded'})))
+    	.pipe(gulpif(minify, sassport(['dev/js/configs/temp/export-temp.js'],{outputStyle:'compressed'}), sassport(['dev/js/configs/temp/export-temp.js'],{outputStyle:'expanded'})))
     	.pipe(gulpif(minify, rename("style.min.css")))
 	.on('error', sass.logError)
 	.pipe(gulp.dest('./dist/css/'))
+	// Clean up temp export file
+	del('dev/js/configs/temp/');
 });
 
 // Image MIN & with CACHE to stop repeat compressed images
