@@ -34,7 +34,7 @@ const del = require('del');
 
 // If minify is true then css & js will be minified
 // This is in case the code needs to be maintained by a less-technical developer
-var minify = true;
+var minify = false;
 
 /*
 |--------------------------------------------------------------------
@@ -52,6 +52,7 @@ gulp.task('delete', function(){
 // SASS w. SASSPort
 gulp.task('sass', function () {
 	gulp.src('dev/sass/**/*.scss')
+	// Replaced breakpoints.js with concat fine
     	.pipe(gulpif(minify, sassport(['dev/js/configs/breakpoints.js'],{outputStyle:'compressed'}), sassport(['dev/js/configs/breakpoints.js'],{outputStyle:'expanded'})))
     	.pipe(gulpif(minify, rename("style.min.css")))
 	.on('error', sass.logError)
@@ -85,6 +86,7 @@ gulp.task('js', function() {
 	return gulp.src([
 		'./dev/js/vendor/*.js',
 		'./dev/js/polyfills/*.js',
+		'./dev/js/configs/breakpoints.js',
 		'./dev/js/global.js'
 	])
 	.pipe(concat('core.js'))

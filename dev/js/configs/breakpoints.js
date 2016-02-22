@@ -12,14 +12,12 @@ var breakpoints = {
 	},
 	convertToPX: function(){
 		this.pxData = this.data;
-		for(key in this["pxData"]){
-			console.log(this[key]);
+		for(key in this.pxData){
+		 	this.pxData[key] += "px";
 		}
+		return this.pxData;
 	}
 };
-
-// Export to SASS via SASSport
-module.exports = breakpoints.convertToPX(); 
 
 // Breakpoint detection function
 // var bp = function(size){	
