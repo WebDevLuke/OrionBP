@@ -17,17 +17,6 @@ const del = require('del');
 
 /*
 |--------------------------------------------------------------------
-| TO DO
-|--------------------------------------------------------------------
-*/
-
-/*
-- How HTML is handled
-- Handle how Watch on misc files & html is dealt with
-*/
-
-/*
-|--------------------------------------------------------------------
 | CONFIG
 |--------------------------------------------------------------------
 */
@@ -43,10 +32,13 @@ var minify = false;
 */
 
 // Delete DIST folder
-gulp.task('delete', function(){
-	del('dist/').then(paths => {
-		console.log('Deleted files and folders:\n', paths.join('\n'));
-	});
+gulp.task('deleteDist', function(){
+	del('dist/');
+});
+
+// Delete DIST folder
+gulp.task('deleteTemp', ['sass'], function(){
+	del('dev/js/configs/temp/');
 });
 
 // SASS w. SASSPort
@@ -66,7 +58,7 @@ gulp.task('sass', function () {
 	.on('error', sass.logError)
 	.pipe(gulp.dest('./dist/css/'))
 	// Clean up temp export file
-	del('dev/js/configs/temp/');
+	gulp.start("deleteTemp");
 });
 
 // Image MIN & with CACHE to stop repeat compressed images
@@ -78,17 +70,18 @@ gulp.task('images', function(){
 
 // Copy Misc Files Task
 gulp.task('copy', function() {
-	// Copy specified folders and contents
-    	gulp.src('*/+(fonts)/**', {base:"./dev/"})
-      .pipe(cache(gulp.dest('dist/')));
 
 	// Copy all non-directory files
 	gulp.src('dev/*.+(xml|txt|json)')
-	.pipe(cache(gulp.dest('dist/')));
+	.pipe(gulp.dest('dist/'));
+
+	// Copy specified folders and contents
+    	gulp.src('*/+(fonts)/**', {base:"./dev/"})
+      .pipe(gulp.dest('dist/'));
 
 	// Copy HTACCESS file seperately as it wouldn't play nice
 	gulp.src('dev/.htaccess')
-	.pipe(cache(gulp.dest('dist/')));
+	.pipe(gulp.dest('dist/'));
 });
 
 // Combine JS and minify
@@ -128,13 +121,13 @@ gulp.task("watch", function() {
 // BUILD FUNCTION
 gulp.task('build',function() {
 	// Delete Dist Folder
-	gulp.start("delete");
+	gulp.start("deleteDist");
 	// Images
 	gulp.start("images");
-	// Copy Files
-	gulp.start("copy");
 	// SASS
 	gulp.start("sass");
 	// JS
 	gulp.start("js");
+	// Copy Files
+	gulp.start("copy");
 });
