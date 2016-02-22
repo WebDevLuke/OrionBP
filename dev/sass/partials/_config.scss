@@ -14,10 +14,5 @@ $gutter: 30px;
 $columns: 12;
 $padding: $gutter / 2;
 
-// Define Media Query Breakpoints
-$breakpoints: (
-	xlrg: 1280px,
-	lrg: 924px,
-	med: 640px,
-	sml: 480px
-);
+// Pull Media Query Breakpoints from JS config using SassPort to convert JS object to SASS map
+$breakpoints: require('dev/js/configs/breakpoints.js');

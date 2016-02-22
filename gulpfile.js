@@ -12,6 +12,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require("gulp-rename");
 var gulpif = require('gulp-if');
+var sassport = require('gulp-sassport');
 const del = require('del');
 
 /*
@@ -48,10 +49,10 @@ gulp.task('delete', function(){
 	});
 });
 
-// SASS
+// SASS w. SASSPort
 gulp.task('sass', function () {
 	gulp.src('dev/sass/**/*.scss')
-    	.pipe(gulpif(minify, sass({outputStyle:'compressed'}), sass({outputStyle:'expanded'})))
+    	.pipe(gulpif(minify, sassport(['dev/js/configs/breakpoints.js'],{outputStyle:'compressed'}), sassport(['dev/js/configs/breakpoints.js'],{outputStyle:'expanded'})))
     	.pipe(gulpif(minify, rename("style.min.css")))
 	.on('error', sass.logError)
 	.pipe(gulp.dest('./dist/css/'))
@@ -68,23 +69,23 @@ gulp.task('images', function(){
 gulp.task('copy', function() {
 	// Copy specified folders and contents
     	gulp.src('*/+(fonts)/**', {base:"./dev/"})
-        .pipe(gulp.dest('dist/'));
+      .pipe(cache(gulp.dest('dist/')));
 
 	// Copy all non-directory files
 	gulp.src('dev/*.+(xml|txt|json)')
-	.pipe(gulp.dest('dist/'));
+	.pipe(cache(gulp.dest('dist/')));
 
 	// Copy HTACCESS file seperately as it wouldn't play nice
 	gulp.src('dev/.htaccess')
-	.pipe(gulp.dest('dist/'));
+	.pipe(cache(gulp.dest('dist/')));
 });
 
 // Combine JS and minify
 gulp.task('js', function() {
 	return gulp.src([
-		'./dev/js/vendor/jquery-1.12.0.min.js',
-		'./dev/js/vendor/modernizr.js',
-		'./dev/js/global.js',
+		'./dev/js/vendor/*.js',
+		'./dev/js/polyfills/*.js',
+		'./dev/js/global.js'
 	])
 	.pipe(concat('core.js'))
     	.pipe(gulpif(minify, rename("core.min.js"), gulp.dest('./dist/js')))
@@ -104,6 +105,8 @@ gulp.task('js', function() {
 gulp.task("watch", function() {
 	// Images
 	gulp.watch('dev/img/*.+(png|jpg|gif|svg)',['images']);
+	// Watch for Breakpoint JS changes and compile SASS
+	gulp.watch('dev/js/configs/breakpoints.js',['sass']);
 	// SASS
 	gulp.watch('dev/sass/**/*.scss',['sass']);
 	// JS
