@@ -24,7 +24,7 @@ const del = require('del');
 
 // If minify is true then css & js will be minified
 // This is in case the code needs to be maintained by a less-technical developer
-var minify = false;
+var minify = true;
 
 /*
 |--------------------------------------------------------------------
@@ -46,8 +46,9 @@ gulp.task('deleteDist', function(){
 gulp.task('bpConcat', function () {
 	// Concat configs into temp file for export
 	return gulp.src([
-		'./dev/js/configs/breakpoints.js',
-		'./dev/js/configs/export.js'
+		'./dev/js/config.js',
+		'./dev/js/partials/modules/breakpoints.js',
+		'./dev/js/partials/modules/export.js'
 	])
 	.pipe(concat('export-temp.js'))
 	.pipe(gulp.dest('./temp'))
@@ -98,9 +99,10 @@ gulp.task('images', function(){
 // Combine JS and minify
 gulp.task('js', function() {
 	return gulp.src([
-		'./dev/js/vendor/*.js',
-		'./dev/js/polyfills/*.js',
-		'./dev/js/configs/breakpoints.js',
+		'./dev/js/partials/vendor/*.js',
+		'./dev/js/partials/polyfills/*.js',
+		'./dev/js/config.js',
+		'./dev/js/partials/modules/breakpoints.js',
 		'./dev/js/global.js'
 	])
 	.pipe(concat('core.js'))
@@ -144,7 +146,7 @@ gulp.task("watch", function() {
 	// Images
 	gulp.watch('dev/img/*.+(png|jpg|gif|svg)',['images']);
 	// Watch for Breakpoint JS changes and compile SASS
-	gulp.watch('dev/js/configs/breakpoints.js',['sass']);
+	gulp.watch('dev/js/partials/breakpoints.js',['sass']);
 	// SASS
 	gulp.watch('dev/sass/**/*.scss',['sass']);
 	// JS
