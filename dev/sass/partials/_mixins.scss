@@ -130,7 +130,7 @@ transition: $target $time $timing;
 		@if $value != null
 		{
 			// Prints a media query based on the value
-			@media (max-width: $value)
+			@media (min-width: $value)
 			{
 			@content;
 			}
@@ -138,7 +138,7 @@ transition: $target $time $timing;
 	}
 }
 
-@mixin bp-min($breakpoint)
+@mixin bp-max($breakpoint)
 {
 	// Only if Responsive Layout
 	@if $responsive == true
@@ -150,7 +150,7 @@ transition: $target $time $timing;
 		@if $value != null
 		{
 			// Prints a media query based on the value
-			@media (min-width: $value + 1)
+			@media (max-width: $value)
 			{
 			@content;
 			}

@@ -196,7 +196,7 @@ padding: 0 $padding 0 $padding;
 	// Grab Breakpoints Map
 	@each $bp-name, $bp-value in $breakpoints
 	{
-		@media (max-width: $bp-value)
+		@media (min-width: $bp-value)
 		{
 			.#{$bp-name}-hide {
 				display:none;
