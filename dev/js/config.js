@@ -6,10 +6,10 @@
 
 // Define Breakpoints
 var breakpoints = {
-	xxlrg: 1366,
-	xlrg: 1280,
-	lrg: 925,
-	med: 640,
+	xsml: 370,
 	sml: 480,
-	xsml: 370
+	med: 640,
+	lrg: 925,
+	xlrg: 1280,
+	xxlrg: 1366
 };

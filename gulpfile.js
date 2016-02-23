@@ -38,6 +38,17 @@ gulp.task('deleteDist', function(){
 
 /*
 |--------------------------------------------------------------------
+|  HTML
+|--------------------------------------------------------------------
+*/
+
+gulp.task('html', function(){
+	gulp.src('dev/*.html')
+	.pipe(gulp.dest('dist/'));
+});
+
+/*
+|--------------------------------------------------------------------
 |  SASS
 |--------------------------------------------------------------------
 */
@@ -143,6 +154,8 @@ gulp.task('copy', function() {
 
 // WATCH FUNCTION
 gulp.task("watch", function() {
+	// HTML
+	gulp.watch('dev/*.html',['html']);
 	// Images
 	gulp.watch('dev/img/*.+(png|jpg|gif|svg)',['images']);
 	// Watch for Breakpoint JS changes and compile SASS
@@ -159,6 +172,6 @@ gulp.task('build',function() {
 		// Delete Dist Folder
 		"deleteDist",	
 		// Run other tasks asynchronously 
-		["images", "sass", "js", "copy"]
+		["html", "images", "sass", "js", "copy"]
 	);
 });
