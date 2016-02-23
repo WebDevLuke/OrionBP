@@ -8,7 +8,8 @@ var breakpoints = {
 		lrg: 925,
 		med: 640,
 		sml: 480,
-		xsml: 370
+		xsml: 370,
+		testZZZ: 100
 	},
 	convertToPX: function(){
 		this.pxData = this.data;

@@ -13,6 +13,7 @@ var uglify = require('gulp-uglify');
 var rename = require("gulp-rename");
 var gulpif = require('gulp-if');
 var sassport = require('gulp-sassport');
+var runSequence = require('run-sequence');
 const del = require('del');
 
 /*
@@ -27,39 +28,59 @@ var minify = false;
 
 /*
 |--------------------------------------------------------------------
-|  FUNCTIONS
+|  DELETE DIST FOLDER
 |--------------------------------------------------------------------
 */
 
-// Delete DIST folder
 gulp.task('deleteDist', function(){
-	del('dist/');
+	return del('dist/');
 });
 
-// Delete DIST folder
-gulp.task('deleteTemp', ['sass'], function(){
-	del('dev/js/configs/temp/');
-});
+/*
+|--------------------------------------------------------------------
+|  SASS
+|--------------------------------------------------------------------
+*/
 
-// SASS w. SASSPort
-gulp.task('sass', function () {
+// Concat Breakpoints
+gulp.task('bpConcat', function () {
 	// Concat configs into temp file for export
-	gulp.src([
+	return gulp.src([
 		'./dev/js/configs/breakpoints.js',
 		'./dev/js/configs/export.js'
 	])
 	.pipe(concat('export-temp.js'))
-	.pipe(gulp.dest('./dev/js/configs/temp'))
+	.pipe(gulp.dest('./temp'))
+});
+
+gulp.task('sassTasks', function () {
 	// Run standard SASS job
-	gulp.src('dev/sass/**/*.scss')
+	return gulp.src('dev/sass/**/*.scss')
 	// Replaced breakpoints.js with concat fine
-    	.pipe(gulpif(minify, sassport(['dev/js/configs/temp/export-temp.js'],{outputStyle:'compressed'}), sassport(['dev/js/configs/temp/export-temp.js'],{outputStyle:'expanded'})))
+    	.pipe(gulpif(minify, sassport(['temp/export-temp.js'],{outputStyle:'compressed'}), sassport(['temp/export-temp.js'],{outputStyle:'expanded'})))
     	.pipe(gulpif(minify, rename("style.min.css")))
 	.on('error', sass.logError)
-	.pipe(gulp.dest('./dist/css/'))
-	// Clean up temp export file
-	gulp.start("deleteTemp");
+	.pipe(gulp.dest('./dist/css/'));
 });
+
+// Delete TEMP folder
+gulp.task('deleteTemp', function(){
+	return del('temp/');
+});
+
+gulp.task('sass',function() {
+	runSequence(
+		"bpConcat",
+		"sassTasks",
+		"deleteTemp"
+	);
+});
+
+/*
+|--------------------------------------------------------------------
+|  IMAGES
+|--------------------------------------------------------------------
+*/
 
 // Image MIN & with CACHE to stop repeat compressed images
 gulp.task('images', function(){
@@ -67,6 +88,32 @@ gulp.task('images', function(){
 	.pipe(cache(imagemin({optimizationLevel: 3, progressive: true})))
 	.pipe(gulp.dest('dist/img/'))
 });
+
+/*
+|--------------------------------------------------------------------
+|  JS
+|--------------------------------------------------------------------
+*/
+
+// Combine JS and minify
+gulp.task('js', function() {
+	return gulp.src([
+		'./dev/js/vendor/*.js',
+		'./dev/js/polyfills/*.js',
+		'./dev/js/configs/breakpoints.js',
+		'./dev/js/global.js'
+	])
+	.pipe(concat('core.js'))
+    	.pipe(gulpif(minify, rename("core.min.js"), gulp.dest('./dist/js')))
+    	.pipe(gulpif(minify, uglify()))
+    	.pipe(gulpif(minify, gulp.dest('./dist/js/')));
+});
+
+/*
+|--------------------------------------------------------------------
+|  MISC
+|--------------------------------------------------------------------
+*/
 
 // Copy Misc Files Task
 gulp.task('copy', function() {
@@ -82,20 +129,6 @@ gulp.task('copy', function() {
 	// Copy HTACCESS file seperately as it wouldn't play nice
 	gulp.src('dev/.htaccess')
 	.pipe(gulp.dest('dist/'));
-});
-
-// Combine JS and minify
-gulp.task('js', function() {
-	return gulp.src([
-		'./dev/js/vendor/*.js',
-		'./dev/js/polyfills/*.js',
-		'./dev/js/configs/breakpoints.js',
-		'./dev/js/global.js'
-	])
-	.pipe(concat('core.js'))
-    	.pipe(gulpif(minify, rename("core.min.js"), gulp.dest('./dist/js')))
-    	.pipe(gulpif(minify, uglify()))
-    	.pipe(gulpif(minify, gulp.dest('./dist/js/')));
 });
 
 /*
@@ -120,14 +153,10 @@ gulp.task("watch", function() {
 
 // BUILD FUNCTION
 gulp.task('build',function() {
-	// Delete Dist Folder
-	gulp.start("deleteDist");
-	// Images
-	gulp.start("images");
-	// SASS
-	gulp.start("sass");
-	// JS
-	gulp.start("js");
-	// Copy Files
-	gulp.start("copy");
+	runSequence(
+		// Delete Dist Folder
+		"deleteDist",	
+		// Run other tasks asynchronously 
+		["images", "sass", "js", "copy"]
+	);
 });
