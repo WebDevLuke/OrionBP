@@ -12,31 +12,10 @@ box-sizing: border-box;
 }
 
 //--------------------------------------------------------------------
-// COLOR FUNCTION
-//--------------------------------------------------------------------
-
-@function color($selection)
-{
-	// If the key exists in the map
-	@if $selection != null
-	{
-		@return map-get($colors, $selection);
-	}
-}
-
-//--------------------------------------------------------------------
-// SVG / PNG BACKGROUND FALLBACK
-//--------------------------------------------------------------------
-
-@mixin svg($name, $position: left top, $repeat: no-repeat, $color: transparent, $extension: png)
-{
-	background: url(../img/#{$name}.#{$extension}) $color $position $repeat;
-	background: $color url(../img/#{$name}.svg) $position $repeat;
-}
-
-//--------------------------------------------------------------------
 // CONTENT GRID
 //--------------------------------------------------------------------
+
+// Quickly generate a scaleable grid from a selection of elements
 
 @mixin grid($numPerRow,$margin:10%)
 {
@@ -117,6 +96,8 @@ transition: $target $time $timing;
 //--------------------------------------------------------------------
 // RESPONSIVE BREAKPOINTS
 //--------------------------------------------------------------------
+
+// Create media queries using breakpoints defined in js/config.js
 
 @mixin bp($breakpoint)
 {
