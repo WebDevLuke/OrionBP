@@ -81,6 +81,7 @@ padding: 0 $padding 0 $padding;
 			float: left;
 			clear:none;
 			margin-left:$gutter-percentage;
+			@include border-box;
 			}
 
 	}
@@ -91,6 +92,7 @@ padding: 0 $padding 0 $padding;
 			width: $grid;
 			float: left;
 			margin-left:$gutter;
+			@include border-box;
 			}
 	}
 }
@@ -104,6 +106,7 @@ padding: 0 $padding 0 $padding;
 	float:none;
 	clear:both;
 	margin-left:0;
+	@include border-box;
 	}
 
 	.#{$prefix}-clear
