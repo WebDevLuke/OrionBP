@@ -146,8 +146,7 @@ padding: 0 $padding 0 $padding;
 			$grid: ($grid / $width) * 100%;
 
 			// Get Gutter Percentage for Grids
-			// We multiple by 2 to make up for the absent 30px due to clear
-			$gutter-percentage: (($gutter / $width) * 100%) * 2;
+			$gutter-percentage: (($gutter / $width) * 100%);
 
 			.#{$prefix}#{$i}
 				{
