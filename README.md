@@ -3,5 +3,5 @@
   <p align="center">A simple mobile-first HTML/CSS/JS framework</p>
 </p>
 
-# What is Orion Framework?
-## A HTML, CSS, and JS framework
+## What is Orion Framework?
+Orion is a HTML/CSS/JS framework in the tradition of popular frameworks such as Bootstrap and Foundation. It's a simple, easy to use and quick way of getting your responsive web project off the ground. 
