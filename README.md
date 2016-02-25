@@ -62,9 +62,21 @@ var breakpoints = {
 	xxlrg: 1366
 };
 ```
+Give each breakpoint a name and order them from smallest to largest. How these breakpoints can be used in SASS and JS is explained under [Breakpoint Usage](#breakpoint-usage)
 
 
 ##### 3) Gulp
+To tweak the settings for what happens during the build process open '/gulpfile.js'
+
+```sh
+var minify = true;
+```
+If set to true, all concatenated CSS and Javascript will then be minified tor reduce files sizes.
+
+If you wish to add any JS libararies such jQuery, simply add these to `/dev/js/vendor/` and they will automatically be concatenated with the rest of the framework JS.
+
+The same goes for polyfills, but add them to `/dev/js/polyfills/` instead. 
+
 
 #### Grid system
 More to come
