@@ -193,6 +193,19 @@ padding: 0 $padding 0 $padding;
 // GENERATE SHOW/HIDE BREAKPOINT CLASSES
 //--------------------------------------------------------------------
 
+// Create standard classes
+.hide {
+	display:none;
+}
+
+.show {
+	display:block;
+}
+
+.show-inline {
+	display:inline-block;
+}
+
 @if $responsive == true
 {
 	// Grab Breakpoints Map

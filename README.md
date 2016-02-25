@@ -103,15 +103,70 @@ More specifically `gulp build` outputs the following in `/dist/`:
 
 
 ## Grid system
+
+On build SASS auto generates all the required classes you will need to construct grids. Below are a few practical examples using the grid outlined in [Framework configuration](#framework-configuration)
+
+#### Basic Grid
+
+```sh
+<div class="container">
+  <div class="clear grid4"></div>
+  <div class="grid4"></div>
+  <div class="grid4"></div>
+</div>
+```
+This is a basic 4/4/4 grid which doesn't change. When you start a new row, you need to add a `clear` class. 
+
+[[View this example]](http://codepen.io/lukedidit/pen/pyzdXx)
+
+#### Basic Grid w. Breakpoint Classes
+
+```sh
+<div class="container">
+  <div class="clear grid4 med-clear med1"></div>
+  <div class="grid4 med5"></div>
+  <div class="grid4 med6"></div>
+</div>
+```
+Here we introduce breakpoint classes which have been automatically created by SASS using the data entered in `/dev/js/partials/config.js`. As this is a mobile-first framework, we start off with a basic 4/4/4 grid and as we scale up and hit 640px it will change to 1/5/6.
+
+[[View this example]](http://codepen.io/lukedidit/pen/grYoPX)
+
+#### Advanced Grid w. Breakpoint Classes
+
+```sh
+<div class="container">
+  <div class="sml-clear sml4 med-full lrg-clear lrg4 xlrg-clear xlrg6"></div>
+  <div class="sml-offset4 sml4 med-clear med6 lrg-offset4 lrg-clear lrg4 xlrg6"></div>
+  <div class="sml-hide med-show med6 lrg-clear lrg-offset8 lrg4 xlrg-full"></div>
+</div>
+```
+Here is an advanced example of how we can combine breakpoint classes to significantly alter our columns as we increase our browser resolution. 
+
+[[View this example]](http://codepen.io/lukedidit/pen/QNLapz)
+
+#### List of Breakpoint Classes
+
+- Column: `.grid{num}` *(Example .grid4}*
+- Breakpoint column: `.{bpName}{num}` *(Example .xlrg4}*
+
+
+- Offset column: `.offset{num}` *(Example .offset4}*
+- Breakpoint offset column: `.{bpName}-offset{num}` *(Example .xlrg-offset4}*
+
+
+- Clear : `.clear`
+- Breakpoint clear : `.{bpName}-clear` *(Example .xlrg-clear}*
+
+
+- Hide/Show/Show inline : `.hide` or `.show` or `.show-inline`
+- Breakpoint Hide/Show/Show inline : `.{bpName}-hide` or `.{bpName}-show` or `.{bpName}-show-inline` *(Example .xlrg-hide, .xlrg-show, .xlrg-show-inline}*
+
+
+## Breakpoint Mixin Usage
 More to come
 
-## Breakpoint Usage
-More to come
-
-## Mixins
-More to come
-
-## Examples
+## Other Mixins
 More to come
 
 ## About the Developer
