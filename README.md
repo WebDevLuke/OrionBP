@@ -11,6 +11,12 @@ Orion is a mobile-first HTML/CSS/JS framework in the tradition of Bootstrap and 
 - **Build with Gulp** - Orion comes with pre-built Gulp tasks allowing you to compress and concatenate your CSS, JS and image assets automatically.
 - **Bloat-free** - Orion comes packaged with just a SASS framework, a few handy mixins and a Gulp setup for building and watching. Meaning you don't have to spend time removing all the styles and components you know you won't use.
 
+
+## Table of contents
+
+* [Getting Started](#getting-started)
+* [Framework configuration](#framework-configuration)
+
 ## Getting Started
 #### 1) Install Gulp
 Orion uses Gulp as it's build system. If you've never used Gulp before, you need to first install its client globally using NPM:
@@ -26,20 +32,19 @@ npm install
 
 **That's it!**
 
-## Usage
-#### Framework configuration
-##### 1) Choosing a grid system
+## Framework configuration
+#### 1) Choosing a grid system
 Orion allows you to define a grid system of your choice with SASS then generating all the required CSS classes and media query mixins automatically. To locate these variables open `/dev/sass/partials/_config.scss`.
 
 ```sh
 $responsive: true;
 ```
-If set to true the container will have a max-width CSS property instead of just a standard width CSS property and will respond as you scale down the browser window.
+If set to `true` the container will have a max-width CSS property instead of just a standard width CSS property and will respond as you scale down the browser window.
 
 ```sh
 $fullWidth: false;
 ```
-If set to true, the max-width on the contrainer is set to 100% and will stretch the full width of the window.
+If set to `true`, the max-width on the contrainer is set to 100% and will stretch the full width of the window.
 
 ```sh
 $columnWidth: 70px;
@@ -49,7 +54,7 @@ $padding: $gutter / 2;
 ```
 Here you set the variables which will create your grid system. By default this is set to a **1170px 12 column grid system**.
 
-##### 2) Defining your breakpoints
+#### 2) Defining your breakpoints
 To define the framework breakpoints open `/dev/js/partials/config.js`.
 
 ```sh
@@ -65,29 +70,48 @@ var breakpoints = {
 Give each breakpoint a name and order them from smallest to largest. How these breakpoints can be used in SASS and JS is explained under [Breakpoint Usage](#breakpoint-usage)
 
 
-##### 3) Gulp
+#### 3) Gulp
 To tweak the settings for what happens during the build process open '/gulpfile.js'
 
 ```sh
 var minify = true;
 ```
-If set to true, all concatenated CSS and Javascript will then be minified tor reduce files sizes.
+If set to `true`, all concatenated CSS and Javascript will then be minified tor reduce files sizes.
 
 If you wish to add any JS libararies such jQuery, simply add these to `/dev/js/vendor/` and they will automatically be concatenated with the rest of the framework JS.
 
 The same goes for polyfills, but add them to `/dev/js/polyfills/` instead. 
 
 
-#### Grid system
+## Creating Builds
+
+```sh
+Orion-Framework/
+├── dev/
+├── dist/ **Appears following a successful Gulp build**
+└── misc/
+```
+
+`/dev/` (short for development) should be where you do all of your dev work. `/dist/` (short for distribution) is where the web-ready version of your project sits. The distribution version is created when you run `gulp build`. This processes all the config variables you've defined and builds a version of the framework which will work correctly in your browser.
+
+More specifically `gulp build` outputs the following in `/dist/`:
+- HTML (unmodified)
+- Compiled &amp; minified CSS
+- Concatenated &amp; minified JS
+- Compressed Images
+- Any misc files you have in the root of `/dev/` (unmodified)
+
+
+## Grid system
 More to come
 
-#### Breakpoint Usage
+## Breakpoint Usage
 More to come
 
-#### Mixins
+## Mixins
 More to come
 
-#### Examples
+## Examples
 More to come
 
 ## About the Developer
