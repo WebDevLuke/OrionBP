@@ -67,7 +67,7 @@ var breakpoints = {
 	xxlrg: 1366
 };
 ```
-Give each breakpoint a name and order them from smallest to largest. How these breakpoints can be used in SASS and JS is explained under [Breakpoint Usage](#breakpoint-usage)
+Give each breakpoint a name and order them from smallest to largest. How these breakpoints can be used in SASS and JS is explained under [Grid System](#grid-system)
 
 
 #### 3) Gulp
@@ -102,9 +102,9 @@ More specifically `gulp build` outputs the following in `/dist/`:
 - Any misc files you have in the root of `/dev/` (unmodified)
 
 
-## Grid system
+## Grid System
 
-On build SASS auto generates all the required classes you will need to construct grids. Below are a few practical examples using the grid outlined in [Framework configuration](#framework-configuration)
+On build SASS auto generates all the required classes you will need to construct grids. Below are a few practical examples using the grid outlined in [Framework Configuration](#framework-configuration)
 
 #### Basic Grid
 
