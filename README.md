@@ -28,6 +28,54 @@ npm install
 
 ## Usage
 #### Framework configuration
+##### 1) Choosing a grid system
+Orion allows you to define a grid system of your choice with SASS then generating all the required CSS classes and media query mixins automatically. To locate these variables open `/dev/sass/partials/_config.scss`.
+
+```sh
+$responsive: true;
+```
+If set to true the container will have a max-width CSS property instead of just a standard width CSS property and will respond as you scale down the browser window.
+
+```sh
+$fullWidth: false;
+```
+If set to true, the max-width on the contrainer is set to 100% and will stretch the full width of the window.
+
+```sh
+$columnWidth: 70px;
+$gutter: 30px;
+$columns: 12;
+$padding: $gutter / 2;
+```
+Here you set the variables which will create your grid system. By default this is set to a **1170px 12 column grid system**.
+
+##### 2) Defining your breakpoints
+To define the framework breakpoints open `/dev/js/partials/config.js`.
+
+```sh
+var breakpoints = {
+	xsml: 370,
+	sml: 480,
+	med: 640,
+	lrg: 925,
+	xlrg: 1280,
+	xxlrg: 1366
+};
+```
+
+
+##### 3) Gulp
+
+#### Grid system
+More to come
+
+#### Breakpoint Usage
+More to come
+
+#### Mixins
+More to come
+
+#### Examples
 More to come
 
 ## About the Developer

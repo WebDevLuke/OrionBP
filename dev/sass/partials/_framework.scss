@@ -10,18 +10,18 @@
 // SET VARIABLE DEFAULTS
 //--------------------------------------------------------------------
 
-$column-width: 70px !default;
+$columnWidth: 70px !default;
 $gutter: 30px !default;
 $columns: 12 !default;
 $padding: $gutter / 2 !default;
 $responsive: true !default;
-$full-width: false !default;
+$fullWidth: false !default;
 
 //--------------------------------------------------------------------
 // CHECK IF FULL WIDTH IS TRUE
 //--------------------------------------------------------------------
 
-@if $full-width == true
+@if $fullWidth == true
 {
 	$responsive: true;
 }
@@ -30,12 +30,12 @@ $full-width: false !default;
 // CREATE BASE CONTAINER
 //--------------------------------------------------------------------
 
-$width: ($column-width * $columns) + ($gutter * ($columns - 1));
+$width: ($columnWidth * $columns) + ($gutter * ($columns - 1));
 
 // Set Base Container
 .container
 {
-@if $full-width == true
+@if $fullWidth == true
 {
 	max-width:100%;
 }
@@ -64,7 +64,7 @@ padding: 0 $padding 0 $padding;
 @for $i from 1 to $columns
 {
 	// Calculate grid size in pixels
-	$grid: ($column-width * $i) + ($gutter * ($i - 1));
+	$grid: ($columnWidth * $i) + ($gutter * ($i - 1));
 	
 	// Calculate responsive grid sizes if required
 	@if $responsive == true
@@ -81,7 +81,7 @@ padding: 0 $padding 0 $padding;
 			float: left;
 			clear:none;
 			margin-left:$gutter-percentage;
-			@include border-box;
+			box-sizing: border-box;
 			}
 
 	}
@@ -92,7 +92,7 @@ padding: 0 $padding 0 $padding;
 			width: $grid;
 			float: left;
 			margin-left:$gutter;
-			@include border-box;
+			box-sizing: border-box;
 			}
 	}
 }
@@ -106,7 +106,7 @@ padding: 0 $padding 0 $padding;
 	float:none;
 	clear:both;
 	margin-left:0;
-	@include border-box;
+	box-sizing: border-box;
 	}
 
 	.#{$prefix}-clear
@@ -137,7 +137,7 @@ padding: 0 $padding 0 $padding;
 	@for $i from 1 to $columns
 	{
 		// Calculate grid size in pixels
-		$grid: ($column-width * $i) + ($gutter * ($i - 1));
+		$grid: ($columnWidth * $i) + ($gutter * ($i - 1));
 		
 		// Calculate responsive grid sizes if required
 		@if $responsive == true
