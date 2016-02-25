@@ -101,6 +101,8 @@ More specifically `gulp build` outputs the following in `/dist/`:
 - Compressed Images
 - Any misc files you have in the root of `/dev/` (unmodified)
 
+After your initial build, it's a good idea to run `gulp watch`. This will tell Gulp to watch for any changes you make to individual files and upon detection will process those individual files in the same manner as they would be during `gulp build`. So if you're working on the SASS there's no need to re-run `gulp build` after every change as `gulp watch` will have already picked the change up and acted accordingly.
+
 
 ## Grid System
 
