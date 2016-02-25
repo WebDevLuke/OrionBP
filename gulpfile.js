@@ -57,7 +57,7 @@ gulp.task('html', function(){
 gulp.task('bpConcat', function () {
 	// Concat configs into temp file for export
 	return gulp.src([
-		'./dev/js/config.js',
+		'./dev/js/partials/config.js',
 		'./dev/js/partials/modules/breakpoints.js',
 		'./dev/js/partials/modules/export.js'
 	])
@@ -112,7 +112,7 @@ gulp.task('js', function() {
 	return gulp.src([
 		'./dev/js/partials/vendor/*.js',
 		'./dev/js/partials/polyfills/*.js',
-		'./dev/js/config.js',
+		'./dev/js/partials/config.js',
 		'./dev/js/partials/modules/breakpoints.js',
 		'./dev/js/global.js'
 	])
