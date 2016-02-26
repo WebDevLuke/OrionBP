@@ -33,7 +33,7 @@ npm install
 **That's it!**
 
 ## Framework configuration
-#### 1) Choosing a grid system
+#### Choosing a grid system
 Orion allows you to define a grid system of your choice with SASS then generating all the required CSS classes and media query mixins automatically. To locate these variables open `/dev/sass/partials/_config.scss`.
 
 ```sh
@@ -54,7 +54,7 @@ $padding: $gutter / 2;
 ```
 Here you set the variables which will create your grid system. By default this is set to a **1170px 12 column grid system**.
 
-#### 2) Defining your breakpoints
+#### Defining your breakpoints
 To define the framework breakpoints open `/dev/js/partials/config.js`.
 
 ```sh
@@ -70,7 +70,7 @@ var breakpoints = {
 Give each breakpoint a name and order them from smallest to largest. How these breakpoints can be used in SASS and JS is explained under [Grid System](#grid-system)
 
 
-#### 3) Gulp
+#### Gulp
 To tweak the settings for what happens during the build process open '/gulpfile.js'
 
 ```sh
@@ -117,7 +117,7 @@ On build SASS auto generates all the required classes you will need to construct
   <div class="grid4"></div>
 </div>
 ```
-This is a basic 4/4/4 grid which doesn't change. When you start a new row, you need to add a `clear` class. 
+This is a basic 4/4/4 grid which doesn't change. When starting a new row, you need to add a `clear` class. 
 
 [[View this example]](http://codepen.io/lukedidit/pen/pyzdXx)
 
@@ -149,24 +149,143 @@ Here is an advanced example of how we can combine breakpoint classes to signific
 
 #### List of Breakpoint Classes
 
-- Column: `.grid{num}` *(Example .grid4}*
-- Breakpoint column: `.{bpName}{num}` *(Example .xlrg4}*
+- Column: `.grid{num}` *Example: .grid4*
 
+- Breakpoint column: `.{bpName}{num}` *Example: .xlrg4*
 
-- Offset column: `.offset{num}` *(Example .offset4}*
-- Breakpoint offset column: `.{bpName}-offset{num}` *(Example .xlrg-offset4}*
+- Offset column: `.offset{num}` *Example: .offset4*
 
+- Breakpoint offset column: `.{bpName}-offset{num}` *Example: .xlrg-offset4*
 
 - Clear : `.clear`
-- Breakpoint clear : `.{bpName}-clear` *(Example .xlrg-clear}*
 
+- Breakpoint clear : `.{bpName}-clear` *Example: .xlrg-clear*
 
 - Hide/Show/Show inline : `.hide` or `.show` or `.show-inline`
-- Breakpoint Hide/Show/Show inline : `.{bpName}-hide` or `.{bpName}-show` or `.{bpName}-show-inline` *(Example .xlrg-hide, .xlrg-show, .xlrg-show-inline}*
+
+- Breakpoint Hide/Show/Show inline : `.{bpName}-hide` or `.{bpName}-show` or `.{bpName}-show-inline` *Example: .xlrg-hide, .xlrg-show, .xlrg-show-inline*
 
 
-## Breakpoint Mixin Usage
-More to come
+## Breakpoint Usage in SASS
+
+#### SASS
+When writing SASS, you also have access to Breakpoints which allow you to generate media queries using the data entered in `/dev/js/partials/config.js`. Like with Breakpoint Classes, these are automatically generated on `gulp build`.
+
+**HTML**
+```sh
+<div class="container">
+  <div class="clear grid4"></div>
+  <div class="grid4"></div>
+  <div class="grid4"></div>
+</div>
+```
+
+**SASS**
+```sh
+.container div {
+  &:before {
+    content:"default";
+  }
+  @include bp(sml){
+    &:before{
+      content:"sml";
+    }
+  }
+  @include bp(med){
+    &:before{
+      content:"med";
+    }
+  }
+  @include bp(lrg){
+    &:before{
+      content:"lrg";
+    }
+  }
+  @include bp(xlrg){
+    &:before{
+      content:"xlrg";
+    }
+  }
+}
+```
+In the above, we give each div within the container a pseudo element and then change its content at different breakpoints. Like in the example above you can group these breakpoint mixins within the element they're modifying or you can define them seperately like in the next example.
+
+[[View this example]](http://codepen.io/lukedidit/pen/RabmxE)
+
+**HTML**
+```sh
+<div class="container">
+  <div class="sml-clear sml4 med-full lrg-clear lrg4 xlrg-clear xlrg6"></div>
+  <div class="sml-offset4 sml4 med-clear med6 lrg-offset4 lrg-clear lrg4 xlrg6"></div>
+  <div class="sml-hide med-show med6 lrg-clear lrg-offset8 lrg4 xlrg-full"></div>
+</div>
+```
+
+**SASS**
+```sh
+.container div {
+  &:before {
+    content:"default";
+  }
+}
+
+@include bp(sml) {
+  .container div:before {
+    content:"sml";
+  }
+  /* Other styles for elements which share this breakpoint would then follow */
+}
+
+@include bp(med) {
+  .container div:before {
+    content:"med";
+  }
+}
+
+@include bp(lrg) {
+  .container div:before {
+    content:"lrg";
+  }
+}
+
+@include bp(xlrg) {
+  .container div:before {
+    content:"xlrg";
+  }
+}
+```
+Here we have seperated the breakpoint mixins from the element they're modifying. This is useful if a breakpoint needs to effect multiple elements on your page as you now have one use of a breakpoint mixin effecting many elements rather then many uses of the same breakpoint mixin. On large projects with lots of SASS this method is preferred as it allows better tracking of what elements are being changed at which breakpoints.
+
+[[View this example]](http://codepen.io/lukedidit/pen/qZWGaV)
+
+#### List of Breakpoint Mixins
+
+- Create a min-width mobile-first breakpoint: `@include bp($bp)` *Example: @include bp(min)*
+
+- Create a max-width desktop-first breakpoint: `@include bpMax($bp)` *Example: @include bpMax(min)*
+
+- Create a breakpoint which only triggers inbetween 2 breakpoints: `@include bpBetween($from, $to)` *Example: @include bpBetween(med, lrg)*
+
+## Breakpoint Usage in Javascript
+Within javascript it's also possible to check if a breakpoint has been reached using provided functions. As with SASS, the breakpoints are pulled directly from the data in `/dev/js/partials/config.js`
+
+```sh
+	if(bp("med")){
+		console.log("med hit");
+		// Do other stuff
+	}
+```
+The above is a simple check to see if the browser window is wide enough to hit the 'med' breakpoint.
+
+```sh
+	if(bpMax("sml")){
+		console.log("sml hit");
+		// Do other stuff
+	}
+```
+Again, although the default function is mobile-first, a desktop-first alternative is provided. This is shown above, and illustrates a simple check to see if the browser window is small enough to hit the 'sml' breakpoint.
+
+<!-- Provide Example -->
 
 ## Other Mixins
 More to come

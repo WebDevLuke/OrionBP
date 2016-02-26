@@ -16,6 +16,15 @@ bpObj.data = breakpoints;
 // Breakpoint detection function
 // eg: if(bp("med")){
 var bp = function(size){
+	if(window.innerWidth >= bpObj["data"][size]){
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+var bpMax = function(size){
 	if(window.innerWidth <= bpObj["data"][size]){
 		return true;
 	}

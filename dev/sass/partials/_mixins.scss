@@ -26,7 +26,7 @@
 	}
 }
 
-@mixin bp-max($breakpoint)
+@mixin bpMax($breakpoint)
 {
 	// Only if Responsive Layout
 	@if $responsive == true
@@ -46,7 +46,7 @@
 	}
 }
 
-@mixin bp-between($from, $to)
+@mixin bpBetween($from, $to)
 {
 	// Only if Responsive Layout
 	@if $responsive == true
