@@ -16,6 +16,11 @@ Orion is a mobile-first HTML/CSS/JS framework in the tradition of Bootstrap and 
 
 * [Getting Started](#getting-started)
 * [Framework configuration](#framework-configuration)
+* [Creating Builds](#creating-builds)
+* [Grid System](#grid-system)
+* [Breakpoint Usage in SASS](#breakpoint-usage-in-sass])
+* [Breakpoint Usage in Javascript](#breakpoint-usage-in-javascript)
+* [About the Developer](#about-the-developer)
 
 ## Getting Started
 #### 1) Install Gulp
@@ -233,7 +238,6 @@ In the above, we give each div within the container a pseudo element and then ch
   .container div:before {
     content:"sml";
   }
-  /* Other styles for elements which share this breakpoint would then follow */
 }
 
 @include bp(med) {
@@ -260,35 +264,30 @@ Here we have seperated the breakpoint mixins from the element they're modifying.
 
 #### List of Breakpoint Mixins
 
-- Create a min-width mobile-first breakpoint: `@include bp($bp)` *Example: @include bp(min)*
+- Create a min-width mobile-first breakpoint: `@include bp($bp)` *Example: @include bp(sml)*
 
-- Create a max-width desktop-first breakpoint: `@include bpMax($bp)` *Example: @include bpMax(min)*
+- Create a max-width desktop-first breakpoint: `@include bpMax($bp)` *Example: @include bpMax(sml)*
 
-- Create a breakpoint which only triggers inbetween 2 breakpoints: `@include bpBetween($from, $to)` *Example: @include bpBetween(med, lrg)*
+- Create a breakpoint which only triggers inbetween 2 breakpoints: `@include bpBetween($from, $to)` *Example: @include bpBetween(sml, med)*
 
 ## Breakpoint Usage in Javascript
-Within javascript it's also possible to check if a breakpoint has been reached using provided functions. As with SASS, the breakpoints are pulled directly from the data in `/dev/js/partials/config.js`
+Within javascript it's also possible to check if a breakpoint has been reached using a function. As with SASS, the breakpoints are pulled directly from the data in `/dev/js/partials/config.js`
 
 ```sh
-	if(bp("med")){
-		console.log("med hit");
-		// Do other stuff
-	}
+if(bp("med")){
+	console.log("med hit");
+	// Do other stuff
+}
 ```
 The above is a simple check to see if the browser window is wide enough to hit the 'med' breakpoint.
 
-```sh
-	if(bpMax("sml")){
-		console.log("sml hit");
-		// Do other stuff
-	}
-```
-Again, although the default function is mobile-first, a desktop-first alternative is provided. This is shown above, and illustrates a simple check to see if the browser window is small enough to hit the 'sml' breakpoint.
+#### List of Breakpoint Functions
 
-<!-- Provide Example -->
+- Check if a min-width mobile-first breakpoint has been hit: `if(bp("$bp"))` *Example: if(bp("sml"))*
+- Check if a max-width desktop-first breakpoint has been hit: `if(bpMax("$bp"))` *Example: if(bpMax("sml"))*
+- Check if your window is currently inbetween 2 breakpoints: `if(bpBetween("$from, $to"))` *Example: if(bpBetween("sml", "med"))*
 
-## Other Mixins
-More to come
+[[View this example]](http://codepen.io/lukedidit/pen/JXPgdo)
 
 ## About the Developer
 I'm Luke Harrison, a Sheffield-based Web Designer &amp; Developer from the UK. I currently work at internet service provider Plusnet and when I'm not there I work on interesting side projects such as this very framework. Read more about me at [lukeharrison.net](http://www.lukeharrison.net) or follow me on twitter at [@silveredge9](https://twitter.com/Silveredge9).
