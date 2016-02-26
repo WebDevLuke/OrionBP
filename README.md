@@ -81,7 +81,7 @@ To tweak the settings for what happens during the build process open '/gulpfile.
 ```sh
 var minify = true;
 ```
-If set to `true`, all concatenated CSS and Javascript will then be minified to reduce files sizes.
+If set to `true`, all concatenated CSS and JavaScript will then be minified to reduce files sizes.
 
 If you wish to add any JS libraries such as jQuery, simply add these to `/dev/js/vendor/` and they will automatically be concatenated with the rest of the framework JS.
 
