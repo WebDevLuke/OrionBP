@@ -14,15 +14,15 @@ Orion is a mobile-first HTML/CSS/JS framework in the tradition of Bootstrap and 
 
 ## Table of contents
 
-* [Getting Started](#getting-started)
+* [Getting started](#getting-started)
 * [Framework configuration](#framework-configuration)
-* [Creating Builds](#creating-builds)
-* [Grid System](#grid-system)
-* [Breakpoint Usage in SASS](#breakpoint-usage-in-sass])
-* [Breakpoint Usage in Javascript](#breakpoint-usage-in-javascript)
-* [About the Developer](#about-the-developer)
+* [Creating builds](#creating-builds)
+* [Grid system](#grid-system)
+* [Breakpoint usage in SASS](#breakpoint-usage-in-sass)
+* [Breakpoint usage in JavaScript](#breakpoint-usage-in-javascript)
+* [About the developer](#about-the-developer)
 
-## Getting Started
+## Getting started
 #### 1) Install Gulp
 Orion uses Gulp as it's build system. If you've never used Gulp before, you need to first install its client globally using NPM:
 
@@ -39,7 +39,7 @@ npm install
 
 ## Framework configuration
 #### Choosing a grid system
-Orion allows you to define a grid system of your choice with SASS then generating all the required CSS classes and media query mixins automatically. To locate these variables open `/dev/sass/partials/_config.scss`.
+Orion allows you to define a grid system of your choice using variables. SASS then generates all the required CSS classes and media query mixins automatically. To locate these variables open `/dev/sass/partials/_config.scss`.
 
 ```sh
 $responsive: true;
@@ -81,14 +81,14 @@ To tweak the settings for what happens during the build process open '/gulpfile.
 ```sh
 var minify = true;
 ```
-If set to `true`, all concatenated CSS and Javascript will then be minified tor reduce files sizes.
+If set to `true`, all concatenated CSS and Javascript will then be minified to reduce files sizes.
 
-If you wish to add any JS libararies such jQuery, simply add these to `/dev/js/vendor/` and they will automatically be concatenated with the rest of the framework JS.
+If you wish to add any JS libraries such as jQuery, simply add these to `/dev/js/vendor/` and they will automatically be concatenated with the rest of the framework JS.
 
 The same goes for polyfills, but add them to `/dev/js/polyfills/` instead. 
 
 
-## Creating Builds
+## Creating builds
 
 ```sh
 Orion-Framework/
@@ -109,11 +109,11 @@ More specifically `gulp build` outputs the following in `/dist/`:
 After your initial build, it's a good idea to run `gulp watch`. This will tell Gulp to watch for any changes you make to individual files and upon detection will process those individual files in the same manner as they would be during `gulp build`. So if you're working on the SASS there's no need to re-run `gulp build` after every change as `gulp watch` will have already picked the change up and acted accordingly.
 
 
-## Grid System
+## Grid system
 
 On build SASS auto generates all the required classes you will need to construct grids. Below are a few practical examples using the grid outlined in [Framework Configuration](#framework-configuration)
 
-#### Basic Grid
+#### Basic grid
 
 ```sh
 <div class="container">
@@ -126,7 +126,7 @@ This is a basic 4/4/4 grid which doesn't change. When starting a new row, you ne
 
 [[View this example]](http://codepen.io/lukedidit/pen/pyzdXx)
 
-#### Basic Grid w. Breakpoint Classes
+#### Basic grid w. breakpoint classes
 
 ```sh
 <div class="container">
@@ -135,11 +135,11 @@ This is a basic 4/4/4 grid which doesn't change. When starting a new row, you ne
   <div class="grid4 med6"></div>
 </div>
 ```
-Here we introduce breakpoint classes which have been automatically created by SASS using the data entered in `/dev/js/partials/config.js`. As this is a mobile-first framework, we start off with a basic 4/4/4 grid and as we scale up and hit 640px it will change to 1/5/6.
+Here we introduce breakpoint classes which have been automatically created by SASS using the data entered in `/dev/js/partials/config.js`. As this is a mobile-first framework, we start off with a basic 4/4/4 grid and as we scale up and hit the med breakpoint at 640px it will change to 1/5/6.
 
 [[View this example]](http://codepen.io/lukedidit/pen/grYoPX)
 
-#### Advanced Grid w. Breakpoint Classes
+#### Advanced grid w. breakpoint classes
 
 ```sh
 <div class="container">
@@ -152,7 +152,7 @@ Here is an advanced example of how we can combine breakpoint classes to signific
 
 [[View this example]](http://codepen.io/lukedidit/pen/QNLapz)
 
-#### List of Breakpoint Classes
+#### List of breakpoint classes
 
 - Column: `.grid{num}` *Example: .grid4*
 
@@ -171,10 +171,10 @@ Here is an advanced example of how we can combine breakpoint classes to signific
 - Breakpoint Hide/Show/Show inline : `.{bpName}-hide` or `.{bpName}-show` or `.{bpName}-show-inline` *Example: .xlrg-hide, .xlrg-show, .xlrg-show-inline*
 
 
-## Breakpoint Usage in SASS
+## Breakpoint usage in SASS
 
 #### SASS
-When writing SASS, you also have access to Breakpoints which allow you to generate media queries using the data entered in `/dev/js/partials/config.js`. Like with Breakpoint Classes, these are automatically generated on `gulp build`.
+When writing SASS, you also have access to breakpoints which allow you to generate media queries using the data entered in `/dev/js/partials/config.js`. Like with breakpoint slasses, these are automatically generated on `gulp build`.
 
 **HTML**
 ```sh
@@ -262,7 +262,7 @@ Here we have seperated the breakpoint mixins from the element they're modifying.
 
 [[View this example]](http://codepen.io/lukedidit/pen/qZWGaV)
 
-#### List of Breakpoint Mixins
+#### List of breakpoint mixins
 
 - Create a min-width mobile-first breakpoint: `@include bp($bp)` *Example: @include bp(sml)*
 
@@ -270,8 +270,8 @@ Here we have seperated the breakpoint mixins from the element they're modifying.
 
 - Create a breakpoint which only triggers inbetween 2 breakpoints: `@include bpBetween($from, $to)` *Example: @include bpBetween(sml, med)*
 
-## Breakpoint Usage in Javascript
-Within javascript it's also possible to check if a breakpoint has been reached using a function. As with SASS, the breakpoints are pulled directly from the data in `/dev/js/partials/config.js`
+## Breakpoint usage in JavaScript
+Within JavaScript it's also possible to check if a breakpoint has been reached using a function. As with SASS, the breakpoints are pulled directly from the data in `/dev/js/partials/config.js`
 
 ```sh
 if(bp("med")){
@@ -281,7 +281,7 @@ if(bp("med")){
 ```
 The above is a simple check to see if the browser window is wide enough to hit the 'med' breakpoint.
 
-#### List of Breakpoint Functions
+#### List of breakpoint functions
 
 - Check if a min-width mobile-first breakpoint has been hit: `if(bp("$bp"))` *Example: if(bp("sml"))*
 - Check if a max-width desktop-first breakpoint has been hit: `if(bpMax("$bp"))` *Example: if(bpMax("sml"))*
@@ -289,5 +289,5 @@ The above is a simple check to see if the browser window is wide enough to hit t
 
 [[View this example]](http://codepen.io/lukedidit/pen/JXPgdo)
 
-## About the Developer
+## About the developer
 I'm Luke Harrison, a Sheffield-based Web Designer &amp; Developer from the UK. I currently work at internet service provider Plusnet and when I'm not there I work on interesting side projects such as this very framework. Read more about me at [lukeharrison.net](http://www.lukeharrison.net) or follow me on twitter at [@silveredge9](https://twitter.com/Silveredge9).
