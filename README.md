@@ -4,12 +4,12 @@
 </p>
 
 ## What is Orion Framework?
-Orion is a mobile-first HTML/CSS/JS framework in the tradition of Bootstrap and Foundation but without any of the bloat. It's a simple, easy to use and quick way of getting your responsive web project off the ground. 
+Orion is a mobile-first HTML/CSS/JS framework. It's a simple, easy to use and quick way of getting your responsive web project off the ground. 
 
 - **SASS Powered** - Choose the column width, number, gutter and padding of a grid system of your choice and SASS will automatically generate all the CSS classes and media query mixins for you.
 - **Share Breakpoints** - Manage your media query breakpoints in one file which then automatically filter into both the SASS framework and JS.
 - **Build with Gulp** - Orion comes with pre-built Gulp tasks allowing you to compress and concatenate your CSS, JS and image assets automatically.
-- **Bloat-free** - Orion comes packaged with just a SASS framework, a few handy mixins and a Gulp setup for building and watching. Meaning you don't have to spend time removing all the styles and components you know you won't use.
+- **Bloat-free** - Orion comes packaged with just a SASS framework, a few handy mixins and a Gulp setup for building and watching.
 
 
 ## Table of contents
