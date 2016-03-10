@@ -14,6 +14,7 @@ var rename = require("gulp-rename");
 var gulpif = require('gulp-if');
 var sassport = require('gulp-sassport');
 var runSequence = require('run-sequence');
+var babel = require("gulp-babel");
 const del = require('del');
 
 /*
@@ -24,7 +25,7 @@ const del = require('del');
 
 // If minify is true then css & js will be minified
 // This is in case the code needs to be maintained by a less-technical developer
-var minify = true;
+var minify = false;
 
 /*
 |--------------------------------------------------------------------
@@ -116,6 +117,7 @@ gulp.task('js', function() {
 		'./dev/js/partials/modules/breakpoints.js',
 		'./dev/js/global.js'
 	])
+	.pipe(babel())
 	.pipe(concat('core.js'))
     	.pipe(gulpif(minify, rename("core.min.js"), gulp.dest('./dist/js')))
     	.pipe(gulpif(minify, uglify()))
