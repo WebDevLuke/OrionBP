@@ -4,19 +4,33 @@
 |--------------------------------------------------------------------
 */
 
+// Required for all tasks
 var gulp = require('gulp');
+// Required for SASS tags
 var sass = require('gulp-sass');
+// Minifies images
 var imagemin = require('gulp-imagemin');
+// Used to prevent minifying of unchanged images
 var cache = require('gulp-cache');
+// Used to concat core js file
 var concat = require('gulp-concat');
+// Used to minify JS
 var uglify = require('gulp-uglify');
+// Used to rename CSS and JS depending if minified
 var rename = require("gulp-rename");
+// Used to add conditional functionality
 var gulpif = require('gulp-if');
+// Used to allow SASS to require JSON data
 var sassport = require('gulp-sassport');
+// Used to create synchronous build tasks
 var runSequence = require('run-sequence');
+// Used to convert ES2015 to accepted JS
 var babel = require("gulp-babel");
+// Used to convert Jade to HTML
 var jade = require('gulp-jade');
+// Used to pipe JSON data into Jade
 var data = require('gulp-data');
+// Used to delete folders during build process
 const del = require('del');
 
 /*
@@ -46,7 +60,6 @@ gulp.task('deleteDist', function(){
 */
 
 // Filter in JSON data
-
 gulp.task('html', function() {
   return gulp.src('./dev/jade/*.jade')
     .pipe(data(function(file){
@@ -62,39 +75,12 @@ gulp.task('html', function() {
 |--------------------------------------------------------------------
 */
 
-// Concat Breakpoints
-gulp.task('bpConcat', function () {
-	// Concat configs into temp file for export
-	return gulp.src([
-		'./dev/js/partials/config.js',
-		'./dev/js/partials/modules/breakpoints.js',
-		'./dev/js/partials/modules/export.js'
-	])
-	.pipe(concat('export-temp.js'))
-	.pipe(gulp.dest('./temp'))
-});
-
-gulp.task('sassTasks', function () {
-	// Run standard SASS job
+gulp.task('sass', function () {
 	return gulp.src('dev/sass/**/*.scss')
-	// Replaced breakpoints.js with concat fine
-    	.pipe(gulpif(minify, sassport(['temp/export-temp.js'],{outputStyle:'compressed'}), sassport(['temp/export-temp.js'],{outputStyle:'expanded'})))
+	.pipe(gulpif(minify, sassport({outputStyle: 'compressed'}), sassport({outputStyle: 'expanded'}) ))
     	.pipe(gulpif(minify, rename("style.min.css")))
 	.on('error', sass.logError)
 	.pipe(gulp.dest('./dist/css/'));
-});
-
-// Delete TEMP folder
-gulp.task('deleteTemp', function(){
-	return del('temp/');
-});
-
-gulp.task('sass',function() {
-	runSequence(
-		"bpConcat",
-		"sassTasks",
-		"deleteTemp"
-	);
 });
 
 /*
@@ -119,9 +105,8 @@ gulp.task('images', function(){
 // Combine JS and minify
 gulp.task('js', function() {
 	return gulp.src([
-		'./dev/js/partials/vendor/*.js',
-		'./dev/js/partials/polyfills/*.js',
-		'./dev/js/partials/config.js',
+		//'./dev/js/partials/vendor/*.js',
+		//'./dev/js/partials/polyfills/*.js',
 		'./dev/js/partials/modules/breakpoints.js',
 		'./dev/js/global.js'
 	])
@@ -144,6 +129,10 @@ gulp.task('copy', function() {
 	// Copy all non-directory files
 	gulp.src('dev/*.+(xml|txt|json)')
 	.pipe(gulp.dest('dist/'));
+
+	// Copy all data files
+	gulp.src('./dev/data/*.json')
+	.pipe(gulp.dest('./dist/data/'));
 
 	// Copy specified folders and contents
     	gulp.src('*/+(fonts)/**', {base:"./dev/"})

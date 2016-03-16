@@ -1,6 +1,7 @@
 // Define Breakpoints
 // Create object which will feed into SASS and our JS Breakpoint Function
 
+
 var bpObj = {
 	convertToPx: function(){
 		this.pxData = this.data;
