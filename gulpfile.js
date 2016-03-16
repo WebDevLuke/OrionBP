@@ -15,6 +15,8 @@ var gulpif = require('gulp-if');
 var sassport = require('gulp-sassport');
 var runSequence = require('run-sequence');
 var babel = require("gulp-babel");
+var jade = require('gulp-jade');
+var data = require('gulp-data');
 const del = require('del');
 
 /*
@@ -25,7 +27,7 @@ const del = require('del');
 
 // If minify is true then css & js will be minified
 // This is in case the code needs to be maintained by a less-technical developer
-var minify = false;
+var minify = true;
 
 /*
 |--------------------------------------------------------------------
@@ -39,13 +41,19 @@ gulp.task('deleteDist', function(){
 
 /*
 |--------------------------------------------------------------------
-|  HTML
+|  JADE
 |--------------------------------------------------------------------
 */
 
-gulp.task('html', function(){
-	gulp.src('dev/*.html')
-	.pipe(gulp.dest('dist/'));
+// Filter in JSON data
+
+gulp.task('html', function() {
+  return gulp.src('./dev/jade/*.jade')
+    .pipe(data(function(file){
+     		return require('./dev/data/info.json');
+     }))
+    .pipe(jade())
+    .pipe(gulp.dest('dist/'));
 });
 
 /*
