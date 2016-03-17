@@ -124,7 +124,7 @@ gulp.task('js', function() {
 		endtag: '/* endinject */',
 		transform: function (filePath, file) {
 			// return file contents as string
-			return "bpObj.data = " + file.contents.toString('utf8')
+			return "var bpData = " + file.contents.toString('utf8')
 		},
 		removeTags: true
 	}))

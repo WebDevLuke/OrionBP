@@ -1,46 +1,52 @@
 // Define Breakpoints
-// Create object which will feed into SASS and our JS Breakpoint Function
+// Create module which exports bp functions
 
-var bpObj = {
-	convertToNum: function(){
-		for(var key in this.data){
-			this.data[key] = parseFloat(this.data[key]);
+const bp = (function(){
+
+	var convertToNum = function(obj){
+		let newObj = {};
+		for(var key in obj){
+			newObj[key] = parseFloat(obj[key]);
 		}
-		return this.data;
-	},
-	data: {}
-};
+		return newObj;
+	};
 
-/* inject: Breakpoints JSON */
-/* endinject */
+	/* inject: Breakpoints JSON */
+	/* endinject */
 
-bpObj.convertToNum();
+	var bpObj = convertToNum(bpData);
 
-// Breakpoint detection function
-// eg: if(bp("med")){
-var bp = function(size){
-	if(window.innerWidth >= bpObj["data"][size]) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
+	return {
 
-var bpMax = function(size){
-	if(window.innerWidth <= bpObj["data"][size]) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
+		// Breakpoint detection function
+		// eg: if(bp.min("med")){
+		min: function(size){
+			if(window.innerWidth >= bpObj[size]) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		},
 
-var bpBetween = function(from, to){
-	if(window.innerWidth >= bpObj["data"][from] && window.innerWidth <= bpObj["data"][to]) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
+		max: function(size){
+			if(window.innerWidth <= bpObj[size]) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		},
+
+		between: function(from, to){
+			if(window.innerWidth >= bpObj[from] && window.innerWidth <= bpObj[to]) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	};
+
+})();
+

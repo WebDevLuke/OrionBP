@@ -274,7 +274,7 @@ Here we have seperated the breakpoint mixins from the element they're modifying.
 Within JavaScript it's also possible to check if a breakpoint has been reached using a function. As with SASS, the breakpoints are pulled directly from the data in `/dev/js/partials/config.js`
 
 ```sh
-if(bp("med")){
+if(bp.min("med")){
 	console.log("med hit");
 	// Do other stuff
 }
@@ -283,9 +283,9 @@ The above is a simple check to see if the browser window is wide enough to hit t
 
 #### List of breakpoint functions
 
-- Check if a min-width mobile-first breakpoint has been hit: `if(bp("$bp"))` *Example: if(bp("sml"))*
-- Check if a max-width desktop-first breakpoint has been hit: `if(bpMax("$bp"))` *Example: if(bpMax("sml"))*
-- Check if your window is currently inbetween 2 breakpoints: `if(bpBetween("$from, $to"))` *Example: if(bpBetween("sml", "med"))*
+- Check if a min-width mobile-first breakpoint has been hit: `if(bp.min("$bp"))` *Example: if(bp.min("sml"))*
+- Check if a max-width desktop-first breakpoint has been hit: `if(bp.max("$bp"))` *Example: if(bp.max("sml"))*
+- Check if your window is currently inbetween 2 breakpoints: `if(bp.between("$from, $to"))` *Example: if(bp.between("sml", "med"))*
 
 [[View this example]](http://codepen.io/lukedidit/pen/JXPgdo)
 
