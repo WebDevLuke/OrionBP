@@ -60,17 +60,17 @@ $padding: $gutter / 2;
 Here you set the variables which will create your grid system. By default this is set to a **1170px 12 column grid system**.
 
 #### Defining your breakpoints
-To define the framework breakpoints open `/dev/js/partials/config.js`.
+To define the framework breakpoints open `/dev/data/breakpoints.json`.
 
 ```sh
-var breakpoints = {
-	xsml: 370,
-	sml: 480,
-	med: 640,
-	lrg: 925,
-	xlrg: 1280,
-	xxlrg: 1366
-};
+{   
+  "xsml": "370px",
+  "sml": "480px",
+  "med": "640px",
+  "lrg": "925px",
+  "xlrg": "1280px",
+  "xxlrg": "1366px"
+}
 ```
 Give each breakpoint a name and order them from smallest to largest. How these breakpoints can be used in SASS and JS is explained under [Grid System](#grid-system)
 

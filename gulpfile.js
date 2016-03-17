@@ -79,7 +79,7 @@ gulp.task('html', function() {
 
 gulp.task('sass', function () {
 	return gulp.src('dev/sass/**/*.scss')
-	.pipe(gulpif(minify, sassport({outputStyle: 'compressed'}), sassport({outputStyle: 'expanded'}) ))
+	.pipe(gulpif(minify, sassport([],{outputStyle: 'compressed'}), sassport([], {outputStyle: 'expanded'})))
     	.pipe(gulpif(minify, rename("style.min.css")))
 	.on('error', sass.logError)
 	.pipe(gulp.dest('./dist/css/'));
