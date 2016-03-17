@@ -31,9 +31,11 @@ var jade = require('gulp-jade');
 // Used to pipe JSON data into Jade
 var data = require('gulp-data');
 // Used to delete folders during build process
-const del = require('del');
+var del = require('del');
 // Used to inject breakpoints json data as object into breakpoints.js
 var inject = require('gulp-inject');
+// Used to add autoprefixer to SASS task
+var autoprefixer = require('gulp-autoprefixer');
 
 /*
 |--------------------------------------------------------------------
@@ -43,7 +45,7 @@ var inject = require('gulp-inject');
 
 // If minify is true then css & js will be minified
 // This is in case the code needs to be maintained by a less-technical developer
-var minify = true;
+var minify = false;
 
 /*
 |--------------------------------------------------------------------
@@ -82,6 +84,10 @@ gulp.task('sass', function () {
 	.pipe(gulpif(minify, sassport([],{outputStyle: 'compressed'}), sassport([], {outputStyle: 'expanded'})))
     	.pipe(gulpif(minify, rename("style.min.css")))
 	.on('error', sass.logError)
+	.pipe(autoprefixer({
+		browsers: ['ie >= 8'],
+		cascade: false
+	}))
 	.pipe(gulp.dest('./dist/css/'));
 });
 
