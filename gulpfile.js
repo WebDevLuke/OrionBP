@@ -43,7 +43,7 @@ var inject = require('gulp-inject');
 
 // If minify is true then css & js will be minified
 // This is in case the code needs to be maintained by a less-technical developer
-var minify = false;
+var minify = true;
 
 /*
 |--------------------------------------------------------------------
@@ -107,12 +107,11 @@ gulp.task('images', function(){
 // Combine JS and minify
 gulp.task('js', function() {
 	return gulp.src([
-		// './dev/js/partials/vendor/*.js',
-		// './dev/js/partials/polyfills/*.js',
+		'./dev/js/partials/vendor/*.js',
+		'./dev/js/partials/polyfills/*.js',
 		'./dev/js/partials/modules/breakpoints.js',
 		'./dev/js/global.js'
 	])
-	.pipe(babel())
 	.pipe(concat('core.js'))
 	.pipe(inject(gulp.src('./dev/data/breakpoints.json'), {
 		starttag: '/* inject: Breakpoints JSON */',
@@ -123,6 +122,7 @@ gulp.task('js', function() {
 		},
 		removeTags: true
 	}))
+	.pipe(babel())
     	.pipe(gulpif(minify, rename("core.min.js"), gulp.dest('./dist/js')))
     	.pipe(gulpif(minify, uglify()))
     	.pipe(gulpif(minify, gulp.dest('./dist/js/')));
@@ -140,10 +140,6 @@ gulp.task('copy', function() {
 	// Copy all non-directory files
 	gulp.src('dev/*.+(xml|txt|json)')
 	.pipe(gulp.dest('dist/'));
-
-	// Copy all data files
-	gulp.src('./dev/data/*.json')
-	.pipe(gulp.dest('./dist/data/'));
 
 	// Copy specified folders and contents
     	gulp.src('*/+(fonts)/**', {base:"./dev/"})

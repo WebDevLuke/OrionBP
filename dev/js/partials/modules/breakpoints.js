@@ -1,20 +1,20 @@
 // Define Breakpoints
 // Create object which will feed into SASS and our JS Breakpoint Function
 
-
 var bpObj = {
-	convertToPx: function(){
-		this.pxData = this.data;
-		for(key in this.pxData){
-		 	this.pxData[key] += "px";
+	convertToNum: function(){
+		for(var key in this.data){
+			this.data[key] = parseFloat(this.data[key]);
 		}
-		return this.pxData;
+		return this.data;
 	},
-	data: undefined
+	data: {}
 };
 
 /* inject: Breakpoints JSON */
 /* endinject */
+
+bpObj.convertToNum();
 
 // Breakpoint detection function
 // eg: if(bp("med")){
