@@ -9,10 +9,12 @@ var bpObj = {
 		 	this.pxData[key] += "px";
 		}
 		return this.pxData;
-	}
+	},
+	data: undefined
 };
 
-bpObj.data = breakpoints;
+/* inject: Breakpoints JSON */
+/* endinject */
 
 // Breakpoint detection function
 // eg: if(bp("med")){

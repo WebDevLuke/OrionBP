@@ -32,6 +32,8 @@ var jade = require('gulp-jade');
 var data = require('gulp-data');
 // Used to delete folders during build process
 const del = require('del');
+// Used to inject breakpoints json data as object into breakpoints.js
+var inject = require('gulp-inject');
 
 /*
 |--------------------------------------------------------------------
@@ -105,13 +107,22 @@ gulp.task('images', function(){
 // Combine JS and minify
 gulp.task('js', function() {
 	return gulp.src([
-		//'./dev/js/partials/vendor/*.js',
-		//'./dev/js/partials/polyfills/*.js',
+		// './dev/js/partials/vendor/*.js',
+		// './dev/js/partials/polyfills/*.js',
 		'./dev/js/partials/modules/breakpoints.js',
 		'./dev/js/global.js'
 	])
 	.pipe(babel())
 	.pipe(concat('core.js'))
+	.pipe(inject(gulp.src('./dev/data/breakpoints.json'), {
+		starttag: '/* inject: Breakpoints JSON */',
+		endtag: '/* endinject */',
+		transform: function (filePath, file) {
+			// return file contents as string
+			return "bpObj.data = " + file.contents.toString('utf8')
+		},
+		removeTags: true
+	}))
     	.pipe(gulpif(minify, rename("core.min.js"), gulp.dest('./dist/js')))
     	.pipe(gulpif(minify, uglify()))
     	.pipe(gulpif(minify, gulp.dest('./dist/js/')));
@@ -158,7 +169,7 @@ gulp.task("watch", function() {
 	// Images
 	gulp.watch('dev/img/*.+(png|jpg|gif|svg)',['images']);
 	// Watch for Breakpoint JS changes and compile SASS
-	gulp.watch('dev/js/partials/breakpoints.js',['sass']);
+	gulp.watch('dev/data/breakpoints.json',['sass']);
 	// SASS
 	gulp.watch('dev/sass/**/*.scss',['sass']);
 	// JS

@@ -14,7 +14,7 @@ $gutter: 30px;
 $columns: 12;
 $padding: $gutter / 2;
 
-// Pull Media Query Breakpoints from JS config using SassPort to convert JS object to SASS map
+// Pull Media Query Breakpoints from JS config using SassPort to convert JSON to SASS map
 // To edit media query breakpoints edit the file referenced below
 $breakpoints: require('dev/data/breakpoints.json');
 
