@@ -14,7 +14,7 @@ const bp = (function(){
 	/* inject: Breakpoints JSON */
 	/* endinject */
 
-	var bpObj = convertToNum(bpData);
+	var bpObj = convertToNum(bpData["breakpoints"]);
 
 	return {
 

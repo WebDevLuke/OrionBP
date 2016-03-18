@@ -119,7 +119,7 @@ gulp.task('js', function() {
 		'./dev/js/global.js'
 	])
 	.pipe(concat('core.js'))
-	.pipe(inject(gulp.src('./dev/data/breakpoints.json'), {
+	.pipe(inject(gulp.src('./dev/data/config.json'), {
 		starttag: '/* inject: Breakpoints JSON */',
 		endtag: '/* endinject */',
 		transform: function (filePath, file) {
