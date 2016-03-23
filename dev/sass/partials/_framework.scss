@@ -142,107 +142,67 @@
 			}
 		}
 	}
-
 }
 
-// //----------------------------------------------------------------------------------------------------
-// // GENERATE DEFAULT CONTAINER AND GRID CLASSES
-// //----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+// GENERATE DEFAULT CONTAINER AND GRID CLASSES
+//----------------------------------------------------------------------------------------------------
 
-// @include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
-// @include create_grid("grid", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
-// @include create_offsets("offset", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+// Default container
+@include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+@include create_grid("grid", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+@include create_offsets("offset", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 
+.hide {
+	display:none;
+}
 
-// //----------------------------------------------------------------------------------------------------
-// // GENERATE BREAKPOINT CLASSES BASED ON MAP VALUES
-// //----------------------------------------------------------------------------------------------------
+.show {
+	display:block;
+}
 
-// @if $responsive == true {
-// 	// Grab Breakpoints Map
-// 	@each $bp-name, $bp-value in $breakpoints	{
-// 		@include bp(#{$bp-name}) {
-// 			@include create_grid(#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
-// 			@include create_offsets(#{$bp-name}-offset, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+.show-inline {
+	display:inline-block;
+}
 
-// 			.#{$bp-name}-hide {
-// 				display:none;
-// 			}
-// 			.#{$bp-name}-show {
-// 				display:block;
-// 			}
-// 			.#{$bp-name}-show--inline {
-// 				display:inline-block;
-// 			}
+//----------------------------------------------------------------------------------------------------
+// GENERATE RESPONSIVE CONTAINER AND GRID CLASSES
+//----------------------------------------------------------------------------------------------------
 
-// 		}
-// 	}
-// }
+// Generate repsonsive classes and containers. If we need to change grid as per responsive container config redefine variables
+@each $bp-name, $bp-value in $breakpoints	{
 
-// // Create standard classes
-// .hide {
-// 	display:none;
-// }
+	@if map-has-key($gridResponsive, $bp-name) {
 
-// .show {
-// 	display:block;
-// }
+		// Get grid match
+		$bp-obj: map-get($gridResponsive, $bp-name);
 
-// .show-inline {
-// 	display:inline-block;
-// }
+		$columnWidth: map-get($bp-obj, "column width"); 
+		$gutter: map-get($bp-obj, "gutter"); 
+		$columns: map-get($bp-obj, "columns"); 
+		$padding: map-get($bp-obj, "padding");
 
-// //----------------------------------------------------------------------------------------------------
-// // GENERATE BREAKPOINT CONTAINERS
-// //----------------------------------------------------------------------------------------------------
+		@include bp(#{$bp-name}) {
+			@include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+		}
+	}
 
-// @if $responsive == true {
-// 	@each $bp-name, $bp-obj in $gridResponsive	{
-// 		$bp-px-value: map-get($breakpoints, $bp-name);
-// 		@media (min-width: $bp-px-value) {
+	@include bp(#{$bp-name}) {
+		@include create_grid(#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+		@include create_offsets(#{$bp-name}-offset, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 
-// 			// If values exist then override defaults else use defaults
-// 			@if map-has-key($bp-obj, "column width") {
-// 				$columnWidth-new: map-get($bp-obj, "column width"); 
-// 			}
-// 			@else {
-// 				$columnWidth-new: $columnWidth;
-// 			}
+		.#{$bp-name}-hide {
+			display:none;
+		}
+		.#{$bp-name}-show {
+			display:block;
+		}
+		.#{$bp-name}-show--inline {
+			display:inline-block;
+		}
+	}
+}
 
-// 			@if map-has-key($bp-obj, "gutter") {
-// 				$gutter-new: map-get($bp-obj, "gutter"); 
-// 			}
-// 			@else {
-// 				$gutter-new: $gutter;
-// 			}
-
-// 			@if map-has-key($bp-obj, "columns") {
-// 				$columns-new: map-get($bp-obj, "columns"); 
-// 			}
-// 			@else {
-// 				$columns-new: $columns;
-// 			}
-
-// 			@if map-has-key($bp-obj, "padding") {
-// 				$padding-new: map-get($bp-obj, "padding"); 
-// 			}
-// 			@else {
-// 				$padding-new: $padding;
-// 			}
-
-// 			@include create_container($columnWidth-new, $columns-new, $gutter-new, $padding-new, $fullWidth, $responsive);
-// 			@include create_grid(#{$bp-name}, $columnWidth-new, $columns-new, $gutter-new, $padding-new, $fullWidth, $responsive);
-// 			@include create_offsets(#{$bp-name}-offset, $columnWidth-new, $columns-new, $gutter-new, $padding-new, $fullWidth, $responsive);
-// 		}
-// 	}
-// }
-
-/*
-- Loop through breakpoints
-- run mixins using vars from default
-- use map-has-key to always check if our current bp has a partner in responsive grid
-- if so redefine vars using the data defined in responsive grid otherwise continue to use default
-*/
 
 
 

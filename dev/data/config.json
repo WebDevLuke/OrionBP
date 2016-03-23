@@ -9,8 +9,11 @@
 			"padding": "15px"
 		},
 		"responsive": {
-			"lrg": {
-				"columns": 16
+			"xlrg": {
+				"column width": "70px",
+				"gutter": "30px",
+				"columns": 16,
+				"padding": "15px"
 			}
 		}
 	},

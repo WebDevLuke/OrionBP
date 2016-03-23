@@ -38,41 +38,75 @@ npm install
 **That's it!**
 
 ## Framework configuration
-#### Choosing a grid system
-Orion allows you to define a grid system of your choice using variables. SASS then generates all the required CSS classes and media query mixins automatically. To locate these variables open `/dev/sass/partials/_config.scss`.
-
-```sh
-$responsive: true;
-```
-If set to `true` the container will have a max-width CSS property instead of just a standard width CSS property and will respond as you scale down the browser window.
-
-```sh
-$fullWidth: false;
-```
-If set to `true`, the max-width on the contrainer is set to 100% and will stretch the full width of the window.
-
-```sh
-$columnWidth: 70px;
-$gutter: 30px;
-$columns: 12;
-$padding: $gutter / 2;
-```
-Here you set the variables which will create your grid system. By default this is set to a **1170px 12 column grid system**.
-
 #### Defining your breakpoints
-To define the framework breakpoints open `/dev/data/breakpoints.json`.
+To define the framework breakpoints open `/dev/data/config.json`.
 
 ```sh
-{   
-  "xsml": "370px",
-  "sml": "480px",
-  "med": "640px",
-  "lrg": "925px",
-  "xlrg": "1280px",
-  "xxlrg": "1366px"
+"breakpoints": {
+    "xsml": "370px",
+    "sml": "480px",
+    "med": "640px",
+    "lrg": "925px",
+    "xlrg": "1280px",
+    "xxlrg": "1366px"
 }
 ```
 Give each breakpoint a name and order them from smallest to largest. How these breakpoints can be used in SASS and JS is explained under [Grid System](#grid-system)
+
+#### Choosing a grid system
+Orion allows you to define a grid system of your choice using variables. SASS then generates all the required CSS classes and media query mixins automatically. To locate these variables open `/dev/data/config.json`.
+
+```sh
+"grid": {
+  "default" : {
+    "responsive": true,
+    "full width": false,
+    "column width": "70px",
+    "gutter": "30px",
+    "columns": 12,
+    "padding": "15px"
+  },
+  "responsive": {
+  }
+}
+```
+
+`responsive`: If set to `true` the container will have a max-width CSS property instead of just a standard width CSS property and will respond as you scale down the browser window.
+
+`fullWidth`: If set to `true`, the max-width on the contrainer is set to 100% and will stretch the full width of the window.
+
+```sh
+"column width": "70px",
+"gutter": "30px",
+"columns": 12,
+"padding": "15px"
+```
+Here you set the variables which will create your grid system. By default this is set to a **1170px 12 column grid system**.
+
+You can also reshape the grid at any of your defined breakpoints by creating entries within the `responsive` property.
+
+```sh
+"grid": {
+  "default" : {
+    "responsive": true,
+    "full width": false,
+    "column width": "70px",
+    "gutter": "30px",
+    "columns": 12,
+    "padding": "15px"
+  },
+  "responsive": {
+    "xlrg": {
+      "column width": "70px",
+      "gutter": "30px",
+      "columns": 16,
+      "padding": "15px"
+    }
+  }
+}
+```
+
+The above example defines a **1170px 12 column grid system** which morphs into a **1600px 16 column grid system** once the `xlrg` breakpoint has been hit.
 
 
 #### Gulp
