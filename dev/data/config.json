@@ -5,17 +5,12 @@
 			"full width": false,
 			"column width": "70px",
 			"gutter": "30px",
-			"columns": 16,
+			"columns": 12,
 			"padding": "15px"
 		},
 		"responsive": {
 			"lrg": {
-				"columns": 12,
-				"padding": "5px"
-			},
-			"med": {
-				"columns": 14,
-				"column width": "100px"
+				"columns": 16
 			}
 		}
 	},
