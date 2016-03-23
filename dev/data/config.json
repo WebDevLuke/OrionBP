@@ -8,7 +8,7 @@
 			"columns": 12,
 			"padding": "15px"
 		},
-		"responsive": {
+		"morph": {
 			"xlrg": {
 				"column width": "70px",
 				"gutter": "30px",

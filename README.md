@@ -39,7 +39,7 @@ npm install
 
 ## Framework configuration
 #### Defining your breakpoints
-To define the framework breakpoints open `/dev/data/config.json`.
+To define the framework breakpoints open `/dev/data/config.json` and edit the config object.
 
 ```sh
 "breakpoints": {
@@ -54,7 +54,7 @@ To define the framework breakpoints open `/dev/data/config.json`.
 Give each breakpoint a name and order them from smallest to largest. How these breakpoints can be used in SASS and JS is explained under [Grid System](#grid-system)
 
 #### Choosing a grid system
-Orion allows you to define a grid system of your choice using variables. SASS then generates all the required CSS classes and media query mixins automatically. To locate these variables open `/dev/data/config.json`.
+Orion allows you to define a grid system of your choice using a config object. SASS then generates all the required CSS classes and media query mixins automatically. To locate this config object open `/dev/data/config.json`.
 
 ```sh
 "grid": {
@@ -66,14 +66,14 @@ Orion allows you to define a grid system of your choice using variables. SASS th
     "columns": 12,
     "padding": "15px"
   },
-  "responsive": {
+  "morph": {
   }
 }
 ```
 
 `responsive`: If set to `true` the container will have a max-width CSS property instead of just a standard width CSS property and will respond as you scale down the browser window.
 
-`fullWidth`: If set to `true`, the max-width on the contrainer is set to 100% and will stretch the full width of the window.
+`full width`: If set to `true`, the max-width on the contrainer is set to 100% and will stretch the full width of the window.
 
 ```sh
 "column width": "70px",
@@ -83,7 +83,7 @@ Orion allows you to define a grid system of your choice using variables. SASS th
 ```
 Here you set the variables which will create your grid system. By default this is set to a **1170px 12 column grid system**.
 
-You can also reshape the grid at any of your defined breakpoints by creating entries within the `responsive` property.
+You can also reshape the grid at any of your defined breakpoints by creating entries within the `morph` property.
 
 ```sh
 "grid": {
@@ -95,7 +95,7 @@ You can also reshape the grid at any of your defined breakpoints by creating ent
     "columns": 12,
     "padding": "15px"
   },
-  "responsive": {
+  "morph": {
     "xlrg": {
       "column width": "70px",
       "gutter": "30px",
