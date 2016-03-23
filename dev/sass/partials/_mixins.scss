@@ -6,62 +6,50 @@
 
 // Create media queries using breakpoints defined in js/config.js
 
-@mixin bp($breakpoint)
-{
+@mixin bp($breakpoint) {
 	// Only if Responsive Layout
-	@if $responsive == true
-	{
+	@if $responsive == true {
 		// Retrieves the value from the key
 		$value: map-get($breakpoints, $breakpoint);
 	 
 		// If the key exists in the map
-		@if $value != null
-		{
+		@if $value != null {
 			// Prints a media query based on the value
-			@media (min-width: $value)
-			{
-			@content;
+			@media (min-width: $value) {
+				@content;
 			}
 		}
 	}
 }
 
-@mixin bpMax($breakpoint)
-{
+@mixin bpMax($breakpoint) {
 	// Only if Responsive Layout
-	@if $responsive == true
-	{
+	@if $responsive == true {
 		// Retrieves the value from the key
 		$value: map-get($breakpoints, $breakpoint);
 	 
 		// If the key exists in the map
-		@if $value != null
-		{
+		@if $value != null {
 			// Prints a media query based on the value
-			@media (max-width: $value)
-			{
-			@content;
+			@media (max-width: $value) {
+				@content;
 			}
 		}
 	}
 }
 
-@mixin bpBetween($from, $to)
-{
+@mixin bpBetween($from, $to) {
 	// Only if Responsive Layout
-	@if $responsive == true
-	{
+	@if $responsive == true {
 		// Retrieves the value from the key
 		$from: map-get($breakpoints, $from);
 		$to: map-get($breakpoints, $to);
 	 
 		// If the key exists in the map
-		@if $from and $to != null
-		{
+		@if $from and $to != null {
 			// Prints a media query based on the value
-			@media (min-width: $from) and (max-width: $to)
-			{
-			@content;
+			@media (min-width: $from) and (max-width: $to)	{
+				@content;
 			}
 		}
 	}
@@ -71,15 +59,12 @@
 // CLEARFIX
 //--------------------------------------------------------------------
 
-@mixin clearfix
-{
-	&:before, &:after
-	{
+@mixin clearfix {
+	&:before, &:after {
         	content: "";
         	display: table;
     	}
-	&:after
-	{
+	&:after {
 		clear: both;
 	}
 }
@@ -90,14 +75,12 @@
 
 // Quickly generate a scaleable grid from a selection of elements
 
-@mixin grid($numPerRow,$margin:10%)
-{
-width:(100% - ($margin * ($numPerRow - 1))) / $numPerRow;
-margin:0 $margin $margin 0;
-float:left;
-&:nth-child(#{$numPerRow}n)
-	{
-	margin-right:0;
+@mixin grid($numPerRow,$margin:10%) {
+	width:(100% - ($margin * ($numPerRow - 1))) / $numPerRow;
+	margin:0 $margin $margin 0;
+	float:left;
+	&:nth-child(#{$numPerRow}n)	{
+		margin-right:0;
 	}
-@include clearfix;
+	@include clearfix;
 }

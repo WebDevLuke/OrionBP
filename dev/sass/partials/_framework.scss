@@ -2,127 +2,98 @@
 // FRAMEWORK
 //--------------------------------------------------------------------
 
-// This is where the magic happens
-// This generates grid classes based on the breakpoints defined in $breakpoints in config
-// Also creates breakpoint classes used for responsive elements
-
 //--------------------------------------------------------------------
-// SET VARIABLE DEFAULTS
+// CREATE DEFAULT CONTAINER
 //--------------------------------------------------------------------
 
-$columnWidth: 70px !default;
-$gutter: 30px !default;
-$columns: 12 !default;
-$padding: $gutter / 2 !default;
-$responsive: true !default;
-$fullWidth: false !default;
+@mixin create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive) {
 
-//--------------------------------------------------------------------
-// CHECK IF FULL WIDTH IS TRUE
-//--------------------------------------------------------------------
+	@if $fullWidth == true {
+		$responsive: true;
+	}
 
-@if $fullWidth == true
-{
-	$responsive: true;
-}
+	$width: ($columnWidth * $columns) + ($gutter * ($columns - 1));
 
-//--------------------------------------------------------------------
-// CREATE BASE CONTAINER
-//--------------------------------------------------------------------
-
-$width: ($columnWidth * $columns) + ($gutter * ($columns - 1));
-
-// Set Base Container
-.container
-{
-@if $fullWidth == true
-{
-	max-width:100%;
-}
-@else if $responsive == true
-{
-	max-width:$width;
-}
-@else
-{
-	width:$width;
-}
-@include clearfix();
-margin:0px auto;
-position:relative;
-padding: 0 $padding 0 $padding;
+	// Set Base Container
+	.container {
+		@if $fullWidth == true {
+			max-width:100%;
+		}
+		@else if $responsive == true {
+			max-width:$width;
+		}
+		@else {
+			width:$width;
+		}
+		@include clearfix();
+		margin:0px auto;
+		position:relative;
+		padding: 0 $padding 0 $padding;
+	}
 }
 
 //--------------------------------------------------------------------
 // CREATE GRID MIXIN
 //--------------------------------------------------------------------
 
-@mixin create_grid($prefix)
-{
+@mixin create_grid($prefix, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive) {
 
-// Define Individual Grid Classes
-@for $i from 1 to $columns
-{
-	// Calculate grid size in pixels
-	$grid: ($columnWidth * $i) + ($gutter * ($i - 1));
-	
-	// Calculate responsive grid sizes if required
-	@if $responsive == true
-	{
-		// Calculate grid size in percentage
-		$grid: ($grid / $width) * 100%;
+	$width: ($columnWidth * $columns) + ($gutter * ($columns - 1));
 
-		// Get Gutter Percentage for Grids
-		$gutter-percentage: ($gutter / $width) * 100%;
+	// Define Individual Grid Classes
+	@for $i from 1 to $columns {
+		// Calculate grid size in pixels
+		$grid: ($columnWidth * $i) + ($gutter * ($i - 1));
+		
+		// Calculate responsive grid sizes if required
+		@if $responsive == true {
+			// Calculate grid size in percentage
+			$grid: ($grid / $width) * 100%;
 
-		.#{$prefix}#{$i}
-			{
-			width: $grid;
-			float: left;
-			clear:none;
-			margin-left:$gutter-percentage;
-			box-sizing: border-box;
+			// Get Gutter Percentage for Grids
+			$gutter-percentage: ($gutter / $width) * 100%;
+
+			.#{$prefix}#{$i}	{
+				width: $grid;
+				float: left;
+				clear:none;
+				margin-left:$gutter-percentage;
+				box-sizing: border-box;
 			}
 
-	}
-	@else
-	{
-		.grid#{$i}
-			{
-			width: $grid;
-			float: left;
-			margin-left:$gutter;
-			box-sizing: border-box;
+		}
+		@else
+		{
+			.grid#{$i} {
+				width: $grid;
+				float: left;
+				margin-left:$gutter;
+				box-sizing: border-box;
 			}
-	}
-}
-
-// Define Additional Full Width Variants & Clear Classes For Responsive Classes Only
-@if $prefix != "grid"
-{		
-	.#{$prefix}-full
-	{	
-	width:100%;
-	float:none;
-	clear:both;
-	margin-left:0;
-	box-sizing: border-box;
+		}
 	}
 
-	.#{$prefix}-clear
-	{
-	margin-left: 0px;
-	clear: left;
+	// Define Additional Full Width Variants & Clear Classes For Responsive Classes Only
+	@if $prefix != "grid" {		
+		.#{$prefix}-full {	
+			width:100%;
+			float:none;
+			clear:both;
+			margin-left:0;
+			box-sizing: border-box;
+		}
+
+		.#{$prefix}-clear {
+			margin-left: 0px;
+			clear: left;
+		}
 	}
-}
-@else
-{
-	.clear
-	{
-	margin-left: 0px;
-	clear: left;
+	@else {
+		.clear {
+			margin-left: 0px;
+			clear: left;
+		}
 	}
-}
 
 }
 
@@ -130,61 +101,55 @@ padding: 0 $padding 0 $padding;
 // CREATE OFFSETS MIXIN
 //--------------------------------------------------------------------
 
-@mixin create_offsets($prefix)
-{
+@mixin create_offsets($prefix, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive) {
+
+	$width: ($columnWidth * $columns) + ($gutter * ($columns - 1));
 
 	// Define Grid Offsets
-	@for $i from 1 to $columns
-	{
+	@for $i from 1 to $columns {
 		// Calculate grid size in pixels
 		$grid: ($columnWidth * $i) + ($gutter * ($i - 1));
 		
 		// Calculate responsive grid sizes if required
-		@if $responsive == true
-		{
+		@if $responsive == true {
 			// Calculate grid size in percentage
 			$grid: ($grid / $width) * 100%;
 
 			// Get Gutter Percentage for Grids
 			$gutter-percentage: (($gutter / $width) * 100%);
 
-			.#{$prefix}#{$i}
-				{
+			.#{$prefix}#{$i}	{
 				margin-left:$grid + $gutter-percentage;
-				}
+			}
 		}
-		@else
-		{
-			.offset#{$i}
-				{
+		@else {
+			.offset#{$i}	{
 				margin-left:$grid + ($gutter * 2);
-				}
+			}
 		}
 	}
 
 }
 
-//--------------------------------------------------------------------
-// GENERATE GRID CLASSES
-//--------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+// GENERATE DEFAULT CONTAINER AND GRID CLASSES
+//----------------------------------------------------------------------------------------------------
 
-@include create_grid("grid");
-@include create_offsets("offset");
+@include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+@include create_grid("grid", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+@include create_offsets("offset", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 
 
 //----------------------------------------------------------------------------------------------------
 // GENERATE BREAKPOINT CLASSES BASED ON MAP VALUES
 //----------------------------------------------------------------------------------------------------
 
-@if $responsive == true
-{
+@if $responsive == true {
 	// Grab Breakpoints Map
-	@each $bp-name, $bp-value in $breakpoints
-	{
-		@include bp(#{$bp-name})
-		{
-			@include create_grid(#{$bp-name});
-			@include create_offsets(#{$bp-name}-offset);
+	@each $bp-name, $bp-value in $breakpoints	{
+		@include bp(#{$bp-name}) {
+			@include create_grid(#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+			@include create_offsets(#{$bp-name}-offset, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 		}
 	}
 }
@@ -225,6 +190,55 @@ padding: 0 $padding 0 $padding;
 		}
 	}
 }
+
+//----------------------------------------------------------------------------------------------------
+// GENERATE BREAKPOINT CONTAINERS
+//----------------------------------------------------------------------------------------------------
+
+@if $responsive == true {
+	@each $bp-name, $bp-value in $gridResponsive	{
+		// $bp-name = lrg
+		// $bp-value = object
+		$bp-px-value: map-get($breakpoints, $bp-name);
+		@media (max-width: $bp-px-value) {
+
+			// If values exist then override defaults else use defaults
+			@if map-has-key($bp-value, "column width") {
+				$columnWidth-new: map-get($bp-value, "column width"); 
+			}
+			@else {
+				$columnWidth-new: $columnWidth;
+			}
+
+			@if map-has-key($bp-value, "gutter") {
+				$gutter-new: map-get($bp-value, "gutter"); 
+			}
+			@else {
+				$gutter-new: $gutter;
+			}
+
+			@if map-has-key($bp-value, "columns") {
+				$columns-new: map-get($bp-value, "columns"); 
+			}
+			@else {
+				$columns-new: $columns;
+			}
+
+			@if map-has-key($bp-value, "padding") {
+				$padding-new: map-get($bp-value, "padding"); 
+			}
+			@else {
+				$padding-new: $padding;
+			}
+
+			@include create_container($columnWidth-new, $columns-new, $gutter-new, $padding-new, $fullWidth, $responsive);
+
+			// Create container within that query using variables within $bp-value
+			// Check if each value with $bp-value exists and if not then use default variant
+		}
+	}
+}
+
 
 
 
