@@ -6,7 +6,7 @@
 
 // Create media queries using breakpoints defined in js/config.js
 
-@mixin bp($breakpoint) {
+@mixin bp($breakpoint, $extras: false) {
 	// Only if Responsive Layout
 	@if $responsive == true {
 		// Retrieves the value from the key
@@ -14,15 +14,21 @@
 	 
 		// If the key exists in the map
 		@if $value != null {
-			// Prints a media query based on the value
-			@media (min-width: $value) {
-				@content;
+			@if $extras {
+				@media (min-width: $value) and ($extras) {
+					@content;
+				}
+			}
+			@else {
+				@media (min-width: $value) {
+					@content;
+				}
 			}
 		}
 	}
 }
 
-@mixin bpMax($breakpoint) {
+@mixin bpMax($breakpoint, $extras: false) {
 	// Only if Responsive Layout
 	@if $responsive == true {
 		// Retrieves the value from the key
@@ -30,9 +36,15 @@
 	 
 		// If the key exists in the map
 		@if $value != null {
-			// Prints a media query based on the value
-			@media (max-width: $value) {
-				@content;
+			@if $extras {
+				@media (max-width: $value) and ($extras) {
+					@content;
+				}
+			}
+			@else {
+				@media (max-width: $value) {
+					@content;
+				}
 			}
 		}
 	}
