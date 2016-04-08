@@ -133,12 +133,19 @@
 			$gutter-percentage: ($gutter / $width) * 100%;
 
 			.#{$prefix}#{$i}	{
-				margin-left:($grid + $gutter-percentage * 2);
+				margin-left:$grid + ($gutter-percentage * 2);
 			}
+			.#{$prefix}#{$i}:first-child {
+				margin-left:$grid + $gutter-percentage;
+			}
+
 		}
 		@else {
 			.offset#{$i}	{
 				margin-left:$grid + ($gutter * 2);
+			}
+			.offset#{$i}:first-child {
+				margin-left:$grid + $gutter;
 			}
 		}
 	}
