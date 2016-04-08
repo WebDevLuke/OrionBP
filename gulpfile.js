@@ -79,16 +79,34 @@ gulp.task('html', function() {
 |--------------------------------------------------------------------
 */
 
-gulp.task('sass', function () {
-	return gulp.src('dev/sass/**/*.scss')
+gulp.task('sass-style', function () {
+	return gulp.src('dev/sass/*.scss')
 	.pipe(gulpif(minify, sassport([],{outputStyle: 'compressed'}), sassport([], {outputStyle: 'expanded'})))
-    	.pipe(gulpif(minify, rename("style.min.css")))
+    	.pipe(gulpif(minify, rename({ suffix: '.min' })))
 	.on('error', sass.logError)
 	.pipe(autoprefixer({
-		browsers: ['ie >= 8'],
+		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
 		cascade: false
 	}))
+	.pipe(gulp.dest('./dist/css/'))
+});
+
+gulp.task('sass-ie8', function(){
+	return gulp.src('dev/sass/ie8.scss')
+	.pipe(gulpif(minify, sass({outputStyle: 'compressed'}), sass({outputStyle: 'expanded'})))
+    	.pipe(gulpif(minify, rename("ie8.min.css")))
+	.on('error', sass.logError)
+	.pipe(autoprefixer({
+		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']
+	}))
 	.pipe(gulp.dest('./dist/css/'));
+});
+
+gulp.task('sass', function(){
+	runSequence(
+		"sass-style",
+		"sass-ie8"
+	);
 });
 
 /*
@@ -111,7 +129,7 @@ gulp.task('images', function(){
 */
 
 // Combine JS and minify
-gulp.task('js', function() {
+gulp.task('js-process', function() {
 	return gulp.src([
 		'./dev/js/partials/vendor/*.js',
 		'./dev/js/partials/polyfills/*.js',
@@ -132,6 +150,22 @@ gulp.task('js', function() {
     	.pipe(gulpif(minify, rename("core.min.js"), gulp.dest('./dist/js')))
     	.pipe(gulpif(minify, uglify()))
     	.pipe(gulpif(minify, gulp.dest('./dist/js/')));
+});
+
+// Copy Across specific JS files
+gulp.task('js-copy', function() {
+	// Copy all non-directory files
+	gulp.src('dev/js/seperate/*.js')
+    	.pipe(gulpif(minify, rename({ suffix: '.min' }), gulp.dest('./dist/js/')))
+    	.pipe(gulpif(minify, uglify()))
+    	.pipe(gulpif(minify, gulp.dest('./dist/js/')));
+});
+
+gulp.task('js', function(){
+	runSequence(
+		"js-process",
+		"js-copy"
+	);
 });
 
 /*
@@ -167,7 +201,7 @@ gulp.task('copy', function() {
 // WATCH FUNCTION
 gulp.task("watch", function() {
 	// HTML
-	gulp.watch('dev/*.html',['html']);
+	gulp.watch('dev/jade/**/*.jade',['html']);
 	// Images
 	gulp.watch('dev/img/*.+(png|jpg|gif|svg)',['images']);
 	// Watch for Breakpoint JS changes and compile SASS
