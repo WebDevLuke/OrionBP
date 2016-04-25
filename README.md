@@ -39,7 +39,7 @@ npm install
 
 ## Framework configuration
 #### Defining your breakpoints
-To define the framework breakpoints open `/dev/data/config.json` and edit the config object.
+To define the framework breakpoints open `/dev/data/config.js` and edit the config object.
 
 ```sh
 "breakpoints": {
@@ -54,7 +54,7 @@ To define the framework breakpoints open `/dev/data/config.json` and edit the co
 Give each breakpoint a name and order them from smallest to largest. How these breakpoints can be used in SASS and JS is explained under [Grid System](#grid-system)
 
 #### Choosing a grid system
-Orion allows you to define a grid system of your choice using a config object. SASS then generates all the required CSS classes and media query mixins automatically. To locate this config object open `/dev/data/config.json`.
+Orion allows you to define a grid system of your choice using a config object. SASS then generates all the required CSS classes and media query mixins automatically. To locate this config object open `/dev/data/config.js`.
 
 ```sh
 "grid": {
