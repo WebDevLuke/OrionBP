@@ -12,8 +12,6 @@ var sass = require('gulp-sass');
 var imagemin = require('gulp-imagemin');
 // Used to prevent minifying of unchanged images
 var cache = require('gulp-cache');
-// Used to concat core js file
-var concat = require('gulp-concat');
 // Used to minify JS
 var uglify = require('gulp-uglify');
 // Used to rename CSS and JS depending if minified
@@ -24,18 +22,19 @@ var gulpif = require('gulp-if');
 var sassport = require('gulp-sassport');
 // Used to create synchronous build tasks
 var runSequence = require('run-sequence');
-// Used to convert ES2015 to accepted JS
-var babel = require("gulp-babel");
 // Used to convert Jade to HTML
 var jade = require('gulp-jade');
 // Used to pipe JSON data into Jade
 var data = require('gulp-data');
 // Used to delete folders during build process
 var del = require('del');
-// Used to inject breakpoints json data as object into breakpoints.js
-var inject = require('gulp-inject');
 // Used to add autoprefixer to SASS task
 var autoprefixer = require('gulp-autoprefixer');
+// Used to compile JS modules
+var browserify = require("browserify");
+var source = require('vinyl-source-stream');
+var glob = require('glob');
+var streamify = require('gulp-streamify');
 
 /*
 |--------------------------------------------------------------------
@@ -45,7 +44,7 @@ var autoprefixer = require('gulp-autoprefixer');
 
 // If minify is true then css & js will be minified
 // This is in case the code needs to be maintained by a less-technical developer
-var minify = false;
+var minify = true;
 
 /*
 |--------------------------------------------------------------------
@@ -67,7 +66,7 @@ gulp.task('deleteDist', function(){
 gulp.task('html', function() {
   return gulp.src('./dev/jade/*.jade')
     .pipe(data(function(file){
-     		return require('./dev/data/info.json');
+     		//return require('./dev/data/info.json');
      }))
     .pipe(jade())
     .pipe(gulp.dest('dist/'));
@@ -128,28 +127,28 @@ gulp.task('images', function(){
 |--------------------------------------------------------------------
 */
 
-// Combine JS and minify
 gulp.task('js-process', function() {
-	return gulp.src([
-		'./dev/js/partials/vendor/*.js',
-		'./dev/js/partials/polyfills/*.js',
-		'./dev/js/partials/modules/breakpoints.js',
-		'./dev/js/global.js'
-	])
-	.pipe(concat('core.js'))
-	.pipe(inject(gulp.src('./dev/data/config.json'), {
-		starttag: '/* inject: Breakpoints JSON */',
-		endtag: '/* endinject */',
-		transform: function (filePath, file) {
-			// return file contents as string
-			return "var bpData = " + file.contents.toString('utf8')
-		},
-		removeTags: true
-	}))
-	.pipe(babel())
-    	.pipe(gulpif(minify, rename("core.min.js"), gulp.dest('./dist/js')))
-    	.pipe(gulpif(minify, uglify()))
-    	.pipe(gulpif(minify, gulp.dest('./dist/js/')));
+	var files = glob.sync('./dev/js/*.js');
+	files.map(function(file) {
+		var name = file.replace("./dev/js/", "");
+		name = name.replace(".js", "");
+		return browserify({entries: file})
+		.transform("babelify", {presets: ["es2015"]})
+		.bundle()
+		.pipe(source(file))
+		.pipe(gulpif(minify, rename({ 
+			dirname: "",
+			basename: name,
+			suffix: ".min",
+			extname: ".js"
+		}), rename({ 
+			dirname: "",
+			basename: name,
+			extname: ".js"
+		})))
+	    	.pipe(gulpif(minify, streamify(uglify())))
+	    	.pipe(gulp.dest('./dist/js/'));
+	});
 });
 
 // Copy Across specific JS files

@@ -1,5 +1,5 @@
 // Pull config from JSON using SassPort to convert JSON to SASS map
-$config: require('dev/data/config.json');
+$config: require('dev/data/config.js');
 $gridConfig: map-get($config, "grid");
 $gridDefault: map-get($gridConfig, "default");
 $gridResponsive: map-get($gridConfig, "morph");

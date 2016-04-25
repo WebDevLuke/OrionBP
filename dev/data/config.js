@@ -1,4 +1,4 @@
-{
+var bpData = {
 	"grid": {
 		"default" : {
 			"responsive": true,
@@ -9,7 +9,7 @@
 			"padding": "15px"
 		},
 		"morph": {
-			"xlrg": {
+			"xxxlrg": {
 				"column width": "70px",
 				"gutter": "30px",
 				"columns": 16,
@@ -20,9 +20,14 @@
 	"breakpoints": {
 		"xsml": "370px",
 		"sml": "480px",
-		"med": "640px",
+		"sml2": "600px",
+		"med": "740px",
 		"lrg": "925px",
 		"xlrg": "1280px",
-		"xxlrg": "1366px"
+		"xxlrg": "1366px",
+		"xxxlrg": "1466px",
+		"xxxxlrg": "1600px"
 	}
-}
+};
+
+module.exports = bpData;

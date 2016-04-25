@@ -44,6 +44,13 @@
 		position:relative;
 		padding: 0 $padding 0 $padding;
 	}
+
+	.container-full {
+		@include clearfix();
+		margin:0px auto;
+		position:relative;
+		padding: 0;
+	}
 }
 
 //--------------------------------------------------------------------
@@ -209,8 +216,3 @@
 		}
 	}
 }
-
-
-
-
-
