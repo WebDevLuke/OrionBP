@@ -2,7 +2,10 @@
 $config: require('dev/data/config.js');
 $gridConfig: map-get($config, "grid");
 $gridDefault: map-get($gridConfig, "default");
-$gridResponsive: map-get($gridConfig, "morph");
+
+@if map-has-key($gridConfig, "morph") {
+	$gridResponsive: map-get($gridConfig, "morph");
+}
 
 // Should it be responsive?
 $responsive: map-get($gridDefault, "responsive");

@@ -186,18 +186,20 @@
 // Generate repsonsive classes and containers. If we need to change grid as per responsive container config redefine variables
 @each $bp-name, $bp-value in $breakpoints	{
 
-	@if map-has-key($gridResponsive, $bp-name) {
+	@if variable-exists(gridResponsive) {
+		@if map-has-key($gridResponsive, $bp-name) {
 
-		// Get grid match
-		$bp-obj: map-get($gridResponsive, $bp-name);
+			// Get grid match
+			$bp-obj: map-get($gridResponsive, $bp-name);
 
-		$columnWidth: map-get($bp-obj, "column width"); 
-		$gutter: map-get($bp-obj, "gutter"); 
-		$columns: map-get($bp-obj, "columns"); 
-		$padding: map-get($bp-obj, "padding");
+			$columnWidth: map-get($bp-obj, "column width"); 
+			$gutter: map-get($bp-obj, "gutter"); 
+			$columns: map-get($bp-obj, "columns"); 
+			$padding: map-get($bp-obj, "padding");
 
-		@include bp(#{$bp-name}) {
-			@include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+			@include bp(#{$bp-name}) {
+				@include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+			}
 		}
 	}
 
