@@ -12,18 +12,19 @@ var bp = (function(){
 			newObj[key] = parseFloat(obj[key]);
 		}
 		return newObj;
-	};
+	},
 
-	var bpData = require("../../../data/config.js");
+		bpData = require("../../../data/config.js"),
+		bpObj = convertToNum(bpData["breakpoints"]),
+		windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
-	var bpObj = convertToNum(bpData["breakpoints"]);
 
 	return {
 
 		// Breakpoint detection function
 		// eg: if(bp.min("med")){
 		min: function(size){
-			if(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth >= bpObj[size]) {
+			if(windowWidth >= bpObj[size]) {
 				return true;
 			}
 			else {
@@ -32,7 +33,7 @@ var bp = (function(){
 		},
 
 		max: function(size){
-			if(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth <= bpObj[size]) {
+			if(windowWidth <= bpObj[size]) {
 				return true;
 			}
 			else {
@@ -41,7 +42,7 @@ var bp = (function(){
 		},
 
 		between: function(from, to){
-			if(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth >= bpObj[from] && window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth <= bpObj[to]) {
+			if(windowWidth >= bpObj[from] && windowWidth <= bpObj[to]) {
 				return true;
 			}
 			else {
