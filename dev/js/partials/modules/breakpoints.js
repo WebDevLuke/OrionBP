@@ -16,14 +16,16 @@ var bp = (function(){
 
 		bpData = require("../../../data/config.js"),
 		bpObj = convertToNum(bpData["breakpoints"]),
-		windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
+		windowWidth;
 
 	return {
 
 		// Breakpoint detection function
 		// eg: if(bp.min("med")){
 		min: function(size){
+
+			windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
 			if(windowWidth >= bpObj[size]) {
 				return true;
 			}
@@ -33,6 +35,9 @@ var bp = (function(){
 		},
 
 		max: function(size){
+
+			windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
 			if(windowWidth <= bpObj[size]) {
 				return true;
 			}
@@ -42,6 +47,9 @@ var bp = (function(){
 		},
 
 		between: function(from, to){
+
+			windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
 			if(windowWidth >= bpObj[from] && windowWidth <= bpObj[to]) {
 				return true;
 			}
