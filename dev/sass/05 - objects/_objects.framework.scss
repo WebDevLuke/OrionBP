@@ -15,7 +15,7 @@
 	$width: ($columnWidth * $columns) + ($gutter * ($columns - 1));
 
 	// Set Base Container
-	.container {
+	.o-container {
 		@if $fullWidth == true {
 			max-width:100%;
 		}
@@ -31,7 +31,7 @@
 		padding: 0 $padding 0 $padding;
 	}
 
-	.container-full {
+	.o-container-full {
 		@include clearfix();
 		margin:0px auto;
 		position:relative;
@@ -71,7 +71,7 @@
 		}
 		@else
 		{
-			.grid#{$i} {
+			.col#{$i} {
 				width: $grid;
 				float: left;
 				margin-left:$gutter;
@@ -150,20 +150,8 @@
 
 // Default container
 @include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
-@include create_grid("grid", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+@include create_grid("col", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 @include create_offsets("offset", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
-
-.hide {
-	display:none;
-}
-
-.show {
-	display:block;
-}
-
-.show-inline {
-	display:inline-block;
-}
 
 //----------------------------------------------------------------------------------------------------
 // GENERATE RESPONSIVE CONTAINER AND GRID CLASSES
@@ -192,15 +180,5 @@
 	@include bp(#{$bp-name}) {
 		@include create_grid(#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 		@include create_offsets(#{$bp-name}-offset, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
-
-		.#{$bp-name}-hide {
-			display:none;
-		}
-		.#{$bp-name}-show {
-			display:block;
-		}
-		.#{$bp-name}-show--inline {
-			display:inline-block;
-		}
 	}
 }

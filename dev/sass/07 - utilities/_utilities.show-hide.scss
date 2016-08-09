@@ -1,0 +1,35 @@
+//----------------------------------------------------------------------------------------------------
+// SHOWING / HIDING OVERRIDES
+//----------------------------------------------------------------------------------------------------
+
+// Standard
+.u-hide {
+	display:none !important;
+}
+
+.u-show {
+	display:block !important;
+}
+
+.u-show-inline {
+	display:inline-block !important;
+}
+
+// Responsive
+@each $bp-name, $bp-value in $breakpoints	{
+
+	@include bp(#{$bp-name}) {
+
+		.u-#{$bp-name}-hide {
+			display:none !important;
+		}
+		.u-#{$bp-name}-show {
+			display:block !important;
+		}
+		.u-#{$bp-name}-show--inline {
+			display:inline-block !important;
+		}
+	
+	}
+
+}

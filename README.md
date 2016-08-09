@@ -150,7 +150,7 @@ On build SASS auto generates all the required classes you will need to construct
 #### Basic grid
 
 ```sh
-<div class="container">
+<div class="o-container">
   <div class="clear grid4"></div>
   <div class="grid4"></div>
   <div class="grid4"></div>
@@ -163,7 +163,7 @@ This is a basic 4/4/4 grid which doesn't change. When starting a new row, you ne
 #### Basic grid w. breakpoint classes
 
 ```sh
-<div class="container">
+<div class="o-container">
   <div class="clear grid4 med-clear med1"></div>
   <div class="grid4 med5"></div>
   <div class="grid4 med6"></div>
@@ -176,7 +176,7 @@ Here we introduce breakpoint classes which have been automatically created by SA
 #### Advanced grid w. breakpoint classes
 
 ```sh
-<div class="container">
+<div class="o-container">
   <div class="sml-clear sml4 med-full lrg-clear lrg4 xlrg-clear xlrg6"></div>
   <div class="sml-offset4 sml4 med-clear med6 lrg-offset4 lrg-clear lrg4 xlrg6"></div>
   <div class="sml-hide med-show med6 lrg-clear lrg-offset8 lrg4 xlrg-full"></div>
@@ -212,7 +212,7 @@ When writing SASS, you also have access to breakpoints which allow you to genera
 
 **HTML**
 ```sh
-<div class="container">
+<div class="o-container">
   <div class="clear grid4"></div>
   <div class="grid4"></div>
   <div class="grid4"></div>
@@ -221,7 +221,7 @@ When writing SASS, you also have access to breakpoints which allow you to genera
 
 **SASS**
 ```sh
-.container div {
+.o-container div {
   &:before {
     content:"default";
   }
@@ -253,7 +253,7 @@ In the above, we give each div within the container a pseudo element and then ch
 
 **HTML**
 ```sh
-<div class="container">
+<div class="o-container">
   <div class="sml-clear sml4 med-full lrg-clear lrg4 xlrg-clear xlrg6"></div>
   <div class="sml-offset4 sml4 med-clear med6 lrg-offset4 lrg-clear lrg4 xlrg6"></div>
   <div class="sml-hide med-show med6 lrg-clear lrg-offset8 lrg4 xlrg-full"></div>
@@ -262,32 +262,32 @@ In the above, we give each div within the container a pseudo element and then ch
 
 **SASS**
 ```sh
-.container div {
+.o-container div {
   &:before {
     content:"default";
   }
 }
 
 @include bp(sml) {
-  .container div:before {
+  .o-container div:before {
     content:"sml";
   }
 }
 
 @include bp(med) {
-  .container div:before {
+  .o-container div:before {
     content:"med";
   }
 }
 
 @include bp(lrg) {
-  .container div:before {
+  .o-container div:before {
     content:"lrg";
   }
 }
 
 @include bp(xlrg) {
-  .container div:before {
+  .o-container div:before {
     content:"xlrg";
   }
 }

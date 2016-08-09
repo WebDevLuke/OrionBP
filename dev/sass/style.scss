@@ -7,49 +7,66 @@ Email: luke@lukeharrison.net
 */
 
 // Implements ITCSS (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture) and BEM
+// Takes good ideas from inuitcss (https://github.com/inuitcss/inuitcss)
 
 //--------------------------------------------------------------------
-// IMPORT COMPONENTS
+// SETTINGS
 //--------------------------------------------------------------------
 
-/*  
-Settings
-* Used with preprocessors and contain font, colors definitions, etc.
-*/
+// Used with preprocessors and contain font, colors definitions, etc.
+
 @import "01 - settings/settings.globals";
 
-/*  
-Tools
-* Globally used mixins and functions. It’s important not to output any CSS in the first 2 layers.
-*/
+
+//--------------------------------------------------------------------
+// TOOLS
+//--------------------------------------------------------------------
+
+// Globally used mixins and functions. It’s important not to output any CSS in the first 2 layers.
+
 @import "02 - tools/tools.clearfix";
 @import "02 - tools/tools.content-grid";
 @import "02 - tools/tools.responsive-breakpoints";
 
-/*  
-Generic
-* Reset and/or normalize styles, box-sizing definition, etc. This is the first layer which generates actual CSS.
-*/
+
+//--------------------------------------------------------------------
+// GENERIC
+//--------------------------------------------------------------------
+
+// Reset and/or normalize styles, box-sizing definition, etc. This is the first layer which generates actual CSS.
+
+@import "03 - generic/generic.normalize";
 @import "03 - generic/generic.reset";
-@import "03 - generic/generic.rebuild";
 
-/*  
-Elements
-* Styling for bare HTML elements (like H1, A, etc.). These come with default styling from the browser so we can redefine them here.
-*/
 
-/*  
-Objects
-* Class-based selectors which define undecorated design patterns, for example media object known from OOCSS
-*/
+//--------------------------------------------------------------------
+// ELEMENTS
+//--------------------------------------------------------------------
+
+// Styling for bare HTML elements (like H1, A, etc.). These come with default styling from the browser so we can redefine them here.
+
+
+//--------------------------------------------------------------------
+// OBJECTS
+//--------------------------------------------------------------------
+
+// Class-based selectors which define undecorated design patterns, for example media object known from OOCSS
+
 @import "05 - objects/objects.framework";
 
-/*  
-Components
-* Specific UI components. This is where majority of our work takes place and our UI components are often composed of Objects and Components
-*/
 
-/*  
-Trumps
-* Utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
-*/
+//--------------------------------------------------------------------
+// COMPONENTS
+//--------------------------------------------------------------------
+
+// Specific UI components. This is where majority of our work takes place and our UI components are often composed of Objects and Components
+
+
+//--------------------------------------------------------------------
+// UTILITIES
+//--------------------------------------------------------------------
+
+// Utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
+
+@import "07 - utilities/utilities.show-hide";
+

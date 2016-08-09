@@ -44,7 +44,7 @@ var streamify = require('gulp-streamify');
 
 // If minify is true then css & js will be minified
 // This is in case the code needs to be maintained by a less-technical developer
-var minify = true;
+var minify = false;
 
 /*
 |--------------------------------------------------------------------
