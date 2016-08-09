@@ -1,32 +1,55 @@
 /*
-SASS 'Orion' Framework
+Orion Framework
 Author: Luke Harrison
 Web: www.lukeharrison.net
 Github: https://github.com/WebDevLuke/Orion-Framework
 Email: luke@lukeharrison.net
 */
 
-// Tries to implement ITCSS (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture) and BEM
+// Implements ITCSS (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture) and BEM
 
 //--------------------------------------------------------------------
 // IMPORT COMPONENTS
 //--------------------------------------------------------------------
 
-// Settings
-@import "settings/globals";
+/*  
+Settings
+* Used with preprocessors and contain font, colors definitions, etc.
+*/
+@import "01 - settings/settings.globals";
 
-// Tools
-@import "tools/mixins";
+/*  
+Tools
+* Globally used mixins and functions. It’s important not to output any CSS in the first 2 layers.
+*/
+@import "02 - tools/tools.clearfix";
+@import "02 - tools/tools.content-grid";
+@import "02 - tools/tools.responsive-breakpoints";
 
-// Generic
-@import "generic/reset";
+/*  
+Generic
+* Reset and/or normalize styles, box-sizing definition, etc. This is the first layer which generates actual CSS.
+*/
+@import "03 - generic/generic.reset";
+@import "03 - generic/generic.rebuild";
 
-// Elements
-@import "elements/rebuild";
+/*  
+Elements
+* Styling for bare HTML elements (like H1, A, etc.). These come with default styling from the browser so we can redefine them here.
+*/
 
-// Objects
-@import "objects/framework";
+/*  
+Objects
+* Class-based selectors which define undecorated design patterns, for example media object known from OOCSS
+*/
+@import "05 - objects/objects.framework";
 
-// Components
+/*  
+Components
+* Specific UI components. This is where majority of our work takes place and our UI components are often composed of Objects and Components
+*/
 
-// Trumps
+/*  
+Trumps
+* Utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
+*/

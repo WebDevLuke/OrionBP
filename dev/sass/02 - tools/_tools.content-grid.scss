@@ -1,0 +1,15 @@
+//--------------------------------------------------------------------
+// CONTENT GRID
+//--------------------------------------------------------------------
+
+// Quickly generate a scaleable grid from a selection of elements
+
+@mixin grid($numPerRow,$margin:10%) {
+	width:(100% - ($margin * ($numPerRow - 1))) / $numPerRow;
+	margin:0 $margin $margin 0;
+	float:left;
+	&:nth-child(#{$numPerRow}n)	{
+		margin-right:0;
+	}
+	@include clearfix;
+}
