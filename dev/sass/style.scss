@@ -16,6 +16,7 @@ Email: luke@lukeharrison.net
 // Used with preprocessors and contain font, colors definitions, etc.
 
 @import "01 - settings/settings.globals";
+@import "01 - settings/settings.typography";
 
 
 //--------------------------------------------------------------------
@@ -44,6 +45,10 @@ Email: luke@lukeharrison.net
 //--------------------------------------------------------------------
 
 // Styling for bare HTML elements (like H1, A, etc.). These come with default styling from the browser so we can redefine them here.
+
+@import "04 - elements/elements.page";
+@import "04 - elements/elements.images";
+@import "04 - elements/elements.headers";
 
 
 //--------------------------------------------------------------------
