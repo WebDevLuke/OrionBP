@@ -200,9 +200,9 @@ Here is an advanced example of how we can combine breakpoint classes to signific
 
 - Breakpoint clear : `.{bpName}-clear` *Example: .xlrg-clear*
 
-- Hide/Show/Show inline : `.hide` or `.show` or `.show-inline`
+- Hide/Show/Show inline : `.u-hide` or `.u-show` or `.u-show-inline`
 
-- Breakpoint Hide/Show/Show inline : `.{bpName}-hide` or `.{bpName}-show` or `.{bpName}-show-inline` *Example: .xlrg-hide, .xlrg-show, .xlrg-show-inline*
+- Breakpoint Hide/Show/Show inline : `.u-{bpName}-hide` or `.u-{bpName}-show` or `.u-{bpName}-show-inline` *Example: .u-xlrg-hide, .u-xlrg-show, .u-xlrg-show-inline*
 
 
 ## Breakpoint usage in SASS
