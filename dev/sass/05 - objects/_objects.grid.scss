@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------
-// FRAMEWORK
+// GENERATE GRID SYSTEM
 //--------------------------------------------------------------------
 
 //--------------------------------------------------------------------
@@ -43,7 +43,7 @@
 // CREATE GRID MIXIN
 //--------------------------------------------------------------------
 
-@mixin create_grid($prefix, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive) {
+@mixin create_columns($prefix, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive) {
 
 	$width: ($columnWidth * $columns) + ($gutter * ($columns - 1));
 
@@ -81,7 +81,7 @@
 	}
 
 	// Define Additional Full Width Variants & Clear Classes For Responsive Classes Only
-	@if $prefix != "grid" {		
+	@if $prefix != "col" {		
 		.#{$prefix}-full {	
 			width:100%;
 			float:none;
@@ -150,7 +150,7 @@
 
 // Default container
 @include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
-@include create_grid("col", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+@include create_columns("col", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 @include create_offsets("offset", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 
 //----------------------------------------------------------------------------------------------------
@@ -178,7 +178,7 @@
 	}
 
 	@include bp(#{$bp-name}) {
-		@include create_grid(#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+		@include create_columns(#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 		@include create_offsets(#{$bp-name}-offset, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 	}
 }
