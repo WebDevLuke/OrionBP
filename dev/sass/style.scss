@@ -15,7 +15,7 @@ Email: luke@lukeharrison.net
 
 // Used with preprocessors and contain font, colors definitions, etc.
 
-@import "01 - settings/settings.framework";
+@import "01 - settings/settings.grid";
 
 
 //--------------------------------------------------------------------
@@ -56,7 +56,7 @@ Email: luke@lukeharrison.net
 
 // Class-based selectors which define undecorated design patterns, for example media object known from OOCSS
 
-@import "05 - objects/objects.framework";
+@import "05 - objects/objects.grid";
 
 
 //--------------------------------------------------------------------
