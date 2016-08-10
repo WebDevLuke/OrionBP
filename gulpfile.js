@@ -8,6 +8,8 @@
 var gulp = require('gulp');
 // Required for SASS tags
 var sass = require('gulp-sass');
+// Adds support for SASS globbing
+var sassGlob = require('gulp-sass-glob');
 // Minifies images
 var imagemin = require('gulp-imagemin');
 // Used to prevent minifying of unchanged images
@@ -80,6 +82,7 @@ gulp.task('html', function() {
 
 gulp.task('sass-style', function () {
 	return gulp.src('dev/sass/*.scss')
+	.pipe(sassGlob())
 	.pipe(gulpif(minify, sassport([],{outputStyle: 'compressed'}), sassport([], {outputStyle: 'expanded'})))
     	.pipe(gulpif(minify, rename({ suffix: '.min' })))
 	.on('error', sass.logError)
@@ -92,6 +95,7 @@ gulp.task('sass-style', function () {
 
 gulp.task('sass-ie8', function(){
 	return gulp.src('dev/sass/ie8.scss')
+	.pipe(sassGlob())
 	.pipe(gulpif(minify, sass({outputStyle: 'compressed'}), sass({outputStyle: 'expanded'})))
     	.pipe(gulpif(minify, rename("ie8.min.css")))
 	.on('error', sass.logError)

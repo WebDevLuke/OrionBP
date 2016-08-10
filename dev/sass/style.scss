@@ -6,71 +6,33 @@ Github: https://github.com/WebDevLuke/Orion-Framework
 Email: luke@lukeharrison.net
 */
 
-// Implements ITCSS (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture) and BEM
+// Implements ITCSS (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture), OOCSS and BEM
 // Takes good ideas from inuitcss (https://github.com/inuitcss/inuitcss)
 
-//--------------------------------------------------------------------
-// SETTINGS
-//--------------------------------------------------------------------
+/*
+Settings – used with preprocessors and contain font, colors definitions, etc.
 
-// Used with preprocessors and contain font, colors definitions, etc.
+Tools – globally used mixins and functions. It’s important not to output any CSS in the first 2 layers.
 
-@import "01 - settings/settings.grid";
+Generic – reset and/or normalize styles, box-sizing definition, etc. This is the first layer which generates actual CSS.
 
+Elements – styling for bare HTML elements (like H1, A, etc.). These come with default styling from the browser so we can redefine them here.
 
-//--------------------------------------------------------------------
-// TOOLS
-//--------------------------------------------------------------------
+Objects – class-based selectors which define undecorated design patterns, for example media object known from OOCSS
 
-// Globally used mixins and functions. It’s important not to output any CSS in the first 2 layers.
+Components – specific UI components. This is where majority of our work takes place and our UI components are often composed of Objects and Components
 
-@import "02 - tools/tools.clearfix";
-@import "02 - tools/tools.content-grid";
-@import "02 - tools/tools.responsive-breakpoints";
-
+Utilities – utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
+*/
 
 //--------------------------------------------------------------------
-// GENERIC
+// IMPORT ITCSS LAYERS
 //--------------------------------------------------------------------
 
-// Reset and/or normalize styles, box-sizing definition, etc. This is the first layer which generates actual CSS.
-
-@import "03 - generic/generic.normalize";
-@import "03 - generic/generic.reset";
-
-
-//--------------------------------------------------------------------
-// ELEMENTS
-//--------------------------------------------------------------------
-
-// Styling for bare HTML elements (like H1, A, etc.). These come with default styling from the browser so we can redefine them here.
-
-@import "04 - elements/elements.page";
-@import "04 - elements/elements.images";
-@import "04 - elements/elements.headers";
-
-
-//--------------------------------------------------------------------
-// OBJECTS
-//--------------------------------------------------------------------
-
-// Class-based selectors which define undecorated design patterns, for example media object known from OOCSS
-
-@import "05 - objects/objects.grid";
-
-
-//--------------------------------------------------------------------
-// COMPONENTS
-//--------------------------------------------------------------------
-
-// Specific UI components. This is where majority of our work takes place and our UI components are often composed of Objects and Components
-
-
-//--------------------------------------------------------------------
-// UTILITIES
-//--------------------------------------------------------------------
-
-// Utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
-
-@import "07 - utilities/utilities.show-hide";
-
+@import "01 - settings/*";
+@import "02 - tools/*";
+@import "03 - generic/*";
+@import "04 - elements/*";
+@import "05 - objects/*";
+@import "06 - components/*";
+@import "07 - utilities/*";
