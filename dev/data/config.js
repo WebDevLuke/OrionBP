@@ -1,16 +1,17 @@
 var bpData = {
 	"grid": {
+		"useFlex" : false,
 		"default" : {
 			"responsive": true,
 			"full width": false,
-			"column width": "70px",
+			"column width": "100px",
 			"gutter": "30px",
 			"columns": 12,
 			"padding": "15px"
 		},
 		"morph": {
 			"xxxlrg": {
-				"column width": "70px",
+				"column width": "100px",
 				"gutter": "30px",
 				"columns": 16,
 				"padding": "15px"

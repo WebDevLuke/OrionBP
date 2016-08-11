@@ -12,7 +12,9 @@
 		$responsive: true;
 	}
 
-	$width: ($columnWidth * $columns) + ($gutter * ($columns - 1));
+	$width: $columnWidth * $columns - $gutter;
+
+	@debug $width;
 
 	// Set Base Container
 	.o-container {
@@ -45,7 +47,7 @@
 
 @mixin create_columns($prefix, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive) {
 
-	$width: ($columnWidth * $columns) + ($gutter * ($columns - 1));
+	$width: ($columnWidth * $columns) + ($columns - 1);
 
 	// Define Individual Grid Classes
 	@for $i from 1 to $columns {
@@ -60,21 +62,23 @@
 			// Get Gutter Percentage for Grids
 			$gutter-percentage: ($gutter / $width) * 100%;
 
-			.#{$prefix}#{$i}	{
+			.#{$prefix}-#{$i}	{
 				width: $grid;
 				float: left;
 				clear:none;
-				margin-left:$gutter-percentage;
-				box-sizing: border-box;
+				padding-left:$gutter / 2;
+				padding-right:$gutter / 2;
+				box-sizing: border-box; 
 			}
 
 		}
 		@else
 		{
-			.col#{$i} {
+			.col-#{$i} {
 				width: $grid;
 				float: left;
-				margin-left:$gutter;
+				padding-left:$gutter / 2;
+				padding-right:$gutter / 2;
 				box-sizing: border-box;
 			}
 		}
@@ -90,13 +94,13 @@
 			box-sizing: border-box;
 		}
 
-		.#{$prefix}-clear {
+		.u-#{$prefix}-clear {
 			margin-left: 0px;
 			clear: left;
 		}
 	}
 	@else {
-		.clear {
+		.u-clear {
 			margin-left: 0px;
 			clear: left;
 		}
@@ -149,7 +153,7 @@
 //----------------------------------------------------------------------------------------------------
 
 // Default container
-@include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+//@include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 @include create_columns("col", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 @include create_offsets("offset", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 
@@ -178,7 +182,7 @@
 	}
 
 	@include bp(#{$bp-name}) {
-		@include create_columns(#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+		@include create_columns(col-#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 		@include create_offsets(#{$bp-name}-offset, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 	}
 }
