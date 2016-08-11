@@ -37,11 +37,3 @@ Utilities – utilities and helper classes with ability to override anything whi
 @import "05 - objects/*";
 @import "06 - components/*";
 @import "07 - utilities/*";
-
-.o-container div {
-	background:#ccc;  
-}
-
-.o-container div div {
-	background:darken(#ccc, 10%);
-} 

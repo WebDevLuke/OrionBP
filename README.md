@@ -145,60 +145,60 @@ After your initial build, it's a good idea to run `gulp watch`. This will tell G
 
 ## Grid system
 
-On build SASS auto generates all the required classes you will need to construct grids. Below are a few practical examples using the grid outlined in [Framework Configuration](#framework-configuration)
+On build SASS auto generates all the required classes you will need to construct grids to your specification as per `/dev/data/config.js`. Below are a few practical examples using the grid outlined in [Framework Configuration](#framework-configuration). If you've used bootstrap, the syntax here is almost identical.
 
 #### Basic grid
 
 ```sh
 <div class="o-container">
-  <div class="clear grid4"></div>
-  <div class="grid4"></div>
-  <div class="grid4"></div>
+  <div class="col-4"></div>
+  <div class="col-4"></div>
+  <div class="col-4"></div>
 </div>
 ```
-This is a basic 4/4/4 grid which doesn't change. When starting a new row, you need to add a `clear` class. 
+This is a basic 4/4/4 grid which doesn't change.
 
-[[View this example]](http://codepen.io/lukedidit/pen/pyzdXx)
+<!-- [[View this example]](http://codepen.io/lukedidit/pen/pyzdXx) -->
 
 #### Basic grid w. breakpoint classes
 
 ```sh
 <div class="o-container">
-  <div class="clear grid4 med-clear med1"></div>
-  <div class="grid4 med5"></div>
-  <div class="grid4 med6"></div>
+  <div class="col-4 col-med-1"></div>
+  <div class="col-4 col-med-5"></div>
+  <div class="col-4 col-med-6"></div>
 </div>
 ```
 Here we introduce breakpoint classes which have been automatically created by SASS using the data entered in `/dev/js/partials/config.js`. As this is a mobile-first framework, we start off with a basic 4/4/4 grid and as we scale up and hit the med breakpoint at 640px it will change to 1/5/6.
 
-[[View this example]](http://codepen.io/lukedidit/pen/grYoPX)
+<!-- [[View this example]](http://codepen.io/lukedidit/pen/grYoPX) -->
 
 #### Advanced grid w. breakpoint classes
 
 ```sh
 <div class="o-container">
-  <div class="sml-clear sml4 med-full lrg-clear lrg4 xlrg-clear xlrg6"></div>
-  <div class="sml-offset4 sml4 med-clear med6 lrg-offset4 lrg-clear lrg4 xlrg6"></div>
-  <div class="sml-hide med-show med6 lrg-clear lrg-offset8 lrg4 xlrg-full"></div>
+  <div class="col-sml-4 col-med-full col-lrg-4 col-xlrg-6"></div>
+  <div class="col-sml-offset-4 col-sml4 col-med-6 col-lrg-offset-4 col-lrg-4 col-xlrg-6"></div>
+  <div class="u-sml-hide u-med-show col-med-6 col-lrg-offset8 col-lrg-4 col-xlrg-full"></div>
 </div>
 ```
 Here is an advanced example of how we can combine breakpoint classes to significantly alter our columns as we increase our browser resolution. 
 
-[[View this example]](http://codepen.io/lukedidit/pen/QNLapz)
+<!-- [[View this example]](http://codepen.io/lukedidit/pen/QNLapz) -->
 
 #### List of breakpoint classes
 
-- Column: `.grid{num}` *Example: .grid4*
+- Column: `.col-{num}` *Example: .col-4*
 
-- Breakpoint column: `.{bpName}{num}` *Example: .xlrg4*
+- Breakpoint column: `.col-{bpName}-{num}` *Example: .col-xlrg-4*
 
-- Offset column: `.offset{num}` *Example: .offset4*
+- Offset column: `.col-offset-{num}` *Example: .col-offset-4*
 
-- Breakpoint offset column: `.{bpName}-offset{num}` *Example: .xlrg-offset4*
+- Breakpoint offset column: `.col-{bpName}-offset-{num}` *Example: .col-xlrg-offset-4*
 
-- Clear : `.clear`
+- Clear float : `.u-clear`
 
-- Breakpoint clear : `.{bpName}-clear` *Example: .xlrg-clear*
+- Breakpoint clear float : `.u-{bpName}-clear` *Example: .u-xlrg-clear*
 
 - Hide/Show/Show inline : `.u-hide` or `.u-show` or `.u-show-inline`
 
@@ -213,9 +213,9 @@ When writing SASS, you also have access to breakpoints which allow you to genera
 **HTML**
 ```sh
 <div class="o-container">
-  <div class="clear grid4"></div>
-  <div class="grid4"></div>
-  <div class="grid4"></div>
+  <div class="col-4"></div>
+  <div class="col-4"></div>
+  <div class="col-4"></div>
 </div>
 ```
 
@@ -254,9 +254,9 @@ In the above, we give each div within the container a pseudo element and then ch
 **HTML**
 ```sh
 <div class="o-container">
-  <div class="sml-clear sml4 med-full lrg-clear lrg4 xlrg-clear xlrg6"></div>
-  <div class="sml-offset4 sml4 med-clear med6 lrg-offset4 lrg-clear lrg4 xlrg6"></div>
-  <div class="sml-hide med-show med6 lrg-clear lrg-offset8 lrg4 xlrg-full"></div>
+  <div class="col-sml-4 col-med-full col-lrg-4 col-xlrg-6"></div>
+  <div class="col-sml-offset-4 col-sml-4 col-med-6 col-lrg-offset-4 col-lrg-4 col-xlrg-6"></div>
+  <div class="u-sml-hide u-med-show col-med-6 col-lrg-offset-8 col-lrg-4 col-xlrg-full"></div>
 </div>
 ```
 
