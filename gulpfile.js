@@ -83,7 +83,7 @@ gulp.task('html', function() {
 gulp.task('sass-style', function () {
 	return gulp.src('dev/sass/*.scss')
 	.pipe(sassGlob())
-	.pipe(gulpif(minify, sassport([],{outputStyle: 'compressed'}), sassport([], {outputStyle: 'expanded'})))
+	.pipe(gulpif(minify, sassport([],{outputStyle: 'compressed', precision: 8}), sassport([], {outputStyle: 'expanded', precision: 8})))
     	.pipe(gulpif(minify, rename({ suffix: '.min' })))
 	.on('error', sass.logError)
 	.pipe(autoprefixer({

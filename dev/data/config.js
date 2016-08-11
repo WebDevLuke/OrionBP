@@ -10,7 +10,7 @@ var bpData = {
 			"padding": "15px"
 		},
 		"morph": {
-			"xxxlrg": {
+			"xlrg": {
 				"column width": "100px",
 				"gutter": "30px",
 				"columns": 16,
