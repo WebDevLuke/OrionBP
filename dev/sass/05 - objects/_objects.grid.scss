@@ -32,10 +32,8 @@
 		box-sizing: content-box;
 	}
 
-	.o-container-full {
-		@include clearfix();
-		margin:0px auto;
-		position:relative;
+	.o-container--full {
+		max-width:100%;
 		padding: 0; 
 	}
 }
@@ -102,18 +100,7 @@
 			margin-left:0;
 			box-sizing: border-box;
 		}
-
-		.#{$prefix}-clear {
-			margin-left: 0px;
-			clear: left !important;
-		}
 	}
-	@else {
-		.clear {
-			clear: left !important;
-		}
-	}
-
 }
 
 //--------------------------------------------------------------------

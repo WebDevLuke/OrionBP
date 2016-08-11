@@ -1,0 +1,18 @@
+//----------------------------------------------------------------------------------------------------
+// CLEAR FLOAT CLASSES
+//----------------------------------------------------------------------------------------------------
+
+.u-clear {
+	clear: left !important;
+}	
+
+// Responsive
+@each $bp-name, $bp-value in $breakpoints	{
+
+	@include bp(#{$bp-name}) {
+		.u-#{$bp-name}-clear {
+			clear: left !important;
+		}
+	}
+}
+

@@ -25,7 +25,7 @@ var sassport = require('gulp-sassport');
 // Used to create synchronous build tasks
 var runSequence = require('run-sequence');
 // Used to convert Jade to HTML
-var jade = require('gulp-jade');
+// var jade = require('gulp-jade');
 // Used to pipe JSON data into Jade
 var data = require('gulp-data');
 // Used to delete folders during build process
@@ -60,17 +60,16 @@ gulp.task('deleteDist', function(){
 
 /*
 |--------------------------------------------------------------------
-|  JADE
+|  HTML
 |--------------------------------------------------------------------
 */
 
-// Filter in JSON data
 gulp.task('html', function() {
-  return gulp.src('./dev/jade/*.jade')
+  return gulp.src('./dev/html/*.html')
     .pipe(data(function(file){
      		//return require('./dev/data/info.json');
      }))
-    .pipe(jade())
+    //.pipe(jade())
     .pipe(gulp.dest('dist/'));
 });
 
@@ -204,7 +203,7 @@ gulp.task('copy', function() {
 // WATCH FUNCTION
 gulp.task("watch", function() {
 	// HTML
-	gulp.watch('dev/jade/**/*.jade',['html']);
+	gulp.watch('dev/html/**/*.html',['html']);
 	// Images
 	gulp.watch('dev/img/*.+(png|jpg|gif|svg)',['images']);
 	// Watch for Breakpoint JS changes and compile SASS
