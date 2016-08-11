@@ -178,8 +178,8 @@ Here we introduce breakpoint classes which have been automatically created by SA
 ```sh
 <div class="o-container">
   <div class="col-sml-4 col-med-full col-lrg-4 col-xlrg-6"></div>
-  <div class="col-sml-offset-4 col-sml4 col-med-6 col-lrg-offset-4 col-lrg-4 col-xlrg-6"></div>
-  <div class="u-sml-hide u-med-show col-med-6 col-lrg-offset8 col-lrg-4 col-xlrg-full"></div>
+  <div class="col-sml-offset-4 col-sml-4 col-med-6 col-lrg-offset-4 col-lrg-4 col-xlrg-6"></div>
+  <div class="u-sml-hide u-med-show col-med-6 col-lrg-offset-8 col-lrg-4 col-xlrg-full"></div>
 </div>
 ```
 Here is an advanced example of how we can combine breakpoint classes to significantly alter our columns as we increase our browser resolution. 
