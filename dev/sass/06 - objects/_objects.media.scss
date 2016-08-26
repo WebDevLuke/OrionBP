@@ -1,0 +1,57 @@
+//--------------------------------------------------------------------
+// MEDIA OBJECT
+//--------------------------------------------------------------------
+
+/*
+Classic media object for layouts with image on one side and text on other.
+http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
+*/
+
+//--------------------------------------------------------------------
+// USAGE
+//--------------------------------------------------------------------
+
+/*
+<div class="o-media">
+	<img src="" alt="" class="o-media__image">
+	<p class="o-media__body">
+		CONTENT
+	</p>
+</div>
+*/
+
+//--------------------------------------------------------------------
+// SASS
+//--------------------------------------------------------------------
+
+.o-media {
+	@include clearfix();
+	margin:15px;
+
+	.o-media__image {
+		float:left;
+		margin-right: 15px;
+	}
+
+	// Alternative Media Image on right instead of left
+	.o-media__image-reverse {
+		float:right;
+		margin-left: 10px;
+	}
+
+	.o-media__image, .o-media__image-reverse {
+		img {
+			display:block;
+		}
+	}
+
+	.o-media__body {
+		@include clearfix();
+	}
+
+	// Modifier class for media body to make text not wrap around image
+	.o-media__body--nowrap {
+		overflow:hidden;
+	}	
+
+}
