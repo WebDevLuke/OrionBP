@@ -9,8 +9,11 @@ Email: luke@lukeharrison.net
 // Implements ITCSS (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture)
 // Takes good ideas from inuitcss (https://github.com/inuitcss/inuitcss)
 // Implements BEM, OOCSS namespacing (http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/)
+// Seperates semantics from appearance where possible
 
 /*
+Vendors - 3rd Party CSS files which I need to drop in
+
 Settings – used with preprocessors and contain font, colors definitions, etc.
 
 Tools – globally used mixins and functions. It’s important not to output any CSS in the first 2 layers.
@@ -30,10 +33,11 @@ Utilities – utilities and helper classes with ability to override anything whi
 // IMPORT ITCSS LAYERS
 //--------------------------------------------------------------------
 
-@import "01 - settings/*";
-@import "02 - tools/*";
-@import "03 - generic/*";
-@import "04 - elements/*";
-@import "05 - objects/*";
-@import "06 - components/*";
-@import "07 - utilities/*";
+@import "01 - vendors/*";
+@import "02 - settings/*";
+@import "03 - tools/*";
+@import "04 - generic/*";
+@import "05 - elements/*";
+@import "06 - objects/*";
+@import "07 - components/*";
+@import "08 - utilities/*";
