@@ -1,6 +1,22 @@
 //--------------------------------------------------------------------
-// GENERATE GRID SYSTEM
+// GRID SYSTEM
 //--------------------------------------------------------------------
+
+/*
+Grid system container, columns and optional rows. Specify responsive breakpoints in /data/config.js.
+*/
+
+//--------------------------------------------------------------------
+// USAGE
+//--------------------------------------------------------------------
+
+/*
+<div class="o-container">
+	<div class="o-col-4 o-col-1@md"></div>
+	<div class="o-col-4 o-col-5@md"></div>
+	<div class="o-col-4 o-col-6@md"></div>
+</div>
+*/
 
 //--------------------------------------------------------------------
 // CREATE  CONTAINER MIXIN

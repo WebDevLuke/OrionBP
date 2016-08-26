@@ -47,11 +47,12 @@ http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-o
 
 	.o-media__body {
 		@include clearfix();
+		overflow:hidden;
 	}
 
-	// Modifier class for media body to make text not wrap around image
-	.o-media__body--nowrap {
-		overflow:hidden;
+	// Modifier class for media body to make text wrap around image
+	.o-media__body--wrap {
+		overflow:visible;
 	}	
 
 }
