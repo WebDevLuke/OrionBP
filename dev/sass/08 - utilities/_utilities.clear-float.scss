@@ -11,7 +11,7 @@
 @each $bp-name, $bp-value in $breakpoints	{
 
 	@include bp(#{$bp-name}) {
-		.u-#{$bp-name}-clear {
+		.u-clear\@#{$bp-name} {
 			clear: left !important;
 		}
 	}

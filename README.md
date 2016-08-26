@@ -43,12 +43,12 @@ To define the framework breakpoints open `/dev/data/config.js` and edit the conf
 
 ```sh
 "breakpoints": {
-    "xsml": "370px",
-    "sml": "480px",
-    "med": "640px",
-    "lrg": "925px",
-    "xlrg": "1280px",
-    "xxlrg": "1366px"
+    "xsm": "370px",
+    "sm": "480px",
+    "md": "640px",
+    "lg": "925px",
+    "xlg": "1280px",
+    "xxlg": "1366px"
 }
 ```
 Give each breakpoint a name and order them from smallest to largest. How these breakpoints can be used in SASS and JS is explained under [Grid System](#grid-system)
@@ -96,7 +96,7 @@ You can also reshape the grid at any of your defined breakpoints by creating ent
     "padding": "15px"
   },
   "morph": {
-    "xlrg": {
+    "xlg": {
       "column width": "70px",
       "gutter": "30px",
       "columns": 16,
@@ -151,9 +151,9 @@ On build SASS auto generates all the required classes you will need to construct
 
 ```sh
 <div class="o-container">
-  <div class="col-4"></div>
-  <div class="col-4"></div>
-  <div class="col-4"></div>
+  <div class="o-col-4"></div>
+  <div class="o-col-4"></div>
+  <div class="o-col-4"></div>
 </div>
 ```
 This is a basic 4/4/4 grid which doesn't change.
@@ -164,9 +164,9 @@ This is a basic 4/4/4 grid which doesn't change.
 
 ```sh
 <div class="o-container">
-  <div class="col-4 col-med-1"></div>
-  <div class="col-4 col-med-5"></div>
-  <div class="col-4 col-med-6"></div>
+  <div class="o-col-4 o-col-1@md"></div>
+  <div class="o-col-4 o-col-5@md"></div>
+  <div class="o-col-4 o-col-6@md"></div>
 </div>
 ```
 Here we introduce breakpoint classes which have been automatically created by SASS using the data entered in `/dev/js/partials/config.js`. As this is a mobile-first framework, we start off with a basic 4/4/4 grid and as we scale up and hit the med breakpoint at 640px it will change to 1/5/6.
@@ -177,9 +177,9 @@ Here we introduce breakpoint classes which have been automatically created by SA
 
 ```sh
 <div class="o-container">
-  <div class="col-sml-4 col-med-full col-lrg-4 col-xlrg-6"></div>
-  <div class="col-sml-offset-4 col-sml-4 col-med-6 col-lrg-offset-4 col-lrg-4 col-xlrg-6"></div>
-  <div class="u-sml-hide u-med-show col-med-6 col-lrg-offset-8 col-lrg-4 col-xlrg-full"></div>
+  <div class="o-col-4@sm o-col-full@md o-col-4@lg o-col-6@xlg"></div>
+  <div class="u-col-offset-4@sm o-col-4@sm o-col-6@md u-col-offset-4@lg o-col-4@lg o-col-6@xlg"></div>
+  <div class="u-hide@sm u-show@md o-col-6@md u-col-offset-8@lg o-col-4@lg o-col-full@xlg"></div>
 </div>
 ```
 Here is an advanced example of how we can combine breakpoint classes to significantly alter our columns as we increase our browser resolution. 
@@ -188,21 +188,21 @@ Here is an advanced example of how we can combine breakpoint classes to signific
 
 #### List of breakpoint classes
 
-- Column: `.col-{num}` *Example: .col-4*
+- Column: `.o-col-{num}` *Example: .o-col-4*
 
-- Breakpoint column: `.col-{bpName}-{num}` *Example: .col-xlrg-4*
+- Breakpoint column: `.o-col-{num}@{bpName}` *Example: .o-col-4@xlg*
 
-- Offset column: `.col-offset-{num}` *Example: .col-offset-4*
+- Offset column: `.u-col-offset-{num}` *Example: .u-col-offset-4*
 
-- Breakpoint offset column: `.col-{bpName}-offset-{num}` *Example: .col-xlrg-offset-4*
+- Breakpoint offset column: `.u-col-offset-{num}@{bpName}` *Example: .u-col-offset-4@xlg*
 
 - Clear float : `.u-clear`
 
-- Breakpoint clear float : `.u-{bpName}-clear` *Example: .u-xlrg-clear*
+- Breakpoint clear float : `.u-clear@{bpName}` *Example: .u-clear@xlg*
 
 - Hide/Show/Show inline : `.u-hide` or `.u-show` or `.u-show-inline`
 
-- Breakpoint Hide/Show/Show inline : `.u-{bpName}-hide` or `.u-{bpName}-show` or `.u-{bpName}-show-inline` *Example: .u-xlrg-hide, .u-xlrg-show, .u-xlrg-show-inline*
+- Breakpoint Hide/Show/Show inline : `.u-hide@{bpName}` or `.u-show@{bpName}` or `.u-show-inline@{bpName}` *Example: .u-hide@xlg, .u-show@xlg, .u-show-inline@xlg*
 
 
 ## Breakpoint usage in SASS
@@ -213,9 +213,9 @@ When writing SASS, you also have access to breakpoints which allow you to genera
 **HTML**
 ```sh
 <div class="o-container">
-  <div class="col-4"></div>
-  <div class="col-4"></div>
-  <div class="col-4"></div>
+  <div class="o-col-4"></div>
+  <div class="o-col-4"></div>
+  <div class="o-col-4"></div>
 </div>
 ```
 
@@ -225,38 +225,38 @@ When writing SASS, you also have access to breakpoints which allow you to genera
   &:before {
     content:"default";
   }
-  @include bp(sml){
+  @include bp(sm){
     &:before{
-      content:"sml";
+      content:"sm";
     }
   }
-  @include bp(med){
+  @include bp(md){
     &:before{
-      content:"med";
+      content:"md";
     }
   }
-  @include bp(lrg){
+  @include bp(lg){
     &:before{
-      content:"lrg";
+      content:"lg";
     }
   }
-  @include bp(xlrg){
+  @include bp(xlg){
     &:before{
-      content:"xlrg";
+      content:"xlg";
     }
   }
 }
 ```
 In the above, we give each div within the container a pseudo element and then change its content at different breakpoints. Like in the example above you can group these breakpoint mixins within the element they're modifying or you can define them seperately like in the next example.
 
-[[View this example]](http://codepen.io/lukedidit/pen/RabmxE)
+<!-- [[View this example]](http://codepen.io/lukedidit/pen/RabmxE) -->
 
 **HTML**
 ```sh
 <div class="o-container">
-  <div class="col-sml-4 col-med-full col-lrg-4 col-xlrg-6"></div>
-  <div class="col-sml-offset-4 col-sml-4 col-med-6 col-lrg-offset-4 col-lrg-4 col-xlrg-6"></div>
-  <div class="u-sml-hide u-med-show col-med-6 col-lrg-offset-8 col-lrg-4 col-xlrg-full"></div>
+  <div class="o-col-4@sm o-col-full@md o-col-4@lg o-col-6@xlg"></div>
+  <div class="u-col-offset-4@sm o-col-4@sm o-col-6@md u-col-offset-4@lg o-col-4@lg o-col-6@xlg"></div>
+  <div class="u-hide@sm u-show@md o-col-6@md u-col-offset-8@lg o-col-4@lg o-col-full@xlg"></div>
 </div>
 ```
 
@@ -268,47 +268,47 @@ In the above, we give each div within the container a pseudo element and then ch
   }
 }
 
-@include bp(sml) {
+@include bp(sm) {
   .o-container div:before {
-    content:"sml";
+    content:"sm";
   }
 }
 
-@include bp(med) {
+@include bp(md) {
   .o-container div:before {
-    content:"med";
+    content:"md";
   }
 }
 
-@include bp(lrg) {
+@include bp(lg) {
   .o-container div:before {
-    content:"lrg";
+    content:"lg";
   }
 }
 
-@include bp(xlrg) {
+@include bp(xlg) {
   .o-container div:before {
-    content:"xlrg";
+    content:"xlg";
   }
 }
 ```
 Here we have seperated the breakpoint mixins from the element they're modifying. This is useful if a breakpoint needs to effect multiple elements on your page as you now have one use of a breakpoint mixin effecting many elements rather then many uses of the same breakpoint mixin. On large projects with lots of SASS this method is preferred as it allows better tracking of what elements are being changed at which breakpoints.
 
-[[View this example]](http://codepen.io/lukedidit/pen/qZWGaV)
+<!-- [[View this example]](http://codepen.io/lukedidit/pen/qZWGaV) -->
 
 #### List of breakpoint mixins
 
-- Create a min-width mobile-first breakpoint: `@include bp($bp)` *Example: @include bp(sml)*
+- Create a min-width mobile-first breakpoint: `@include bp($bp)` *Example: @include bp(sm)*
 
-- Create a max-width desktop-first breakpoint: `@include bpMax($bp)` *Example: @include bpMax(sml)*
+- Create a max-width desktop-first breakpoint: `@include bpMax($bp)` *Example: @include bpMax(sm)*
 
-- Create a breakpoint which only triggers inbetween 2 breakpoints: `@include bpBetween($from, $to)` *Example: @include bpBetween(sml, med)*
+- Create a breakpoint which only triggers inbetween 2 breakpoints: `@include bpBetween($from, $to)` *Example: @include bpBetween(sm, md)*
 
 ## Breakpoint usage in JavaScript
 Within JavaScript it's also possible to check if a breakpoint has been reached using a function. As with SASS, the breakpoints are pulled directly from the data in `/dev/js/partials/config.js`
 
 ```sh
-if(bp.min("med")){
+if(bp.min("md")){
 	console.log("med hit");
 	// Do other stuff
 }
@@ -317,11 +317,11 @@ The above is a simple check to see if the browser window is wide enough to hit t
 
 #### List of breakpoint functions
 
-- Check if a min-width mobile-first breakpoint has been hit: `if(bp.min("$bp"))` *Example: if(bp.min("sml"))*
-- Check if a max-width desktop-first breakpoint has been hit: `if(bp.max("$bp"))` *Example: if(bp.max("sml"))*
-- Check if your window is currently inbetween 2 breakpoints: `if(bp.between("$from, $to"))` *Example: if(bp.between("sml", "med"))*
+- Check if a min-width mobile-first breakpoint has been hit: `if(bp.min("$bp"))` *Example: if(bp.min("sm"))*
+- Check if a max-width desktop-first breakpoint has been hit: `if(bp.max("$bp"))` *Example: if(bp.max("sm"))*
+- Check if your window is currently inbetween 2 breakpoints: `if(bp.between("$from, $to"))` *Example: if(bp.between("sm", "md"))*
 
-[[View this example]](http://codepen.io/lukedidit/pen/JXPgdo)
+<!-- [[View this example]](http://codepen.io/lukedidit/pen/JXPgdo) -->
 
 ## About the developer
 I'm Luke Harrison, a Sheffield-based Web Designer &amp; Developer from the UK. I currently work at internet service provider Plusnet and when I'm not there I work on interesting side projects such as this very framework. Read more about me at [lukeharrison.net](http://www.lukeharrison.net) or follow me on twitter at [@WebDevLuke](https://twitter.com/WebDevLuke).

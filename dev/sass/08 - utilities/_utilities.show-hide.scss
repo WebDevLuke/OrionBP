@@ -20,16 +20,15 @@
 
 	@include bp(#{$bp-name}) {
 
-		.u-#{$bp-name}-hide {
+		.u-hide\@#{$bp-name} {
 			display:none !important;
 		}
-		.u-#{$bp-name}-show {
+		.u-show\@#{$bp-name} {
 			display:block !important;
 		}
-		.u-#{$bp-name}-show--inline {
+		.u-show--inline\@#{$bp-name} {
 			display:inline-block !important;
 		}
 	
 	}
-
 }

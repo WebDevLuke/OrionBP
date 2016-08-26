@@ -10,7 +10,7 @@ var bpData = {
 			"padding": "15px"
 		},
 		"morph": {
-			"xlrg": {
+			"xlg": {
 				"column width": "100px",
 				"gutter": "30px",
 				"columns": 16,
@@ -19,11 +19,11 @@ var bpData = {
 		}
 	},
 	"breakpoints": {
-		"xsml": "370px",
-		"sml": "480px",
-		"med": "740px",
-		"lrg": "925px",
-		"xlrg": "1280px"
+		"xsm": "370px",
+		"sm": "480px",
+		"md": "740px",
+		"lg": "925px",
+		"xlg": "1280px"
 	}
 };
 

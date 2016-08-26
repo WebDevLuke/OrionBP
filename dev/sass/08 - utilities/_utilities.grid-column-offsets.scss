@@ -1,0 +1,45 @@
+//--------------------------------------------------------------------
+// CREATE COLUMN OFFSETS  MIXIN
+//--------------------------------------------------------------------
+
+@mixin create_offsets($prefix, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive) {
+
+	$width: ($columnWidth * $columns) - $gutter;
+
+	// Define Grid Offsets
+	@for $i from 1 to $columns {
+		// Calculate grid size in pixels
+		$grid: ($width / $columns) * $i;
+
+		// Calculate responsive grid sizes if required
+		@if $responsive == true {
+			// Calculate grid size in percentage
+			$grid: ($grid / $width) * 100%;
+
+			// Example u-col-offset-4@md
+			.u-col-offset-#{$i}#{$prefix}	{
+				margin-left:$grid;
+			}
+
+		}
+		@else {
+			// Example u-col-offset-4
+			.u-col-offset-#{$i}	{
+				margin-left:$grid + ($gutter * 2);
+			}
+		}
+	}
+}
+
+//----------------------------------------------------------------------------------------------------
+// GENERATE COLUMN OFFSET CLASSES
+//----------------------------------------------------------------------------------------------------
+
+@include create_offsets(null, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+
+// Responsive
+@each $bp-name, $bp-value in $breakpoints	{
+	@include bp(#{$bp-name}) {
+		@include create_offsets(\@#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+	}
+}

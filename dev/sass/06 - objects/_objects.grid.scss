@@ -39,7 +39,7 @@
 }
 
 //----------------------------------------------------------------------------------------------------
-// CREATE ROW
+// CREATE ROW OBJECT
 //----------------------------------------------------------------------------------------------------
 
 .o-row {
@@ -49,7 +49,7 @@
 }
 
 //--------------------------------------------------------------------
-// CREATE GRID MIXIN
+// CREATE COLUMNS MIXIN
 //--------------------------------------------------------------------
 
 @mixin create_columns($prefix, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive) {
@@ -60,7 +60,7 @@
 	@for $i from 1 to $columns {
 		// Calculate grid size in pixels
 		$grid: ($width / $columns) * $i;
-		
+
 		// Calculate responsive grid sizes if required
 		@if $responsive == true {
 			// Calculate grid size in percentage
@@ -69,7 +69,8 @@
 			// Get Gutter Percentage for Grids
 			$gutter-percentage: ($gutter / $width) * 100%;
 
-			.#{$prefix}-#{$i}	{
+			// Example: o-col-6@md
+			.o-col-#{$i}#{$prefix} {
 				width: $grid;
 				float: left;
 				clear:none;
@@ -81,7 +82,8 @@
 		}
 		@else
 		{
-			.col-#{$i} {
+			// Example o-col-6
+			.o-col-#{$i} {
 				width: $grid;
 				float: left;
 				padding-left:$gutter / 2;
@@ -92,44 +94,14 @@
 	}
 
 	// Define Additional Full Width Variants & Clear Classes For Responsive Classes Only
-	@if $prefix != "col" {		
-		.#{$prefix}-full {	
+	@if $prefix != "col" {
+		// Example 	o-col-full@md
+		.o-col-full#{$prefix} {
 			width:100%;
 			float:none;
 			clear:both;
 			margin-left:0;
 			box-sizing: border-box;
-		}
-	}
-}
-
-//--------------------------------------------------------------------
-// CREATE OFFSETS MIXIN
-//--------------------------------------------------------------------
-
-@mixin create_offsets($prefix, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive) {
-
-	$width: ($columnWidth * $columns) - $gutter;
-
-	// Define Grid Offsets
-	@for $i from 1 to $columns {
-		// Calculate grid size in pixels
-		$grid: ($width / $columns) * $i;
-		
-		// Calculate responsive grid sizes if required
-		@if $responsive == true {
-			// Calculate grid size in percentage
-			$grid: ($grid / $width) * 100%;
-
-			.#{$prefix}-offset-#{$i}	{
-				margin-left:$grid;
-			}
-
-		}
-		@else {
-			.#{$prefix}-offset-#{$i}	{
-				margin-left:$grid + ($gutter * 2);
-			}
 		}
 	}
 }
@@ -140,8 +112,7 @@
 
 // Default container
 @include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
-@include create_columns("col", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
-@include create_offsets("col", $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+@include create_columns(null, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 
 //----------------------------------------------------------------------------------------------------
 // GENERATE RESPONSIVE CONTAINER AND GRID CLASSES
@@ -156,9 +127,9 @@
 			// Get grid match
 			$bp-obj: map-get($gridResponsive, $bp-name);
 
-			$columnWidth: map-get($bp-obj, "column width"); 
-			$gutter: map-get($bp-obj, "gutter"); 
-			$columns: map-get($bp-obj, "columns"); 
+			$columnWidth: map-get($bp-obj, "column width");
+			$gutter: map-get($bp-obj, "gutter");
+			$columns: map-get($bp-obj, "columns");
 			$padding: map-get($bp-obj, "padding");
 
 			@include bp(#{$bp-name}) {
@@ -168,7 +139,6 @@
 	}
 
 	@include bp(#{$bp-name}) {
-		@include create_columns(col-#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
-		@include create_offsets(col-#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+		@include create_columns(\@#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
 	}
 }
