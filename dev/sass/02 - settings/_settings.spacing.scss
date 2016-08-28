@@ -1,0 +1,11 @@
+// Pull config from JSON using SassPort to convert JSON to SASS map
+$config: require('dev/data/config.js');
+$spacing-unit: map-get($config, "spacing unit");
+
+// Create ready made spacing unit variants
+$spacing-unit-xsm: ($spacing-unit * 0.50);
+$spacing-unit-sm: ($spacing-unit * 0.75);
+$spacing-unit-lg: ($spacing-unit * 2);
+$spacing-unit-xlg: ($spacing-unit * 3);
+$spacing-unit-xxlg: ($spacing-unit * 5);
+$spacing-unit-xxxlg: ($spacing-unit * 8);

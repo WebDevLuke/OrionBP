@@ -64,7 +64,7 @@ Orion allows you to define a grid system of your choice using a config object. S
     "column width": "70px",
     "gutter": "30px",
     "columns": 12,
-    "padding": "15px"
+    "outer padding": "15px"
   },
   "morph": {
   }
@@ -79,7 +79,7 @@ Orion allows you to define a grid system of your choice using a config object. S
 "column width": "70px",
 "gutter": "30px",
 "columns": 12,
-"padding": "15px"
+"outer padding": "15px"
 ```
 Here you set the variables which will create your grid system. By default this is set to a **1170px 12 column grid system**.
 
@@ -93,14 +93,14 @@ You can also reshape the grid at any of your defined breakpoints by creating ent
     "column width": "70px",
     "gutter": "30px",
     "columns": 12,
-    "padding": "15px"
+    "outer padding": "15px"
   },
   "morph": {
     "xlg": {
       "column width": "70px",
       "gutter": "30px",
       "columns": 16,
-      "padding": "15px"
+      "outer padding": "15px"
     }
   }
 }

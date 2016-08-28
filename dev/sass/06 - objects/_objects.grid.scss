@@ -146,7 +146,7 @@ Grid system container, columns and optional rows. Specify responsive breakpoints
 			$columnWidth: map-get($bp-obj, "column width");
 			$gutter: map-get($bp-obj, "gutter");
 			$columns: map-get($bp-obj, "columns");
-			$padding: map-get($bp-obj, "padding");
+			$padding: map-get($bp-obj, "outer padding");
 
 			@include bp(#{$bp-name}) {
 				@include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);

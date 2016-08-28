@@ -1,20 +1,19 @@
 var bpData = {
 	"grid": {
-		"useFlex" : false,
-		"default" : {
+		"default": {
 			"responsive": true,
 			"full width": false,
 			"column width": "100px",
-			"gutter": "30px",
+			"gutter": "12px",
 			"columns": 12,
-			"padding": "15px"
+			"outer padding": "12px"
 		},
 		"morph": {
 			"xlg": {
 				"column width": "100px",
-				"gutter": "30px",
+				"gutter": "12px",
 				"columns": 16,
-				"padding": "15px"
+				"outer padding": "12px"
 			}
 		}
 	},
@@ -24,7 +23,8 @@ var bpData = {
 		"md": "740px",
 		"lg": "925px",
 		"xlg": "1280px"
-	}
+	},
+	"spacing unit": "12px"
 };
 
 module.exports = bpData;
