@@ -27,32 +27,29 @@ http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-o
 .o-media {
 	@include clearfix();
 	margin:15px;
+}
 
-	.o-media__image {
-		float:left;
-		margin-right: 15px;
+.o-media__image {
+	float:left;
+	margin: 0 15px 0 0;
+
+	img {
+		display:block;
 	}
 
-	// Alternative Media Image on right instead of left
-	.o-media__image-reverse {
+	// Modifier class to put image on right instead of left
+	.o-media--reverse & {
 		float:right;
-		margin-left: 10px;
+		margin: 0 0 0 10px;
 	}
+}
 
-	.o-media__image, .o-media__image-reverse {
-		img {
-			display:block;
-		}
-	}
-
-	.o-media__body {
-		@include clearfix();
-		overflow:hidden;
-	}
+.o-media__body {
+	@include clearfix(); 
+	overflow:hidden;
 
 	// Modifier class for media body to make text wrap around image
-	.o-media__body--wrap {
+	.o-media--wrap & {
 		overflow:visible;
 	}	
-
 }
