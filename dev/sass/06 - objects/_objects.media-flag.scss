@@ -8,16 +8,33 @@ http://csswizardry.com/2013/05/the-flag-object/
 */
 
 //--------------------------------------------------------------------
-// USAGE
+// BASIC USAGE
 //--------------------------------------------------------------------
 
 /*
-<div class="flag">
-	<div class="flag__image">
+<div class="o-flag">
+	<div class="o-flag__image">
 		<img src="" alt="">
 	</div>
-	<div class="flag__body">
-		<p></p>
+	<div class="o-flag__body">
+		CONTENT
+	</div>
+</div>
+*/
+
+//--------------------------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------------------------
+
+// Reverse the padding for the image. Requires you to manually switch position of inner elements.
+
+/*
+<div class="o-flag o-flag--reverse">
+	<div class="o-flag__body">
+		CONTENT
+	</div>
+	<div class="o-flag__image">
+		<img src="" alt="">
 	</div>
 </div>
 */

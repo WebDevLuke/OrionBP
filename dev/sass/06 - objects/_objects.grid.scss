@@ -7,11 +7,25 @@ Grid system container, columns and optional rows. Specify responsive breakpoints
 */
 
 //--------------------------------------------------------------------
-// USAGE
+// BASIC USAGE
 //--------------------------------------------------------------------
 
 /*
 <div class="o-container">
+	<div class="o-col-4 o-col-1@md"></div>
+	<div class="o-col-4 o-col-5@md"></div>
+	<div class="o-col-4 o-col-6@md"></div>
+</div>
+*/
+
+//--------------------------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------------------------
+
+// Makes the container full width
+
+/*
+<div class="o-container o-container--full">
 	<div class="o-col-4 o-col-1@md"></div>
 	<div class="o-col-4 o-col-5@md"></div>
 	<div class="o-col-4 o-col-6@md"></div>
