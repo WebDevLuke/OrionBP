@@ -8,11 +8,11 @@ Email: luke@lukeharrison.net
 
 // Implements ITCSS (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture)
 // Takes good ideas from inuitcss (https://github.com/inuitcss/inuitcss)
-// Implements BEM, OOCSS namespacing (http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/)
+// Implements BEM (http://getbem.com) and BEMIT (http://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further), OOCSS namespacing (http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces)
 // Seperates semantics from appearance where possible
 
 /*
-Vendors - 3rd Party CSS files which I need to drop in
+Vendors - 3rd Party CSS files which need to be dropped in.
 
 Settings – used with preprocessors and contain font, colors definitions, etc.
 
