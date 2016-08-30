@@ -1,19 +1,7 @@
 //----------------------------------------------------------------------------------------------------------------------------------------
-// CLEAR FLOAT CLASSES
+// LIST ELEMENT STYLES
 //----------------------------------------------------------------------------------------------------------------------------------------
 
-// Standard
-.u-clear {
-	clear: left !important;
-}	
-
-// Responsive
-@each $bp-name, $bp-value in $breakpoints	{
-
-	@include bp(#{$bp-name}) {
-		.u-clear\@#{$bp-name} {
-			clear: left !important;
-		}
-	}
+dd, ol, ul {
+  margin:0 0 $spacing-unit-md $spacing-unit-md;
 }
-

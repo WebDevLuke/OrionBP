@@ -1,0 +1,63 @@
+//----------------------------------------------------------------------------------------------------------------------------------------
+// SHOWING / HIDING OVERRIDES
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Basic utility classes for hiding and displaying elements.
+*/
+
+
+// STANDARD
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+.u-hide {
+	display:none !important;
+}
+
+.u-display-block {
+	display:block !important;
+}
+
+.u-display-inline-block {
+	display:inline-block !important;
+}
+
+.u-display-table {
+	display:table !important;
+	width:100%;
+}
+
+.u-display-table {
+	display:table-cell !important;
+	width:100%;
+}
+
+
+// RESPONSIVE
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+@each $bp-name, $bp-value in $breakpoints {
+
+	@include bp(#{$bp-name}) {
+
+		.u-hide\@#{$bp-name} {
+			display:none;
+		}
+
+		.u-display-block\@#{$bp-name} {
+			display:block !important;
+		}
+
+		.u-display-inline-block\@#{$bp-name} {
+			display:inline-block !important;
+		}
+
+		.u-display-table\@#{$bp-name} {
+			display:table !important;
+		}
+
+		.u-display-table-cell\@#{$bp-name} {
+			display:table-cell !important;
+		}
+	}
+}

@@ -1,0 +1,59 @@
+//----------------------------------------------------------------------------------------------------------------------------------------
+// INLINE LIST OBJECT
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Simple inline list with content stacked left or right horizontally
+*/
+
+
+// BASIC USAGE
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+<ul class="o-list-inline">
+	<li class="o-list-inline__item">CONTENT</li>
+	<li class="o-list-inline__item">CONTENT</li>
+	<li class="o-list-inline__item">CONTENT</li>
+</ul>
+*/
+
+
+// MODIFIERS
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+// Seperate individual list items with the character listed in the $list-inline-delimiter variable
+
+/*
+<ul class="o-list-inline o-list-inline--delimited">
+	<li class="o-list-inline__item">CONTENT</li>
+	<li class="o-list-inline__item">CONTENT</li>
+	<li class="o-list-inline__item">CONTENT</li>
+</ul>
+*/
+
+
+// SASS
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+$list-inline-delimiter: "|";
+
+.o-list-inline {
+	list-style:none;
+	margin-left:0;
+}
+
+.o-list-inline__item {
+	display:inline-block;
+}
+
+.o-list-inline--delimited {
+	.o-list-inline__item:after {
+		content: $list-inline-delimiter;
+		margin:0 $spacing-unit-sm;
+	}
+	.o-list-inline__item:last-child:after {
+		display:none;
+	}
+}
+
