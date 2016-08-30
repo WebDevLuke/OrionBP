@@ -18,14 +18,14 @@
 
 			// Example u-col-offset-4@md
 			.u-col-offset-#{$i}#{$prefix}	{
-				margin-left:$grid;
+				margin-left:$grid !important;
 			}
 
 		}
 		@else {
 			// Example u-col-offset-4
 			.u-col-offset-#{$i}	{
-				margin-left:$grid + ($gutter * 2);
+				margin-left:$grid + ($gutter * 2) !important;
 			}
 		}
 	}

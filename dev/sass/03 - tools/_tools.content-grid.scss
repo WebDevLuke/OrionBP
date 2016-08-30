@@ -2,7 +2,7 @@
 // CONTENT GRID
 //--------------------------------------------------------------------
 
-// Quickly generate a scaleable grid from a selection of elements
+// Quickly generate equal sized colunns for the selected elements. Useful for stuff like gallery layouts etc.
 
 @mixin grid($numPerRow,$margin:10%) {
 	width:(100% - ($margin * ($numPerRow - 1))) / $numPerRow;

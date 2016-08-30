@@ -4,31 +4,46 @@
 
 // Standard
 .u-hide {
-	display:none !important;
+	border: 0 !important;
+	clip: rect(0 0 0 0) !important;
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	width: 1px !important;
 }
 
-.u-show {
+.u-display-block {
 	display:block !important;
 }
 
-.u-show-inline {
+.u-display-inline-block {
 	display:inline-block !important;
 }
 
 // Responsive
-@each $bp-name, $bp-value in $breakpoints	{
+@each $bp-name, $bp-value in $breakpoints {
 
 	@include bp(#{$bp-name}) {
 
 		.u-hide\@#{$bp-name} {
-			display:none !important;
+			border: 0 !important;
+			clip: rect(0 0 0 0) !important;
+			height: 1px !important;
+			margin: -1px !important;
+			overflow: hidden !important;
+			padding: 0 !important;
+			position: absolute !important;
+			width: 1px !important;
 		}
-		.u-show\@#{$bp-name} {
+
+		.u-display-block\@#{$bp-name} {
 			display:block !important;
 		}
-		.u-show--inline\@#{$bp-name} {
+
+		.u-display-inline-block\@#{$bp-name} {
 			display:inline-block !important;
-		}
-	
+		}	
 	}
 }
