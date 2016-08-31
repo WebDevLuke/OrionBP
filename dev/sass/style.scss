@@ -9,7 +9,6 @@ Email: luke@lukeharrison.net
 // Implements ITCSS (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture)
 // Takes good ideas from inuitcss (https://github.com/inuitcss/inuitcss)
 // Implements BEM (http://getbem.com) and BEMIT (http://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further), OOCSS namespacing (http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces)
-// Seperates semantics from appearance where possible
 
 /*
 Vendors - 3rd Party CSS files which need to be dropped in.
@@ -20,7 +19,7 @@ Tools – globally used mixins and functions. It’s important not to output any
 
 Generic – reset and/or normalize styles, box-sizing definition, etc. This is the first layer which generates actual CSS.
 
-Elements – styling for bare HTML elements (like H1, A, etc.). These come with default styling from the browser so we can redefine them here.
+Elements – styling for bare HTML elements. These come with default styling from the browser so we can redefine them here.
 
 Objects – class-based selectors which define undecorated design patterns, for example media object known from OOCSS
 

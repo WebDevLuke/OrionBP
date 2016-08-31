@@ -1,3 +1,34 @@
+//----------------------------------------------------------------------------------------------------------------------------------------
+// HEADINGS
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Component classes for headings
+*/
+
+
+// SASS
+//----------------------------------------------------------------------------------------------------------------------------------------
+
 .c-heading-page {
+
+}
+
+
+// CONTEXT SPECIFIC STYLING
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+If a component needs to be positioned differently within another component add those styles here.
+These should be only implmentation based styles such as floats or positioning. None of these should change
+the cosmetics of the component.
+
+We use stateful classes rather than nesting to avoid violating the open/closed principle and to avoid future 
+complications if we need to extend the component.
+
+http://csswizardry.com/2015/06/contextual-styling-ui-components-nesting-and-implementation-detail/
+*/
+
+.in-mycomponent.c-heading-page {
 
 }
