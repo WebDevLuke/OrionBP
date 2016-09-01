@@ -37,6 +37,7 @@ var browserify = require("browserify");
 var source = require('vinyl-source-stream');
 var glob = require('glob');
 var streamify = require('gulp-streamify');
+// Used to generate styleguide
 var kss = require('kss');
 
 /*
@@ -50,7 +51,8 @@ var kss = require('kss');
 var minify = false;
 
 // If true a styleguide for all CSS components will be generated
-var styleguide = true
+// Edit homepage content of said styleguide at styleguide/homepage.md
+var createStyleguide = false
 
 /*
 |--------------------------------------------------------------------
@@ -194,7 +196,12 @@ options.styleGuide = {
 };
 
 gulp.task('styleguide', function(cb) {
-	kss(options.styleGuide, cb);
+	if(createStyleguide){
+		kss(options.styleGuide, cb);
+	}
+	else {
+		console.log("No Styleguide generated");
+	}
 });
 
 
