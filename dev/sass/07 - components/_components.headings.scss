@@ -6,12 +6,27 @@
 Component classes for headings
 */
 
+// npm-run kss-node dev/sass styleguide --css ../dist/css/style.css
+
+
+// Headings
+//
+// Your standard button suitable for clicking.
+//
+// .in-mycomponent.c-heading-page  - When in mycomponent
+//
+// Style guide: components.headings
+//
+// Markup:
+// <h1 class="c-heading-page {{modifier_class}}">Hello</h1>
+
 
 // SASS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 .c-heading-page {
-
+	font-size:2em;
+	color:red;
 }
 
 
@@ -30,5 +45,5 @@ http://csswizardry.com/2015/06/contextual-styling-ui-components-nesting-and-impl
 */
 
 .in-mycomponent.c-heading-page {
-
+	color:green;
 }
