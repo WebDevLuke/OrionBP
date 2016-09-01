@@ -52,7 +52,7 @@ var minify = false;
 
 // If true a styleguide for all CSS components will be generated
 // Edit homepage content of said styleguide at styleguide/homepage.md
-var createStyleguide = false
+var createStyleguide = true
 
 /*
 |--------------------------------------------------------------------
@@ -185,7 +185,7 @@ gulp.task('js', function(){
 var options = {};
 options.styleGuide = {
 	"source": [
-	  "dev/sass/"
+	  "dev/"
 	],
 	"destination":  "styleguide/dist/",
 	"css": [
