@@ -1,0 +1,42 @@
+//--------------------------------------------------------------------------------------------------------------------------------------
+// HEADINGS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Component classes for headings
+*/
+
+// npm-run kss-node dev/sass styleguide --css ../dist/css/style.css
+
+
+// Buttons
+//
+// Your standard button suitable for clicking.
+//
+// .btn--large - Large button
+//
+// Styleguide:
+// components.buttons
+//
+// Markup:
+// <a href="#" class="btn {{modifier_class}}">Hello</a>
+
+
+// SASS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+.btn {
+	display:inline-block;
+	background:red;
+	text-decoration:none;
+	color:#fff;
+	padding:10px;
+	&:hover {
+		background:lighten(red, 10%);
+	}
+}
+
+.btn--large {
+	padding:30px;
+	font-size:1.5em;
+}

@@ -37,6 +37,7 @@ var browserify = require("browserify");
 var source = require('vinyl-source-stream');
 var glob = require('glob');
 var streamify = require('gulp-streamify');
+var kss = require('kss');
 
 /*
 |--------------------------------------------------------------------
@@ -47,6 +48,9 @@ var streamify = require('gulp-streamify');
 // If minify is true then css & js will be minified
 // This is in case the code needs to be maintained by a less-technical developer
 var minify = false;
+
+// If true a styleguide for all CSS components will be generated
+var styleguide = true
 
 /*
 |--------------------------------------------------------------------
@@ -172,6 +176,30 @@ gulp.task('js', function(){
 
 /*
 |--------------------------------------------------------------------
+|  KSS STYLE GUIDELINES
+|--------------------------------------------------------------------
+*/
+
+var options = {};
+options.styleGuide = {
+	"source": [
+	  "dev/sass/"
+	],
+	"destination":  "styleguide/dist/",
+	"css": [
+	  "../../dist/css/style.css"
+	],
+	homepage: '../../styleguide/homepage.md',
+	title: 'Styleguide'
+};
+
+gulp.task('styleguide', function(cb) {
+	kss(options.styleGuide, cb);
+});
+
+
+/*
+|--------------------------------------------------------------------
 |  MISC
 |--------------------------------------------------------------------
 */
@@ -220,6 +248,6 @@ gulp.task('build',function() {
 		// Delete Dist Folder
 		"deleteDist",	
 		// Run other tasks asynchronously 
-		["html", "images", "sass", "js", "copy"]
+		["html", "images", "sass", "js", "copy", "styleguide"]
 	);
 });
