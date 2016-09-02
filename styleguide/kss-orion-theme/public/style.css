@@ -15,7 +15,7 @@
 }
 
 .kss-style a:hover, .kss-style a:focus {
-  color: #5e5e5e;
+  color: #2b2b2b;
 }
 
 .kss-style a:active {
@@ -33,7 +33,7 @@
 .kss-style h1, .kss-style h2, .kss-style h3, .kss-style h4, .kss-style h5, .kss-style h6 {
   margin: 24px 0 0 0;
   font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
-  color: #444;
+  color: #2b2b2b;
   line-height: 1.15em;
 }
 
@@ -88,7 +88,7 @@
 
 .kss-style pre, .kss-style code, .kss-style kbd, .kss-style samp {
   font-family: Menlo, "Ubuntu Mono", "Lucida Console", "Courier New", Courier, monospace;
-  color: #383838;
+  color: #2b2b2b;
   font-size: 1em;
 }
 
@@ -98,13 +98,13 @@
 }
 
 .kss-style ins {
-  color: #444;
+  color: #2b2b2b;
   background: #ff9;
   text-decoration: none;
 }
 
 .kss-style mark {
-  color: #444;
+  color: #2b2b2b;
   background: #ff0;
   font-weight: bold;
 }
@@ -193,17 +193,22 @@
 
 #kss-node {
   margin: 0;
-  padding: 20px;
   background: #fff;
+}
+
+#kss-node .kss-body-container {
+  position: relative;
 }
 
 #kss-node .kss-main {
   width: 100%;
   margin: 0 auto;
+  padding: 15px;
 }
 
 #kss-node .kss-sidebar {
   border-bottom: 1px solid #cecece;
+  margin-bottom: 15px;
 }
 
 @media screen and (min-width: 769px) {
@@ -213,7 +218,6 @@
   }
   #kss-node .kss-main,
   #kss-node .kss-sidebar {
-    float: left;
     margin-right: -100%;
     box-sizing: border-box;
   }
@@ -223,12 +227,13 @@
     padding: 30px;
   }
   #kss-node .kss-sidebar {
-    position: fixed;
+    position: absolute;
     width: 20%;
     height: 100%;
     overflow: auto;
     border-right: 1px solid #cecece;
     border-bottom: 0;
+    margin-bottom: 0;
   }
 }
 
@@ -244,10 +249,17 @@
 
 #kss-node .kss-nav {
   text-transform: capitalize;
+  padding: 0 0 30px 0;
+}
+
+#kss-node .kss-header {
+  padding: 30px 15px 15px 15px;
 }
 
 #kss-node .kss-doc-title {
+  font-size: 1.5em;
   margin: 0;
+  text-align: center;
 }
 
 #kss-node .kss-header__logo {
@@ -258,14 +270,13 @@
 }
 
 #kss-node .kss-nav__menu {
-  padding: 0;
+  padding: 0 15px;
   margin: 0;
   list-style-type: none;
 }
 
 #kss-node .kss-nav__menu-item {
-  display: inline-block;
-  padding-right: 24px;
+  text-align: center;
 }
 
 #kss-node .kss-nav__menu-child {
@@ -282,21 +293,29 @@
 }
 
 @media screen and (min-width: 769px) {
-  #kss-node .kss-doc-title {
-    font-size: 1.5em;
+  #kss-node .kss-nav {
+    padding: 0;
   }
   #kss-node .kss-header {
     padding: 15px;
     text-align: center;
   }
+  #kss-node .kss-nav__menu {
+    padding: 0;
+  }
   #kss-node .kss-nav__menu-item {
     display: list-item;
     padding-right: 0;
+    text-align: left;
   }
   #kss-node .kss-nav__menu-item .kss-nav__menu-item__link {
     display: block;
     padding: 20px;
     border-top: 1px solid #cecece;
+    font-weight: bold;
+  }
+  #kss-node .kss-nav__menu-item.is-active .kss-nav__menu-child-item__link:hover {
+    text-decoration: underline;
   }
   #kss-node .kss-nav__menu-item:last-child {
     border-bottom: 1px solid #cecece;
@@ -308,8 +327,11 @@
     padding: 0 20px 20px 20px;
   }
   #kss-node .kss-nav__menu-child .kss-nav__menu-child-item__link {
-    display: block;
+    display: inline-block;
     padding: 5px 0;
+  }
+  #kss-node .kss-nav__menu-child-item:first-child .kss-nav__menu-child-item__link {
+    padding-top: 0;
   }
   #kss-node .kss-nav__ref:after {
     content: ") ";
@@ -354,7 +376,8 @@
   display: block;
   font-size: 16px;
   line-height: 16px;
-  color: #666;
+  color: #929292;
+  font-weight: 300;
 }
 
 #kss-node .kss-title__ref:before {
@@ -363,23 +386,18 @@
 
 #kss-node .kss-title__permalink {
   display: block;
-  color: #444;
+  color: #2b2b2b;
   text-decoration: none;
+  text-transform: capitalize;
+  font-size: 1.5rem;
 }
 
 #kss-node .kss-title__permalink:hover, #kss-node .kss-title__permalink:focus, #kss-node .kss-title__permalink:active {
   color: #2b2b2b;
 }
 
-@media screen and (min-width: 607px) {
-  #kss-node .kss-title__permalink:hover .kss-title__permalink-hash, #kss-node .kss-title__permalink:focus .kss-title__permalink-hash, #kss-node .kss-title__permalink:active .kss-title__permalink-hash {
-    display: inline;
-  }
-}
-
 #kss-node .kss-title__permalink-hash {
   display: none;
-  color: #ccc;
 }
 
 #kss-node .kss-parameters {
@@ -411,7 +429,7 @@
   margin: -10px -10px 10px -10px;
   padding: 10px;
   border-bottom: 1px solid #cecece;
-  background-color: #eee;
+  background-color: #f6f6f6;
   font-weight: bold;
 }
 
@@ -573,4 +591,10 @@
 #kss-node ol.linenums li.L6,
 #kss-node ol.linenums li.L8 {
   background: #fcfcfc;
+}
+
+@media screen and (min-width: 769px) {
+  #kss-node .kss-title__permalink {
+    font-size: inherit;
+  }
 }
