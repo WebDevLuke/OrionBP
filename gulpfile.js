@@ -192,7 +192,7 @@ options.styleGuide = {
 	  "../../dist/css/style.css"
 	],
 	homepage: '../../styleguide/dist/homepage.md',
-	title: 'Styleguide',
+	title: 'Style Guide',
 	template: "styleguide/kss-orion-theme"
 };
 

@@ -27,14 +27,14 @@
 	<nav class="kss-nav">
 		<ul class="kss-nav__menu">
 			<li class="kss-nav__menu-item">
-				<a href="./">
+				<a href="./" class="kss-nav__menu-item__link">
 					<span class="kss-nav__ref">0</span
 					><span class="kss-nav__name">Overview</span>
 				</a>
 			</li>
 		{{#eachRoot}}
 			<li class="kss-nav__menu-item">
-				<a href="section-{{referenceURI}}.html">
+				<a href="section-{{referenceURI}}.html" class="kss-nav__menu-item__link">
 					<span class="kss-nav__ref">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span
 					><span class="kss-nav__name">{{header}}</span>
 				</a>
@@ -42,8 +42,8 @@
 				<ul class="kss-nav__menu-child">
 				{{#eachSection reference}}
 					{{#ifDepth 2 ../../../options.[nav-depth]}}
-						<li class="kss-nav__menu-item">
-							<a href="section-{{../../referenceURI}}.html#kssref-{{referenceURI}}">
+						<li class="kss-nav__menu-child-item">
+							<a href="section-{{../../referenceURI}}.html#kssref-{{referenceURI}}" class="kss-nav__menu-child-item__link">
 								<span class="kss-nav__ref {{#ifDepth 3 100}}kss-nav__ref-child{{/ifDepth}}">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span
 								><span class="kss-nav__name">{{header}}</span>
 							</a>
@@ -74,7 +74,7 @@
 	}}
 	{{#eachSection rootName}}
 		{{#ifDepth 1}}
-			<div     id="kssref-{{referenceURI}}" class="kss-section kss-section--depth-{{depth}}">
+			<div id="kssref-{{referenceURI}}" class="kss-section kss-section--depth-{{depth}}">
 		{{else}}
 			<section id="kssref-{{referenceURI}}" class="kss-section kss-section--depth-{{depth}}">
 		{{/ifDepth}}

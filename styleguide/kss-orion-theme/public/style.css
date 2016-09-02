@@ -35,7 +35,7 @@
 .kss-style h1, .kss-style h2, .kss-style h3, .kss-style h4, .kss-style h5, .kss-style h6 {
   margin: 24px 0 0 0;
   font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
-  color: #111;
+  color: #2f353e;
   line-height: 1.15em;
 }
 
@@ -86,7 +86,7 @@
 
 .kss-style pre, .kss-style code, .kss-style kbd, .kss-style samp {
   font-family: Menlo, "Ubuntu Mono", "Lucida Console", "Courier New", Courier, monospace;
-  color: #2b2b2b;
+  color: #3a3d41;
   font-size: 1em;
 }
 
@@ -96,13 +96,13 @@
 }
 
 .kss-style ins {
-  color: #111;
+  color: #2f353e;
   background: #ff9;
   text-decoration: none;
 }
 
 .kss-style mark {
-  color: #111;
+  color: #2f353e;
   background: #ff0;
   font-weight: bold;
 }
@@ -195,6 +195,15 @@
   background: #fff;
 }
 
+#kss-node .kss-main {
+  width: 100%;
+  margin: 0 auto;
+}
+
+#kss-node .kss-sidebar {
+  border-bottom: 1px solid #ddd;
+}
+
 @media screen and (min-width: 769px) {
   #kss-node {
     padding: 0;
@@ -206,26 +215,11 @@
     margin-right: -100%;
     box-sizing: border-box;
   }
-}
-
-#kss-node .kss-main {
-  width: 100%;
-  margin: 0 auto;
-}
-
-@media screen and (min-width: 769px) {
   #kss-node .kss-main {
     width: 80%;
     margin-left: 20%;
     padding: 0 20px 0 30px;
   }
-}
-
-#kss-node .kss-sidebar {
-  border-bottom: 1px solid #ddd;
-}
-
-@media screen and (min-width: 769px) {
   #kss-node .kss-sidebar {
     position: fixed;
     width: 20%;
@@ -236,35 +230,25 @@
   }
 }
 
+@media screen and (min-width: 1500px) {
+  #kss-node .kss-main {
+    width: 85%;
+    margin-left: 15%;
+  }
+  #kss-node .kss-sidebar {
+    width: 15%;
+  }
+}
+
 #kss-node .kss-doc-title {
   margin: 0;
 }
 
-@media screen and (min-width: 769px) {
-  #kss-node .kss-doc-title {
-    font-size: 1.5em;
-  }
-}
-
-#kss-node .kss-header .kss-header__logo {
+#kss-node .kss-header__logo {
   display: block;
-  margin: 0 auto 0 auto;
+  margin: 0 auto 15px auto;
   max-width: 80%;
   height: auto;
-}
-
-@media screen and (min-width: 769px) {
-  #kss-node .kss-header {
-    padding: 30px;
-    text-align: center;
-  }
-}
-
-@media screen and (min-width: 769px) {
-  #kss-node .kss-nav {
-    padding: 30px;
-    border-top: 1px solid #ddd;
-  }
 }
 
 #kss-node .kss-nav__menu {
@@ -278,47 +262,53 @@
   padding-right: 24px;
 }
 
-@media screen and (min-width: 769px) {
-  #kss-node .kss-nav__menu-item {
-    display: list-item;
-    padding-right: 0;
-  }
-}
-
 #kss-node .kss-nav__menu-child {
   display: none;
 }
 
-@media screen and (min-width: 769px) {
-  #kss-node .kss-nav__menu-child {
-    display: block;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  #kss-node .kss-nav__menu-child li:first-child {
-    margin-top: 10px;
-    border-top: 1px solid #ccc;
-    padding: 10px 0 0;
-  }
-  #kss-node .kss-nav__menu-child li:last-child {
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ccc;
-    padding: 0 0 10px;
-  }
-}
-
 #kss-node .kss-nav__ref {
   color: #333;
-  font-weight: bold;
 }
 
 #kss-node .kss-nav__ref:after {
   content: ' ';
 }
 
-#kss-node .kss-nav__ref-child {
-  font-weight: normal;
+@media screen and (min-width: 769px) {
+  #kss-node .kss-doc-title {
+    font-size: 1.5em;
+  }
+  #kss-node .kss-header {
+    padding: 15px;
+    text-align: center;
+  }
+  #kss-node .kss-nav__menu-item {
+    display: list-item;
+    padding-right: 0;
+  }
+  #kss-node .kss-nav__menu-item .kss-nav__menu-item__link {
+    display: block;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+  }
+  #kss-node .kss-nav__menu-item .kss-nav__menu-child {
+    padding: 0 20px 20px 20px;
+  }
+  #kss-node .kss-nav__menu-item:last-child {
+    border-bottom: 1px solid #ddd;
+  }
+  #kss-node .kss-nav__menu-child {
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  #kss-node .kss-header {
+    padding: 30px;
+  }
 }
 
 #kss-node {
@@ -362,7 +352,7 @@
 
 #kss-node .kss-title__permalink {
   display: block;
-  color: #000;
+  color: #2f353e;
   text-decoration: none;
 }
 
@@ -402,14 +392,14 @@
 }
 
 #kss-node .kss-modifier__wrapper {
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   padding: 10px;
 }
 
 #kss-node .kss-modifier__heading {
   margin: -10px -10px 10px -10px;
   padding: 10px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
   background-color: #eee;
   font-weight: bold;
 }
@@ -442,7 +432,7 @@
 
 #kss-node .kss-markup {
   margin: -1px 0 24px 0;
-  border: 1px solid #999;
+  border: 1px solid #ddd;
 }
 
 #kss-node .kss-markup pre {
@@ -557,7 +547,7 @@
 
 #kss-node ol.linenums li {
   min-height: 24px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ddd;
   padding: 0 10px;
   background: #fff;
 }
