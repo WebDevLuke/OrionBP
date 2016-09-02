@@ -33,7 +33,11 @@
 				</a>
 			</li>
 		{{#eachRoot}}
-			<li class="kss-nav__menu-item">
+			{{#ifReference ../rootName}}
+			<li class="kss-nav__menu-item is-active" >
+			{{else}}
+			<li class="kss-nav__menu-item" >
+			{{/ifReference}}
 				<a href="section-{{referenceURI}}.html" class="kss-nav__menu-item__link">
 					<span class="kss-nav__ref">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span
 					><span class="kss-nav__name">{{header}}</span>
