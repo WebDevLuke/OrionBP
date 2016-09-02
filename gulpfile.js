@@ -191,8 +191,9 @@ options.styleGuide = {
 	"css": [
 	  "../../dist/css/style.css"
 	],
-	homepage: '../../styleguide/homepage.md',
-	title: 'Styleguide'
+	homepage: '../../styleguide/dist/homepage.md',
+	title: 'Styleguide',
+	template: "styleguide/kss-orion-theme"
 };
 
 gulp.task('styleguide', function(cb) {
