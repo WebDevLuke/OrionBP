@@ -82,7 +82,7 @@
 		{{#ifDepth 1}}
 			<div id="kssref-{{referenceURI}}" class="kss-section kss-section--depth-{{depth}}">
 		{{else}}
-			<section id="kssref-{{referenceURI}}" class="kss-section kss-section--depth-{{depth}}">
+			<section id="kssref-{{referenceURI}}" class="kss-section kss-component kss-section--depth-{{depth}}">
 		{{/ifDepth}}
 
 		<div class="kss-style">
@@ -126,9 +126,6 @@
 
 		{{#if markup}}
 			<div class="kss-modifier__wrapper">
-				<div class="kss-modifier__heading kss-style">
-					Example{{#if modifiers}}s{{/if}}
-				</div>
 			{{#if modifiers}}
 				<div class="kss-modifier__default-name kss-style">
 					Default styling

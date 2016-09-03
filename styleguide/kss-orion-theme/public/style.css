@@ -27,7 +27,7 @@
 }
 
 .kss-style p {
-  margin: 12px 0 24px 0;
+  margin: 12px 0 36px 0;
 }
 
 .kss-style h1, .kss-style h2, .kss-style h3, .kss-style h4, .kss-style h5, .kss-style h6 {
@@ -198,6 +198,7 @@
 
 #kss-node .kss-body-container {
   position: relative;
+  min-height: 100vh;
 }
 
 #kss-node .kss-main {
@@ -368,12 +369,17 @@
   margin-bottom: 48px;
 }
 
+#kss-node .kss-section.kss-component > .kss-style:first-child {
+  border-bottom: 1px solid #cecece;
+  margin-bottom: 48px;
+}
+
 #kss-node .kss-title {
   margin-bottom: 0;
 }
 
 #kss-node .kss-title__ref {
-  display: block;
+  display: none;
   font-size: 16px;
   line-height: 16px;
   color: #929292;
@@ -421,8 +427,7 @@
 }
 
 #kss-node .kss-modifier__wrapper {
-  border: 1px solid #cecece;
-  padding: 10px;
+  margin: 0 0 23px 0;
 }
 
 #kss-node .kss-modifier__heading {
