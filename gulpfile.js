@@ -24,8 +24,6 @@ var gulpif = require('gulp-if');
 var sassport = require('gulp-sassport');
 // Used to create synchronous build tasks
 var runSequence = require('run-sequence');
-// Used to convert Jade to HTML
-// var jade = require('gulp-jade');
 // Used to pipe JSON data into Jade
 var data = require('gulp-data');
 // Used to delete folders during build process
@@ -65,12 +63,8 @@ gulp.task('deleteDist', function(){
 */
 
 gulp.task('html', function() {
-  return gulp.src('./dev/html/*.html')
-    .pipe(data(function(file){
-     		//return require('./dev/data/info.json');
-     }))
-    //.pipe(jade())
-    .pipe(gulp.dest('dist/'));
+	return gulp.src('./dev/html/*.html')
+	.pipe(gulp.dest('dist/'));
 });
 
 /*
@@ -79,7 +73,7 @@ gulp.task('html', function() {
 |--------------------------------------------------------------------
 */
 
-gulp.task('sass-style', function () {
+gulp.task('sass', function () {
 	return gulp.src('dev/sass/*.scss')
 	.pipe(sassGlob())
 	.pipe(gulpif(minify, sassport([],{outputStyle: 'compressed', precision: 8}), sassport([], {outputStyle: 'expanded', precision: 8})))
@@ -90,25 +84,6 @@ gulp.task('sass-style', function () {
 		cascade: false
 	}))
 	.pipe(gulp.dest('./dist/css/'))
-});
-
-gulp.task('sass-ie8', function(){
-	return gulp.src('dev/sass/ie8.scss')
-	.pipe(sassGlob())
-	.pipe(gulpif(minify, sass({outputStyle: 'compressed'}), sass({outputStyle: 'expanded'})))
-    	.pipe(gulpif(minify, rename("ie8.min.css")))
-	.on('error', sass.logError)
-	.pipe(autoprefixer({
-		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']
-	}))
-	.pipe(gulp.dest('./dist/css/'));
-});
-
-gulp.task('sass', function(){
-	runSequence(
-		"sass-style",
-		"sass-ie8"
-	);
 });
 
 /*
