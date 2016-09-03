@@ -185,15 +185,15 @@ gulp.task('js', function(){
 var options = {};
 options.styleGuide = {
 	"source": [
-	  "dev/"
+	  "dev/" // This is where we should look for your CSS to scan
 	],
-	"destination":  "styleguide/dist/",
+	"destination":  "styleguide/dist/", // Where the compiled style guide should go
 	"css": [
-	  "../../dist/css/style.css"
+	  "../../dist/css/style.css" // The path of the compiled CSS for your project so we can include this in the style guide so your components work correctly
 	],
-	homepage: '../../styleguide/kss-orion-theme/homepage.md',
-	title: 'Style Guide',
-	template: "styleguide/kss-orion-theme"
+	homepage: '../../styleguide/kss-orion-theme/homepage.md', // The path to the homepage content for your style guide
+	title: 'Style Guide', // The title of your style guide
+	template: "styleguide/kss-orion-theme" // The path to the template you want to use
 };
 
 gulp.task('styleguide', function(cb) {
