@@ -3,7 +3,7 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 // We set the default spacing unit equal to our project base line-height to serve as our baseline
-$spacing-unit: $line-height;
+$spacing-unit: round($line-height);
 
 // Create ready made spacing unit variants
 $spacing-unit-xsm: ($spacing-unit * 0.25); // Default: 6px
