@@ -50,7 +50,7 @@ $list-inline-delimiter: "|";
 .o-list-inline--delimited {
 	.o-list-inline__item:after {
 		content: $list-inline-delimiter;
-		margin:0 $spacing-unit-sm;
+		margin:0 $spacing-unit-xsm;
 	}
 	.o-list-inline__item:last-child:after {
 		display:none;

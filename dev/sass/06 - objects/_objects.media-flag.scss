@@ -61,7 +61,7 @@ http://csswizardry.com/2013/05/the-flag-object/
 	display: table;
 	width: 100%; 
 	box-sizing:border-box;
-	margin-bottom:$spacing-unit;
+	margin-bottom:$spacing-unit-sm;
 }
 
 .flag__body {
@@ -82,7 +82,7 @@ http://csswizardry.com/2013/05/the-flag-object/
 }
 
 .o-flag__image {
-	padding: 0 $spacing-unit 0 0;
+	padding: 0 $spacing-unit-sm 0 0;
 
 	img {
 		display: block;
@@ -90,7 +90,7 @@ http://csswizardry.com/2013/05/the-flag-object/
 	}
 
 	.o-flag--reverse & {
-		padding: 0 0 0 $spacing-unit;
+		padding: 0 0 0 $spacing-unit-sm;
 	}
 }
 

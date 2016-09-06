@@ -32,7 +32,12 @@ Utilities – utilities and helper classes with ability to override anything whi
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 @import "01 - vendors/*";
-@import "02 - settings/*";
+
+// We import settings manually as its load order matters
+@import "02 - settings/_settings.grid";
+@import "02 - settings/_settings.typography";
+@import "02 - settings/_settings.spacing";
+
 @import "03 - tools/*";
 @import "04 - generic/*";
 @import "05 - elements/*";

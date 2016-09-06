@@ -53,12 +53,12 @@ http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-o
 .o-media {
 	@include clearfix();
 	box-sizing:border-box;
-	margin-bottom:$spacing-unit;
+	margin-bottom:$spacing-unit-sm;
 }
 
 .o-media__image {
 	float:left;
-	margin: 0 $spacing-unit 0 0;
+	margin: 0 $spacing-unit-sm 0 0;
 
 	img {
 		display:block;
@@ -67,7 +67,7 @@ http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-o
 	// Modifier class to put image on right instead of left
 	.o-media--reverse & {
 		float:right;
-		margin: 0 0 0 $spacing-unit;
+		margin: 0 0 0 $spacing-unit-sm;
 	}
 }
 

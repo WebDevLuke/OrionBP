@@ -23,8 +23,7 @@ var bpData = {
 		"md": "740px",
 		"lg": "925px",
 		"xlg": "1280px"
-	},
-	"spacing unit": "12px"
+	}
 };
 
 module.exports = bpData;

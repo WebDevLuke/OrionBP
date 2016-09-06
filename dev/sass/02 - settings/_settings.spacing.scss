@@ -1,12 +1,12 @@
-// Pull config from JSON using SassPort to convert JSON to SASS map
-$config: require('dev/data/config.js');
-$spacing-unit: map-get($config, "spacing unit"); // Default: 12px
+//--------------------------------------------------------------------------------------------------------------------------------------
+// SPACING UNITS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+// We set the default spacing unit equal to our project base line-height to serve as our baseline
+$spacing-unit: $line-height;
 
 // Create ready made spacing unit variants
-$spacing-unit-xsm: ($spacing-unit * 0.50); // Default: 6px
-$spacing-unit-sm: ($spacing-unit * 0.75); // Default: 9px
-$spacing-unit-md: ($spacing-unit * 1.5); // Default: 18px
-$spacing-unit-lg: ($spacing-unit * 2); // Default: 24px
-$spacing-unit-xlg: ($spacing-unit * 3); // Default: 36px
-$spacing-unit-xxlg: ($spacing-unit * 5); // Default: 60px
-$spacing-unit-xxxlg: ($spacing-unit * 8); // Default: 96px
+$spacing-unit-xsm: ($spacing-unit * 0.25); // Default: 6px
+$spacing-unit-sm: ($spacing-unit * 0.5); // Default: 12px
+$spacing-unit-lg: ($spacing-unit * 2); // Default: 48px
+$spacing-unit-xlg: ($spacing-unit * 4); // Default: 96px
