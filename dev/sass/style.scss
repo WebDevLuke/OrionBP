@@ -34,6 +34,7 @@ Utilities – utilities and helper classes with ability to override anything whi
 @import "01 - vendors/*";
 
 // We import settings manually as its load order matters
+@import "02 - settings/_settings.breakpoints";
 @import "02 - settings/_settings.grid";
 @import "02 - settings/_settings.typography";
 @import "02 - settings/_settings.spacing";
@@ -44,3 +45,15 @@ Utilities – utilities and helper classes with ability to override anything whi
 @import "06 - objects/*";
 @import "07 - components/*";
 @import "08 - utilities/*";
+
+
+// OPTIONAL LAYERS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+// Enable if wanting to check baseline grid (http://basehold.it)
+//@import url("http://basehold.it/24");
+
+
+.o-container div div {
+	background:#ccc;
+}

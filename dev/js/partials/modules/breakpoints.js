@@ -12,8 +12,8 @@ var bp = (function(){
 		return newObj;
 	},
 
-		bpData = require("../../../data/config.js"),
-		bpObj = convertToNum(bpData["breakpoints"]),
+		breakpoints = require("../../../data/breakpoints.js"),
+		bpObj = convertToNum(breakpoints),
 		windowWidth;
 
 	return {

@@ -1,16 +1,45 @@
-// Pull config from JSON using SassPort to convert JSON to SASS map
-$config: require('dev/data/config.js');
-$gridConfig: map-get($config, "grid");
-$gridDefault: map-get($gridConfig, "default");
+//--------------------------------------------------------------------------------------------------------------------------------------
+// GRID SETTINGS
+//--------------------------------------------------------------------------------------------------------------------------------------
 
-@if map-has-key($gridConfig, "morph") {
-	$gridResponsive: map-get($gridConfig, "morph");
+/*
+Define default grid attributes and any morphs which change the grid as it hits certain breakpoints
+*/
+
+$grid: (
+	"default": (
+		"responsive": true,
+		"max-width": 1170px,
+		"columns": 12,
+		"gutter": 30px,
+		"padding": 30px // Outer Padding
+	),
+	'morph': (
+		"xlg" : (
+			"max-width": 1600px,
+			"columns": 16,
+			"gutter": 30px,
+			"padding": 30px // Outer Padding
+		)
+	)
+);
+
+//--------------------------------------------------------------------------------------------------------------------------------------
+// GRID VARIABLES - DON'T EDIT
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+// Get default attributes
+$gridDefault: map-get($grid, "default");
+
+// Set default variables
+$responsive: map-get($gridDefault, "responsive");
+$defaultMaxWidth: map-get($gridDefault, "max-width");
+$defaultColumns: map-get($gridDefault, "columns");
+$defaultGutter: map-get($gridDefault, "gutter");
+$defaultPadding: map-get($gridDefault, "padding");
+
+// Set morph object variable
+@if map-has-key($grid, "morph") {
+	$gridResponsive: map-get($grid, "morph");
 }
 
-$responsive: map-get($gridDefault, "responsive");
-$fullWidth: map-get($gridDefault, "full width");
-$columnWidth: map-get($gridDefault, "column width");
-$gutter: map-get($gridDefault, "gutter");
-$columns: map-get($gridDefault, "columns");
-$padding: map-get($gridDefault, "outer padding");
-$breakpoints: map-get($config, "breakpoints");

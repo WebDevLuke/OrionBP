@@ -36,24 +36,15 @@ Grid system container, columns and optional rows. Specify responsive breakpoints
 // CREATE  CONTAINER MIXIN
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-@mixin create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive) {
-
-	@if $fullWidth == true {
-		$responsive: true;
-	}
-
-	$width: ($columnWidth * $columns) - $gutter;
+@mixin create_container($responsive, $maxWidth, $columns, $gutter, $padding) {
 
 	// Set Base Container
 	.o-container {
-		@if $fullWidth == true {
-			max-width:100%;
-		}
-		@else if $responsive == true {
-			max-width:$width;
+		@if $responsive == true {
+			max-width:$maxWidth;
 		}
 		@else {
-			width:$width;
+			width:$maxWidth;
 		}
 		@include clearfix();
 		margin:0px auto;
@@ -62,46 +53,38 @@ Grid system container, columns and optional rows. Specify responsive breakpoints
 		box-sizing: content-box;
 	}
 
+	//
 	.o-container--full {
 		max-width:100%;
 		padding: 0; 
 	}
 }
 
-// CREATE ROW OBJECT
-//--------------------------------------------------------------------------------------------------------------------------------------
-
-.o-row {
-	margin-left:-$gutter;
-	margin-right:-$gutter;
-	@include clearfix();
-}
 
 // CREATE COLUMNS MIXIN
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-@mixin create_columns($prefix, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive) {
+@mixin create_columns($prefix, $responsive, $maxWidth, $columns, $gutter, $padding) {
 
-	$width: ($columnWidth * $columns) - $gutter;
+	// Calculate single column width in pixels
+	$widthPX: $maxWidth / $columns;
+
+	// Calculate single column width in percentage
+	$widthPercentage: ($widthPX / $maxWidth) * 100%;
 
 	// Define Individual Grid Classes
 	@for $i from 1 to $columns {
-		// Calculate grid size in pixels
-		$grid: ($width / $columns) * $i;
 
 		// Calculate responsive grid sizes if required
 		@if $responsive == true {
-			// Calculate grid size in percentage
-			$grid: ($grid / $width) * 100%;
 
-			// Get Gutter Percentage for Grids
-			$gutter-percentage: ($gutter / $width) * 100%;
+			// Multiple width % by the column size
+			$widthPercentage: $widthPercentage * $i;
 
 			// Example: o-col-6@md
 			.o-col-#{$i}#{$prefix} {
-				width: $grid;
+				width: $widthPercentage;
 				float: left;
-				clear:none;
 				padding-left:$gutter / 2;
 				padding-right:$gutter / 2;
 				box-sizing: border-box;
@@ -112,10 +95,10 @@ Grid system container, columns and optional rows. Specify responsive breakpoints
 		{
 			// Example o-col-6
 			.o-col-#{$i} {
-				width: $grid;
+				width: $widthPX;
 				float: left;
-				padding-left:$gutter / 2;
-				padding-right:$gutter / 2;
+				padding-left: $gutter / 2;
+				padding-right: $gutter / 2;
 				box-sizing: border-box;
 			}
 		}
@@ -134,12 +117,22 @@ Grid system container, columns and optional rows. Specify responsive breakpoints
 	}
 }
 
-// GENERATE DEFAULT CONTAINER AND GRID CLASSES
+
+// GENERATE DEFAULT CONTAINER AND COLUMN CLASSES
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-// Default container
-@include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
-@include create_columns(null, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+@include create_container($responsive, $defaultMaxWidth, $defaultColumns, $defaultGutter, $defaultPadding);
+@include create_columns(null, $responsive, $defaultMaxWidth, $defaultColumns, $defaultGutter, $defaultPadding);
+
+
+// CREATE ROW OBJECT
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+.o-row {
+	margin-left:-$gutter;
+	margin-right:-$gutter;
+	@include clearfix();
+}
 
 
 // GENERATE RESPONSIVE CONTAINER AND GRID CLASSES
@@ -160,12 +153,12 @@ Grid system container, columns and optional rows. Specify responsive breakpoints
 			$padding: map-get($bp-obj, "outer padding");
 
 			@include bp(#{$bp-name}) {
-				@include create_container($columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+				@include create_container($columnWidth, $columns, $gutter, $padding, $responsive);
 			}
 		}
 	}
 
 	@include bp(#{$bp-name}) {
-		@include create_columns(\@#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+		@include create_columns(\@#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $responsive);
 	}
 }

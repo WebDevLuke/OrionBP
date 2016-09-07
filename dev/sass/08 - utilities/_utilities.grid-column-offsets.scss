@@ -2,43 +2,51 @@
 // CREATE COLUMN OFFSETS  MIXIN
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-@mixin create_offsets($prefix, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive) {
+@mixin create_offsets($prefix, $responsive, $maxWidth, $columns, $gutter, $padding) {
 
-	$width: ($columnWidth * $columns) - $gutter;
+	// Calculate single column width in pixels
+	$widthPX: $maxWidth / $columns;
+
+	// Calculate single column width in percentage
+	$widthPercentage: ($widthPX / $maxWidth) * 100%;
 
 	// Define Grid Offsets
 	@for $i from 1 to $columns {
-		// Calculate grid size in pixels
-		$grid: ($width / $columns) * $i;
 
 		// Calculate responsive grid sizes if required
 		@if $responsive == true {
-			// Calculate grid size in percentage
-			$grid: ($grid / $width) * 100%;
+
+			// Multiple width % by the column size
+			$widthPercentage: $widthPercentage * $i;
 
 			// Example u-col-offset-4@md
 			.u-col-offset-#{$i}#{$prefix}	{
-				margin-left:$grid !important;
+				margin-left:$widthPercentage !important;
 			}
 
 		}
 		@else {
 			// Example u-col-offset-4
 			.u-col-offset-#{$i}	{
-				margin-left:$grid + ($gutter * 2) !important;
+				margin-left:$widthPX !important;
 			}
 		}
 	}
 }
 
-// GENERATE COLUMN OFFSET CLASSES
+
+// GENERATE DEFAULT COLUMN OFFSET CLASSES
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-@include create_offsets(null, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+@include create_offsets(null, $columnWidth, $columns, $gutter, $padding, $responsive);
+
+
+// GENERATE RESPONSIVE COLUMN OFFSET CLASSES
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 // Responsive
 @each $bp-name, $bp-value in $breakpoints	{
 	@include bp(#{$bp-name}) {
-		@include create_offsets(\@#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $fullWidth, $responsive);
+		@include create_offsets(\@#{$bp-name}, $columnWidth, $columns, $gutter, $padding, $responsive);
 	}
 }
