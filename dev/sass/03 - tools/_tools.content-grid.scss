@@ -4,7 +4,7 @@
 
 // Quickly generate equal sized colunns for the selected elements. Useful for stuff like gallery layouts etc.
 
-@mixin grid($numPerRow,$margin:10%) {
+@mixin grid($numPerRow, $margin: 0) {
 	width:(100% - ($margin * ($numPerRow - 1))) / $numPerRow;
 	margin:0 $margin $margin 0;
 	float:left;

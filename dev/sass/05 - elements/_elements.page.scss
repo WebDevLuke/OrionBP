@@ -3,8 +3,8 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 html {
-  font-size: $font-size;
-  line-height: $line-height;
+  font-size: $global-font-size;
+  line-height: $global-line-height;
   overflow-y: scroll;
   min-height: 100%;
 }
