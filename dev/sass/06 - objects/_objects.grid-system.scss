@@ -72,8 +72,8 @@ Grid system container, columns and optional rows. Specify responsive breakpoints
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 .o-row {
-	margin-left:-$gutter / 2;
-	margin-right:-$gutter / 2;
+	margin-left:-$gutter;
+	margin-right:-$gutter;
 	@include clearfix();
 }
 
