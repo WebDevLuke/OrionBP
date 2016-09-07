@@ -2,9 +2,17 @@
 // HTML STYLES
 //--------------------------------------------------------------------------------------------------------------------------------------
 
+/*
+Set basic styles for HTML top level element.
+*/
+
+
+// SASS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
 html {
-  font-size: $global-font-size;
-  line-height: $global-line-height;
-  overflow-y: scroll;
-  min-height: 100%;
+	font-size: $global-font-size;
+	line-height: $global-line-height;
+	overflow-y: scroll;
+	min-height: 100%;
 }

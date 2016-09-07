@@ -36,6 +36,10 @@ Basic utility classes for hiding and displaying elements.
 // RESPONSIVE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
+/*
+Example: .u-hide@xlg
+*/
+
 @each $bp-name, $bp-value in $breakpoints {
 
 	@include bp(#{$bp-name}) {

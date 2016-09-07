@@ -1,30 +1,36 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
-// CLEARFIX
+// FULL WIDTH OVERRIDE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
- A mixin to apply clearfix to an element
+Utility class used to override max width to 100%.
+Typically this would be attached to a grid container
 */
 
 
-// BASIC USAGE
+// STANDARD
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-/*
-.myElement {
-	@include clearfix();
+.u-full-width {
+	max-width:100%;
+	padding: 0; 
 }
-*/
 
 
-// SASS
+// RESPONSIVE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
+/*
+Example: .u-full-width@xlg
+*/
 
-@mixin clearfix {
-	&:after {
-		content: "" !important;
-		display: block !important;
-		clear: both !important;
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+
+		.u-full-width\@#{$bp-name} {
+			max-width:100%;
+			padding: 0; 
+		}
+
 	}
 }

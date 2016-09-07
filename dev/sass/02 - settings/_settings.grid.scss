@@ -12,14 +12,14 @@ $grid: (
 		"max-width": 1170px,
 		"columns": 12,
 		"gutter": 30px,
-		"padding": 30px // Outer Padding
+		"containerPadding": 30px
 	),
 	'morph': (
 		"xlg" : (
 			"max-width": 1600px,
 			"columns": 16,
 			"gutter": 30px,
-			"padding": 30px // Outer Padding
+			"containerPadding": 30px
 		)
 	)
 );
@@ -33,10 +33,10 @@ $gridDefault: map-get($grid, "default");
 
 // Set default variables
 $responsive: map-get($gridDefault, "responsive");
-$defaultMaxWidth: map-get($gridDefault, "max-width");
-$defaultColumns: map-get($gridDefault, "columns");
-$defaultGutter: map-get($gridDefault, "gutter");
-$defaultPadding: map-get($gridDefault, "padding");
+$maxWidth: map-get($gridDefault, "max-width");
+$columns: map-get($gridDefault, "columns");
+$gutter: map-get($gridDefault, "gutter");
+$containerPadding: map-get($gridDefault, "containerPadding");
 
 // Set morph object variable
 @if map-has-key($grid, "morph") {

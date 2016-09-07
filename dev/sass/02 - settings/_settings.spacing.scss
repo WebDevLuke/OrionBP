@@ -2,7 +2,11 @@
 // SPACING UNITS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-// We set the default spacing unit equal to our project base line-height to serve as our baseline
+/*
+Set spacing unit variables based on the `$global-line-height` variable to keep baseline intact
+*/
+
+// Standard spacing unit
 $spacing-unit: round($global-line-height);
 
 // Create ready made spacing unit variants

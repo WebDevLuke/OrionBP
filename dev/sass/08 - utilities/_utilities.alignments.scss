@@ -38,6 +38,10 @@ Basic utility classes for aligning elements horizontally or vertically.
 // RESPONSIVE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
+/*
+Example: .u-align-left@xlg
+*/
+
 @each $bp-name, $bp-value in $breakpoints {
 
 	@include bp(#{$bp-name}) {

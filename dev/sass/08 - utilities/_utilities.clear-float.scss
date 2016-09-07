@@ -17,11 +17,17 @@ Utility class to clear floats
 // RESPONSIVE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
+/*
+Example: .u-clear@xlg
+*/
+
 @each $bp-name, $bp-value in $breakpoints	{
 
 	@include bp(#{$bp-name}) {
+
 		.u-clear\@#{$bp-name} {
 			clear: left !important;
 		}
+		
 	}
 }

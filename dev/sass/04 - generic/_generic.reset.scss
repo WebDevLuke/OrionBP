@@ -2,9 +2,10 @@
 // RESET
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-/**
- * A very simple reset that sits on top of Normalize.css.
- */
+/*
+A very simple reset that sits on top of Normalize.css.
+*/
+
 
 body,
 h1, h2, h3, h4, h5, h6,
@@ -13,30 +14,30 @@ dl, dd, ol, ul,
 figure,
 hr,
 fieldset, legend {
-  margin:  0;
-  padding: 0;
+	margin:  0;
+	padding: 0;
 }
 
 
-/**
- * Remove trailing margins from nested lists.
- */
+/*
+Remove trailing margins from nested lists.
+*/
 
 li > {
 
-  ol,
-  ul {
-    margin-bottom: 0;
-  }
+	ol,
+	ul {
+		margin-bottom: 0;
+	}
 
 }
 
 
-/**
- * Remove default table spacing.
- */
+/*
+Remove default table spacing.
+*/
 
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
