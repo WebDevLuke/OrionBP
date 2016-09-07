@@ -6,4 +6,4 @@
 Import breakpoints from `data/breakpoints.js` using SASSPort.
 */
 
-$breakpoints: require('dev/data/breakpoints.js');
+$breakpoints: require('dev/data/breakpoints.json');

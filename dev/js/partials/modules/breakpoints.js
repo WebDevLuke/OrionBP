@@ -12,7 +12,7 @@ var bp = (function(){
 		return newObj;
 	},
 
-		breakpoints = require("../../../data/breakpoints.js"),
+		breakpoints = require("../../../data/breakpoints.json"),
 		bpObj = convertToNum(breakpoints),
 		windowWidth;
 
