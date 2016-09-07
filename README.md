@@ -15,7 +15,7 @@ Orion takes inspiration and ideas from many sources, including but not limited t
 
 - CSS methodology [ITCSS](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture)
 - [Inuit CSS](https://github.com/inuitcss) is often a source of inspiration for me.
-- Naming methodologies including [BEM](http://getbem.com), [BEMIT](http://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further), and [OOCSS](http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces)
+- Naming methodologies such as [BEM](http://getbem.com), [BEMIT](http://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further), and [OOCSS](http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces)
 
 ## Table of contents
 
@@ -122,10 +122,6 @@ To tweak the settings for what happens during the build process open '/gulpfile.
 var minify = true;
 ```
 If set to `true`, all concatenated CSS and JavaScript will then be minified to reduce files sizes.
-
-If you wish to add any JS libraries such as jQuery, simply add these to `/dev/js/vendor/` and they will automatically be concatenated with the rest of the framework JS.
-
-The same goes for polyfills, but add them to `/dev/js/polyfills/` instead. 
 
 
 ## Creating builds
@@ -274,7 +270,6 @@ In the above, we give each div within the container a pseudo element and then ch
 ```
 Here we have seperated the breakpoint mixins from the element they're modifying. This is useful if a breakpoint needs to effect multiple elements on your page as you now have one use of a breakpoint mixin effecting many elements rather then many uses of the same breakpoint mixin. On large projects with lots of SASS this method is preferred as it allows better tracking of what elements are being changed at which breakpoints.
 
-<!-- [[View this example]](http://codepen.io/lukedidit/pen/qZWGaV) -->
 
 #### List of breakpoint mixins
 
@@ -285,7 +280,7 @@ Here we have seperated the breakpoint mixins from the element they're modifying.
 - Create a breakpoint which only triggers inbetween 2 breakpoints: `@include bpBetween($from, $to)` *Example: @include bpBetween(sm, md)*
 
 ## Breakpoint usage in JavaScript
-Within JavaScript it's also possible to check if a breakpoint has been reached using a function. As with SASS, the breakpoints are pulled directly from the data in `/dev/js/partials/config.js`
+Within JavaScript it's also possible to check if a breakpoint has been reached using a function. As with SASS, the breakpoints are pulled directly from the data in `/dev/data/breakpoints.json`
 
 ```sh
 if(bp.min("md")){
