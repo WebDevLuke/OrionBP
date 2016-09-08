@@ -7,7 +7,7 @@ Simple inline list with content stacked left or right horizontally
 */
 
 
-// BASIC USAGE
+// BASE & ELEMENTS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
@@ -18,8 +18,87 @@ Simple inline list with content stacked left or right horizontally
 </ul>
 */
 
+.o-list-inline {
+	list-style:none;
+	margin-left:0;
+}
 
-// MODIFIERS
+.o-list-inline__item {
+	display:inline-block;
+}
+
+
+// SPACING VARIANT MODIFIERS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Adds padding between each item. Can also be used in conjunction with delimited modifier
+*/
+
+/*
+<ul class="o-list-inline o-list-inline--spacing">
+	<li class="o-list-inline__item">CONTENT</li>
+	<li class="o-list-inline__item">CONTENT</li>
+	<li class="o-list-inline__item">CONTENT</li>
+</ul>
+*/
+
+/*
+[1] Remove the last list items spacing.
+*/
+
+.o-list-inline--spacing {
+	.o-list-inline__item:after {
+		content:"";
+		padding:0 $spacing-unit;
+	}
+	.o-list-inline__item:last-child:after {
+		display:none; /* [1] */
+	}
+}
+
+.o-list-inline--spacing-tiny {
+	.o-list-inline__item:after {
+		content:"";
+		padding:0 $spacing-unit-tiny;
+	}
+	.o-list-inline__item:last-child:after {
+		display:none; /* [1] */
+	}
+}
+
+.o-list-inline--spacing-small {
+	.o-list-inline__item:after {
+		content:"";
+		padding:0 $spacing-unit-small;
+	}
+	.o-list-inline__item:last-child:after {
+		display:none; /* [1] */
+	}
+}
+
+.o-list-inline--spacing-large {
+	.o-list-inline__item:after {
+		content:"";
+		padding:0 $spacing-unit-large;
+	}
+	.o-list-inline__item:last-child:after {
+		display:none; /* [1] */
+	}
+}
+
+.o-list-inline--spacing-huge {
+	.o-list-inline__item:after {
+		content:"";
+		padding:0 $spacing-unit-huge;
+	}
+	.o-list-inline__item:last-child:after {
+		display:none; /* [1] */
+	}
+}
+
+
+// DELIMITED MODIFIER
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
@@ -34,28 +113,25 @@ Seperate individual list items with the character listed in the $list-inline-del
 </ul>
 */
 
-
-// SASS
-//--------------------------------------------------------------------------------------------------------------------------------------
+/*
+[1] Remove the default arbitory whitespace between text and delimiter.
+[2] Remove the last list items delimiter.
+*/
 
 $list-inline-delimiter: "|";
 
-.o-list-inline {
-	list-style:none;
-	margin-left:0;
-}
-
-.o-list-inline__item {
-	display:inline-block;
-}
-
 .o-list-inline--delimited {
+	font-size: 0; /* [1] */
+
+	.o-list-inline__item {
+		font-size: 1rem; /* [1] */
+	}
+
 	.o-list-inline__item:after {
 		content: $list-inline-delimiter;
-		margin:0 $spacing-unit-xsm;
 	}
+
 	.o-list-inline__item:last-child:after {
-		display:none;
+		display:none; /* [2] */
 	}
 }
-

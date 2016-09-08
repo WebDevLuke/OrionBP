@@ -8,7 +8,7 @@ http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-o
 */
 
 
-// BASIC USAGE
+// BASE & ELEMENTS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
@@ -20,8 +20,27 @@ http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-o
 </div>
 */
 
+.o-media {
+	@include clearfix();
+	box-sizing:border-box;
+}
 
-// MODIFIERS
+.o-media__image {
+	float:left;
+	margin-right:$spacing-unit;
+
+	img {
+		display:block;
+	}
+}
+
+.o-media__body {
+	@include clearfix(); 
+	overflow:hidden;
+}
+
+
+// REVERSE ORDER MODIFIER
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
@@ -37,6 +56,14 @@ Reverse the position of text and image
 </div>
 */
 
+.o-media--reverse > .o-media__image {
+	float:right;
+	margin-left:$spacing-unit;
+}
+
+
+// TEXT WRAP MODIFIER
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
 Wrap the text around the image
@@ -51,37 +78,63 @@ Wrap the text around the image
 </div>
 */
 
+.o-media--wrap > .o-media__body {
+	overflow:visible;
+}
 
-// SASS
+
+// SPACING VARIANT MODIFIERS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-.o-media {
-	@include clearfix();
-	box-sizing:border-box;
-	margin-bottom:$spacing-unit-sm;
-}
+/*
+Alter the spacing in between image and text
+*/
 
-.o-media__image {
-	float:left;
-	margin: 0 $spacing-unit-sm 0 0;
+/*
+<div class="o-media o-media--spacing-tiny">
+	<img src="" alt="" class="o-media__image">
+	<p class="o-media__body">
+		CONTENT
+	</p>
+</div>
+*/
 
-	img {
-		display:block;
+.o-media-spacing-tiny {
+	& > .o-media__image {
+		margin-right:$spacing-unit-tiny;
 	}
 
-	// Modifier class to put image on right instead of left
-	.o-media--reverse & {
-		float:right;
-		margin: 0 0 0 $spacing-unit-sm;
+	&.o-media--reverse > .o-media__image {
+		margin-left:$spacing-unit-tiny;
 	}
 }
 
-.o-media__body {
-	@include clearfix(); 
-	overflow:hidden;
+.o-media-spacing-small {
+	& > .o-media__image {
+		margin-right:$spacing-unit-small;
+	}
 
-	// Modifier class for media body to make text wrap around image
-	.o-media--wrap & {
-		overflow:visible;
-	}	
+	&.o-media--reverse > .o-media__image {
+		margin-left:$spacing-unit-small;
+	}
+}
+
+.o-media-spacing-large {
+	& > .o-media__image {
+		margin-right:$spacing-unit-large;
+	}
+
+	&.o-media--reverse > .o-media__image {
+		margin-left:$spacing-unit-large;
+	}
+}
+
+.o-media-spacing-huge {
+	& > .o-media__image {
+		margin-right:$spacing-unit-huge;
+	}
+
+	&.o-media--reverse > .o-media__image {
+		margin-left:$spacing-unit-huge;
+	}
 }

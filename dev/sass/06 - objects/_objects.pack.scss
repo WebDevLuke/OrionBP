@@ -1,0 +1,96 @@
+//--------------------------------------------------------------------------------------------------------------------------------------
+// FLAG MEDIA OBJECT
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+The pack object simply causes any number of elements pack up horizontally to automatically
+fill an equal, fluid width of their parent.
+
+https://css-tricks.com/fixing-tables-long-strings/
+*/
+
+
+// BASE & ELEMENTS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+<ul class="o-pack">
+	<li class="o-pack__item">CONTENT</li>
+	<li class="o-pack__item">CONTENT</li>
+	<li class="o-pack__item">CONTENT</li>
+</ul>
+*/
+
+/*
+[1] Fill all available space.
+[2] Cause children to be automatically equally sized.
+[3] Remove any leftover styling from lists.
+[4] Cause children to adopt table-like structure.
+*/
+
+.o-pack {
+	width: 100%; /* [1] */
+	display: table;
+	table-layout: fixed; /* [2] */
+	margin-left:0; /* [3] */
+}
+
+.o-pack__item {
+	display: table-cell; /* [4] */
+}
+
+
+// REVERSE PACK ORDER MODIFIER
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+<ul class="o-pack o-pack--reverse">
+	<li class="o-pack__item">CONTENT</li>
+	<li class="o-pack__item">CONTENT</li>
+	<li class="o-pack__item">CONTENT</li>
+</ul>
+*/
+
+.o-pack--reverse {
+	direction: rtl;
+	> .o-pack__item {
+		direction: ltr;
+		text-align:left;
+	}
+}
+
+
+// SPACING VARIANT MODIFIERS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Add spacing in between pack items
+*/
+
+/*
+<ul class="o-pack o-pack--xsm">
+	<li class="o-pack__item">CONTENT</li>
+	<li class="o-pack__item">CONTENT</li>
+	<li class="o-pack__item">CONTENT</li>
+</ul>
+*/
+
+.o-pack--spacing {
+	border-spacing: $spacing-unit;
+}
+
+.o-pack--spacing-tiny {
+	border-spacing: $spacing-unit-tiny;
+}
+
+.o-pack--spacing-small {
+	border-spacing: $spacing-unit-small;
+}
+
+.o-pack--spacing-large {
+	border-spacing: $spacing-unit-large;
+}
+
+.o-pack--spacing-huge {
+	border-spacing: $spacing-unit-huge;
+}

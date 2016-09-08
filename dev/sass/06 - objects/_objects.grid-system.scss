@@ -7,7 +7,7 @@ Grid system container, columns and optional rows. Specify responsive breakpoints
 */
 
 
-// BASIC USAGE
+// BASE & ELEMENTS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
@@ -17,31 +17,10 @@ Grid system container, columns and optional rows. Specify responsive breakpoints
 	<div class="o-col-4 o-col-6@md"></div>
 </div>
 */
-
-
-// MODIFIERS
-//--------------------------------------------------------------------------------------------------------------------------------------
-
-/*
-Makes the container full width
-*/
-
-/*
-<div class="o-container">
-	<div class="o-col-4 o-col-1@md"></div>
-	<div class="o-col-4 o-col-5@md"></div>
-	<div class="o-col-4 o-col-6@md"></div>
-</div>
-*/
-
-
-// SET BASE STYLES
-//--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
 This approach avoids repetition of non-dynamic styles across responsive classes
 */
-
 
 [class*="o-container"] {
 	position:relative;
@@ -52,10 +31,6 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 [class*="o-col"] {
 	float: left;
 	clear:none;
-}
-
-[class*="o-row"] {
-	@include clearfix();
 }
 
 
@@ -85,6 +60,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 	.o-row {
 		margin-left:-$gutter / 2;
 		margin-right:-$gutter / 2;
+		@include clearfix();
 	}
 }
 

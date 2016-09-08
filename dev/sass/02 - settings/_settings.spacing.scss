@@ -3,15 +3,15 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Set spacing unit variables based on the `$global-line-height` variable to keep baseline intact
+Set spacing unit variables based on the `$global-line-height` variable to keep baseline intact.
+We don't use variables featuring xs, sm, md, lg etc as to not confuse with responsive breakpoints.
 */
 
 // Standard spacing unit
 $spacing-unit: round($global-line-height);
 
 // Create ready made spacing unit variants
-$spacing-unit-xsm: ($spacing-unit * 0.25); // Default: 6px
-$spacing-unit-sm: ($spacing-unit * 0.5); // Default: 12px
-$spacing-unit-lg: ($spacing-unit * 2); // Default: 48px
-$spacing-unit-xlg: ($spacing-unit * 3); // Default: 72px
-$spacing-unit-xxlg: ($spacing-unit * 4); // Default: 96px
+$spacing-unit-tiny: ($spacing-unit * 0.25); // Default: 6px
+$spacing-unit-small: ($spacing-unit * 0.5); // Default: 12px
+$spacing-unit-large: ($spacing-unit * 2); // Default: 48px
+$spacing-unit-huge: ($spacing-unit * 4); // Default: 96px

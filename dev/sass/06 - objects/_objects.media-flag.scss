@@ -8,7 +8,7 @@ http://csswizardry.com/2013/05/the-flag-object/
 */
 
 
-// BASIC USAGE
+// BASE & ELEMENTS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
@@ -22,8 +22,32 @@ http://csswizardry.com/2013/05/the-flag-object/
 </div>
 */
 
+.o-flag {
+	display: table;
+	width: 100%; 
+	box-sizing:border-box;
+}
 
-// MODIFIERS
+.flag__body {
+	width: 100%;
+}
+
+.o-flag__image, .o-flag__body {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.o-flag__image {
+	padding-right:$spacing-unit;
+
+	img {
+		display: block;
+		max-width: none;
+	}
+}
+
+
+// REVERSE ORDER MODIFIER
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
@@ -41,6 +65,13 @@ Reverse the padding for the image. Requires you to manually switch position of i
 </div>
 */
 
+.o-flag--reverse > .o-flag__image {
+	padding-left:$spacing-unit;
+}
+
+
+// FLAG ALIGNMENT MODIFIERS
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
 Change the vertical alignment of flag contents. Default: middle.
@@ -57,46 +88,75 @@ Change the vertical alignment of flag contents. Default: middle.
 </div>
 */
 
+.o-flag--top {
+	> .o-flag__image,
+	> .o-flag__body {
+		vertical-align: top;
+	}
+}
 
-// SASS
+.o-flag--bottom {
+	> .o-flag__image,
+	> .o-flag__body {
+		vertical-align: bottom;
+	}
+}
+
+
+// SPACING VARIANT MODIFIERS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-.o-flag {
-	display: table;
-	width: 100%; 
-	box-sizing:border-box;
-	margin-bottom:$spacing-unit-sm;
-}
+/*
+Alter the spacing in between image and text
+*/
 
-.flag__body {
-	width: 100%;
-}
+/*
+<div class="o-flag o-flag--spacing-tiny">
+	<div class="o-flag__body">
+		CONTENT
+	</div>
+	<div class="o-flag__image">
+		<img src="" alt="">
+	</div>
+</div>
+*/
 
-.o-flag__image, .o-flag__body {
-	display: table-cell;
-	vertical-align: middle;
-
-	.o-flag--top & {
-	vertical-align: top;
+.o-flag-spacing-tiny {
+	& > .o-flag__image {
+		padding-right:$spacing-unit-tiny;
 	}
 
-	.o-flag--bottom & {
-	vertical-align: bottom;
-	}
-}
-
-.o-flag__image {
-	padding: 0 $spacing-unit-sm 0 0;
-
-	img {
-		display: block;
-		max-width: none;
-	}
-
-	.o-flag--reverse & {
-		padding: 0 0 0 $spacing-unit-sm;
+	&.o-flag--reverse > .o-flag__image {
+		padding-left:$spacing-unit-tiny;
 	}
 }
 
+.o-flag-spacing-small {
+	& > .o-flag__image {
+		padding-right:$spacing-unit-small;
+	}
 
+	&.o-flag--reverse > .o-flag__image {
+		padding-left:$spacing-unit-small;
+	}
+}
 
+.o-flag-spacing-large {
+	& > .o-flag__image {
+		padding-right:$spacing-unit-large;
+	}
+
+	&.o-flag--reverse > .o-flag__image {
+		padding-left:$spacing-unit-large;
+	}
+}
+
+.o-flag-spacing-huge {
+	& > .o-flag__image {
+		padding-right:$spacing-unit-huge;
+	}
+
+	&.o-flag--reverse > .o-flag__image {
+		padding-left:$spacing-unit-huge;
+	}
+}

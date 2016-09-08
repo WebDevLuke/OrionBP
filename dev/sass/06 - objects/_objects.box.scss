@@ -1,0 +1,59 @@
+//--------------------------------------------------------------------------------------------------------------------------------------
+// BOX OBJECT
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Boxes off content
+http://csswizardry.com/2011/10/the-island-object/
+*/
+
+
+// BASE & ELEMENTS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+<div class="o-box">
+	CONTENT
+</div>
+*/
+
+/*
+[1] So we can apply the `.o-box` class to naturally-inline elements.
+[2] If a box is extended to have a bottom margin then remove if last-child to prevent extending container margin
+*/
+
+.o-box {
+	@include clearfix();
+	display: block; /* [1] */
+	padding: $spacing-unit;
+
+	> :last-child {
+		margin-bottom: 0; /* [2] */
+	}
+}
+
+
+// SPACING VARIANT MODIFIERS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+<div class="o-box o-box--tiny">
+	CONTENT
+</div>
+*/
+
+.o-box--tiny {
+  padding: $spacing-unit-tiny;
+}
+
+.o-box--small {
+  padding: $spacing-unit-small;
+}
+
+.o-box--large {
+  padding: $spacing-unit-large;
+}
+
+.o-box--huge {
+  padding: $spacing-unit-huge;
+}
