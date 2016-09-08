@@ -14,7 +14,7 @@ $grid: (
 		"gutter": 30px,
 		"containerPadding": 30px
 	),
-	'morph': (
+	"morph": (
 		"xlg" : (
 			"max-width": 1600px,
 			"columns": 16,
@@ -42,4 +42,3 @@ $containerPadding: map-get($gridDefault, "containerPadding");
 @if map-has-key($grid, "morph") {
 	$gridResponsive: map-get($grid, "morph");
 }
-
