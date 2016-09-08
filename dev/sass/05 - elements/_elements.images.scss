@@ -3,11 +3,10 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-1. Fluid images for responsive purposes.
-2. Offset `alt` text from surrounding copy.
-3. Setting `vertical-align` removes the whitespace that appears under `img`
-		elements when they are dropped into a page as-is. Safer alternative to
-		using `display: block;`.
+[1] Fluid images for responsive purposes.
+[2] Offset `alt` text from surrounding copy.
+[3] Setting `vertical-align` removes the whitespace that appears under `img` elements when they are dropped into a page as-is.
+     Safer alternative to	using `display: block;`.
 */
 
 img {
@@ -17,7 +16,7 @@ img {
 }
 
 /*
-1. If a `width` and/or `height` attribute have been explicitly defined, let’s not make the image fluid.
+[1] If a `width` and/or `height` attribute have been explicitly defined, let’s not make the image fluid.
 */
 
 img[width], /* [1] */
