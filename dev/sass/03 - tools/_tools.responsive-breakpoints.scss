@@ -79,6 +79,10 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 	 
 		// If the key exists in the map
 		@if $value != null {
+
+			// Convert value to REM
+			$value: rem($value);
+
 			@if $extras {
 				@media (min-width: $value) and ($extras) {
 					@content;
@@ -108,6 +112,10 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 	 
 		// If the key exists in the map
 		@if $value != null {
+
+			// Convert value to REM
+			$value: rem($value);
+
 			@if $extras {
 				@media (max-width: $value) and ($extras) {
 					@content;
@@ -144,6 +152,11 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 	 
 		// If the key exists in the map
 		@if $from and $to != null {
+
+			// Convert values to REM
+			$from: rem($from);
+			$to: rem($to);
+
 			// Prints a media query based on the value
 			@media (min-width: $from) and (max-width: $to)	{
 				@content;

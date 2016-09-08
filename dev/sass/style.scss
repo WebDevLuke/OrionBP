@@ -39,7 +39,12 @@ Utilities – utilities and helper classes with ability to override anything whi
 @import "02 - settings/_settings.typography";
 @import "02 - settings/_settings.spacing";
 
-@import "03 - tools/*";
+// We import tools manually as its load order matters
+@import "03 - tools/_tools.clearfix";
+@import "03 - tools/_tools.font-size";
+@import "03 - tools/_tools.rem";
+@import "03 - tools/_tools.responsive-breakpoints";
+
 @import "04 - generic/*";
 @import "05 - elements/*";
 @import "06 - objects/*";
@@ -52,3 +57,9 @@ Utilities – utilities and helper classes with ability to override anything whi
 
 // Enable if wanting to check baseline grid (http://basehold.it)
 //@import url("http://basehold.it/24");
+
+@include bp(lg){
+	body {
+		background:red;
+	}
+}
