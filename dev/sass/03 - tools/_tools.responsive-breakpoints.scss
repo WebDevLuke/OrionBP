@@ -4,6 +4,9 @@
 
 /*
 Create media queries using breakpoints defined in `data/breakpoints.js`.
+
+Media queries are converted to EM to cover instances where users change font sizes, zoom in, base font size changed in html (https://zellwk.com/blog/media-query-units)
+
 */
 
 
@@ -74,7 +77,7 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 			$value: map-get($breakpoints, $breakpoint);
 		}
 		@else {
-			@error "`#{$breakpoint}` doesn't exist in `data/config.js`";
+			@error "`#{$breakpoint}` doesn't exist in `data/breakpoints.js`";
 		}
 	 
 		// If the key exists in the map
@@ -107,7 +110,7 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 			$value: map-get($breakpoints, $breakpoint);
 		}
 		@else {
-			@error "`#{$breakpoint}` doesn't exist in `data/config.js`";
+			@error "`#{$breakpoint}` doesn't exist in `data/breakpoints.js`";
 		}
 	 
 		// If the key exists in the map
@@ -140,14 +143,14 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 			$from: map-get($breakpoints, $from); 
 		}
 		@else {
-			@error "`#{$from}` doesn't exist in `data/config.js`"; 
+			@error "`#{$from}` doesn't exist in `data/breakpoints.js`"; 
 		}
 
 		@if map-has-key($breakpoints, $to) {
 			$to: map-get($breakpoints, $to); 
 		}
 		@else {
-			@error "`#{$to}` doesn't exist in `data/config.js`";
+			@error "`#{$to}` doesn't exist in `data/breakpoints.js`";
 		}
 	 
 		// If the key exists in the map
