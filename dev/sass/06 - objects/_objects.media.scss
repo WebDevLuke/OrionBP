@@ -59,6 +59,7 @@ Reverse the position of text and image
 .o-media--reverse > .o-media__image {
 	float:right;
 	margin-left:$spacing-unit;
+	margin-right:0;
 }
 
 
