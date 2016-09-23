@@ -10,22 +10,31 @@ Component classes for headings
 // BASE & ELEMENTS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
+/*
+<h1 class="c-heading-page">
+	CONTENT
+</h1>
+*/
+
 .c-heading-page {
 
 }
 
 
-// CONTEXT SPECIFIC STYLING
+// STATEFUL MODIFIER SAMPLE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-If a component needs to be positioned differently within another component add those styles here.
-These should be only implmentation based styles such as floats or positioning. None of these should change
-the cosmetics of the component.
+If a component needs to be positioned when nested within another component, create stateful modifiers here to
+declare that behavour.
 
-We use stateful classes rather than nesting to avoid violating the open/closed principle and to avoid future 
-complications if we need to extend the component.
+These stateful modifiers should only affect positioning (floats, positions etc) and should not affect the cosmetics
+of the component, which is the job of the regular modifier.
 
+The use of stateful modifiers rather than simple nesting is preferred as it doesn't change the 
+original component and violate the open/closed principle. It also leads to more readable HTML.
+
+https://en.wikipedia.org/wiki/Open/closed_principle
 http://csswizardry.com/2015/06/contextual-styling-ui-components-nesting-and-implementation-detail/
 */
 
