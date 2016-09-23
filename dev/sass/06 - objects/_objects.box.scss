@@ -37,23 +37,23 @@ http://csswizardry.com/2011/10/the-island-object/
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-<div class="o-box o-box--tiny">
+<div class="o-box o-box--spacing-tiny">
 	CONTENT
 </div>
 */
 
-.o-box--tiny {
+.o-box--spacing-tiny {
   padding: $spacing-unit-tiny;
 }
 
-.o-box--small {
+.o-box--spacing-small {
   padding: $spacing-unit-small;
 }
 
-.o-box--large {
+.o-box--spacing-large {
   padding: $spacing-unit-large;
 }
 
-.o-box--huge {
+.o-box--spacing-huge {
   padding: $spacing-unit-huge;
 }
