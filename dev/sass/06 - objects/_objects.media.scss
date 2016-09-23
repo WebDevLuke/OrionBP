@@ -100,7 +100,7 @@ Alter the spacing in between image and text
 </div>
 */
 
-.o-media-spacing-tiny {
+.o-media--spacing-tiny {
 	& > .o-media__image {
 		margin-right:$spacing-unit-tiny;
 	}
@@ -110,7 +110,7 @@ Alter the spacing in between image and text
 	}
 }
 
-.o-media-spacing-small {
+.o-media--spacing-small {
 	& > .o-media__image {
 		margin-right:$spacing-unit-small;
 	}
@@ -120,7 +120,7 @@ Alter the spacing in between image and text
 	}
 }
 
-.o-media-spacing-large {
+.o-media--spacing-large {
 	& > .o-media__image {
 		margin-right:$spacing-unit-large;
 	}
@@ -130,7 +130,7 @@ Alter the spacing in between image and text
 	}
 }
 
-.o-media-spacing-huge {
+.o-media--spacing-huge {
 	& > .o-media__image {
 		margin-right:$spacing-unit-huge;
 	}

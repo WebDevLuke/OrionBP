@@ -67,6 +67,7 @@ Reverse the padding for the image. Requires you to manually switch position of i
 
 .o-flag--reverse > .o-flag__image {
 	padding-left:$spacing-unit;
+	padding-right:0;
 }
 
 
@@ -121,7 +122,7 @@ Alter the spacing in between image and text
 </div>
 */
 
-.o-flag-spacing-tiny {
+.o-flag--spacing-tiny {
 	& > .o-flag__image {
 		padding-right:$spacing-unit-tiny;
 	}
@@ -131,7 +132,7 @@ Alter the spacing in between image and text
 	}
 }
 
-.o-flag-spacing-small {
+.o-flag--spacing-small {
 	& > .o-flag__image {
 		padding-right:$spacing-unit-small;
 	}
@@ -141,7 +142,7 @@ Alter the spacing in between image and text
 	}
 }
 
-.o-flag-spacing-large {
+.o-flag--spacing-large {
 	& > .o-flag__image {
 		padding-right:$spacing-unit-large;
 	}
@@ -151,7 +152,7 @@ Alter the spacing in between image and text
 	}
 }
 
-.o-flag-spacing-huge {
+.o-flag--spacing-huge {
 	& > .o-flag__image {
 		padding-right:$spacing-unit-huge;
 	}
