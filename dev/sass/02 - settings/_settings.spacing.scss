@@ -3,12 +3,12 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Set spacing unit variables based on the `$global-line-height` variable to keep baseline intact.
+Set REM spacing unit variables based on the `$global-line-height` variable to keep baseline intact.
 We don't use variables featuring xs, sm, md, lg etc as to not confuse with responsive breakpoints.
 */
 
 // Standard spacing unit
-$spacing-unit: round($global-line-height);
+$spacing-unit: round($global-line-height) / $global-font-size * 1rem;
 
 // Create ready made spacing unit variants
 $spacing-unit-tiny: ($spacing-unit * 0.25); // Default: 6px
