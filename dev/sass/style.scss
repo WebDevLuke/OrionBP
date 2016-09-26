@@ -28,6 +28,7 @@ Components – specific UI components. This is where majority of our work takes 
 Utilities – utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
 */
 
+
 // IMPORT ITCSS LAYERS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
@@ -40,7 +41,11 @@ Utilities – utilities and helper classes with ability to override anything whi
 @import "02 - settings/_settings.spacing";
 
 @import "03 - tools/*";
+
+// Manually import normalize.css to generic layer from node_modules
+@import "../../node_modules/normalize.css/normalize";
 @import "04 - generic/*";
+
 @import "05 - elements/*";
 @import "06 - objects/*";
 @import "07 - components/*";

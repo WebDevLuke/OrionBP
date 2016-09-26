@@ -52,6 +52,8 @@ var minify = false;
 |--------------------------------------------------------------------
 */
 
+// Delete any existing Dist folder so old files don't contaminate our new build
+
 gulp.task('deleteDist', function(){
 	return del('dist/');
 });
