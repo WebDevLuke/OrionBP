@@ -11,17 +11,35 @@ Component classes for headings
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-<h1 class="c-heading-page">
+<a href="/" class="c-btn">
 	CONTENT
-</h1>
+</a>
 */
 
-.c-heading-page {
+.c-btn {
 
 }
 
 
-// STATEFUL MODIFIER SAMPLE
+// REGULAR MODIFIER EXAMPLE
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+This is an example of a regular component modifier as per BEM naming convention
+*/
+
+/*
+<a href="/" class="c-btn c-btn--large">
+	CONTENT
+</a>
+*/
+
+.c-btn--large {
+
+}
+
+
+// STATEFUL MODIFIER EXAMPLE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
@@ -38,6 +56,6 @@ https://en.wikipedia.org/wiki/Open/closed_principle
 http://csswizardry.com/2015/06/contextual-styling-ui-components-nesting-and-implementation-detail/
 */
 
-.in-mycomponent.c-heading-page {
+.in-mycomponent.c-btn {
 
 }

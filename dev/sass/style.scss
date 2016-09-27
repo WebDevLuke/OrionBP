@@ -12,40 +12,32 @@ Email: luke@lukeharrison.net
 
 /*
 Vendors - 3rd Party CSS files which need to be dropped in and aren't on NPM or any other package manager.
-
 Settings – used with preprocessors and contain font, colors definitions, etc.
-
 Tools – globally used mixins and functions. It’s important not to output any CSS in the first 2 layers.
-
 Generic – reset and/or normalize styles, box-sizing definition, etc. This is the first layer which generates actual CSS.
-
 Elements – styling for bare HTML elements. These come with default styling from the browser so we can redefine them here.
-
-Objects – class-based selectors which define undecorated design patterns, for example media object known from OOCSS
-
-Components – specific UI components. This is where majority of our work takes place and our UI components are often composed of Objects and Components
-
-Utilities – utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
+Objects – class-based selectors which define undecorated design patterns, for example media object known from OOCSS.
+Components – specific UI components. This is where majority of our work takes place and our UI components are often composed of Objects and Components.
+Utilities – utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class.
 */
 
 
 // IMPORT ITCSS LAYERS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
+/*
+[1] We import settings manually as load order matters here
+[2] Manually import normalize.css into generic layer from node_modules
+*/
+
 @import "01 - vendors/*";
-
-// We import settings manually as its load order matters
-@import "02 - settings/_settings.breakpoints";
-@import "02 - settings/_settings.grid";
-@import "02 - settings/_settings.typography";
-@import "02 - settings/_settings.spacing";
-
+@import "02 - settings/_settings.breakpoints"; /* [1] */
+@import "02 - settings/_settings.grid"; /* [1] */
+@import "02 - settings/_settings.typography"; /* [1] */
+@import "02 - settings/_settings.spacing"; /* [1] */
 @import "03 - tools/*";
-
-// Manually import normalize.css to generic layer from node_modules
-@import "../../node_modules/normalize.css/normalize";
+@import "../../node_modules/normalize.css/normalize"; /* [2] */
 @import "04 - generic/*";
-
 @import "05 - elements/*";
 @import "06 - objects/*";
 @import "07 - components/*";
