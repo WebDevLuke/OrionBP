@@ -69,6 +69,9 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 
 // Mobile first
 @mixin bp($breakpoint, $extras: false) {
+
+	$value: null;
+
 	// Only if Responsive Layout
 	@if $responsive == true {
 
@@ -102,6 +105,9 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 
 // Desktop first
 @mixin bpMax($breakpoint, $extras: false) {
+
+	$value: null;
+
 	// Only if Responsive Layout
 	@if $responsive == true {
 
@@ -135,6 +141,9 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 
 // In between 2 breakpoints
 @mixin bpBetween($from, $to) {
+
+	$value: null;
+	
 	// Only if Responsive Layout
 	@if $responsive == true {
 
