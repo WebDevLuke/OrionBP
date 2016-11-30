@@ -122,6 +122,9 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 		// If the key exists in the map
 		@if $value != null {
 
+			// Add 1px to cover overflow clashes with other min media queries
+			$value: $value - 1px;
+
 			// Convert value to EM
 			$value: $value / $global-font-size * 1em;
 

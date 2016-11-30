@@ -35,6 +35,11 @@ var browserify = require("browserify");
 var source = require('vinyl-source-stream');
 var glob = require('glob');
 var streamify = require('gulp-streamify');
+// Used to generate svg icon system and to minify
+var svgstore = require('gulp-svgstore');
+var svgmin = require('gulp-svgmin');
+var path = require('path');
+var inject = require('gulp-inject');
 
 /*
 |--------------------------------------------------------------------
@@ -44,7 +49,7 @@ var streamify = require('gulp-streamify');
 
 // If minify is true then css & js will be minified
 // This is in case the code needs to be maintained by a less-technical developer
-var minify = false;
+var minify = true;
 
 /*
 |--------------------------------------------------------------------
@@ -56,17 +61,6 @@ var minify = false;
 
 gulp.task('deleteDist', function(){
 	return del('dist/');
-});
-
-/*
-|--------------------------------------------------------------------
-|  HTML
-|--------------------------------------------------------------------
-*/
-
-gulp.task('html', function() {
-	return gulp.src('./dev/html/*.html')
-	.pipe(gulp.dest('dist/'));
 });
 
 /*
@@ -88,6 +82,7 @@ gulp.task('sass', function () {
 	.pipe(gulp.dest('./dist/css/'))
 });
 
+
 /*
 |--------------------------------------------------------------------
 |  IMAGES
@@ -95,11 +90,45 @@ gulp.task('sass', function () {
 */
 
 // Image MIN & with CACHE to stop repeat compressed images
-gulp.task('images', function(){
-	return gulp.src('dev/img/*.+(png|jpg|gif|svg)')
+gulp.task('bitmap', function(){
+	return gulp.src('dev/img/*.+(png|jpg|gif)')
 	.pipe(cache(imagemin({optimizationLevel: 3, progressive: true})))
 	.pipe(gulp.dest('dist/img/'))
 });
+
+gulp.task('svg', function () {
+    var svgs = gulp
+        .src('dev/img/*.svg')
+        .pipe(svgmin(function (file) {
+            var prefix = path.basename(file.relative, path.extname(file.relative));
+            return {
+                plugins: [{
+                    cleanupIDs: {
+                        prefix: prefix + '-',
+                        minify: true
+                    }
+                }]
+            }
+        }))
+        .pipe(svgstore({ inlineSvg: true }));
+
+    function fileContents (filePath, file) {
+        return file.contents.toString();
+    }
+
+    return gulp
+        .src('dev/html/*.html')
+        .pipe(inject(svgs, { transform: fileContents }))
+        .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('images', function(){
+	runSequence(
+		"bitmap",
+		"svg"
+	);
+});
+
 
 /*
 |--------------------------------------------------------------------
@@ -146,6 +175,30 @@ gulp.task('js', function(){
 		"js-copy"
 	);
 });
+
+
+/*
+|--------------------------------------------------------------------
+|  HTML
+|--------------------------------------------------------------------
+*/
+
+gulp.task('html-copy', function() {
+	return gulp.src('./dev/html/*.html')
+	.pipe(gulp.dest('dist/'));
+});
+
+/*
+HTML task need to also run SVG task as SVG task copies master file into html document
+*/
+
+gulp.task('html', function(){
+	runSequence(
+		"html-copy",
+		"svg"
+	);
+});
+
 
 /*
 |--------------------------------------------------------------------

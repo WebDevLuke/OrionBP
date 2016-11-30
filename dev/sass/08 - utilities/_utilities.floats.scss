@@ -1,16 +1,24 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
-// CLEAR FLOAT CLASSES
+// FLOAT CLASSES
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Utility class to clear floats
+Utility class for floats
 */
 
 // STANDARD
 //--------------------------------------------------------------------------------------------------------------------------------------
 
+.u-float-left {
+	float:left !important;
+}
+
+.u-float-right {
+	float:right !important;
+}
+
 .u-clear {
-	clear: left !important;
+	clear: both !important;
 }
 
 
@@ -25,8 +33,16 @@ Example: .u-clear@xlg
 
 	@include bp(#{$bp-name}) {
 
+		.u-float-left\@#{$bp-name} {
+			float:left !important;
+		}
+
+		.u-float-right\@#{$bp-name} {
+			float:right !important;
+		}
+
 		.u-clear\@#{$bp-name} {
-			clear: left !important;
+			clear: both !important;
 		}
 		
 	}
