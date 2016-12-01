@@ -26,11 +26,13 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 	position:relative;
 	margin:0px auto;
 	@include clearfix();
+	box-sizing:content-box;
 }
 
 [class*="o-col"] {
 	float: left;
 	clear:none;
+	box-sizing:border-box;
 }
 
 
@@ -68,7 +70,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 // CREATE COLUMNS MIXIN
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-@mixin create_columns($prefix, $responsive, $maxWidth, $columns, $gutter) {
+@mixin create_columns($suffix, $responsive, $maxWidth, $columns, $gutter) {
 
 	// Calculate single column width in pixels
 	$widthPX: $maxWidth / $columns;
@@ -86,10 +88,11 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 			$widthPercentage: $widthPercentageSingle * $i;
 
 			// Example: o-col-6@md
-			.o-col-#{$i}#{$prefix} {
+			.o-col-#{$i}#{$suffix} {
 				width: $widthPercentage;
 				padding-left:$gutter / 2;
 				padding-right:$gutter / 2;
+				clear:none;
 			}
 
 		}
@@ -99,7 +102,8 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 			.o-col-#{$i} {
 				width: $widthPX;
 				padding-left: $gutter / 2;
-				padding-right: $gutter / 2; 
+				padding-right: $gutter / 2;
+				clear:none; 
 			}
 		}
 	}
@@ -109,7 +113,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 // CREATE COLUMN OFFSETS  MIXIN
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-@mixin create_offsets($prefix, $responsive, $maxWidth, $columns, $gutter) {
+@mixin create_offsets($suffix, $responsive, $maxWidth, $columns, $gutter) {
 
 	// Calculate single column width in pixels
 	$widthPX: $maxWidth / $columns;
@@ -127,17 +131,27 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 			$widthPercentage: $widthPercentageSingle * $i;
 
 			// Example u-col-offset-4@md
-			.u-col-offset-#{$i}#{$prefix}	{
+			.o-col-offset-#{$i}#{$suffix}	{
 				margin-left:$widthPercentage !important;
 			}
 
 		}
 		@else {
 			// Example u-col-offset-4
-			.u-col-offset-#{$i}	{
+			.o-col-offset-#{$i}	{
 				margin-left:$widthPX !important;
 			}
 		}
+	}
+}
+
+
+// CREATE GRID UTILITY CLASSES
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@mixin create_utilities($suffix) {
+	.o-col-clear#{$suffix} {
+		clear:both;
 	}
 }
 
@@ -149,6 +163,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 @include create_row($gutter);
 @include create_columns(null, $responsive, $maxWidth, $columns, $gutter);
 @include create_offsets(null, $responsive, $maxWidth, $columns, $gutter);
+@include create_utilities(null);
 
 
 // GENERATE RESPONSIVE CONTAINER AND GRID CLASSES
@@ -179,5 +194,14 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 	@include bp(#{$bp-name}) {
 		@include create_columns(\@#{$bp-name}, $responsive, $maxWidth, $columns, $gutter);
 		@include create_offsets(\@#{$bp-name}, $responsive, $maxWidth, $columns, $gutter);
+		@include create_utilities(\@#{$bp-name});	
 	}
+}
+
+
+// LARGE CONTAINER MODIFIER
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+.o-container--large {
+	max-width:1160px;
 }
