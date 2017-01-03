@@ -1,0 +1,31 @@
+//------------------------------------------------------------------------------------------------------------------------------------
+// GENERAL INPUT STYLES
+//------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Define some basic spacing for input elements
+*/
+
+// Remove spinners/arrows for number input
+input[type='number'] {
+	-moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+
+// VALIDATION DEFAULTS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+[1] Remove firefox blur on invalid elements
+[2] Removes outline on IE, Edge
+*/
+
+input:invalid, select:invalid, textarea:invalid {
+	box-shadow:none; /* [1] */
+	outline:none; /* [2] */
+}
