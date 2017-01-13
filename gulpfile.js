@@ -22,6 +22,8 @@ var rename = require("gulp-rename");
 var gulpif = require('gulp-if');
 // Used to allow SASS to require JSON data
 var sassport = require('gulp-sassport');
+// Used to remove unused CSS styles post compile
+var uncss = require('gulp-uncss');
 // Used to create synchronous build tasks
 var runSequence = require('run-sequence');
 // Used to pipe JSON data into Jade
@@ -69,6 +71,8 @@ gulp.task('deleteDist', function(){
 |--------------------------------------------------------------------
 */
 
+// Compile SASS, add autoprefixer and filter out unused CSS styles
+// That way we can have unlimited utility classes and only have the ones we're actually using in our compiled CSS file
 gulp.task('sass', function () {
 	return gulp.src('dev/sass/*.scss')
 	.pipe(sassGlob())
@@ -78,6 +82,9 @@ gulp.task('sass', function () {
 	.pipe(autoprefixer({
 		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
 		cascade: false
+	}))
+	.pipe(uncss({
+	    html: ['dist/*.html']
 	}))
 	.pipe(gulp.dest('./dist/css/'))
 });
@@ -91,35 +98,37 @@ gulp.task('sass', function () {
 
 // Image MIN & with CACHE to stop repeat compressed images
 gulp.task('bitmap', function(){
-	return gulp.src('dev/img/*.+(png|jpg|gif)')
-	.pipe(cache(imagemin({optimizationLevel: 3, progressive: true})))
-	.pipe(gulp.dest('dist/img/'))
+	gulp.src('dev/src/asset/img/*.+(png|jpg|gif)')
+	.pipe(imagemin({optimizationLevel: 3, progressive: true}))
+	.pipe(gulp.dest('./dist/src/asset/img/'));
 });
 
+// Compile all SVG icons into one large svg icon and inject as inline svg into page header
+// We can then directly reference these icons without making an extra request
 gulp.task('svg', function () {
-    var svgs = gulp
-        .src('dev/img/*.svg')
-        .pipe(svgmin(function (file) {
-            var prefix = path.basename(file.relative, path.extname(file.relative));
-            return {
-                plugins: [{
-                    cleanupIDs: {
-                        prefix: prefix + '-',
-                        minify: true
-                    }
-                }]
-            }
-        }))
-        .pipe(svgstore({ inlineSvg: true }));
+		var svgs = gulp
+				.src('dev/src/asset/img/*.svg')
+				.pipe(svgmin(function (file) {
+						var prefix = path.basename(file.relative, path.extname(file.relative));
+						return {
+								plugins: [{
+										cleanupIDs: {
+												prefix: prefix + '-',
+												minify: true
+										}
+								}]
+						}
+				}))
+				.pipe(svgstore({ inlineSvg: true }));
 
-    function fileContents (filePath, file) {
-        return file.contents.toString();
-    }
+		function fileContents (filePath, file) {
+				return file.contents.toString();
+		}
 
-    return gulp
-        .src('dev/html/*.html')
-        .pipe(inject(svgs, { transform: fileContents }))
-        .pipe(gulp.dest('dist/'));
+		return gulp
+				.src('dist/*.html')
+				.pipe(inject(svgs, { transform: fileContents }))
+				.pipe(gulp.dest('dist/'));
 });
 
 gulp.task('images', function(){
@@ -189,13 +198,15 @@ gulp.task('html-copy', function() {
 });
 
 /*
-HTML task need to also run SVG task as SVG task copies master file into html document
+HTML task need to also run SVG task as SVG task copies master file into html document.
+It also needs to run SASS task as new CSS classes may have been used which need to be added to the compiled CSS file
 */
 
 gulp.task('html', function(){
 	runSequence(
 		"html-copy",
-		"svg"
+		"svg",
+		"sass"
 	);
 });
 

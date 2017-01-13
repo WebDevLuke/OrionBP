@@ -34,6 +34,20 @@ Basic utility classes for aligning elements horizontally or vertically.
 	vertical-align:bottom !important;
 }
 
+.u-align-center-block {
+	margin-left:auto !important;
+	margin-right:auto !important;
+}
+
+.u-align-center-absolute {
+	position:absolute !important;
+	top:0 !important;
+	bottom:0 !important;
+	left:0 !important;
+	right:0 !important;
+	margin:auto !important;
+}
+
 
 // RESPONSIVE
 //--------------------------------------------------------------------------------------------------------------------------------------
@@ -68,6 +82,20 @@ Example: .u-align-left@xlg
 
 		.u-vertical-align-bottom\@#{$bp-name} {
 			vertical-align:bottom !important;
+		}
+
+		.u-align-center-block\@#{$bp-name} {
+			margin-left:auto !important;
+			margin-right:auto !important;
+		}
+
+		.u-align-center-absolute\@#{$bp-name} {
+			position:absolute !important;
+			top:0 !important;
+			bottom:0 !important;
+			left:0 !important;
+			right:0 !important;
+			margin:auto !important;
 		}
 	}
 }
