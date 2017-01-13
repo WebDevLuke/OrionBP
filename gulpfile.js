@@ -95,6 +95,29 @@ gulp.task('sass', function () {
 	.pipe(gulp.dest('./dist/css/'))
 });
 
+gulp.task('uncss', function () {
+	return gulp.src('dist/css/*.css')
+	.pipe(uncss({
+		html: ['dist/*.html'],
+		ignore: [
+			/\.is-*/,
+			/\.has-*/,
+			/\.in-*/	
+		]
+	}))
+	.pipe(gulp.dest('./dist/css/'))
+});
+
+
+// Create seperate sass build task which runs standard SASS functions followed by UNCSS
+// This will be used on Build task. It won't be used on watch task to speed things up.
+gulp.task('sass-build', function(){
+	runSequence(
+		"sass",
+		"uncss"
+	);
+});
+
 
 /*
 |--------------------------------------------------------------------
@@ -267,6 +290,6 @@ gulp.task('build',function() {
 		// Delete Dist Folder
 		"deleteDist",	
 		// Run other tasks asynchronously 
-		["html", "images", "sass", "js", "copy"]
+		["html", "images", "sass-build", "js", "copy"]
 	);
 });
