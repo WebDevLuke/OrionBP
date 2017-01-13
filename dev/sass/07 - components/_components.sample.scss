@@ -39,6 +39,24 @@ This is an example of a regular component modifier as per BEM naming convention
 }
 
 
+// STATEFUL MODIFIER EXAMPLE
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+This is an example of a component with styles which appear following the addition of a stateful class
+*/
+
+/*
+<a href="/" class="c-btn is-active">
+	CONTENT
+</a>
+*/
+
+.c-btn.is-active {
+
+}
+
+
 // NESTED MODIFIER EXAMPLE
 //--------------------------------------------------------------------------------------------------------------------------------------
 

@@ -1,0 +1,31 @@
+//--------------------------------------------------------------------------------------------------------------------------------------
+// OVERFLOW UTILITY
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+A simple utility class to add overflow styles
+*/
+
+
+// STANDARD
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+.u-overflow-visible {
+	overflow:visible !important;
+}
+
+.u-overflow-hidden {
+	overflow:hidden !important;
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		.u-overflow-visible\@#{$bp-name} {
+			overflow:visible !important;
+		}
+
+		.u-overflow-hidden\@#{$bp-name} {
+			overflow:hidden !important;
+		}
+	}
+}

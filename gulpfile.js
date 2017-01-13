@@ -73,6 +73,7 @@ gulp.task('deleteDist', function(){
 
 // Compile SASS, add autoprefixer and filter out unused CSS styles
 // That way we can have unlimited utility classes and only have the ones we're actually using in our compiled CSS file
+// We also tell uncss to ignore styles with stateful modifiers as these are typically added into the DOM dynamically which UNCSS is unable to detect
 gulp.task('sass', function () {
 	return gulp.src('dev/sass/*.scss')
 	.pipe(sassGlob())
@@ -84,7 +85,12 @@ gulp.task('sass', function () {
 		cascade: false
 	}))
 	.pipe(uncss({
-	    html: ['dist/*.html']
+		html: ['dist/*.html'],
+		ignore: [
+			/\.is-*/,
+			/\.has-*/,
+			/\.in-*/	
+		]
 	}))
 	.pipe(gulp.dest('./dist/css/'))
 });

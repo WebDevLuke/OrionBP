@@ -1,0 +1,42 @@
+//--------------------------------------------------------------------------------------------------------------------------------------
+// POSITION UTILITY
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+A simple utility class to position styles
+*/
+
+
+// STANDARD
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+.u-position-relative {
+	position:relative !important;
+}
+
+.u-position-absolute {
+	position:absolute !important;
+}
+
+.u-position-fixed {
+	position:fixed !important;
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+
+	@include bp(#{$bp-name}) {
+
+		.u-position-relative\@#{$bp-name} {
+			position:relative !important;
+		}
+
+		.u-position-absolute\@#{$bp-name} {
+			position:absolute !important;
+		}
+
+		.u-position-fixed\@#{$bp-name} {
+			position:fixed !important;
+		}
+
+	}
+}

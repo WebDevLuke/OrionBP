@@ -1,0 +1,86 @@
+//--------------------------------------------------------------------------------------------------------------------------------------
+// BORDERS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Basic classes for common border configurations. Colours listed in settings.colors.
+*/
+
+
+// BORDER TYPE
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+.u-border-thin {
+	border-width:rem(1px) !important;
+	border-style:solid !important;
+	border-color:black !important;
+}
+
+.u-border-top-thin {
+	border:0 !important;
+	border-top-width:rem(1px) !important;
+	border-style:solid !important;
+	border-color:black !important;
+}
+
+.u-border-right-thin {
+	border:0 !important;
+	border-right-width:rem(1px) !important;
+	border-style:solid !important;
+	border-color:black !important;
+}
+
+.u-border-bottom-thin {
+	border:0 !important;
+	border-bottom-width:rem(1px) !important;
+	border-style:solid !important;
+	border-color:black !important;
+}
+
+.u-border-left-thin {
+	border:0 !important;
+	border-left-width:rem(1px) !important;
+	border-style:solid !important;
+	border-color:black !important;
+}
+
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+
+		.u-border-thin\@#{$bp-name}  {
+			border-width:rem(1px) !important;
+			border-style:solid !important;
+			border-color:black !important;
+		}
+
+		.u-border-top-thin\@#{$bp-name}  {
+			border:0 !important;
+			border-top-width:rem(1px) !important;
+			border-style:solid !important;
+			border-color:black !important;
+		}
+
+		.u-border-right-thin\@#{$bp-name}  {
+			border:0 !important;
+			border-right-width:rem(1px) !important;
+			border-style:solid !important;
+			border-color:black !important;
+		}
+
+		.u-border-bottom-thin\@#{$bp-name}  {
+			border:0 !important;
+			border-bottom-width:rem(1px) !important;
+			border-style:solid !important;
+			border-color:black !important;
+		}
+
+		.u-border-left-thin\@#{$bp-name}  {
+			border:0 !important;
+			border-left-width:rem(1px) !important;
+			border-style:solid !important;
+			border-color:black !important;
+		}	
+
+	}
+}

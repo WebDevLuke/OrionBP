@@ -27,7 +27,7 @@ Basic utility classes for hiding and displaying elements.
 	width:100%;
 }
 
-.u-display-table {
+.u-display-table-cell {
 	display:table-cell !important;
 	width:100%;
 }
@@ -45,7 +45,7 @@ Example: .u-hide@xlg
 	@include bp(#{$bp-name}) {
 
 		.u-hide\@#{$bp-name} {
-			display:none;
+			display:none !important;
 		}
 
 		.u-display-block\@#{$bp-name} {

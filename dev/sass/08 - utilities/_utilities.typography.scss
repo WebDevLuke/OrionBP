@@ -24,10 +24,9 @@ Basic utility classes for typography.
 	font-weight:bold !important;
 }
 
-/* Create a responsive version for edge-case use */
 @each $bp-name, $bp-value in $breakpoints {
-	@include bp(#{$bp-name}) {
 
+	@include bp(#{$bp-name}) {
 		.u-bold\@#{$bp-name} {
 			font-weight:bold !important;
 		}
@@ -36,10 +35,10 @@ Basic utility classes for typography.
 			white-space:nowrap !important;
 		}
 
+		/* Slightly increase text size and make bold to make stand out */
 		.u-strong\@#{$bp-name} {
 			font-size:1.111em !important;
 			font-weight:bold !important;
 		}
-
 	}
 }
