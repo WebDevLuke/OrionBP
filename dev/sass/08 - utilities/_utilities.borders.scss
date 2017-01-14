@@ -47,7 +47,6 @@ Basic classes for common border configurations. Colours listed in settings.color
 
 @each $bp-name, $bp-value in $breakpoints {
 	@include bp(#{$bp-name}) {
-
 		.u-border-thin\@#{$bp-name}  {
 			border-width:rem(1px) !important;
 			border-style:solid !important;
@@ -80,7 +79,6 @@ Basic classes for common border configurations. Colours listed in settings.color
 			border-left-width:rem(1px) !important;
 			border-style:solid !important;
 			border-color:black !important;
-		}	
-
+		}
 	}
 }

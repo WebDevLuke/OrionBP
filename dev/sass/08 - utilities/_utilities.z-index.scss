@@ -31,9 +31,7 @@ Simple utility classes to tweak z-index
 }
 
 @each $bp-name, $bp-value in $breakpoints {
-
 	@include bp(#{$bp-name}) {
-
 		.u-z-index-hidden\@#{$bp-name} {
 			z-index:-1 !important;
 		}
@@ -57,6 +55,5 @@ Simple utility classes to tweak z-index
 		.u-z-index--huge\@#{$bp-name} {
 			z-index:50 !important;
 		}
-
 	}
 }

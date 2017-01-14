@@ -36,7 +36,7 @@ Adds padding between each item. Can also be used in conjunction with delimited m
 */
 
 /*
-<ul class="o-list-inline o-list-inline--spacing">
+<ul class="o-list-inline o-list-inline--spacing-huge">
 	<li class="o-list-inline__item">CONTENT</li>
 	<li class="o-list-inline__item">CONTENT</li>
 	<li class="o-list-inline__item">CONTENT</li>
@@ -47,53 +47,20 @@ Adds padding between each item. Can also be used in conjunction with delimited m
 [1] Remove the last list items spacing.
 */
 
-.o-list-inline--spacing {
+[class*="o-list-inline--spacing-"] {
 	.o-list-inline__item:after {
 		content:"";
-		padding:0 $spacing-unit;
 	}
 	.o-list-inline__item:last-child:after {
 		display:none; /* [1] */
 	}
 }
 
-.o-list-inline--spacing-tiny {
-	.o-list-inline__item:after {
-		content:"";
-		padding:0 $spacing-unit-tiny;
-	}
-	.o-list-inline__item:last-child:after {
-		display:none; /* [1] */
-	}
-}
-
-.o-list-inline--spacing-small {
-	.o-list-inline__item:after {
-		content:"";
-		padding:0 $spacing-unit-small;
-	}
-	.o-list-inline__item:last-child:after {
-		display:none; /* [1] */
-	}
-}
-
-.o-list-inline--spacing-large {
-	.o-list-inline__item:after {
-		content:"";
-		padding:0 $spacing-unit-large;
-	}
-	.o-list-inline__item:last-child:after {
-		display:none; /* [1] */
-	}
-}
-
-.o-list-inline--spacing-huge {
-	.o-list-inline__item:after {
-		content:"";
-		padding:0 $spacing-unit-huge;
-	}
-	.o-list-inline__item:last-child:after {
-		display:none; /* [1] */
+@each $sp-name, $sp-value in $spacing {
+	.o-list-inline--spacing-#{$sp-name} {
+		.o-list-inline__item:after {
+			padding:0 rem($sp-value);
+		}
 	}
 }
 

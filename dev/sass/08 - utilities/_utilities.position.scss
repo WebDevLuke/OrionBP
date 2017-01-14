@@ -23,9 +23,7 @@ A simple utility class to position styles
 }
 
 @each $bp-name, $bp-value in $breakpoints {
-
 	@include bp(#{$bp-name}) {
-
 		.u-position-relative\@#{$bp-name} {
 			position:relative !important;
 		}
@@ -37,6 +35,5 @@ A simple utility class to position styles
 		.u-position-fixed\@#{$bp-name} {
 			position:fixed !important;
 		}
-
 	}
 }

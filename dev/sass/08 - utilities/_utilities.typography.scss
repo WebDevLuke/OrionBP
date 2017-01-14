@@ -25,7 +25,6 @@ Basic utility classes for typography.
 }
 
 @each $bp-name, $bp-value in $breakpoints {
-
 	@include bp(#{$bp-name}) {
 		.u-bold\@#{$bp-name} {
 			font-weight:bold !important;

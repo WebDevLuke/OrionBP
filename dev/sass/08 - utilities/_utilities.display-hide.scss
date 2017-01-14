@@ -41,9 +41,7 @@ Example: .u-hide@xlg
 */
 
 @each $bp-name, $bp-value in $breakpoints {
-
 	@include bp(#{$bp-name}) {
-
 		.u-hide\@#{$bp-name} {
 			display:none !important;
 		}

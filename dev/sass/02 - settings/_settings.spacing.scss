@@ -3,15 +3,21 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Set REM spacing unit variables based on the `$global-line-height` variable to keep baseline intact.
-We don't use variables featuring xs, sm, md, lg etc as to not confuse with responsive breakpoints.
+Here we define spacing variants. We don't use variables featuring xs, sm, md, lg etc as to not confuse with responsive breakpoints.
+These are used to generate variants of many object and utility classes to give you a range to choose from. We can create as many
+as we want without fear of bloating our compiled CSS file as UNCSS filters out unused css classes.
 */
 
-// Standard spacing unit
-$spacing-unit: round($global-line-height) / $global-font-size * 1rem;
-
-// Create ready made spacing unit variants
-$spacing-unit-tiny: ($spacing-unit * 0.25); // Default: 6px
-$spacing-unit-small: ($spacing-unit * 0.5); // Default: 12px
-$spacing-unit-large: ($spacing-unit * 2); // Default: 48px
-$spacing-unit-huge: ($spacing-unit * 4); // Default: 96px
+// Set spacing variants
+$spacing: (
+	"none": 0px,
+	"micro": 5px,
+	"tiny": 10px,
+	"small": 15px,
+	"reduced": 20px,
+	"regular": 25px,
+	"increased": 30px,
+	"large": 35px,
+	"huge": 40px,
+	"giant": 45px
+);

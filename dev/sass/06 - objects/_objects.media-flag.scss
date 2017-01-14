@@ -37,13 +37,9 @@ http://csswizardry.com/2013/05/the-flag-object/
 	vertical-align: middle;
 }
 
-.o-flag__image {
-	padding-right:$spacing-unit;
-
-	img {
-		display: block;
-		max-width: none;
-	}
+.o-flag__image img {
+	display: block;
+	max-width: none;
 }
 
 
@@ -66,7 +62,6 @@ Reverse the padding for the image. Requires you to manually switch position of i
 */
 
 .o-flag--reverse > .o-flag__image {
-	padding-left:$spacing-unit;
 	padding-right:0;
 }
 
@@ -113,51 +108,23 @@ Alter the spacing in between image and text
 
 /*
 <div class="o-flag o-flag--spacing-tiny">
-	<div class="o-flag__body">
-		CONTENT
-	</div>
 	<div class="o-flag__image">
 		<img src="" alt="">
+	</div>
+	<div class="o-flag__body">
+		CONTENT
 	</div>
 </div>
 */
 
-.o-flag--spacing-tiny {
-	& > .o-flag__image {
-		padding-right:$spacing-unit-tiny;
-	}
+@each $sp-name, $sp-value in $spacing {
+	.o-flag--spacing-#{$sp-name} {
+		& > .o-flag__image {
+			padding-right:rem($sp-value);
+		}
 
-	&.o-flag--reverse > .o-flag__image {
-		padding-left:$spacing-unit-tiny;
-	}
-}
-
-.o-flag--spacing-small {
-	& > .o-flag__image {
-		padding-right:$spacing-unit-small;
-	}
-
-	&.o-flag--reverse > .o-flag__image {
-		padding-left:$spacing-unit-small;
-	}
-}
-
-.o-flag--spacing-large {
-	& > .o-flag__image {
-		padding-right:$spacing-unit-large;
-	}
-
-	&.o-flag--reverse > .o-flag__image {
-		padding-left:$spacing-unit-large;
-	}
-}
-
-.o-flag--spacing-huge {
-	& > .o-flag__image {
-		padding-right:$spacing-unit-huge;
-	}
-
-	&.o-flag--reverse > .o-flag__image {
-		padding-left:$spacing-unit-huge;
+		&.o-flag--reverse > .o-flag__image {
+			padding-left:rem($sp-value);
+		}
 	}
 }

@@ -138,7 +138,7 @@ Orion-Framework/
 
 More specifically `gulp build` outputs the following in `/dist/`:
 - HTML (unmodified)
-- Compiled &amp; minified CSS
+- Compiled &amp; minified CSS, with unused CSS classes removed
 - Concatenated &amp; minified JS
 - Compressed images
 - Any misc files you have in the root of `/dev/` (unmodified)

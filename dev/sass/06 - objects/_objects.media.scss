@@ -27,7 +27,6 @@ http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-o
 
 .o-media__image {
 	float:left;
-	margin-right:$spacing-unit;
 
 	img {
 		display:block;
@@ -58,7 +57,6 @@ Reverse the position of text and image
 
 .o-media--reverse > .o-media__image {
 	float:right;
-	margin-left:$spacing-unit;
 	margin-right:0;
 }
 
@@ -100,42 +98,14 @@ Alter the spacing in between image and text
 </div>
 */
 
-.o-media--spacing-tiny {
-	& > .o-media__image {
-		margin-right:$spacing-unit-tiny;
-	}
+@each $sp-name, $sp-value in $spacing {
+	.o-media--spacing-#{$sp-name} {
+		& > .o-media__image {
+			margin-right:rem($sp-value);
+		}
 
-	&.o-media--reverse > .o-media__image {
-		margin-left:$spacing-unit-tiny;
-	}
-}
-
-.o-media--spacing-small {
-	& > .o-media__image {
-		margin-right:$spacing-unit-small;
-	}
-
-	&.o-media--reverse > .o-media__image {
-		margin-left:$spacing-unit-small;
-	}
-}
-
-.o-media--spacing-large {
-	& > .o-media__image {
-		margin-right:$spacing-unit-large;
-	}
-
-	&.o-media--reverse > .o-media__image {
-		margin-left:$spacing-unit-large;
-	}
-}
-
-.o-media--spacing-huge {
-	& > .o-media__image {
-		margin-right:$spacing-unit-huge;
-	}
-
-	&.o-media--reverse > .o-media__image {
-		margin-left:$spacing-unit-huge;
+		&.o-media--reverse > .o-media__image {
+			margin-left:rem($sp-value);
+		}
 	}
 }

@@ -68,29 +68,15 @@ Add spacing in between pack items
 */
 
 /*
-<ul class="o-pack o-pack--xsm">
+<ul class="o-pack o-pack--spacing-huge">
 	<li class="o-pack__item">CONTENT</li>
 	<li class="o-pack__item">CONTENT</li>
 	<li class="o-pack__item">CONTENT</li>
 </ul>
 */
 
-.o-pack--spacing {
-	border-spacing: $spacing-unit;
-}
-
-.o-pack--spacing-tiny {
-	border-spacing: $spacing-unit-tiny;
-}
-
-.o-pack--spacing-small {
-	border-spacing: $spacing-unit-small;
-}
-
-.o-pack--spacing-large {
-	border-spacing: $spacing-unit-large;
-}
-
-.o-pack--spacing-huge {
-	border-spacing: $spacing-unit-huge;
+@each $sp-name, $sp-value in $spacing {
+	.o-pack--spacing-#{$sp-name} {
+		border-spacing: rem($sp-value);
+	}
 }

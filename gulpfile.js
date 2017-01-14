@@ -12,8 +12,6 @@ var sass = require('gulp-sass');
 var sassGlob = require('gulp-sass-glob');
 // Minifies images
 var imagemin = require('gulp-imagemin');
-// Used to prevent minifying of unchanged images
-var cache = require('gulp-cache');
 // Used to minify JS
 var uglify = require('gulp-uglify');
 // Used to rename CSS and JS depending if minified
@@ -84,14 +82,6 @@ gulp.task('sass', function () {
 		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
 		cascade: false
 	}))
-	.pipe(uncss({
-		html: ['dist/*.html'],
-		ignore: [
-			/\.is-*/,
-			/\.has-*/,
-			/\.in-*/	
-		]
-	}))
 	.pipe(gulp.dest('./dist/css/'))
 });
 
@@ -135,29 +125,29 @@ gulp.task('bitmap', function(){
 // Compile all SVG icons into one large svg icon and inject as inline svg into page header
 // We can then directly reference these icons without making an extra request
 gulp.task('svg', function () {
-		var svgs = gulp
-				.src('dev/src/asset/img/*.svg')
-				.pipe(svgmin(function (file) {
-						var prefix = path.basename(file.relative, path.extname(file.relative));
-						return {
-								plugins: [{
-										cleanupIDs: {
-												prefix: prefix + '-',
-												minify: true
-										}
-								}]
-						}
-				}))
-				.pipe(svgstore({ inlineSvg: true }));
+	var svgs = gulp
+		.src('dev/img/**/*.svg')
+		.pipe(svgmin(function (file) {
+			var prefix = path.basename(file.relative, path.extname(file.relative));
+			return {
+				plugins: [{
+					cleanupIDs: {
+						prefix: prefix + '-',
+						minify: true
+					}
+				}]
+			}
+		}))
+		.pipe(svgstore({ inlineSvg: true }));
 
 		function fileContents (filePath, file) {
-				return file.contents.toString();
+			return file.contents.toString();
 		}
 
 		return gulp
-				.src('dist/*.html')
-				.pipe(inject(svgs, { transform: fileContents }))
-				.pipe(gulp.dest('dist/'));
+		.src('dist/*.html')
+		.pipe(inject(svgs, { transform: fileContents }))
+		.pipe(gulp.dest('dist/'));
 });
 
 gulp.task('images', function(){
@@ -242,6 +232,19 @@ gulp.task('html', function(){
 
 /*
 |--------------------------------------------------------------------
+|  PHP & SQL
+|--------------------------------------------------------------------
+*/
+
+/* Copy PHP & SQL files across and keep their directory structure intact */
+gulp.task("php", function() {
+	return gulp.src('./dev/**/*.+(php|sql)')
+	.pipe(gulp.dest('dist/'));
+});
+
+
+/*
+|--------------------------------------------------------------------
 |  MISC
 |--------------------------------------------------------------------
 */
@@ -274,11 +277,14 @@ gulp.task('copy', function() {
 gulp.task("watch", function() {
 	// HTML
 	gulp.watch('dev/html/**/*.html',['html']);
+	// PHP & MYSQL
+	gulp.watch('dev/**/*.(php|sql)',['php']);
 	// Images
 	gulp.watch('dev/img/*.+(png|jpg|gif|svg)',['images']);
 	// Watch for Breakpoint JS changes and compile SASS
 	gulp.watch('dev/data/breakpoints.json',['sass']);
 	// SASS
+	// UNCSS doesn't run for watch task to speed things up
 	gulp.watch('dev/sass/**/*.scss',['sass']);
 	// JS
 	gulp.watch('dev/js/**/*.js',['js']);
@@ -290,6 +296,6 @@ gulp.task('build',function() {
 		// Delete Dist Folder
 		"deleteDist",	
 		// Run other tasks asynchronously 
-		["html", "images", "sass-build", "js", "copy"]
+		["html", "php", "sass-build", "js", "copy", "images"]
 	);
 });

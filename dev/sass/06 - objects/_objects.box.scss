@@ -25,7 +25,6 @@ http://csswizardry.com/2011/10/the-island-object/
 .o-box {
 	@include clearfix();
 	display: block; /* [1] */
-	padding: $spacing-unit;
 
 	> :last-child {
 		margin-bottom: 0; /* [2] */
@@ -42,18 +41,8 @@ http://csswizardry.com/2011/10/the-island-object/
 </div>
 */
 
-.o-box--spacing-tiny {
-  padding: $spacing-unit-tiny;
-}
-
-.o-box--spacing-small {
-  padding: $spacing-unit-small;
-}
-
-.o-box--spacing-large {
-  padding: $spacing-unit-large;
-}
-
-.o-box--spacing-huge {
-  padding: $spacing-unit-huge;
+@each $sp-name, $sp-value in $spacing {
+	.o-box--spacing-#{$sp-name} {
+		padding:rem($sp-value);
+	}
 }

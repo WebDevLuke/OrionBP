@@ -30,9 +30,7 @@ Example: .u-clear@xlg
 */
 
 @each $bp-name, $bp-value in $breakpoints	{
-
 	@include bp(#{$bp-name}) {
-
 		.u-float-left\@#{$bp-name} {
 			float:left !important;
 		}
@@ -43,7 +41,6 @@ Example: .u-clear@xlg
 
 		.u-clear\@#{$bp-name} {
 			clear: both !important;
-		}
-		
+		}		
 	}
 }

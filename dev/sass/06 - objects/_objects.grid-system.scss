@@ -197,11 +197,3 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 		@include create_utilities(\@#{$bp-name});	
 	}
 }
-
-
-// LARGE CONTAINER MODIFIER
-//--------------------------------------------------------------------------------------------------------------------------------------
-
-.o-container--large {
-	max-width:1160px;
-}

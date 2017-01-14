@@ -58,7 +58,6 @@ Example: .u-align-left@xlg
 
 @each $bp-name, $bp-value in $breakpoints {
 	@include bp(#{$bp-name}) {
-
 		.u-align-left\@#{$bp-name} {
 			text-align:left !important;
 		}
@@ -95,7 +94,6 @@ Example: .u-align-left@xlg
 			left:0 !important;
 			right:0 !important;
 			margin:auto !important;
-		}
-		
+		}		
 	}
 }

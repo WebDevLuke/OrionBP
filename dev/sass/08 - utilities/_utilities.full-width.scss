@@ -26,11 +26,9 @@ Example: .u-full-width@xlg
 
 @each $bp-name, $bp-value in $breakpoints {
 	@include bp(#{$bp-name}) {
-
 		.u-full-width\@#{$bp-name} {
 			max-width:100%;
 			padding: 0; 
 		}
-
 	}
 }
