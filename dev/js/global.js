@@ -2,9 +2,17 @@
 // IMPORTS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-// Import breakpoint functions
-var bp = require("./partials/modules/breakpoints.js");
+/*
+Construct our JS by importing required partials
+*/
 
+
+// MODULES
 //--------------------------------------------------------------------------------------------------------------------------------------
-// CODE
-//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Reusable JS functionality
+*/
+
+require("./partials/modules/js-active.js");
+require("./partials/modules/js-active-swipe.js");

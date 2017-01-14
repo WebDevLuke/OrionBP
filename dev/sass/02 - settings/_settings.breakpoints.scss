@@ -3,7 +3,8 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Import breakpoints from `data/breakpoints.js` using SASSPort.
+Import breakpoints from `data/breakpoints.json` using SASSPort.
+We keep the breakpoint data in a seperate json file so it can be shared with JS
 */
 
 $breakpoints: require('dev/data/breakpoints.json');
