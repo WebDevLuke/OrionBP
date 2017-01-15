@@ -16,3 +16,4 @@ Reusable JS functionality
 
 require("./partials/modules/js-active.js");
 require("./partials/modules/js-active-swipe.js");
+require("./partials/modules/js-toggle-text.js");
