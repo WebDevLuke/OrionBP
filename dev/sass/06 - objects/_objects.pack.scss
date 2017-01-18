@@ -64,19 +64,25 @@ https://css-tricks.com/fixing-tables-long-strings/
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Add spacing in between pack items
+Add spacing in between pack items. Use within a o-pack-container object to absorb outer margin and align.
 */
 
 /*
-<ul class="o-pack o-pack--spacing-huge">
-	<li class="o-pack__item">CONTENT</li>
-	<li class="o-pack__item">CONTENT</li>
-	<li class="o-pack__item">CONTENT</li>
-</ul>
+<div class="o-pack-container-huge">
+	<ul class="o-pack o-pack--spacing-huge">
+		<li class="o-pack__item">CONTENT</li>
+		<li class="o-pack__item">CONTENT</li>
+		<li class="o-pack__item">CONTENT</li>
+	</ul>
+</div>
 */
 
 @each $sp-name, $sp-value in $spacing {
 	.o-pack--spacing-#{$sp-name} {
 		border-spacing: rem($sp-value);
+	}
+	.o-pack-container-#{$sp-name} {
+		margin-left: rem(-$sp-value);
+		margin-right: rem(-$sp-value);
 	}
 }
