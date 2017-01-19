@@ -3,7 +3,8 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Basic utility classes for hiding and displaying elements.
+These utility classes should only be used for showing or hiding elements. If you require an element to have
+a certain layout for any other purpose, build that display property into the component directly.
 */
 
 
@@ -24,12 +25,12 @@ Basic utility classes for hiding and displaying elements.
 
 .u-display-table {
 	display:table !important;
-	width:100%;
+	width:100% !important;
 }
 
 .u-display-table-cell {
 	display:table-cell !important;
-	width:100%;
+	width:100% !important;
 }
 
 
@@ -56,10 +57,12 @@ Example: .u-hide@xlg
 
 		.u-display-table\@#{$bp-name} {
 			display:table !important;
+			width:100% !important;
 		}
 
 		.u-display-table-cell\@#{$bp-name} {
 			display:table-cell !important;
+			width:100% !important;
 		}
 	}
 }

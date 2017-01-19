@@ -36,6 +36,10 @@ http://csswizardry.com/2011/10/the-island-object/
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
+Generates variants in padding size using data from settings.spacing
+*/
+
+/*
 <div class="o-box o-box--spacing-tiny">
 	CONTENT
 </div>
@@ -45,4 +49,42 @@ http://csswizardry.com/2011/10/the-island-object/
 	.o-box--spacing-#{$sp-name} {
 		padding:rem($sp-value);
 	}
+}
+
+
+// VERTICAL MODIFIER
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+A modifier which makes the box padding vertical only.
+*/
+
+/*
+<div class="o-box o-box--vertical">
+	CONTENT
+</div>
+*/
+
+.o-box--vertical {
+	padding-left:0;
+	padding-right:0;
+}
+
+
+// HORIZONTAL MODIFIER
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+A modifier which makes the box padding vertical only.
+*/
+
+/*
+<div class="o-box o-box--horizontal">
+	CONTENT
+</div>
+*/
+
+.o-box--horizontal {
+	padding-top:0;
+	padding-bottom:0;
 }
