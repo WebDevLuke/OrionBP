@@ -49,11 +49,15 @@ To define the framework breakpoints open `/dev/data/breakpoints.json` and edit t
 
 ```sh
 {
-  "xsm": "370px",
-  "sm": "480px",
-  "md": "740px",
-  "lg": "925px",
-  "xlg": "1280px"
+  "sm": "370px",
+  "sm2": "425px",
+  "sm3": "500px",
+  "md": "768px",
+  "md2": "840px",
+  "md3": "925px",
+  "lg": "1024px",
+  "lg2": "1280px",
+  "lg3": "1440px"
 }
 ```
 Give each breakpoint a name and order them from smallest to largest. How these breakpoints can be used in SASS and JS is explained under [Grid System](#grid-system)
@@ -71,7 +75,7 @@ $grid: (
     "containerPadding": 30px
   ),
   'morph': (
-    "xlg" : (
+    "lg" : (
       "max-width": 1600px,
       "columns": 16,
       "gutter": 30px,
@@ -103,7 +107,7 @@ $grid: (
     "containerPadding": 30px
   ),
   'morph': (
-    "xlg" : (
+    "lg" : (
       "max-width": 1600px,
       "columns": 16,
       "gutter": 30px,
@@ -113,7 +117,7 @@ $grid: (
 );
 ```
 
-The above example defines a **1170px 12 column grid system** which morphs into a **1600px 16 column grid system** once the `xlg` breakpoint has been hit.
+The above example defines a **1170px 12 column grid system** which morphs into a **1600px 16 column grid system** once the `lg` breakpoint has been hit.
 
 
 #### Gulp
@@ -176,9 +180,9 @@ Here we introduce breakpoint classes which have been automatically created by SA
 
 ```sh
 <div class="o-container">
-  <div class="o-col-4@sm o-col-12@md o-col-4@lg o-col-6@xlg"></div>
-  <div class="u-col-offset-4@sm o-col-4@sm o-col-6@md u-col-offset-4@lg o-col-4@lg o-col-6@xlg"></div>
-  <div class="u-hide@sm u-show@md o-col-6@md u-col-offset-8@lg o-col-4@lg o-col-16@xlg"></div>
+  <div class="o-col-4@sm o-col-12@md o-col-4@lg o-col-6@lg"></div>
+  <div class="u-col-offset-4@sm o-col-4@sm o-col-6@md u-col-offset-4@lg o-col-4@lg o-col-6@lg"></div>
+  <div class="u-hide@sm u-show@md o-col-6@md u-col-offset-8@lg o-col-4@lg o-col-16@lg"></div>
 </div>
 ```
 Here is an advanced example of how we can combine breakpoint classes to significantly alter our columns as we increase our browser resolution. 
@@ -218,9 +222,9 @@ When writing SASS, you also have access to breakpoints which allow you to genera
       content:"lg";
     }
   }
-  @include bp(xlg){
+  @include bp(lg){
     &:before{
-      content:"xlg";
+      content:"lg";
     }
   }
 }
@@ -231,9 +235,9 @@ In the above, we give each div within the container a pseudo element and then ch
 **HTML**
 ```sh
 <div class="o-container">
-  <div class="o-col-4@sm o-col-12@md o-col-4@lg o-col-6@xlg"></div>
-  <div class="u-col-offset-4@sm o-col-4@sm o-col-6@md u-col-offset-4@lg o-col-4@lg o-col-6@xlg"></div>
-  <div class="u-hide@sm u-show@md o-col-6@md u-col-offset-8@lg o-col-4@lg o-col-16@xlg"></div>
+  <div class="o-col-4@sm o-col-12@md o-col-4@lg o-col-6@lg"></div>
+  <div class="u-col-offset-4@sm o-col-4@sm o-col-6@md u-col-offset-4@lg o-col-4@lg o-col-6@lg"></div>
+  <div class="u-hide@sm u-show@md o-col-6@md u-col-offset-8@lg o-col-4@lg o-col-16@lg"></div>
 </div>
 ```
 
@@ -263,9 +267,9 @@ In the above, we give each div within the container a pseudo element and then ch
   }
 }
 
-@include bp(xlg) {
+@include bp(lg) {
   .o-container div:before {
-    content:"xlg";
+    content:"lg";
   }
 }
 ```
