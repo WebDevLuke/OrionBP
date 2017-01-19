@@ -1,0 +1,55 @@
+//--------------------------------------------------------------------------------------------------------------------------------------
+// EXPANDER OBJECT
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Simple object which hides content which then slides down after a linked element is clicked. Utilises the
+js-active module.
+*/
+
+
+// BASE
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+<div class="o-expander js-myexpander">
+	CONTENT
+</div>
+<a href="/" data-active="js-myexpander">TOGGLE LINK</a>
+*/
+
+.o-expander {
+	width:100%;
+	transition:max-height 0.5s;
+	max-height:0;
+	overflow:hidden;
+}
+
+
+// DISABLE MODIFIER
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Disables the expander once a certain breakpoint has been hit.
+*/
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		.o-expander--disable\@#{$bp-name} {
+			max-height:none;
+			overflow:visible;
+		}
+	}
+}
+
+
+// EXPANDER STATEFUL MODIFIER
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Controls behaviour once is-active class is added
+*/
+
+.o-expander.is-active {
+	max-height:1999px;
+}
