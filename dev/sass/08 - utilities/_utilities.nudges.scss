@@ -1,0 +1,93 @@
+//--------------------------------------------------------------------------------------------------------------------------------------
+// NUDGE UTILITIES
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Utility classes to add simple direction styles. Use to nudge and fine tune elements positions.
+
+Generates standard and responsive variants using spacing map located in settings.spacing and
+responsive breakpoints located in dev/data/breakpoints
+
+u-nudge-top-huge
+u-nudge-top-huge@xlg
+*/
+
+// NUDGE TOP
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@each $sp-name, $sp-value in $spacing {
+	.u-nudge-top-#{$sp-name} {
+		top:rem($sp-value) !important;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.u-nudge-top-#{$sp-name}\@#{$bp-name} {
+				top:rem($sp-value) !important;
+			}
+		}
+	}
+}
+
+
+// NUDGE RIGHT
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@each $sp-name, $sp-value in $spacing {
+	.u-nudge-right-#{$sp-name} {
+		right:rem($sp-value) !important;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.u-nudge-right-#{$sp-name}\@#{$bp-name} {
+				right:rem($sp-value) !important;
+			}
+		}
+	}
+}
+
+
+// NUDGE BOTTOM
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@each $sp-name, $sp-value in $spacing {
+	.u-nudge-bottom-#{$sp-name} {
+		bottom:rem($sp-value) !important;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.u-nudge-bottom-#{$sp-name}\@#{$bp-name} {
+				bottom:rem($sp-value) !important;
+			}
+		}
+	}
+}
+
+
+// NUDGE LEFT
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@each $sp-name, $sp-value in $spacing {
+	.u-nudge-left-#{$sp-name} {
+		left:rem($sp-value) !important;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.u-nudge-left-#{$sp-name}\@#{$bp-name} {
+				left:rem($sp-value) !important;
+			}
+		}
+	}
+}
+

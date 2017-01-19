@@ -36,6 +36,7 @@ http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-o
 .o-media__body {
 	@include clearfix(); 
 	overflow:hidden;
+	float:left;
 }
 
 
