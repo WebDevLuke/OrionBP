@@ -26,36 +26,6 @@ js-active module.
 }
 
 
-// ENABLE & DISABLE MODIFIER
-//--------------------------------------------------------------------------------------------------------------------------------------
-
-/*
-Disables the expander once a certain breakpoint has been hit.
-*/
-
-@each $bp-name, $bp-value in $breakpoints {
-	@include bp(#{$bp-name}) {
-		.o-expander--disable\@#{$bp-name} {
-			max-height:none;
-			overflow:visible;
-		}
-	}
-}
-
-/*
-Enables the expander once a certain breakpoint has been hit.
-*/
-
-@each $bp-name, $bp-value in $breakpoints {
-	@include bpMax(#{$bp-name}) {
-		.o-expander--enable\@#{$bp-name} {
-			max-height:none;
-			overflow:visible;
-		}
-	}
-}
-
-
 // PARTIAL VISIBLE MODIFIERS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
@@ -94,4 +64,34 @@ Controls behaviour once is-active class is added
 
 .o-expander.is-active {
 	max-height:1999px;
+}
+
+
+// ENABLE & DISABLE MODIFIER
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Disables the expander once a certain breakpoint has been hit.
+*/
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		.o-expander--disable\@#{$bp-name} {
+			max-height:none; 
+			overflow:visible;
+		}
+	}
+}
+
+/*
+Enables the expander once a certain breakpoint has been hit.
+*/
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bpMax(#{$bp-name}) {
+		.o-expander--enable\@#{$bp-name} {
+			max-height:none;
+			overflow:visible;
+		}
+	}
 }
