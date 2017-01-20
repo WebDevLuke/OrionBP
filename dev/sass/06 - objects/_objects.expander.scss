@@ -26,7 +26,7 @@ js-active module.
 }
 
 
-// DISABLE MODIFIER
+// ENABLE & DISABLE MODIFIER
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
@@ -40,6 +40,48 @@ Disables the expander once a certain breakpoint has been hit.
 			overflow:visible;
 		}
 	}
+}
+
+/*
+Enables the expander once a certain breakpoint has been hit.
+*/
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bpMax(#{$bp-name}) {
+		.o-expander--enable\@#{$bp-name} {
+			max-height:none;
+			overflow:visible;
+		}
+	}
+}
+
+
+// PARTIAL VISIBLE MODIFIERS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Modifiers to make a part of the hidden text visible, with the rest showing on is-active. This uses the
+global-line-height variable defined in settings.typography.
+*/
+
+.o-expander--partial-tiny {
+	max-height:calc(#{$global-line-height}em * 3);
+}
+
+.o-expander--partial-small {
+	max-height:calc(#{$global-line-height}em * 6);
+}
+
+.o-expander--partial-regular {
+	max-height:calc(#{$global-line-height}em * 9);
+}
+
+.o-expander--partial-large {
+	max-height:calc(#{$global-line-height}em * 12);
+}
+
+.o-expander--partial-huge {
+	max-height:calc(#{$global-line-height}em * 15);
 }
 
 
