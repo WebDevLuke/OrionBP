@@ -22,14 +22,17 @@ http://csswizardry.com/2013/05/the-flag-object/
 </div>
 */
 
+/*
+[1] Make the image take as little space as possible
+*/
+
 .o-flag {
 	display: table;
-	width: 100%; 
 	box-sizing:border-box;
 }
 
 .o-flag__body {
-	width: 100%;
+	width: auto;
 }
 
 .o-flag__image, .o-flag__body {
@@ -37,9 +40,12 @@ http://csswizardry.com/2013/05/the-flag-object/
 	vertical-align: middle;
 }
 
-.o-flag__image img {
-	display: block;
-	max-width: none;
+.o-flag__image {
+	width:rem(1px); /* [1] */
+	img {
+		display: block;
+		max-width: none;
+	}
 }
 
 
