@@ -37,7 +37,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 // CREATE  CONTAINER MIXIN
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-@mixin create_container($responsive, $maxWidth, $columns, $gutter, $containerPadding) {
+@mixin create_container($responsive, $maxWidth, $containerPadding) {
 
 	// Set Base Container
 	.o-container {
@@ -68,7 +68,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 // CREATE COLUMNS MIXIN
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-@mixin create_columns($suffix, $responsive, $maxWidth, $columns, $gutter) {
+@mixin create_columns($suffix, $maxWidth, $columns, $gutter) {
 
 	// Calculate single column width in pixels
 	$widthPX: $maxWidth / $columns;
@@ -97,7 +97,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 // CREATE COLUMN OFFSETS  MIXIN
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-@mixin create_offsets($suffix, $responsive, $maxWidth, $columns, $gutter) {
+@mixin create_offsets($suffix, $maxWidth, $columns) {
 
 	// Calculate single column width in pixels
 	$widthPX: $maxWidth / $columns;
@@ -133,10 +133,10 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 // GENERATE DEFAULT CONTAINER AND COLUMN CLASSES
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-@include create_container($responsive, $maxWidth, $columns, $gutter, $containerPadding);
+@include create_container($responsive, $maxWidth, $containerPadding);
 @include create_row($gutter);
-@include create_columns(null, $responsive, $maxWidth, $columns, $gutter);
-@include create_offsets(null, $responsive, $maxWidth, $columns, $gutter);
+@include create_columns(null, $maxWidth, $columns, $gutter);
+@include create_offsets(null, $maxWidth, $columns);
 @include create_utilities(null);
 
 
@@ -153,29 +153,38 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 			// Get grid match
 			$bp-obj: map-get($gridMorph, $bp-name);
 
+			// If present, feed variables into next round of column and creation
 			@if map-has-key($bp-obj, "max-width") {
 				$maxWidth: map-get($bp-obj, "max-width");
 			}
 			@if map-has-key($bp-obj, "columns") {
 				$columns: map-get($bp-obj, "columns");
 			}
-			@if map-has-key($bp-obj, "gutter") {
-				$gutter: map-get($bp-obj, "gutter");
-			}
 			@if map-has-key($bp-obj, "containerPadding") {
 				$containerPadding: map-get($bp-obj, "containerPadding");
 			}
 
+			// Gutter is column focused rather than container so needs to treated differently
+			@if map-has-key($bp-obj, "gutter") {
+				$localGutter: map-get($bp-obj, "gutter");
+				@include bp(#{$bp-name}) {
+					[class^="o-col"] {
+						padding-left:$localGutter / 2;
+						padding-right:$localGutter / 2;
+					}
+				}
+			}
+
 			@include bp(#{$bp-name}) {
-				@include create_container($responsive, $maxWidth, $columns, $gutter, $containerPadding);
+				@include create_container($responsive, $maxWidth, $containerPadding);
 				@include create_row($gutter);	
 			}
 		}
 	}
 
 	@include bp(#{$bp-name}) {
-		@include create_columns(\@#{$bp-name}, $responsive, $maxWidth, $columns, $gutter);
-		@include create_offsets(\@#{$bp-name}, $responsive, $maxWidth, $columns, $gutter);
+		@include create_columns(\@#{$bp-name}, $maxWidth, $columns, $gutter);
+		@include create_offsets(\@#{$bp-name}, $maxWidth, $columns);
 		@include create_utilities(\@#{$bp-name});	
 	}
 }

@@ -99,8 +99,8 @@ You can also reshape the grid at any of your defined breakpoints by creating ent
 
 ```sh
 $grid: (
+  "responsive": true,
   "default": (
-    "responsive": true,
     "max-width": 1170px,
     "columns": 12,
     "gutter": 30px,
