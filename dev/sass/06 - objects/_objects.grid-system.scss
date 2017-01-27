@@ -163,21 +163,23 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 			@if map-has-key($bp-obj, "containerPadding") {
 				$containerPadding: map-get($bp-obj, "containerPadding");
 			}
-
-			// Gutter is column focused rather than container so needs to treated differently
 			@if map-has-key($bp-obj, "gutter") {
-				$localGutter: map-get($bp-obj, "gutter");
-				@include bp(#{$bp-name}) {
-					[class^="o-col"] {
-						padding-left:$localGutter / 2;
-						padding-right:$localGutter / 2;
-					}
-				}
+				$gutter: map-get($bp-obj, "gutter");
 			}
 
 			@include bp(#{$bp-name}) {
 				@include create_container($responsive, $maxWidth, $containerPadding);
 				@include create_row($gutter);	
+			}
+
+			// Gutter is column focused rather than container so needs to treated differently
+			@if map-has-key($bp-obj, "gutter") {				
+				@include bp(#{$bp-name}) {
+					[class^="o-col"] {
+						padding-left:$gutter / 2;
+						padding-right:$gutter / 2;
+					}
+				}
 			}
 		}
 	}
