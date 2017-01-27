@@ -68,8 +68,8 @@ Add spacing in between pack items. Use within a o-pack-container object to absor
 */
 
 /*
-<div class="o-pack-container-huge">
-	<ul class="o-pack o-pack--spacing-huge">
+<div class="o-pack-container-huge@lg2">
+	<ul class="o-pack o-pack--spacing-huge@lg2">
 		<li class="o-pack__item">CONTENT</li>
 		<li class="o-pack__item">CONTENT</li>
 		<li class="o-pack__item">CONTENT</li>
@@ -77,12 +77,16 @@ Add spacing in between pack items. Use within a o-pack-container object to absor
 </div>
 */
 
-@each $sp-name, $sp-value in $spacing {
-	.o-pack--spacing-#{$sp-name} {
-		border-spacing: rem($sp-value);
-	}
-	.o-pack-container-#{$sp-name} {
-		margin-left: rem(-$sp-value);
-		margin-right: rem(-$sp-value);
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.o-pack--spacing-#{$sp-name}\@#{$bp-name} {
+				border-spacing: rem($sp-value);
+			}
+			.o-pack-container-#{$sp-name}\@#{$bp-name} {
+				margin-left: rem(-$sp-value);
+				margin-right: rem(-$sp-value);
+			}
+		}
 	}
 }

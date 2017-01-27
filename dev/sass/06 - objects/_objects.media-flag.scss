@@ -97,10 +97,71 @@ Change the vertical alignment of flag contents. Default: middle.
 	}
 }
 
+.o-flag--middle {
+	> .o-flag__image,
+	> .o-flag__body {
+		vertical-align: middle;
+	}
+}
+
 .o-flag--bottom {
 	> .o-flag__image,
 	> .o-flag__body {
 		vertical-align: bottom;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		.o-flag--top\@#{$bp-name} {
+			> .o-flag__image,
+			> .o-flag__body {
+				vertical-align: top;
+			}
+		}
+		.o-flag--middle\@#{$bp-name} {
+			> .o-flag__image,
+			> .o-flag__body {
+				vertical-align: middle;
+			}
+		}
+		.o-flag--bottom\@#{$bp-name} {
+			> .o-flag__image,
+			> .o-flag__body {
+				vertical-align: bottom;
+			}
+		}
+	}
+}
+
+
+// FIXED WIDTH IMAGE MODIFIERS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Adds a fixed width to the image element. Useful if you have multiple stacked flags with different width icons
+and everything needs to stack up
+*/
+
+/*
+<div class="o-flag o-flag--fixed-image-small@md">
+	<div class="o-flag__body">
+		CONTENT
+	</div>
+	<div class="o-flag__image">
+		<img src="" alt="">
+	</div>
+</div>
+*/
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.o-flag--fixed-image-#{$sp-name}\@#{$bp-name} .o-flag__image {
+				width:rem($sp-value);
+				max-width:rem($sp-value);
+			}
+		}
 	}
 }
 
@@ -113,7 +174,7 @@ Alter the spacing in between image and text
 */
 
 /*
-<div class="o-flag o-flag--spacing-tiny">
+<div class="o-flag o-flag--spacing-tiny@md">
 	<div class="o-flag__image">
 		<img src="" alt="">
 	</div>
@@ -123,13 +184,17 @@ Alter the spacing in between image and text
 </div>
 */
 
-@each $sp-name, $sp-value in $spacing {
-	.o-flag--spacing-#{$sp-name} {
-		& > .o-flag__image {
-			padding-right:rem($sp-value);
-		}
-		&.o-flag--reverse > .o-flag__image {
-			padding-left:rem($sp-value);
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.o-flag--spacing-#{$sp-name}\@#{$bp-name} {
+				& > .o-flag__image {
+					padding-right:rem($sp-value);
+				}
+				&.o-flag--reverse > .o-flag__image {
+					padding-left:rem($sp-value);
+				}
+			}
 		}
 	}
 }
