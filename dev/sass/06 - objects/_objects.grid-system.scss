@@ -79,32 +79,16 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 	// Define Individual Grid Classes
 	@for $i from 1 to ($columns + 1) {
 
-		// Calculate responsive grid sizes if required
-		@if $responsive == true {
+		// Multiple width % by the column size
+		$widthPercentage: $widthPercentageSingle * $i;
 
-			// Multiple width % by the column size
-			$widthPercentage: $widthPercentageSingle * $i;
-
-			// Example: o-col-6@md
-			.o-col-#{$i}#{$suffix} {
-				width: $widthPercentage;
-				padding-left:$gutter / 2;
-				padding-right:$gutter / 2;
-				margin-left:0;
-				clear:none;
-			}
-
-		}
-		@else
-		{
-			// Example o-col-6
-			.o-col-#{$i} {
-				width: $widthPX;
-				padding-left: $gutter / 2;
-				padding-right: $gutter / 2;
-				margin-left:0;
-				clear:none; 
-			}
+		// Example: o-col-6@md
+		.o-col-#{$i}#{$suffix} {
+			width: $widthPercentage;
+			padding-left:$gutter / 2;
+			padding-right:$gutter / 2;
+			margin-left:0;
+			clear:none;
 		}
 	}
 }
@@ -124,24 +108,14 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 	// Define Grid Offsets
 	@for $i from 1 to $columns {
 
-		// Calculate responsive grid sizes if required
-		@if $responsive == true {
+		// Multiple width % by the column size
+		$widthPercentage: $widthPercentageSingle * $i;
 
-			// Multiple width % by the column size
-			$widthPercentage: $widthPercentageSingle * $i;
-
-			// Example u-col-offset-4@md
-			.o-col-offset-#{$i}#{$suffix}	{
-				margin-left:$widthPercentage;
-			}
-
+		// Example u-col-offset-4@md
+		.o-col-offset-#{$i}#{$suffix}	{
+			margin-left:$widthPercentage;
 		}
-		@else {
-			// Example u-col-offset-4
-			.o-col-offset-#{$i}	{
-				margin-left:$widthPX;
-			}
-		}
+
 	}
 }
 
@@ -173,11 +147,11 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 @each $bp-name, $bp-value in $breakpoints	{
 
 	// If we discover that a morph comes into play override grid variables
-	@if variable-exists(gridResponsive) {
-		@if map-has-key($gridResponsive, $bp-name) {
+	@if variable-exists(gridMorph) {
+		@if map-has-key($gridMorph, $bp-name) {
 
 			// Get grid match
-			$bp-obj: map-get($gridResponsive, $bp-name);
+			$bp-obj: map-get($gridMorph, $bp-name);
 
 			$maxWidth: map-get($bp-obj, "max-width");
 			$columns: map-get($bp-obj, "columns");
@@ -190,7 +164,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 			}
 		}
 	}
-
+	
 	@include bp(#{$bp-name}) {
 		@include create_columns(\@#{$bp-name}, $responsive, $maxWidth, $columns, $gutter);
 		@include create_offsets(\@#{$bp-name}, $responsive, $maxWidth, $columns, $gutter);
