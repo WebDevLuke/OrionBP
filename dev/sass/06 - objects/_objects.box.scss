@@ -12,42 +12,39 @@ http://csswizardry.com/2011/10/the-island-object/
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-<div class="o-box">
+<div class="o-box-tiny@md">
 	CONTENT
 </div>
 */
 
 /*
 [1] So we can apply the `.o-box` class to naturally-inline elements.
-[2] If a box is extended to have a bottom margin then remove if last-child to prevent extending container margin
 */
 
-.o-box {
+[class*="o-box"] {
 	@include clearfix();
 	display: block; /* [1] */
-
-	> :last-child {
-		margin-bottom: 0; /* [2] */
-	}
 }
-
-
-// SPACING VARIANT MODIFIERS
-//--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
 Generates variants in padding size using data from settings.spacing
 */
 
-/*
-<div class="o-box o-box--spacing-tiny">
-	CONTENT
-</div>
-*/
-
+// Generate using settings.spacing
 @each $sp-name, $sp-value in $spacing {
-	.o-box--spacing-#{$sp-name} {
+	.o-box-#{$sp-name} {
 		padding:rem($sp-value);
+	}
+}
+
+// Create responsive variants using data/breakpoints.json
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.o-box-#{$sp-name}\@#{$bp-name} {
+				padding:rem($sp-value);
+			}
+		}
 	}
 }
 

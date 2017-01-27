@@ -36,7 +36,7 @@ Adds padding between each item. Can also be used in conjunction with delimited m
 */
 
 /*
-<ul class="o-list-inline o-list-inline--spacing-huge">
+<ul class="o-list-inline o-list-inline--spacing-huge@sm2">
 	<li class="o-list-inline__item">CONTENT</li>
 	<li class="o-list-inline__item">CONTENT</li>
 	<li class="o-list-inline__item">CONTENT</li>
@@ -56,6 +56,7 @@ Adds padding between each item. Can also be used in conjunction with delimited m
 	}
 }
 
+// Generate using settings.spacing
 @each $sp-name, $sp-value in $spacing {
 	.o-list-inline--spacing-#{$sp-name} {
 		.o-list-inline__item:after {
@@ -64,6 +65,18 @@ Adds padding between each item. Can also be used in conjunction with delimited m
 	}
 }
 
+// Create responsive variants using data/breakpoints.json
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.o-list-inline--spacing-#{$sp-name}\@#{$bp-name} {
+				.o-list-inline__item:after {
+					padding:0 rem($sp-value);
+				}
+			}
+		}
+	}
+}
 
 // DELIMITED MODIFIER
 //--------------------------------------------------------------------------------------------------------------------------------------

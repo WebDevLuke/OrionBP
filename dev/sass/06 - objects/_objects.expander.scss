@@ -54,6 +54,31 @@ global-line-height variable defined in settings.typography.
 	max-height:calc(#{$global-line-height}em * 15);
 }
 
+// Create responsive variants using data/breakpoints.json
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		.o-expander--partial-tiny\@#{$bp-name} {
+			max-height:calc(#{$global-line-height}em * 3);
+		}
+
+		.o-expander--partial-small\@#{$bp-name} {
+			max-height:calc(#{$global-line-height}em * 6);
+		}
+
+		.o-expander--partial-regular\@#{$bp-name} {
+			max-height:calc(#{$global-line-height}em * 9);
+		}
+
+		.o-expander--partial-large\@#{$bp-name} {
+			max-height:calc(#{$global-line-height}em * 12);
+		}
+
+		.o-expander--partial-huge\@#{$bp-name} {
+			max-height:calc(#{$global-line-height}em * 15);
+		}
+	}
+}
+
 
 // EXPANDER STATEFUL MODIFIER
 //--------------------------------------------------------------------------------------------------------------------------------------

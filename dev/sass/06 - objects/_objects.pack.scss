@@ -64,7 +64,8 @@ https://css-tricks.com/fixing-tables-long-strings/
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Add spacing in between pack items. Use within a o-pack-container object to absorb outer margin and align.
+Add spacing in between pack items. Use within a o-pack-container object as you would with .o-row and
+absorb outer margin and align.
 */
 
 /*
@@ -77,6 +78,18 @@ Add spacing in between pack items. Use within a o-pack-container object to absor
 </div>
 */
 
+// Generate using settings.spacing
+@each $sp-name, $sp-value in $spacing {
+	.o-pack--spacing-#{$sp-name} {
+		border-spacing: rem($sp-value);
+	}
+	.o-pack-container-#{$sp-name} {
+		margin-left: rem(-$sp-value);
+		margin-right: rem(-$sp-value);
+	}
+}
+
+// Create responsive variants using data/breakpoints.json
 @each $bp-name, $bp-value in $breakpoints {
 	@include bp(#{$bp-name}) {
 		@each $sp-name, $sp-value in $spacing {
