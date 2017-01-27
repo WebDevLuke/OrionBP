@@ -49,7 +49,7 @@ var inject = require('gulp-inject');
 
 // If minify is true then css & js will be minified
 // This is in case the code needs to be maintained by a less-technical developer
-var minify = false;
+var minify = true;
 
 /*
 |--------------------------------------------------------------------
@@ -85,6 +85,20 @@ gulp.task('sass', function () {
 	.pipe(gulp.dest('./dist/css/'))
 });
 
+// A SASS task for debug use. Compiles an unminified stylesheet but uses canon naming structure as per minify variable so no links are broken on the page
+gulp.task('sass-debug', function () {
+	return gulp.src('dev/sass/*.scss')
+	.pipe(sassGlob())
+	.pipe(sassport([],{outputStyle: 'expanded', precision: 8}))
+    	.pipe(gulpif(minify, rename({ suffix: '.min' })))
+	.on('error', sass.logError)
+	.pipe(autoprefixer({
+		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
+		cascade: false
+	}))
+	.pipe(gulp.dest('./dist/css/'))
+});
+
 gulp.task('uncss', function () {
 	return gulp.src('dist/css/*.css')
 	.pipe(uncss({
@@ -104,6 +118,13 @@ gulp.task('uncss', function () {
 gulp.task('sass-build', function(){
 	runSequence(
 		"sass",
+		"uncss"
+	);
+});
+
+gulp.task('sass-build-debug', function(){
+	runSequence(
+		"sass-debug",
 		"uncss"
 	);
 });
@@ -130,12 +151,23 @@ gulp.task('svg', function () {
 		.pipe(svgmin(function (file) {
 			var prefix = path.basename(file.relative, path.extname(file.relative));
 			return {
-				plugins: [{
-					cleanupIDs: {
-						prefix: prefix + '-',
-						minify: true
+				plugins: [
+					{
+						removeDoctype: true
+					},
+					{
+						removeUselessDefs: true
+					},
+					{
+						removeTitle: true
+					},
+					{
+						cleanupIDs: {
+							prefix: prefix + '-',
+							minify: true
+						}
 					}
-				}]
+				]
 			}
 		}))
 		.pipe(svgstore({ inlineSvg: true }));
