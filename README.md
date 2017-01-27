@@ -67,8 +67,8 @@ Orion allows you to define a grid system of your choice using a config object. S
 
 ```sh
 $grid: (
+  "responsive": true,
   "default": (
-    "responsive": true,
     "max-width": 1170px,
     "columns": 12,
     "gutter": 30px,

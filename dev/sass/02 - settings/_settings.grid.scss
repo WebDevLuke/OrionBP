@@ -7,8 +7,8 @@ Define default grid attributes and any morphs which change the grid as it hits c
 */
 
 $grid: (
+	"responsive": true,
 	"default": (
-		"responsive": true,
 		"max-width": 1170px,
 		"columns": 12,
 		"gutter": 30px,
@@ -17,9 +17,7 @@ $grid: (
 	"morph": (
 		"lg2" : (
 			"max-width": 1600px,
-			"columns": 16,
-			"gutter": 60px,
-			"containerPadding": 30px
+			"columns": 16
 		)
 	)
 );
@@ -32,7 +30,7 @@ $grid: (
 $gridDefault: map-get($grid, "default");
 
 // Set default variables
-$responsive: map-get($gridDefault, "responsive");
+$responsive: map-get($grid, "responsive");
 $maxWidth: map-get($gridDefault, "max-width");
 $columns: map-get($gridDefault, "columns");
 $gutter: map-get($gridDefault, "gutter");

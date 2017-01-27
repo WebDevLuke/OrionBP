@@ -153,10 +153,18 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 			// Get grid match
 			$bp-obj: map-get($gridMorph, $bp-name);
 
-			$maxWidth: map-get($bp-obj, "max-width");
-			$columns: map-get($bp-obj, "columns");
-			$gutter: map-get($bp-obj, "gutter");
-			$padding: map-get($bp-obj, "padding");
+			@if map-has-key($bp-obj, "max-width") {
+				$maxWidth: map-get($bp-obj, "max-width");
+			}
+			@if map-has-key($bp-obj, "columns") {
+				$columns: map-get($bp-obj, "columns");
+			}
+			@if map-has-key($bp-obj, "gutter") {
+				$gutter: map-get($bp-obj, "gutter");
+			}
+			@if map-has-key($bp-obj, "containerPadding") {
+				$containerPadding: map-get($bp-obj, "containerPadding");
+			}
 
 			@include bp(#{$bp-name}) {
 				@include create_container($responsive, $maxWidth, $columns, $gutter, $containerPadding);
@@ -164,7 +172,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 			}
 		}
 	}
-	
+
 	@include bp(#{$bp-name}) {
 		@include create_columns(\@#{$bp-name}, $responsive, $maxWidth, $columns, $gutter);
 		@include create_offsets(\@#{$bp-name}, $responsive, $maxWidth, $columns, $gutter);
