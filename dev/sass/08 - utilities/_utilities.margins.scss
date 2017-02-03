@@ -91,3 +91,83 @@ u-margin-top-huge@xlg
 	}
 }
 
+
+// NEGATIVE MARGIN TOP
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@each $sp-name, $sp-value in $spacing {
+	.u-margin-top-#{$sp-name}-negative {
+		margin-top:rem(-$sp-value) !important;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.u-margin-top-#{$sp-name}-negative\@#{$bp-name} {
+				margin-top:rem(-$sp-value) !important;
+			}
+		}
+	}
+}
+
+
+// NEGATIVE MARGIN RIGHT
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@each $sp-name, $sp-value in $spacing {
+	.u-margin-right-#{$sp-name}-negative {
+		margin-right:rem(-$sp-value) !important;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.u-margin-right-#{$sp-name}-negative\@#{$bp-name} {
+				margin-right:rem(-$sp-value) !important;
+			}
+		}
+	}
+}
+
+
+// NEGATIVE MARGIN BOTTOM
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@each $sp-name, $sp-value in $spacing {
+	.u-margin-bottom-#{$sp-name}-negative {
+		margin-bottom:rem(-$sp-value) !important;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.u-margin-bottom-#{$sp-name}-negative\@#{$bp-name} {
+				margin-bottom:rem(-$sp-value) !important;
+			}
+		}
+	}
+}
+
+
+// NEGATIVE MARGIN LEFT
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@each $sp-name, $sp-value in $spacing {
+	.u-margin-left-#{$sp-name}-negative {
+		margin-left:rem(-$sp-value) !important;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.u-margin-left-#{$sp-name}-negative\@#{$bp-name} {
+				margin-left:rem(-$sp-value) !important;
+			}
+		}
+	}
+}
+

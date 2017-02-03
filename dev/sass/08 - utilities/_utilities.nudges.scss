@@ -91,3 +91,83 @@ u-nudge-top-huge@xlg
 	}
 }
 
+
+// NEGATIVE NUDGE TOP
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@each $sp-name, $sp-value in $spacing {
+	.u-nudge-top-#{$sp-name}-negative {
+		top:rem($sp-value) !important;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.u-nudge-top-#{$sp-name}-negative\@#{$bp-name} {
+				top:rem(-$sp-value) !important;
+			}
+		}
+	}
+}
+
+
+// NEGATIVE NUDGE RIGHT
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@each $sp-name, $sp-value in $spacing {
+	.u-nudge-right-#{$sp-name}-negative {
+		right:rem(-$sp-value) !important;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.u-nudge-right-#{$sp-name}-negative\@#{$bp-name} {
+				right:rem(-$sp-value) !important;
+			}
+		}
+	}
+}
+
+
+// NEGATIVE NUDGE BOTTOM
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@each $sp-name, $sp-value in $spacing {
+	.u-nudge-bottom-#{$sp-name}-negative {
+		bottom:rem(-$sp-value) !important;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.u-nudge-bottom-#{$sp-name}-negative\@#{$bp-name} {
+				bottom:rem(-$sp-value) !important;
+			}
+		}
+	}
+}
+
+
+// NEGATIVE NUDGE LEFT
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+@each $sp-name, $sp-value in $spacing {
+	.u-nudge-left-#{$sp-name}-negative {
+		left:rem(-$sp-value) !important;
+	}
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.u-nudge-left-#{$sp-name}-negative\@#{$bp-name} {
+				left:rem(-$sp-value) !important;
+			}
+		}
+	}
+}
+

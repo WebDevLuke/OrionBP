@@ -12,7 +12,7 @@ http://csswizardry.com/2011/10/the-island-object/
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-<div class="o-box-tiny@md">
+<div class="o-box">
 	CONTENT
 </div>
 */
@@ -21,18 +21,28 @@ http://csswizardry.com/2011/10/the-island-object/
 [1] So we can apply the `.o-box` class to naturally-inline elements.
 */
 
-[class*="o-box"] {
+.o-box {
 	@include clearfix();
 	display: block; /* [1] */
 }
+
+
+// SIZE MODIFIERS
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
 Generates variants in padding size using data from settings.spacing
 */
 
+/*
+<div class="o-box--tiny@md">
+	CONTENT
+</div>
+*/
+
 // Generate using settings.spacing
 @each $sp-name, $sp-value in $spacing {
-	.o-box-#{$sp-name} {
+	.o-box--#{$sp-name} {
 		padding:rem($sp-value);
 	}
 }
@@ -41,7 +51,7 @@ Generates variants in padding size using data from settings.spacing
 @each $bp-name, $bp-value in $breakpoints {
 	@include bp(#{$bp-name}) {
 		@each $sp-name, $sp-value in $spacing {
-			.o-box-#{$sp-name}\@#{$bp-name} {
+			.o-box--#{$sp-name}\@#{$bp-name} {
 				padding:rem($sp-value);
 			}
 		}
