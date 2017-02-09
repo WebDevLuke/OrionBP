@@ -109,9 +109,7 @@ $grid: (
   'morph': (
     "lg" : (
       "max-width": 1600px,
-      "columns": 16,
-      "gutter": 30px,
-      "containerPadding": 30px
+      "columns": 16
     )
   )
 );
@@ -158,9 +156,11 @@ On build SASS auto generates all the required classes you will need to construct
 
 ```sh
 <div class="o-container">
-  <div class="o-col-4"></div>
-  <div class="o-col-4"></div>
-  <div class="o-col-4"></div>
+  <div class="o-row">
+    <div class="o-col-4"></div>
+    <div class="o-col-4"></div>
+    <div class="o-col-4"></div>
+  </div>
 </div>
 ```
 This is a basic 4/4/4 grid which doesn't change.
@@ -169,9 +169,11 @@ This is a basic 4/4/4 grid which doesn't change.
 
 ```sh
 <div class="o-container">
-  <div class="o-col-4 o-col-1@md"></div>
-  <div class="o-col-4 o-col-5@md"></div>
-  <div class="o-col-4 o-col-6@md"></div>
+  <div class="o-row">
+    <div class="o-col-4 o-col-1@md"></div>
+    <div class="o-col-4 o-col-5@md"></div>
+    <div class="o-col-4 o-col-6@md"></div>
+  </div>
 </div>
 ```
 Here we introduce breakpoint classes which have been automatically created by SASS using the data entered in `/dev/data/breakpoints.json`. As this is a mobile-first framework, we start off with a basic 4/4/4 grid and as we scale up and hit the med breakpoint at 640px it will change to 1/5/6.
@@ -180,9 +182,11 @@ Here we introduce breakpoint classes which have been automatically created by SA
 
 ```sh
 <div class="o-container">
-  <div class="o-col-4@sm o-col-12@md o-col-4@lg o-col-6@lg"></div>
-  <div class="u-col-offset-4@sm o-col-4@sm o-col-6@md u-col-offset-4@lg o-col-4@lg o-col-6@lg"></div>
-  <div class="u-hide@sm u-show@md o-col-6@md u-col-offset-8@lg o-col-4@lg o-col-16@lg"></div>
+  <div class="o-row">
+    <div class="o-col-4@sm o-col-12@md o-col-4@lg o-col-6@lg"></div>
+    <div class="u-col-offset-4@sm o-col-4@sm o-col-6@md u-col-offset-4@lg o-col-4@lg o-col-6@lg"></div>
+    <div class="u-hide@sm u-display-block@md o-col-6@md u-col-offset-8@lg o-col-4@lg o-col-16@lg"></div>
+  </div>
 </div>
 ```
 Here is an advanced example of how we can combine breakpoint classes to significantly alter our columns as we increase our browser resolution. 
@@ -195,9 +199,11 @@ When writing SASS, you also have access to breakpoints which allow you to genera
 **HTML**
 ```sh
 <div class="o-container">
-  <div class="o-col-4"></div>
-  <div class="o-col-4"></div>
-  <div class="o-col-4"></div>
+  <div class="o-row">
+    <div class="o-col-4"></div>
+    <div class="o-col-4"></div>
+    <div class="o-col-4"></div>
+  </div>
 </div>
 ```
 
@@ -235,9 +241,11 @@ In the above, we give each div within the container a pseudo element and then ch
 **HTML**
 ```sh
 <div class="o-container">
-  <div class="o-col-4@sm o-col-12@md o-col-4@lg o-col-6@lg"></div>
-  <div class="u-col-offset-4@sm o-col-4@sm o-col-6@md u-col-offset-4@lg o-col-4@lg o-col-6@lg"></div>
-  <div class="u-hide@sm u-show@md o-col-6@md u-col-offset-8@lg o-col-4@lg o-col-16@lg"></div>
+  <div class="o-row">
+    <div class="o-col-4@sm o-col-12@md o-col-4@lg o-col-6@lg"></div>
+    <div class="u-col-offset-4@sm o-col-4@sm o-col-6@md u-col-offset-4@lg o-col-4@lg o-col-6@lg"></div>
+    <div class="u-hide@sm u-display-block@md o-col-6@md u-col-offset-8@lg o-col-4@lg o-col-16@lg"></div>
+  </div>
 </div>
 ```
 

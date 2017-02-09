@@ -39,11 +39,38 @@ This is an example of a regular component modifier as per BEM naming convention
 }
 
 
+// BEM MIX EXAMPLE
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+An example of a BEM mix. Useful for when nesting components within others. For example, if we want to introduce 
+new styles to our c-icon component when its nested within our button component instead of tampering with our original icon
+component we create a brand new element for our button component with a name which is a "mix" of our 2 components.
+
+Quoting the below:
+"This avoids the question of where things live, it reduces the specificity by avoiding nesting, and also prevents mutation 
+by avoiding repeating the .btn class again. Magical."
+
+https://csswizardry.com/2017/02/code-smells-in-css-revisited/#bem-mixes
+*/
+
+/*
+<a href="/" class="c-btn">
+	<svg class="c-icon c-btn__icon"></svg>
+</a>
+*/
+
+.c-btn__icon {
+
+}
+
+
 // STATEFUL MODIFIER EXAMPLE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-This is an example of a component with styles which appear following the addition of a stateful class
+This is an example of a component with a stateful class. This stateful class represents a change of state.
+The below example would target a button which has an active state.
 */
 
 /*
@@ -53,27 +80,5 @@ This is an example of a component with styles which appear following the additio
 */
 
 .c-btn.is-active {
-
-}
-
-
-// NESTED MODIFIER EXAMPLE
-//--------------------------------------------------------------------------------------------------------------------------------------
-
-/*
-If a component needs to be positioned when nested within another component, create stateful modifiers here to
-declare that behavour.
-
-These stateful modifiers should only affect positioning (floats, positions etc) and should not affect the cosmetics
-of the component, which is the job of the regular modifier.
-
-The use of stateful modifiers rather than simple nesting is preferred as it doesn't change the 
-original component and violate the open/closed principle. It also leads to more readable HTML.
-
-https://en.wikipedia.org/wiki/Open/closed_principle
-http://csswizardry.com/2015/06/contextual-styling-ui-components-nesting-and-implementation-detail/
-*/
-
-.c-btn.in-mycomponent {
 
 }

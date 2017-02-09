@@ -11,6 +11,7 @@ as we want without fear of bloating our compiled CSS file as UNCSS filters out u
 // Set spacing variants
 $spacing: (
 	"none": 0px,
+	"atomic": 2px,
 	"micro": 5px,
 	"tiny": 10px,
 	"small": 15px,
