@@ -14,34 +14,34 @@ to replicate flush gutter on grid columns.
 
 // Remove vertical padding
 .u-padding-vertical-none {
-	padding-top:0;
-	padding-bottom:0;
+	padding-top:0 !important;
+	padding-bottom:0 !important;
 }
 
 // Remove horizontal padding
 .u-padding-horizontal-none {
-	padding-left:0;
-	padding-right:0;
+	padding-left:0 !important;
+	padding-right:0 !important;
 }
 
 // Remove top padding
 .u-padding-top-none {
-	padding-top:0;
+	padding-top:0 !important;
 }
 
 // Remove right padding
 .u-padding-right-none {
-	padding-right:0;
+	padding-right:0 !important;
 }
 
 // Remove bottom padding
 .u-padding-bottom-none {
-	padding-bottom:0;
+	padding-bottom:0 !important;
 }
 
 // Remove left padding
 .u-padding-left-none {
-	padding-left:0;
+	padding-left:0 !important;
 }
 
 
@@ -60,39 +60,39 @@ to replicate flush gutter on grid columns.
 		// Remove vertical padding
 		// Example: u-padding-vertical-none@md
 		.u-padding-vertical-none\@#{$bp-name} {
-			padding-top:0;
-			padding-bottom:0;
+			padding-top:0 !important;
+			padding-bottom:0 !important;
 		}
 
 		// Remove horizontal padding
 		// Example: u-padding-horizontal-none@md
 		.u-padding-horizontal-none\@#{$bp-name} {
-			padding-left:0;
-			padding-right:0;
+			padding-left:0 !important;
+			padding-right:0 !important;
 		}
 
 		// Remove top padding
 		// Example: u-padding-top-none@md
 		.u-padding-top-none\@#{$bp-name} {
-			padding-top:0;
+			padding-top:0 !important;
 		}
 
 		// Remove right padding
 		// Example: u-padding-right-none@md
 		.u-padding-right-none\@#{$bp-name} {
-			padding-right:0;
+			padding-right:0 !important;
 		}
 
 		// Remove bottom padding
 		// Example: u-padding-bottom-none@md
 		.u-padding-bottom-none\@#{$bp-name} {
-			padding-bottom:0;
+			padding-bottom:0 !important;
 		}
 
 		// Remove left padding
 		// Example: u-padding-left-none@md
 		.u-padding-left-none\@#{$bp-name} {
-			padding-left:0;
+			padding-left:0 !important;
 		}
 	}
 }
@@ -109,39 +109,39 @@ to replicate flush gutter on grid columns.
 		// Remove vertical padding
 		// Example: u-padding-vertical-none@max-md
 		.u-padding-vertical-none\@max-#{$bp-name} {
-			padding-top:0;
-			padding-bottom:0;
+			padding-top:0 !important;
+			padding-bottom:0 !important;
 		}
 
 		// Remove horizontal padding
 		// Example: u-padding-horizontal-none@max-md
 		.u-padding-horizontal-none\@max-#{$bp-name} {
-			padding-left:0;
-			padding-right:0;
+			padding-left:0 !important;
+			padding-right:0 !important;
 		}
 
 		// Remove top padding
 		// Example: u-padding-top-none@max-md
 		.u-padding-top-none\@max-#{$bp-name} {
-			padding-top:0;
+			padding-top:0 !important;
 		}
 
 		// Remove right padding
 		// Example: u-padding-right-none@max-md
 		.u-padding-right-none\@max-#{$bp-name} {
-			padding-right:0;
+			padding-right:0 !important;
 		}
 
 		// Remove bottom padding
 		// Example: u-padding-bottom-none@max-md
 		.u-padding-bottom-none\@max-#{$bp-name} {
-			padding-bottom:0;
+			padding-bottom:0 !important;
 		}
 
 		// Remove left padding
 		// Example: u-padding-left-none@max-md
 		.u-padding-left-none\@max-#{$bp-name} {
-			padding-left:0;
+			padding-left:0 !important;
 		}
 	}
 }
