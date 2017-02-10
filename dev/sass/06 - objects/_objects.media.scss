@@ -91,7 +91,7 @@ Alter the spacing in between image and text
 */
 
 /*
-<div class="o-media o-media--spacing-tiny">
+<div class="o-media o-media--spacing-small">
 	<img src="" alt="" class="o-media__image">
 	<p class="o-media__body">
 		CONTENT
@@ -99,6 +99,8 @@ Alter the spacing in between image and text
 </div>
 */
 
+// Generate using settings.spacing
+// Example: o-media--spacing-small
 @each $sp-name, $sp-value in $spacing {
 	.o-media--spacing-#{$sp-name} {
 		& > .o-media__image {
@@ -107,6 +109,44 @@ Alter the spacing in between image and text
 
 		&.o-media--reverse > .o-media__image {
 			margin-left:rem($sp-value);
+		}
+	}
+}
+
+// Generate using settings.spacing
+// Change spacing when breakpoint is hit
+// Example: o-media--spacing-small@md
+@each $bp-name, $bp-value in $breakpoints {
+	@include bp(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.o-media--spacing-#{$sp-name}\@#{$bp-name}  {
+				& > .o-media__image {
+					margin-right:rem($sp-value);
+				}
+
+				&.o-media--reverse > .o-media__image {
+					margin-left:rem($sp-value);
+				}
+			}
+		}
+	}
+}
+
+// Generate using settings.spacing
+// Change spacing until breakpoint is hit
+// Example: o-media--spacing-small@max-md
+@each $bp-name, $bp-value in $breakpoints {
+	@include bpMax(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.o-media--spacing-#{$sp-name}\@max-#{$bp-name}  {
+				& > .o-media__image {
+					margin-right:rem($sp-value);
+				}
+
+				&.o-media--reverse > .o-media__image {
+					margin-left:rem($sp-value);
+				}
+			}
 		}
 	}
 }

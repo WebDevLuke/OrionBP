@@ -112,6 +112,8 @@ Change the vertical alignment of flag contents. Default: middle.
 }
 
 // Create responsive variants using data/breakpoints.json
+// Changes vertical alignment once breakpoint is hit
+// Example: o-flag--top@md
 @each $bp-name, $bp-value in $breakpoints {
 	@include bp(#{$bp-name}) {
 		.o-flag--top\@#{$bp-name} {
@@ -127,6 +129,31 @@ Change the vertical alignment of flag contents. Default: middle.
 			}
 		}
 		.o-flag--bottom\@#{$bp-name} {
+			> .o-flag__image,
+			> .o-flag__body {
+				vertical-align: bottom;
+			}
+		}
+	}
+}
+
+// Changes vertical alignment until breakpoint is hit
+// Example: o-flag--top@max-md
+@each $bp-name, $bp-value in $breakpoints {
+	@include bpMax(#{$bp-name}) {
+		.o-flag--top\@max-#{$bp-name} {
+			> .o-flag__image,
+			> .o-flag__body {
+				vertical-align: top;
+			}
+		}
+		.o-flag--middle\@max-#{$bp-name} {
+			> .o-flag__image,
+			> .o-flag__body {
+				vertical-align: middle;
+			}
+		}
+		.o-flag--bottom\@max-#{$bp-name} {
 			> .o-flag__image,
 			> .o-flag__body {
 				vertical-align: bottom;
@@ -156,6 +183,7 @@ and everything needs to stack up
 */
 
 // Generate using settings.spacing
+// Example: o-flag--fixed-image-small
 @each $sp-name, $sp-value in $spacing {
 	.o-flag--fixed-image-#{$sp-name} .o-flag__image {
 		width:rem($sp-value);
@@ -164,10 +192,26 @@ and everything needs to stack up
 }
 
 // Create responsive variants using data/breakpoints.json
+// Changes width and max width when breakpoint is hit
+// Example: o-flag--fixed-image-small@md
 @each $bp-name, $bp-value in $breakpoints {
 	@include bp(#{$bp-name}) {
 		@each $sp-name, $sp-value in $spacing {
 			.o-flag--fixed-image-#{$sp-name}\@#{$bp-name} .o-flag__image {
+				width:rem($sp-value);
+				max-width:rem($sp-value);
+			}
+		}
+	}
+}
+
+// Create responsive variants using data/breakpoints.json
+// Changes width and max width until breakpoint is hit
+// Example: o-flag--fixed-image-small@max-md
+@each $bp-name, $bp-value in $breakpoints {
+	@include bpMax(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.o-flag--fixed-image-#{$sp-name}\@-max#{$bp-name} .o-flag__image {
 				width:rem($sp-value);
 				max-width:rem($sp-value);
 			}
@@ -195,6 +239,7 @@ Alter the spacing in between image and text
 */
 
 // Generate using settings.spacing
+// Example o-flag--spacing-small
 @each $sp-name, $sp-value in $spacing {
 	.o-flag--spacing-#{$sp-name} {
 		& > .o-flag__image {
@@ -207,10 +252,30 @@ Alter the spacing in between image and text
 }
 
 // Create responsive variants using data/breakpoints.json
+// Changes padding once breakpoint is hit
+// Example o-flag--spacing@md
 @each $bp-name, $bp-value in $breakpoints {
 	@include bp(#{$bp-name}) {
 		@each $sp-name, $sp-value in $spacing {
 			.o-flag--spacing-#{$sp-name}\@#{$bp-name} {
+				& > .o-flag__image {
+					padding-right:rem($sp-value);
+				}
+				&.o-flag--reverse > .o-flag__image {
+					padding-left:rem($sp-value);
+				}
+			}
+		}
+	}
+}
+
+// Create responsive variants using data/breakpoints.json
+// Changes padding until breakpoint is hit
+// Example o-flag--spacing@max-md
+@each $bp-name, $bp-value in $breakpoints {
+	@include bpMax(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.o-flag--spacing-#{$sp-name}\@max-#{$bp-name} {
 				& > .o-flag__image {
 					padding-right:rem($sp-value);
 				}

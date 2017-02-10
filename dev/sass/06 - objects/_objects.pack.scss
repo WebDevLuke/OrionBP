@@ -79,6 +79,7 @@ absorb outer margin and align.
 */
 
 // Generate using settings.spacing
+// Example o-pack--spacing-small
 @each $sp-name, $sp-value in $spacing {
 	.o-pack--spacing-#{$sp-name} {
 		border-spacing: rem($sp-value);
@@ -90,6 +91,8 @@ absorb outer margin and align.
 }
 
 // Create responsive variants using data/breakpoints.json
+// Changes spacing when breakpoint is hit
+// Example o-pack--spacing-small@md
 @each $bp-name, $bp-value in $breakpoints {
 	@include bp(#{$bp-name}) {
 		@each $sp-name, $sp-value in $spacing {
@@ -97,6 +100,23 @@ absorb outer margin and align.
 				border-spacing: rem($sp-value);
 			}
 			.o-pack-container-#{$sp-name}\@#{$bp-name} {
+				margin-left: rem(-$sp-value);
+				margin-right: rem(-$sp-value);
+			}
+		}
+	}
+}
+
+// Create responsive variants using data/breakpoints.json
+// Changes spacing until breakpoint is hit
+// Example o-pack--spacing-small@max-md
+@each $bp-name, $bp-value in $breakpoints {
+	@include bpMax(#{$bp-name}) {
+		@each $sp-name, $sp-value in $spacing {
+			.o-pack--spacing-#{$sp-name}\@max-#{$bp-name} {
+				border-spacing: rem($sp-value);
+			}
+			.o-pack-container-#{$sp-name}\@max-#{$bp-name} {
 				margin-left: rem(-$sp-value);
 				margin-right: rem(-$sp-value);
 			}

@@ -55,6 +55,8 @@ global-line-height variable defined in settings.typography.
 }
 
 // Create responsive variants using data/breakpoints.json
+// Changes amount of visible text once breakpoint is hit
+// Example: o-expander--partial-tiny@md
 @each $bp-name, $bp-value in $breakpoints {
 	@include bp(#{$bp-name}) {
 		.o-expander--partial-tiny\@#{$bp-name} {
@@ -74,6 +76,32 @@ global-line-height variable defined in settings.typography.
 		}
 
 		.o-expander--partial-huge\@#{$bp-name} {
+			max-height:calc(#{$global-line-height}em * 15);
+		}
+	}
+}
+
+// Changes amount of visible text until breakpoint is hit
+// Example: o-expander--partial-tiny@max-md
+@each $bp-name, $bp-value in $breakpoints {
+	@include bpMax(#{$bp-name}) {
+		.o-expander--partial-tiny\@max-#{$bp-name} {
+			max-height:calc(#{$global-line-height}em * 3);
+		}
+
+		.o-expander--partial-small\@max-#{$bp-name} {
+			max-height:calc(#{$global-line-height}em * 6);
+		}
+
+		.o-expander--partial-regular\@max-#{$bp-name} {
+			max-height:calc(#{$global-line-height}em * 9);
+		}
+
+		.o-expander--partial-large\@max-#{$bp-name} {
+			max-height:calc(#{$global-line-height}em * 12);
+		}
+
+		.o-expander--partial-huge\@max-#{$bp-name} {
 			max-height:calc(#{$global-line-height}em * 15);
 		}
 	}
@@ -99,6 +127,7 @@ Controls behaviour once is-active class is added
 Disables the expander once a certain breakpoint has been hit.
 */
 
+// Example: o-expander--disable@md
 @each $bp-name, $bp-value in $breakpoints {
 	@include bp(#{$bp-name}) {
 		.o-expander--disable\@#{$bp-name} {
@@ -112,6 +141,7 @@ Disables the expander once a certain breakpoint has been hit.
 Enables the expander once a certain breakpoint has been hit.
 */
 
+// Example: o-expander--enable@md
 @each $bp-name, $bp-value in $breakpoints {
 	@include bpMax(#{$bp-name}) {
 		.o-expander--enable\@#{$bp-name} {

@@ -25,10 +25,8 @@ Utility class for floats
 // RESPONSIVE
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-/*
-Example: .u-clear@xlg
-*/
-
+// Changes float when breakpoint is hit
+// Example: .u-float-left@md
 @each $bp-name, $bp-value in $breakpoints	{
 	@include bp(#{$bp-name}) {
 		.u-float-left\@#{$bp-name} {
@@ -40,6 +38,24 @@ Example: .u-clear@xlg
 		}
 
 		.u-clear\@#{$bp-name} {
+			clear: both !important;
+		}		
+	}
+}
+
+// Changes float until breakpoint is hit
+// Example: .u-float-left@max-md
+@each $bp-name, $bp-value in $breakpoints	{
+	@include bpMax(#{$bp-name}) {
+		.u-float-left\@max-#{$bp-name} {
+			float:left !important;
+		}
+
+		.u-float-right\@max-#{$bp-name} {
+			float:right !important;
+		}
+
+		.u-clear\@max-#{$bp-name} {
 			clear: both !important;
 		}		
 	}
