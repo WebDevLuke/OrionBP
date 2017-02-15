@@ -24,6 +24,7 @@ Orion takes inspiration and ideas from many sources, including but not limited t
 * [Grid system](#grid-system)
 * [Breakpoint usage in SASS](#breakpoint-usage-in-sass)
 * [Breakpoint usage in JavaScript](#breakpoint-usage-in-javascript)
+* [Configuring SASS spacing](#configuring-sass-object-and-utility-spacing-variants)
 * [Further documentation](#further-documentation)
 * [About the developer](#about-the-developer)
 
@@ -304,7 +305,7 @@ The above is a simple check to see if the browser window is wide enough to hit t
 - Check if a max-width desktop-first breakpoint has been hit: `if(bp.max("$bp"))` *Example: if(bp.max("sm"))*
 - Check if your window is currently inbetween 2 breakpoints: `if(bp.between("$from, $to"))` *Example: if(bp.between("sm", "md"))*
 
-## Configuring SASS spacing
+## Configuring SASS object and utility spacing variants
 
 ```sh
 $spacing: (
