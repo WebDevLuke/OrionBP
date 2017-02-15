@@ -3,7 +3,7 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Manually fires the specified event
+Manually fires the given event for the given element
 */
 
 module.exports = function(elem, event) {

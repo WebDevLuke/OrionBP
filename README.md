@@ -6,7 +6,8 @@
 ## What is Orion Framework?
 Orion is a mobile-first HTML/CSS/JS framework. It's a simple, easy to use and quick way of getting your responsive web project off the ground. 
 
-- **SASS Powered** - Enter the max width, number of columns, gutter and padding of a grid system of your choice and SASS will automatically generate all the CSS classes and media query mixins for you.
+- **ITCSS Powered** - Orion uses the popular ITCSS methodology to organise its SASS and includes many useful object and utility classes out of the box. 
+- **Easily Configurable Grid System** - Enter the max width, number of columns, gutter and padding of a grid system of your choice and SASS will automatically generate all the CSS classes and media query mixins for you.
 - **Share Breakpoints** - Manage your media query breakpoints in one file which then automatically filter into both the SASS framework and JS.
 - **Build with Gulp** - Orion comes with pre-built Gulp tasks allowing you to compress and concatenate your CSS, JS and image assets automatically.
 
@@ -299,6 +300,12 @@ if(bp.min("md")){
 }
 ```
 The above is a simple check to see if the browser window is wide enough to hit the 'med' breakpoint.
+
+This is a helper function and so first has to be imported into your script using `require`. As seen below.
+
+```sh
+var bp = require("../helpers/breakpoints.js");
+```
 
 
 #### List of breakpoint functions
