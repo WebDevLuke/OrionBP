@@ -67,10 +67,6 @@ Reverse the padding for the image. Requires you to manually switch position of i
 </div>
 */
 
-.o-flag--reverse > .o-flag__image {
-	padding-right:0;
-}
-
 
 // FLAG ALIGNMENT MODIFIERS
 //--------------------------------------------------------------------------------------------------------------------------------------
@@ -247,6 +243,7 @@ Alter the spacing in between image and text
 		}
 		&.o-flag--reverse > .o-flag__image {
 			padding-left:rem($sp-value);
+			padding-right:0;
 		}
 	}
 }
@@ -263,6 +260,7 @@ Alter the spacing in between image and text
 				}
 				&.o-flag--reverse > .o-flag__image {
 					padding-left:rem($sp-value);
+					padding-right:0;
 				}
 			}
 		}
@@ -281,6 +279,7 @@ Alter the spacing in between image and text
 				}
 				&.o-flag--reverse > .o-flag__image {
 					padding-left:rem($sp-value);
+					padding-right:0;
 				}
 			}
 		}

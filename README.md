@@ -9,7 +9,6 @@ Orion is a mobile-first HTML/CSS/JS framework. It's a simple, easy to use and qu
 - **SASS Powered** - Enter the max width, number of columns, gutter and padding of a grid system of your choice and SASS will automatically generate all the CSS classes and media query mixins for you.
 - **Share Breakpoints** - Manage your media query breakpoints in one file which then automatically filter into both the SASS framework and JS.
 - **Build with Gulp** - Orion comes with pre-built Gulp tasks allowing you to compress and concatenate your CSS, JS and image assets automatically.
-- **Bloat-free** - Orion comes packaged with just a SASS framework, a few handy mixins and a Gulp setup for building and watching.
 
 Orion takes inspiration and ideas from many sources, including but not limited to the following:
 
@@ -73,14 +72,6 @@ $grid: (
     "columns": 12,
     "gutter": 30px,
     "containerPadding": 30px
-  ),
-  'morph': (
-    "lg" : (
-      "max-width": 1600px,
-      "columns": 16,
-      "gutter": 30px,
-      "containerPadding": 30px
-    )
   )
 );
 ```
@@ -115,7 +106,7 @@ $grid: (
 );
 ```
 
-The above example defines a **1170px 12 column grid system** which morphs into a **1600px 16 column grid system** once the `lg` breakpoint has been hit.
+The above example defines a **1170px 12 column grid system** which morphs into a **1600px 16 column grid system** once the `lg` breakpoint defined in `/dev/data/breakpoints.json` has been hit.
 
 
 #### Gulp
@@ -125,6 +116,8 @@ To tweak the settings for what happens during the build process open '/gulpfile.
 var minify = true;
 ```
 If set to `true`, all concatenated CSS and JavaScript will then be minified to reduce files sizes.
+
+Note: If you just need to compile SASS un-minified, you can do so using the `sass-debug` task.
 
 
 ## Creating builds
@@ -143,6 +136,7 @@ More specifically `gulp build` outputs the following in `/dist/`:
 - Compiled &amp; minified CSS, with unused CSS classes removed
 - Concatenated &amp; minified JS
 - Compressed images
+- PHP files are copied across unmodified with their directory structure intact
 - Any misc files you have in the root of `/dev/` (unmodified)
 
 After your initial build, it's a good idea to run `gulp watch`. This will tell Gulp to watch for any changes you make to individual files and upon detection will process those individual files in the same manner as they would be during `gulp build`. So if you're working on the SASS there's no need to re-run `gulp build` after every change as `gulp watch` will have already picked the change up and acted accordingly.
@@ -303,11 +297,48 @@ if(bp.min("md")){
 ```
 The above is a simple check to see if the browser window is wide enough to hit the 'med' breakpoint.
 
+
 #### List of breakpoint functions
 
 - Check if a min-width mobile-first breakpoint has been hit: `if(bp.min("$bp"))` *Example: if(bp.min("sm"))*
 - Check if a max-width desktop-first breakpoint has been hit: `if(bp.max("$bp"))` *Example: if(bp.max("sm"))*
 - Check if your window is currently inbetween 2 breakpoints: `if(bp.between("$from, $to"))` *Example: if(bp.between("sm", "md"))*
+
+## Configuring SASS spacing
+
+```sh
+$spacing: (
+  "none": 0px,
+  "atomic": 2px,
+  "micro": 5px,
+  "tiny": 10px,
+  "small": 15px,
+  "reduced": 20px,
+  "regular": 25px,
+  "increased": 30px,
+  "large": 35px,
+  "huge": 40px,
+  "giant": 50px,
+  "mega": 60px,
+  "giga": 70px,
+  "terra": 80px
+);
+```
+Many objects and utility classes within Orion have spacing variants which are automatically generated on build. These can be defined in `/dev/sass/02 - settings/_settings.spacing`. The default variants can be found above.
+
+```sh
+  @include bp(#{$bp-name}) {
+    @each $sp-name, $sp-value in $spacing {
+      .u-margin-bottom-#{$sp-name}\@#{$bp-name} {
+        margin-bottom:rem($sp-value) !important;
+      }
+    }
+  }
+```
+
+With the default spacing map, 14 variants of each linked object or utility class will be generated on build (For example: `u-margin-bottom-small`), and often a responsive variant based on the data in `/dev/data/breakpoints.json` will in addition be generated (For example: `u-margin-bottom-small@lg`).
+
+To prevent bloat, on `gulp build` UNCSS scans your HTML and filters out unused classes, meaning only the classes referenced in your HTML are included in your compiled CSS.
 
 ## Further documentation
 The codebase is fully documented where appropriate so for a more indepth explanation of each component that's the place to look.
