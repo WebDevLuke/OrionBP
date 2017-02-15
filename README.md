@@ -24,7 +24,7 @@ Orion takes inspiration and ideas from many sources, including but not limited t
 * [Grid system](#grid-system)
 * [Breakpoint usage in SASS](#breakpoint-usage-in-sass)
 * [Breakpoint usage in JavaScript](#breakpoint-usage-in-javascript)
-* [Configuring SASS spacing](#configuring-sass-object-and-utility-spacing-variants)
+* [Configuring SASS object and utility spacing variants](#configuring-sass-object-and-utility-spacing-variants)
 * [Further documentation](#further-documentation)
 * [About the developer](#about-the-developer)
 
@@ -110,7 +110,7 @@ $grid: (
 The above example defines a **1170px 12 column grid system** which morphs into a **1600px 16 column grid system** once the `lg` breakpoint defined in `/dev/data/breakpoints.json` has been hit.
 
 
-#### Gulp
+#### Configuring Gulp
 To tweak the settings for what happens during the build process open '/gulpfile.js'
 
 ```sh
@@ -134,13 +134,15 @@ Orion-Framework/
 
 More specifically `gulp build` outputs the following in `/dist/`:
 - HTML (unmodified)
-- Compiled &amp; minified CSS, with unused CSS classes removed
+- Compiled &amp; minified CSS, with unused CSS classes removed via UNCSS
 - Concatenated &amp; minified JS
 - Compressed images
 - PHP files are copied across unmodified with their directory structure intact
 - Any misc files you have in the root of `/dev/` (unmodified)
 
 After your initial build, it's a good idea to run `gulp watch`. This will tell Gulp to watch for any changes you make to individual files and upon detection will process those individual files in the same manner as they would be during `gulp build`. So if you're working on the SASS there's no need to re-run `gulp build` after every change as `gulp watch` will have already picked the change up and acted accordingly.
+
+If you need to compile SASS, but have it unminified and untouched by UNCSS, you can use the `gulp sass-debug` task.
 
 
 ## Grid system
