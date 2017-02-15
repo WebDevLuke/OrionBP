@@ -27,17 +27,13 @@ Utilities – utilities and helper classes with the ability to override anything
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-[1] We import settings manually as load order matters here
-[2] Manually import normalize.css into generic layer from node_modules
+[1] Manually import normalize.css into generic layer from node_modules
 */
 
 @import "01 - vendors/*";
-@import "02 - settings/_settings.breakpoints"; /* [1] */
-@import "02 - settings/_settings.grid"; /* [1] */
-@import "02 - settings/_settings.typography"; /* [1] */
-@import "02 - settings/_settings.spacing"; /* [1] */
+@import "02 - settings/*";
 @import "03 - tools/*";
-@import "../../node_modules/normalize.css/normalize"; /* [2] */
+@import "../../node_modules/normalize.css/normalize"; /* [1] */
 @import "04 - generic/*";
 @import "05 - elements/*";
 @import "06 - objects/*";
