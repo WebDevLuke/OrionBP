@@ -327,16 +327,16 @@ $spacing: (
 Many objects and utility classes within Orion have spacing variants which are automatically generated on build. These can be defined in `/dev/sass/02 - settings/_settings.spacing`. The default variants can be found above.
 
 ```sh
-  @include bp(#{$bp-name}) {
-    @each $sp-name, $sp-value in $spacing {
-      .u-margin-bottom-#{$sp-name}\@#{$bp-name} {
-        margin-bottom:rem($sp-value) !important;
-      }
+@include bp(#{$bp-name}) {
+  @each $sp-name, $sp-value in $spacing {
+    .u-margin-bottom-#{$sp-name}\@#{$bp-name} {
+      margin-bottom:rem($sp-value) !important;
     }
   }
+}
 ```
 
-With the default spacing map, 14 variants of each linked object or utility class will be generated on build (For example: `u-margin-bottom-small`), and often a responsive variant based on the data in `/dev/data/breakpoints.json` will in addition be generated (For example: `u-margin-bottom-small@lg`).
+With the default spacing map, 14 variants of each linked object or utility class will be generated on build from the code above (For example: `u-margin-bottom-small`). Often a responsive variant based on the data in `/dev/data/breakpoints.json` will also be generated (For example: `u-margin-bottom-small@lg`).
 
 To prevent bloat, on `gulp build` UNCSS scans your HTML and filters out unused classes, meaning only the classes referenced in your HTML are included in your compiled CSS.
 
@@ -345,4 +345,4 @@ The codebase is fully documented where appropriate so for a more indepth explana
 
 
 ## About the developer
-I'm Luke Harrison, a Sheffield-based Web Designer &amp; Developer from the UK. I currently work at internet service provider Plusnet and when I'm not there I work on interesting side projects to further my knowledge such as this very framework. Read more about me at [lukeharrison.net](http://www.lukeharrison.net) or follow me on twitter at [@WebDevLuke](https://twitter.com/WebDevLuke).
+I'm Luke Harrison, a Sheffield-based Web Designer &amp; Developer from the UK. I currently work at Evolution Funding: The UK’s leading motor finance intermediary. When I'm not there I work on interesting side projects to further my knowledge such as this very framework. Read more about me at [lukeharrison.net](http://www.lukeharrison.net) or follow me on twitter at [@WebDevLuke](https://twitter.com/WebDevLuke).
