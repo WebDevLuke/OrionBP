@@ -40,6 +40,8 @@ var svgstore = require('gulp-svgstore');
 var svgmin = require('gulp-svgmin');
 var path = require('path');
 var inject = require('gulp-inject');
+// Used to compile nunjacks templates if present
+var nunjucks = require('gulp-nunjucks');
 
 /*
 |--------------------------------------------------------------------
@@ -245,6 +247,7 @@ gulp.task('js', function(){
 
 gulp.task('html-copy', function() {
 	return gulp.src('./dev/html/*.html')
+	.pipe(nunjucks.compile())
 	.pipe(gulp.dest('dist/'));
 });
 
