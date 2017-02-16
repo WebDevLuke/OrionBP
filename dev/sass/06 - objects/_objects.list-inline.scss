@@ -100,11 +100,11 @@ Adds padding between each item. Can also be used in conjunction with delimited m
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Seperate individual list items with the character listed in the $list-inline-delimiter variable
+Seperate individual list items with a specific character
 */
 
 /*
-<ul class="o-list-inline o-list-inline--delimited">
+<ul class="o-list-inline o-list-inline--delimited-pipe">
 	<li class="o-list-inline__item">CONTENT</li>
 	<li class="o-list-inline__item">CONTENT</li>
 	<li class="o-list-inline__item">CONTENT</li>
@@ -116,20 +116,30 @@ Seperate individual list items with the character listed in the $list-inline-del
 [2] Remove the last list items delimiter.
 */
 
-$list-inline-delimiter: "|";
-
-.o-list-inline--delimited {
+[class*="o-list-inline--delimited-"] {
 	font-size: 0; /* [1] */
-
 	.o-list-inline__item {
 		font-size: 1rem; /* [1] */
 	}
-
-	.o-list-inline__item:after {
-		content: $list-inline-delimiter;
-	}
-
 	.o-list-inline__item:last-child:after {
 		display:none; /* [2] */
+	}
+}
+
+.o-list-inline--delimited-pipe {
+	.o-list-inline__item:after {
+		content: "|";
+	}
+}
+
+.o-list-inline--delimited-comma {
+	.o-list-inline__item:after {
+		content: ",";
+	}
+}
+
+.o-list-inline--delimited-dash {
+	.o-list-inline__item:after {
+		content: "-";
 	}
 }
