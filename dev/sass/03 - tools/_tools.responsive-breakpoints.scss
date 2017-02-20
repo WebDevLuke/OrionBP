@@ -6,7 +6,6 @@
 Create media queries using breakpoints defined in `data/breakpoints.js`.
 
 Media queries are converted to EM to cover instances where users change font sizes, zoom in, base font size changed in html (https://zellwk.com/blog/media-query-units)
-
 */
 
 
@@ -70,34 +69,31 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 // Mobile first
 @mixin bp($breakpoint, $extras: false) {
 
+	// Set value var
 	$value: null;
 
-	// Only if Responsive Layout
-	@if $responsive == true {
+	// Retrieves the value from the key
+	@if map-has-key($breakpoints, $breakpoint) {
+		$value: map-get($breakpoints, $breakpoint);
+	}
+	@else {
+		@error "`#{$breakpoint}` doesn't exist in `data/breakpoints.js`";
+	}
+ 
+	// If the key exists in the map
+	@if $value != null {
 
-		// Retrieves the value from the key
-		@if map-has-key($breakpoints, $breakpoint) {
-			$value: map-get($breakpoints, $breakpoint);
+		// Convert value to EM
+		$value: $value / $global-font-size * 1em;
+
+		@if $extras {
+			@media (min-width: $value) and ($extras) {
+				@content;
+			}
 		}
 		@else {
-			@error "`#{$breakpoint}` doesn't exist in `data/breakpoints.js`";
-		}
-	 
-		// If the key exists in the map
-		@if $value != null {
-
-			// Convert value to EM
-			$value: $value / $global-font-size * 1em;
-
-			@if $extras {
-				@media (min-width: $value) and ($extras) {
-					@content;
-				}
-			}
-			@else {
-				@media (min-width: $value) {
-					@content;
-				}
+			@media (min-width: $value) {
+				@content;
 			}
 		}
 	}
@@ -106,37 +102,34 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 // Desktop first
 @mixin bpMax($breakpoint, $extras: false) {
 
+	// Set value var
 	$value: null;
 
-	// Only if Responsive Layout
-	@if $responsive == true {
+	// Retrieves the value from the key
+	@if map-has-key($breakpoints, $breakpoint) {
+		$value: map-get($breakpoints, $breakpoint);
+	}
+	@else {
+		@error "`#{$breakpoint}` doesn't exist in `data/breakpoints.js`";
+	}
+ 
+	// If the key exists in the map
+	@if $value != null {
 
-		// Retrieves the value from the key
-		@if map-has-key($breakpoints, $breakpoint) {
-			$value: map-get($breakpoints, $breakpoint);
+		// Add 1px to cover overflow clashes with other min media queries
+		$value: $value - 1px;
+
+		// Convert value to EM
+		$value: $value / $global-font-size * 1em;
+
+		@if $extras {
+			@media (max-width: $value) and ($extras) {
+				@content;
+			}
 		}
 		@else {
-			@error "`#{$breakpoint}` doesn't exist in `data/breakpoints.js`";
-		}
-	 
-		// If the key exists in the map
-		@if $value != null {
-
-			// Add 1px to cover overflow clashes with other min media queries
-			$value: $value - 1px;
-
-			// Convert value to EM
-			$value: $value / $global-font-size * 1em;
-
-			@if $extras {
-				@media (max-width: $value) and ($extras) {
-					@content;
-				}
-			}
-			@else {
-				@media (max-width: $value) {
-					@content;
-				}
+			@media (max-width: $value) {
+				@content;
 			}
 		}
 	}
@@ -145,38 +138,34 @@ Other Variants include `bpMax` which desktop first media queries and `bpBetween`
 // In between 2 breakpoints
 @mixin bpBetween($from, $to) {
 
+	// Set value var
 	$value: null;
-	
-	// Only if Responsive Layout
-	@if $responsive == true {
 
-		// Retrieves the value from the key
-		@if map-has-key($breakpoints, $from) {
-			$from: map-get($breakpoints, $from); 
-		}
-		@else {
-			@error "`#{$from}` doesn't exist in `data/breakpoints.js`"; 
-		}
+	// Retrieves the value from the key
+	@if map-has-key($breakpoints, $from) {
+		$from: map-get($breakpoints, $from); 
+	}
+	@else {
+		@error "`#{$from}` doesn't exist in `data/breakpoints.js`"; 
+	}
 
-		@if map-has-key($breakpoints, $to) {
-			$to: map-get($breakpoints, $to); 
-		}
-		@else {
-			@error "`#{$to}` doesn't exist in `data/breakpoints.js`";
-		}
-	 
-		// If the key exists in the map
-		@if $from and $to != null {
+	@if map-has-key($breakpoints, $to) {
+		$to: map-get($breakpoints, $to); 
+	}
+	@else {
+		@error "`#{$to}` doesn't exist in `data/breakpoints.js`";
+	}
+ 
+	// If the key exists in the map
+	@if $from and $to != null {
 
-			// Convert values to EM
-			$from: $from / $global-font-size * 1em;
-			$to: $to / $global-font-size * 1em;
+		// Convert values to EM
+		$from: $from / $global-font-size * 1em;
+		$to: $to / $global-font-size * 1em;
 
-			// Prints a media query based on the value
-			@media (min-width: $from) and (max-width: $to)	{
-				@content;
-			}
+		// Prints a media query based on the value
+		@media (min-width: $from) and (max-width: $to)	{
+			@content;
 		}
-
 	}
 }

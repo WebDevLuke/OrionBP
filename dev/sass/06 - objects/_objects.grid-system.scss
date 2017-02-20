@@ -3,8 +3,28 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Grid system container, columns and optional rows. Specify responsive breakpoints in /data/config.js.
+Grid system container, columns and optional rows. You can specify the data which feeds into this in settings.breakpoints whilst
+you can alter breakpoints in /data/breakpoints.json.
 */
+
+
+// SET UP VARIABLES
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+// Get default attributes
+$gridDefault: map-get($grid, "default");
+
+// Set default variables
+$maxWidth: map-get($gridDefault, "max-width");
+$columns: map-get($gridDefault, "columns");
+$gutter: map-get($gridDefault, "gutter");
+$containerPadding: map-get($gridDefault, "containerPadding");
+$gridMorph: null;
+
+// Set morph object variable
+@if map-has-key($grid, "morph") {
+	$gridMorph: map-get($grid, "morph");
+}
 
 
 // BASE & ELEMENTS
@@ -25,7 +45,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 */
 
 [class*="o-container"] {
-	margin:0px auto;
+	margin:0 auto;
 	@include clearfix();
 	box-sizing:content-box;
 }
@@ -39,29 +59,24 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 // CREATE  CONTAINER MIXIN
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-@mixin create_container($responsive, $maxWidth, $containerPadding) {
+@mixin create_container($maxWidth, $containerPadding) {
 
 	// Set Base Container
 	.o-container {
-		@if $responsive == true {
-			max-width:$maxWidth;
-		}
-		@else {
-			width:$maxWidth;
-		}
-		padding: 0 ($containerPadding / 2) 0 ($containerPadding / 2);
+		max-width:rem($maxWidth);
+		padding: 0 rem($containerPadding / 2) 0 rem($containerPadding / 2);
 	}
 
 }
 
 
-// CREATE ROW  MIXIN
+// CREATE ROW MIXIN
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 @mixin create_row($gutter) {
 	.o-row {
-		margin-left:-$gutter / 2;
-		margin-right:-$gutter / 2;
+		margin-left:rem(-$gutter / 2);
+		margin-right:rem(-$gutter / 2);
 		@include clearfix();
 	}
 }
@@ -87,8 +102,8 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 		// Example: o-col-6@md
 		.o-col-#{$i}#{$suffix} {
 			width: $widthPercentage;
-			padding-left:$gutter / 2;
-			padding-right:$gutter / 2;
+			padding-left:rem($gutter / 2);
+			padding-right:rem($gutter / 2);
 			margin-left:0;
 			clear:none;
 		}
@@ -122,7 +137,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 }
 
 
-// CREATE GRID UTILITY CLASSES
+// CREATE GRID UTILITY CLASSES MIXIN
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 @mixin create_utilities($suffix) {
@@ -135,7 +150,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 // GENERATE DEFAULT CONTAINER AND COLUMN CLASSES
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-@include create_container($responsive, $maxWidth, $containerPadding);
+@include create_container($maxWidth, $containerPadding);
 @include create_row($gutter);
 @include create_columns(null, $maxWidth, $columns, $gutter);
 @include create_offsets(null, $maxWidth, $columns);
@@ -145,7 +160,10 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 // GENERATE RESPONSIVE CONTAINER AND GRID CLASSES
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-// Generate repsonsive classes and containers. If we need to change grid as per responsive container config redefine variables
+/*
+Generate responsive classes based on breakpoints in /data/breakpoints.json. Also generates
+reponsive container classes if any morphs in setting.grid-system are found.
+*/
 @each $bp-name, $bp-value in $breakpoints	{
 
 	// If we discover that a morph comes into play override grid variables
@@ -170,7 +188,7 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 			}
 
 			@include bp(#{$bp-name}) {
-				@include create_container($responsive, $maxWidth, $containerPadding);
+				@include create_container($maxWidth, $containerPadding);
 				@include create_row($gutter);	
 			}
 
@@ -178,14 +196,15 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 			@if map-has-key($bp-obj, "gutter") {				
 				@include bp(#{$bp-name}) {
 					[class^="o-col"] {
-						padding-left:$gutter / 2;
-						padding-right:$gutter / 2;
+						padding-left:rem($gutter / 2);
+						padding-right:rem($gutter / 2);
 					}
 				}
 			}
 		}
 	}
 
+	// Create responsive grid classes
 	@include bp(#{$bp-name}) {
 		@include create_columns(\@#{$bp-name}, $maxWidth, $columns, $gutter);
 		@include create_offsets(\@#{$bp-name}, $maxWidth, $columns);
@@ -198,10 +217,25 @@ This approach avoids repetition of non-dynamic styles across responsive classes
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Removes all width instances from container, making it stretch 100%
+Removes all width instances from container, making it stretch 100%.
 */
 
 .o-container--fluid {
 	max-width:none;
 	width:100%;
+}
+
+
+// NON-RESPONSIVE CONTAINER MODIFIER
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Makes the container non-responsive by swapping max-width for width.
+NOTE: If applying this modifier, remember to remove all grid morphs from "settings.grid-system" otherwise
+your fixed grid will take the width of your last morph.
+*/
+
+.o-container--fixed {
+	max-width:none;
+	width:$maxWidth;
 }
