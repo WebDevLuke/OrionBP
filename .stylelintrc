@@ -15,12 +15,7 @@
 		'number-leading-zero': 'always',
 		'number-no-trailing-zeros': true,
 		'property-case': 'lower',
-		'scss/media-feature-value-dollar-variable': 'always',
 		'scss/operator-no-unspaced': true,
-		'selector-no-id': true,
-		'selector-no-qualifying-type': [	true, {
-			ignore: ["attribute"]	
-		}],
 		'selector-pseudo-class-case': 'lower',
 		'string-no-newline': true,
 		'unit-case': 'lower',
