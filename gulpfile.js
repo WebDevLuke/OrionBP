@@ -5,43 +5,45 @@
 */
 
 // Required for all tasks
-var gulp = require('gulp');
+const gulp = require('gulp');
 // Required for SASS tags
-var sass = require('gulp-sass');
+const sass = require('gulp-sass');
 // Adds support for SASS globbing
-var sassGlob = require('gulp-sass-glob');
+const sassGlob = require('gulp-sass-glob');
 // Minifies images
-var imagemin = require('gulp-imagemin');
+const imagemin = require('gulp-imagemin');
 // Used to minify JS
-var uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify');
 // Used to rename CSS and JS depending if minified
-var rename = require("gulp-rename");
+const rename = require("gulp-rename");
 // Used to add conditional functionality
-var gulpif = require('gulp-if');
+const gulpif = require('gulp-if');
 // Used to allow SASS to require JSON data
-var sassport = require('gulp-sassport');
+const sassport = require('gulp-sassport');
 // Used to remove unused CSS styles post compile
-var uncss = require('gulp-uncss');
+const uncss = require('gulp-uncss');
 // Used to create synchronous build tasks
-var runSequence = require('run-sequence');
+const runSequence = require('run-sequence');
 // Used to pipe JSON data into Jade
-var data = require('gulp-data');
+const data = require('gulp-data');
 // Used to delete folders during build process
-var del = require('del');
+const del = require('del');
 // Used to add autoprefixer to SASS task
-var autoprefixer = require('gulp-autoprefixer');
+const autoprefixer = require('gulp-autoprefixer');
 // Used to compile JS modules
-var browserify = require("browserify");
-var source = require('vinyl-source-stream');
-var glob = require('glob');
-var streamify = require('gulp-streamify');
+const browserify = require("browserify");
+const source = require('vinyl-source-stream');
+const glob = require('glob');
+const streamify = require('gulp-streamify');
 // Used to generate svg icon system and to minify
-var svgstore = require('gulp-svgstore');
-var svgmin = require('gulp-svgmin');
-var path = require('path');
-var inject = require('gulp-inject');
+const svgstore = require('gulp-svgstore');
+const svgmin = require('gulp-svgmin');
+const path = require('path');
+const inject = require('gulp-inject');
 // Used to compile nunjacks templates if present
-var nunjucks = require('gulp-nunjucks');
+const nunjucks = require('gulp-nunjucks');
+// Used to lint SASS
+const gulpStylelint = require('gulp-stylelint');
 
 /*
 |--------------------------------------------------------------------
@@ -49,9 +51,12 @@ var nunjucks = require('gulp-nunjucks');
 |--------------------------------------------------------------------
 */
 
-// If minify is true then css & js will be minified
+// If minify is true then CSS & JS will be minified
 // This is in case the code needs to be maintained by a less-technical developer
-var minify = true;
+const minify = true;
+
+// If lint then CSS will be linted to enforce style guidelines
+const lint = true;
 
 /*
 |--------------------------------------------------------------------
@@ -78,7 +83,7 @@ gulp.task('sass', function () {
 	return gulp.src('dev/sass/*.scss')
 	.pipe(sassGlob())
 	.pipe(gulpif(minify, sassport([],{outputStyle: 'compressed', precision: 8}), sassport([], {outputStyle: 'expanded', precision: 8})))
-    	.pipe(gulpif(minify, rename({ suffix: '.min' })))
+			.pipe(gulpif(minify, rename({ suffix: '.min' })))
 	.on('error', sass.logError)
 	.pipe(autoprefixer({
 		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
@@ -92,7 +97,7 @@ gulp.task('sass-debug', function () {
 	return gulp.src('dev/sass/*.scss')
 	.pipe(sassGlob())
 	.pipe(sassport([],{outputStyle: 'expanded', precision: 8}))
-    	.pipe(gulpif(minify, rename({ suffix: '.min' })))
+			.pipe(gulpif(minify, rename({ suffix: '.min' })))
 	.on('error', sass.logError)
 	.pipe(autoprefixer({
 		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
@@ -101,6 +106,21 @@ gulp.task('sass-debug', function () {
 	.pipe(gulp.dest('./dist/css/'))
 });
 
+
+// Lint SASS Task
+gulp.task('sass-lint', function lintCssTask() {
+	return gulp.src('dev/sass/**/*.scss')
+	.pipe(gulpStylelint({
+		reportOutputDir: 'reports/lint',
+		reporters: [{
+			formatter: 'verbose',
+			console: true,
+			save: 'report.txt'
+		}]
+	}));
+});
+
+// UNCSS Task
 gulp.task('uncss', function () {
 	return gulp.src('dist/css/*.css')
 	.pipe(uncss({
@@ -118,17 +138,35 @@ gulp.task('uncss', function () {
 // Create seperate sass build task which runs standard SASS functions followed by UNCSS
 // This will be used on Build task. It won't be used on watch task to speed things up.
 gulp.task('sass-build', function(){
-	runSequence(
-		"sass",
-		"uncss"
-	);
+	if(lint) {
+		runSequence(
+			"sass-lint",
+			"sass",
+			"uncss"
+		);
+	}
+	else {
+		runSequence(
+			"sass",
+			"uncss"
+		);		
+	}
 });
 
 gulp.task('sass-build-debug', function(){
-	runSequence(
-		"sass-debug",
-		"uncss"
-	);
+	if(lint) {
+		runSequence(
+			"sass-lint",
+			"sass-debug",
+			"uncss"
+		);
+	}
+	else {
+		runSequence(
+			"sass",
+			"uncss"
+		);		
+	}
 });
 
 
@@ -217,8 +255,8 @@ gulp.task('js-process', function() {
 			basename: name,
 			extname: ".js"
 		})))
-	    	.pipe(gulpif(minify, streamify(uglify())))
-	    	.pipe(gulp.dest('./dist/js/'));
+				.pipe(gulpif(minify, streamify(uglify())))
+				.pipe(gulp.dest('./dist/js/'));
 	});
 });
 
@@ -226,9 +264,9 @@ gulp.task('js-process', function() {
 gulp.task('js-copy', function() {
 	// Copy all non-directory files
 	gulp.src('dev/js/seperate/*.js')
-    	.pipe(gulpif(minify, rename({ suffix: '.min' }), gulp.dest('./dist/js/')))
-    	.pipe(gulpif(minify, uglify()))
-    	.pipe(gulpif(minify, gulp.dest('./dist/js/')));
+			.pipe(gulpif(minify, rename({ suffix: '.min' }), gulp.dest('./dist/js/')))
+			.pipe(gulpif(minify, uglify()))
+			.pipe(gulpif(minify, gulp.dest('./dist/js/')));
 });
 
 gulp.task('js', function(){
@@ -292,8 +330,8 @@ gulp.task('copy', function() {
 	.pipe(gulp.dest('dist/'));
 
 	// Copy specified folders and contents
-    	gulp.src('*/+(fonts)/**', {base:"./dev/"})
-      .pipe(gulp.dest('dist/'));
+			gulp.src('*/+(fonts)/**', {base:"./dev/"})
+			.pipe(gulp.dest('dist/'));
 
 	// Copy HTACCESS file seperately as it wouldn't play nice
 	gulp.src('dev/.htaccess')

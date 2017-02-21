@@ -1,0 +1,30 @@
+{
+	'plugins': [
+		'stylelint-scss'
+	],
+	'rules': {
+		'color-hex-case': 'lower',
+		'color-no-invalid-hex': true,
+		'declaration-block-no-duplicate-properties': true,
+		'font-family-no-duplicate-names': true,
+		'function-calc-no-unspaced-operator': true,
+		'indentation': "tab",
+		'keyframe-declaration-no-important': true,
+		'max-nesting-depth': 4,
+		'no-extra-semicolons': true,
+		'number-leading-zero': 'always',
+		'number-no-trailing-zeros': true,
+		'property-case': 'lower',
+		'scss/media-feature-value-dollar-variable': 'always',
+		'scss/operator-no-unspaced': true,
+		'selector-no-id': true,
+		'selector-no-qualifying-type': [	true, {
+			ignore: ["attribute"]	
+		}],
+		'selector-pseudo-class-case': 'lower',
+		'string-no-newline': true,
+		'unit-case': 'lower',
+		'unit-no-unknown': true,
+		'value-keyword-case': 'lower',
+	}
+}

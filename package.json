@@ -27,18 +27,21 @@
     "gulp-if": "2.0.0",
     "gulp-imagemin": "2.4.0",
     "gulp-inject": "4.2.0",
-    "gulp-nunjucks": "^3.0.0",
+    "gulp-nunjucks": "3.0.0",
     "gulp-rename": "1.2.2",
     "gulp-sass": "2.3.2",
     "gulp-sass-glob": "1.0.6",
     "gulp-sassport": "0.4.0",
     "gulp-streamify": "1.0.2",
+    "gulp-stylelint": "^3.9.0",
     "gulp-svgmin": "1.2.3",
     "gulp-svgstore": "6.1.0",
     "gulp-uglify": "1.5.2",
     "gulp-uncss": "1.0.6",
     "normalize.css": "5.0.0",
     "run-sequence": "1.1.5",
+    "stylelint-scss": "1.4.3",
+    "stylelint-selector-bem-pattern": "1.0.0",
     "vinyl-source-stream": "1.1.0"
   }
 }
