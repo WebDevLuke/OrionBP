@@ -1,9 +1,9 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
-// HEADINGS
+// SAMPLE COMPONENT
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Component classes for headings
+This is a sample component. Copy and adapt as required.
 */
 
 
@@ -11,12 +11,12 @@ Component classes for headings
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-<a href="/" class="c-btn">
+<a href="/" class="c-mycomponent">
 	CONTENT
 </a>
 */
 
-.c-btn {
+.c-mycomponent {
 
 }
 
@@ -29,12 +29,12 @@ This is an example of a regular component modifier as per BEM naming convention
 */
 
 /*
-<a href="/" class="c-btn c-btn--large">
+<a href="/" class="c-mycomponent c-mycomponent--modifier">
 	CONTENT
 </a>
 */
 
-.c-btn--large {
+.c-mycomponent--modifier {
 
 }
 
@@ -55,12 +55,12 @@ https://csswizardry.com/2017/02/code-smells-in-css-revisited/#bem-mixes
 */
 
 /*
-<a href="/" class="c-btn">
-	<svg class="c-icon c-btn__icon"></svg>
+<a href="/" class="c-mycomponent">
+	<svg class="c-othercomponent c-mycomponent__othercomponent"></svg>
 </a>
 */
 
-.c-btn__icon {
+.c-mycomponent__othercomponent {
 
 }
 
@@ -74,11 +74,11 @@ The below example would target a button which has an active state.
 */
 
 /*
-<a href="/" class="c-btn is-active">
+<a href="/" class="c-mycomponent is-active">
 	CONTENT
 </a>
 */
 
-.c-btn.is-active {
+.c-mycomponent.is-active {
 
 }

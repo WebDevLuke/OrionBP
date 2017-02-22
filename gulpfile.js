@@ -83,7 +83,7 @@ gulp.task('sass', function () {
 	return gulp.src('dev/sass/*.scss')
 	.pipe(sassGlob())
 	.pipe(gulpif(minify, sassport([],{outputStyle: 'compressed', precision: 8}), sassport([], {outputStyle: 'expanded', precision: 8})))
-			.pipe(gulpif(minify, rename({ suffix: '.min' })))
+	.pipe(gulpif(minify, rename({ suffix: '.min' })))
 	.on('error', sass.logError)
 	.pipe(autoprefixer({
 		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
@@ -97,7 +97,7 @@ gulp.task('sass-debug', function () {
 	return gulp.src('dev/sass/*.scss')
 	.pipe(sassGlob())
 	.pipe(sassport([],{outputStyle: 'expanded', precision: 8}))
-			.pipe(gulpif(minify, rename({ suffix: '.min' })))
+	.pipe(gulpif(minify, rename({ suffix: '.min' })))
 	.on('error', sass.logError)
 	.pipe(autoprefixer({
 		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
@@ -134,8 +134,24 @@ gulp.task('uncss', function () {
 	.pipe(gulp.dest('./dist/css/'))
 });
 
+// Watch task for SASS. Lints and then runs standard SASS functions. No UNCSS to speed things up..
+gulp.task('sass-watch', function(){
+	if(lint) {
+		runSequence(
+			"sass-lint",
+			"sass",
+			"uncss"
+		);
+	}
+	else {
+		runSequence(
+			"sass",
+			"uncss"
+		);		
+	}
+});
 
-// Create seperate sass build task which runs standard SASS functions followed by UNCSS
+// Create seperate sass build task which lints and then runs standard SASS functions followed by UNCSS
 // This will be used on Build task. It won't be used on watch task to speed things up.
 gulp.task('sass-build', function(){
 	if(lint) {
@@ -255,8 +271,8 @@ gulp.task('js-process', function() {
 			basename: name,
 			extname: ".js"
 		})))
-				.pipe(gulpif(minify, streamify(uglify())))
-				.pipe(gulp.dest('./dist/js/'));
+		.pipe(gulpif(minify, streamify(uglify())))
+		.pipe(gulp.dest('./dist/js/'));
 	});
 });
 
@@ -264,9 +280,9 @@ gulp.task('js-process', function() {
 gulp.task('js-copy', function() {
 	// Copy all non-directory files
 	gulp.src('dev/js/seperate/*.js')
-			.pipe(gulpif(minify, rename({ suffix: '.min' }), gulp.dest('./dist/js/')))
-			.pipe(gulpif(minify, uglify()))
-			.pipe(gulpif(minify, gulp.dest('./dist/js/')));
+	.pipe(gulpif(minify, rename({ suffix: '.min' }), gulp.dest('./dist/js/')))
+	.pipe(gulpif(minify, uglify()))
+	.pipe(gulpif(minify, gulp.dest('./dist/js/')));
 });
 
 gulp.task('js', function(){
@@ -330,8 +346,8 @@ gulp.task('copy', function() {
 	.pipe(gulp.dest('dist/'));
 
 	// Copy specified folders and contents
-			gulp.src('*/+(fonts)/**', {base:"./dev/"})
-			.pipe(gulp.dest('dist/'));
+	gulp.src('*/+(fonts)/**', {base:"./dev/"})
+	.pipe(gulp.dest('dist/'));
 
 	// Copy HTACCESS file seperately as it wouldn't play nice
 	gulp.src('dev/.htaccess')
@@ -355,10 +371,10 @@ gulp.task("watch", function() {
 	// Images
 	gulp.watch('dev/img/*.+(png|jpg|gif|svg)',['images']);
 	// Watch for Breakpoint JS changes and compile SASS
-	gulp.watch('dev/data/breakpoints.json',['sass']);
+	gulp.watch('dev/data/breakpoints.json',['sass-watch']);
 	// SASS
 	// UNCSS doesn't run for watch task to speed things up
-	gulp.watch('dev/sass/**/*.scss',['sass']);
+	gulp.watch('dev/sass/**/*.scss',['sass-watch']);
 	// JS
 	gulp.watch('dev/js/**/*.js',['js']);
 });
