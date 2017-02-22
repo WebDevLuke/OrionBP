@@ -60,6 +60,21 @@ const lint = true;
 
 /*
 |--------------------------------------------------------------------
+|  ORION SETUP TASK
+|--------------------------------------------------------------------
+*/
+
+// Task which you run on project start to setup SASS directory and copy required files from dependancy
+
+/*
+Creates SASS directory in /dev and adds the following:
+	- main.sample renamed to main
+	- component.sample added to components folder
+	- Creates rest of folders
+*/
+
+/*
+|--------------------------------------------------------------------
 |  DELETE DIST FOLDER
 |--------------------------------------------------------------------
 */
