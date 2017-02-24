@@ -35,7 +35,7 @@ Here you can configure the paths used by Gulp to align with your project's direc
 // Source code root
 const dev = "dev";
 
-// Compile code root
+// Compiled code root
 const dist = "dist";
 
 // HTML directories
@@ -46,11 +46,11 @@ const htmlDist = dist;
 const imgDev = "dev/img";
 const imgDist = "dist/img";
 
-// Source SASS directory
+// SASS directories
 const sassDev = "dev/sass";
 const sassDist = "dist/css";
 
-// Source JS directory
+// JS directories
 const jsDev = "dev/js";
 const jsDist = "dist/js";
 
@@ -226,14 +226,12 @@ gulp.task('sass-watch', function(){
 	if(lint) {
 		runSequence(
 			"sass-lint",
-			"sass",
-			"uncss"
+			"sass"
 		);
 	}
 	else {
 		runSequence(
-			"sass",
-			"uncss"
+			"sass"
 		);		
 	}
 });
