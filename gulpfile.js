@@ -388,7 +388,7 @@ gulp.task('copy', function() {
 
 /*
 Here we pull everything together into generic watch and build functions
-*/
+*/git
 
 // WATCH FUNCTION
 gulp.task("watch", function() {
