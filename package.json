@@ -1,8 +1,8 @@
 {
-  "name": "Orion-Framework",
+  "name": "OrionBP",
   "version": "1.0.0",
   "author": "Luke Harrison",
-  "description": "Orion is a mobile-first HTML/CSS/JS framework. It's a simple, easy to use and quick way of getting your responsive web project off the ground.",
+  "description": "OrionBP is a simple front-end boilerplate for projects using OrionCSS. It includes a suite of powerful Gulp tasks allowing you to compile, compress and concatenate your SASS, JS and image assets.",
   "homepage": "http://www.lukeharrison.net",
   "license": "MIT",
   "repository": {

@@ -46,12 +46,58 @@ const mkdirp = require('mkdirp');
 // OPTIONS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-// If minify is true then CSS & JS will be minified
-// This is in case the code needs to be maintained by a less-technical developer
+/*
+Tweak various options to suit the needs of your project
+*/
+
+
+// MINIFY
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+If minify is true then CSS & JS will be minified
+This is in case the code needs to be maintained by a less-technical developer
+*/
 const minify = true;
 
-// If lint then CSS will be linted to enforce style guidelines
+
+// SASS LINTING
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+If lint then SASS will be linted to enforce style guidelines
+*/
 const lint = true;
+
+
+// CONFIGURE PATHS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Here you can configure paths to fit your project's directory structure
+*/
+
+// Source code root
+const dev = "dev";
+
+// Compile code root
+const dist = "dist";
+
+// HTML directories
+const htmlDev = "dev/html";
+const htmlDist = dist;
+
+// Image directories
+const imgDev = "dev/img";
+const imgDist = "dist/img";
+
+// Source SASS directory
+const sassDev = "dev/sass";
+const sassDist = "dist/css";
+
+// Source JS directory
+const jsDev = "dev/js";
+const jsDist = "dist/js";
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------
@@ -69,7 +115,7 @@ Create all the individual functions which will contribute towards our production
 /*
 Task which you run on project start to setup SASS directory and copy required files from OrionCSS dependancy
 
-Creates SASS directory in /dev and adds the following:-
+Creates SASS directory in dev directory and adds the following:-
 
 - Creates ITCSS directory structure
 - sample.main-orion-framework renamed to main and copied to SASS root
@@ -77,13 +123,13 @@ Creates SASS directory in /dev and adds the following:-
 */
 
 const folders = [
-	"dev/sass/01 - settings",
-	"dev/sass/02 - tools",
-	"dev/sass/03 - generic",
-	"dev/sass/04 - elements",
-	"dev/sass/05 - objects",
-	"dev/sass/06 - components",
-	"dev/sass/07 - utilities",
+	sassDev + "/01 - settings",
+	sassDev + "/02 - tools",
+	sassDev + "/03 - generic",
+	sassDev + "/04 - elements",
+	sassDev + "/05 - objects",
+	sassDev + "/06 - components",
+	sassDev + "/07 - utilities",
 ]
 
 gulp.task('setup', function(){
@@ -98,10 +144,10 @@ gulp.task('setup', function(){
 	// Grab main sample and move to SASS root
 	gulp.src('node_modules/orioncss/sample.main-orion-framework.scss')
 	.pipe(rename('main.scss'))
-	.pipe(gulp.dest('dev/sass'))
+	.pipe(gulp.dest(sassDev))
 	// Grab sample component and move to new components dir
 	gulp.src('node_modules/orioncss/06 - components/_sample.component.mycomponent.scss')
-	.pipe(gulp.dest('dev/sass/06 - components/'));
+	.pipe(gulp.dest(sassDev + '/06 - components/'));
 });
 
 
@@ -111,7 +157,7 @@ gulp.task('setup', function(){
 // Delete any existing Dist directory so old files don't contaminate our new build
 
 gulp.task('deleteDist', function(){
-	return del('dist/');
+	return del(dist);
 });
 
 
@@ -122,7 +168,7 @@ gulp.task('deleteDist', function(){
 // That way we can have unlimited utility classes and only have the ones we're actually using in our compiled CSS file
 // We also tell uncss to ignore styles with stateful modifiers as these are typically added into the DOM dynamically which UNCSS is unable to detect
 gulp.task('sass', function () {
-	return gulp.src('dev/sass/*.scss')
+	return gulp.src(sassDev + '/*.scss')
 	.pipe(sassGlob())
 	.pipe(gulpif(minify, sass({outputStyle: 'compressed', precision: 8}), sass({outputStyle: 'expanded', precision: 8})))
 	.pipe(gulpif(minify, rename({ suffix: '.min' })))
@@ -131,12 +177,12 @@ gulp.task('sass', function () {
 		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
 		cascade: false
 	}))
-	.pipe(gulp.dest('./dist/css/'))
+	.pipe(gulp.dest('./' + sassDist))
 });
 
 // A SASS task for debug use. Compiles an unminified stylesheet but uses canon naming structure as per minify variable so no links are broken on the page
 gulp.task('sass-debug', function () {
-	return gulp.src('dev/sass/*.scss')
+	return gulp.src(sassDev + '/*.scss')
 	.pipe(sassGlob())
 	.pipe(sass({outputStyle: 'expanded', precision: 8}))
 	.pipe(gulpif(minify, rename({ suffix: '.min' })))
@@ -145,13 +191,13 @@ gulp.task('sass-debug', function () {
 		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
 		cascade: false
 	}))
-	.pipe(gulp.dest('./dist/css/'))
+	.pipe(gulp.dest('./' + sassDist))
 });
 
 
 // Lint SASS Task
 gulp.task('sass-lint', function lintCssTask() {
-	return gulp.src('dev/sass/**/*.scss')
+	return gulp.src(sassDev + '/**/*.scss')
 	.pipe(gulpStylelint({
 		reportOutputDir: 'reports/lint',
 		reporters: [{
@@ -164,16 +210,16 @@ gulp.task('sass-lint', function lintCssTask() {
 
 // UNCSS Task
 gulp.task('uncss', function () {
-	return gulp.src('dist/css/*.css')
+	return gulp.src(sassDist + '/*.css')
 	.pipe(uncss({
-		html: ['dist/*.html'],
+		html: [htmlDist + '/*.html'],
 		ignore: [
 			/\.is-*/,
 			/\.has-*/,
 			/\.in-*/	
 		]
 	}))
-	.pipe(gulp.dest('./dist/css/'))
+	.pipe(gulp.dest('./' + sassDist))
 });
 
 // Watch task for SASS. Lints and then runs standard SASS functions. No UNCSS to speed things up..
@@ -233,16 +279,16 @@ gulp.task('sass-build-debug', function(){
 
 // Image MIN & with CACHE to stop repeat compressed images
 gulp.task('bitmap', function(){
-	gulp.src('dev/src/asset/img/*.+(png|jpg|gif)')
+	gulp.src(imgDev + '/*.+(png|jpg|gif)')
 	.pipe(imagemin({optimizationLevel: 3, progressive: true}))
-	.pipe(gulp.dest('./dist/src/asset/img/'));
+	.pipe(gulp.dest(imgDist));
 });
 
 // Compile all SVG icons into one large svg icon and inject as inline svg into page header
 // We can then directly reference these icons without making an extra request
 gulp.task('svg', function () {
 	var svgs = gulp
-		.src('dev/img/**/*.svg')
+		.src(imgDev + '/**/*.svg')
 		.pipe(svgmin(function (file) {
 			var prefix = path.basename(file.relative, path.extname(file.relative));
 			return {
@@ -272,9 +318,9 @@ gulp.task('svg', function () {
 		}
 
 		return gulp
-		.src('dist/*.html')
+		.src(htmlDist + '/*.html')
 		.pipe(inject(svgs, { transform: fileContents }))
-		.pipe(gulp.dest('dist/'));
+		.pipe(gulp.dest(htmlDist + '/'));
 });
 
 gulp.task('images', function(){
@@ -288,13 +334,13 @@ gulp.task('images', function(){
 // JS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-gulp.task('js-process', function() {
-	var files = glob.sync('./dev/js/*.js');
+gulp.task('js', function() {
+	var files = glob.sync('./' + jsDev + '/*.js');
 	files.map(function(file) {
-		var name = file.replace("./dev/js/", "");
-		name = name.replace(".js", "");
+		var name = file.replace('./' + jsDev + '/', '');
+		name = name.replace('.js', '');
 		return browserify({entries: file})
-		.transform("babelify", {presets: ["es2015"]})
+		.transform('babelify', {presets: ['es2015']})
 		.bundle()
 		.pipe(source(file))
 		.pipe(gulpif(minify, rename({ 
@@ -308,24 +354,8 @@ gulp.task('js-process', function() {
 			extname: ".js"
 		})))
 		.pipe(gulpif(minify, streamify(uglify())))
-		.pipe(gulp.dest('./dist/js/'));
+		.pipe(gulp.dest('./' + jsDist + '/'));
 	});
-});
-
-// Copy Across specific JS files
-gulp.task('js-copy', function() {
-	// Copy all non-directory files
-	gulp.src('dev/js/seperate/*.js')
-	.pipe(gulpif(minify, rename({ suffix: '.min' }), gulp.dest('./dist/js/')))
-	.pipe(gulpif(minify, uglify()))
-	.pipe(gulpif(minify, gulp.dest('./dist/js/')));
-});
-
-gulp.task('js', function(){
-	runSequence(
-		"js-process",
-		"js-copy"
-	);
 });
 
 
@@ -333,9 +363,9 @@ gulp.task('js', function(){
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 gulp.task('html-copy', function() {
-	return gulp.src('./dev/html/*.html')
+	return gulp.src('./' + htmlDev +'/*.html')
 	.pipe(nunjucks.compile())
-	.pipe(gulp.dest('dist/'));
+	.pipe(gulp.dest(htmlDist + '/'));
 });
 
 /*
@@ -357,8 +387,8 @@ gulp.task('html', function(){
 
 /* Copy PHP & SQL files across and keep their directory structure intact */
 gulp.task("php", function() {
-	return gulp.src('./dev/**/*.+(php|sql)')
-	.pipe(gulp.dest('dist/'));
+	return gulp.src('./' + dev + '/**/*.+(php|sql)')
+	.pipe(gulp.dest(dist + '/'));
 });
 
 
@@ -369,16 +399,16 @@ gulp.task("php", function() {
 gulp.task('copy', function() {
 
 	// Copy all non-directory files
-	gulp.src('dev/*.+(xml|txt|json)')
-	.pipe(gulp.dest('dist/'));
+	gulp.src(dev + '/*.+(xml|txt|json)')
+	.pipe(gulp.dest(dist + '/'));
 
 	// Copy specified folders and contents
-	gulp.src('*/+(fonts)/**', {base:"./dev/"})
-	.pipe(gulp.dest('dist/'));
+	gulp.src('*/+(fonts)/**', {base:"./" + dev + "/"})
+	.pipe(gulp.dest(dist + '/'));
 
 	// Copy HTACCESS file seperately as it wouldn't play nice
-	gulp.src('dev/.htaccess')
-	.pipe(gulp.dest('dist/'));
+	gulp.src(dev + '/.htaccess')
+	.pipe(gulp.dest(dist + '/'));
 });
 
 
@@ -388,23 +418,21 @@ gulp.task('copy', function() {
 
 /*
 Here we pull everything together into generic watch and build functions
-*/git
+*/
 
 // WATCH FUNCTION
 gulp.task("watch", function() {
 	// HTML
-	gulp.watch('dev/html/**/*.html',['html']);
+	gulp.watch(htmlDev + '/**/*.html',['html']);
 	// PHP & MYSQL
-	gulp.watch('dev/**/*.(php|sql)',['php']);
+	gulp.watch(dev + '/**/*.(php|sql)',['php']);
 	// Images
-	gulp.watch('dev/img/*.+(png|jpg|gif|svg)',['images']);
-	// Watch for Breakpoint JS changes and compile SASS
-	gulp.watch('dev/data/breakpoints.json',['sass-watch']);
+	gulp.watch(imgDev + '/*.+(png|jpg|gif|svg)',['images']);
 	// SASS
 	// UNCSS doesn't run for watch task to speed things up
-	gulp.watch('dev/sass/**/*.scss',['sass-watch']);
+	gulp.watch(sassDev + '/**/*.scss',['sass-watch']);
 	// JS
-	gulp.watch('dev/js/**/*.js',['js']);
+	gulp.watch(jsDev + '/**/*.js',['js']);
 });
 
 // BUILD FUNCTION
