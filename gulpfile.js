@@ -1,13 +1,13 @@
-/*
-|--------------------------------------------------------------------
-| SET DEPENDENCIES
-|--------------------------------------------------------------------
-*/
+//--------------------------------------------------------------------------------------------------------------------------------------
+// SET DEPENDENCIES
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 // Required for all tasks
 const gulp = require('gulp');
 // Required for SASS tags
 const sass = require('gulp-sass');
+// Used to lint SASS
+const gulpStylelint = require('gulp-stylelint');
 // Adds support for SASS globbing
 const sassGlob = require('gulp-sass-glob');
 // Minifies images
@@ -18,14 +18,10 @@ const uglify = require('gulp-uglify');
 const rename = require("gulp-rename");
 // Used to add conditional functionality
 const gulpif = require('gulp-if');
-// Used to allow SASS to require JSON data
-const sassport = require('gulp-sassport');
 // Used to remove unused CSS styles post compile
 const uncss = require('gulp-uncss');
 // Used to create synchronous build tasks
 const runSequence = require('run-sequence');
-// Used to pipe JSON data into Jade
-const data = require('gulp-data');
 // Used to delete folders during build process
 const del = require('del');
 // Used to add autoprefixer to SASS task
@@ -42,14 +38,13 @@ const path = require('path');
 const inject = require('gulp-inject');
 // Used to compile nunjacks templates if present
 const nunjucks = require('gulp-nunjucks');
-// Used to lint SASS
-const gulpStylelint = require('gulp-stylelint');
+// Used to make directories
+const mkdirp = require('mkdirp');
 
-/*
-|--------------------------------------------------------------------
-| CONFIG
-|--------------------------------------------------------------------
-*/
+
+//--------------------------------------------------------------------------------------------------------------------------------------
+// OPTIONS
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 // If minify is true then CSS & JS will be minified
 // This is in case the code needs to be maintained by a less-technical developer
@@ -58,38 +53,70 @@ const minify = true;
 // If lint then CSS will be linted to enforce style guidelines
 const lint = true;
 
-/*
-|--------------------------------------------------------------------
-|  ORION SETUP TASK
-|--------------------------------------------------------------------
-*/
 
-// Task which you run on project start to setup SASS directory and copy required files from dependancy
+//--------------------------------------------------------------------------------------------------------------------------------------
+// FUNCTIONS
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-Creates SASS directory in /dev and adds the following:
-	- main.sample renamed to main
-	- component.sample added to components folder
-	- Creates rest of folders
+Create all the individual functions which will contribute towards our production functions
 */
+
+
+// SETUP TASK
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-|--------------------------------------------------------------------
-|  DELETE DIST FOLDER
-|--------------------------------------------------------------------
+Task which you run on project start to setup SASS directory and copy required files from OrionCSS dependancy
+
+Creates SASS directory in /dev and adds the following:-
+
+- Creates ITCSS directory structure
+- sample.main-orion-framework renamed to main and copied to SASS root
+- sample.component.mycomponent added to "06 - components" directory
 */
 
-// Delete any existing Dist folder so old files don't contaminate our new build
+const folders = [
+	"dev/sass/01 - settings",
+	"dev/sass/02 - tools",
+	"dev/sass/03 - generic",
+	"dev/sass/04 - elements",
+	"dev/sass/05 - objects",
+	"dev/sass/06 - components",
+	"dev/sass/07 - utilities",
+]
+
+gulp.task('setup', function(){
+	// Generate ITCSS directories
+	for(var i = 0; i < folders.length; i++) {
+		mkdirp(folders[i], function (err) {
+			if(err){
+				console.error(err);
+			}
+		});
+	}
+	// Grab main sample and move to SASS root
+	gulp.src('node_modules/orioncss/sample.main-orion-framework.scss')
+	.pipe(rename('main.scss'))
+	.pipe(gulp.dest('dev/sass'))
+	// Grab sample component and move to new components dir
+	gulp.src('node_modules/orioncss/06 - components/_sample.component.mycomponent.scss')
+	.pipe(gulp.dest('dev/sass/06 - components/'));
+});
+
+
+// DELETE DIST DIRECTORY
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+// Delete any existing Dist directory so old files don't contaminate our new build
 
 gulp.task('deleteDist', function(){
 	return del('dist/');
 });
 
-/*
-|--------------------------------------------------------------------
-|  SASS
-|--------------------------------------------------------------------
-*/
+
+// SASS
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 // Compile SASS, add autoprefixer and filter out unused CSS styles
 // That way we can have unlimited utility classes and only have the ones we're actually using in our compiled CSS file
@@ -97,7 +124,7 @@ gulp.task('deleteDist', function(){
 gulp.task('sass', function () {
 	return gulp.src('dev/sass/*.scss')
 	.pipe(sassGlob())
-	.pipe(gulpif(minify, sassport([],{outputStyle: 'compressed', precision: 8}), sassport([], {outputStyle: 'expanded', precision: 8})))
+	.pipe(gulpif(minify, sass({outputStyle: 'compressed', precision: 8}), sass({outputStyle: 'expanded', precision: 8})))
 	.pipe(gulpif(minify, rename({ suffix: '.min' })))
 	.on('error', sass.logError)
 	.pipe(autoprefixer({
@@ -111,7 +138,7 @@ gulp.task('sass', function () {
 gulp.task('sass-debug', function () {
 	return gulp.src('dev/sass/*.scss')
 	.pipe(sassGlob())
-	.pipe(sassport([],{outputStyle: 'expanded', precision: 8}))
+	.pipe(sass({outputStyle: 'expanded', precision: 8}))
 	.pipe(gulpif(minify, rename({ suffix: '.min' })))
 	.on('error', sass.logError)
 	.pipe(autoprefixer({
@@ -201,11 +228,8 @@ gulp.task('sass-build-debug', function(){
 });
 
 
-/*
-|--------------------------------------------------------------------
-|  IMAGES
-|--------------------------------------------------------------------
-*/
+// IMAGES
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 // Image MIN & with CACHE to stop repeat compressed images
 gulp.task('bitmap', function(){
@@ -261,11 +285,8 @@ gulp.task('images', function(){
 });
 
 
-/*
-|--------------------------------------------------------------------
-|  JS
-|--------------------------------------------------------------------
-*/
+// JS
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 gulp.task('js-process', function() {
 	var files = glob.sync('./dev/js/*.js');
@@ -308,11 +329,8 @@ gulp.task('js', function(){
 });
 
 
-/*
-|--------------------------------------------------------------------
-|  HTML
-|--------------------------------------------------------------------
-*/
+// HTML
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 gulp.task('html-copy', function() {
 	return gulp.src('./dev/html/*.html')
@@ -334,11 +352,8 @@ gulp.task('html', function(){
 });
 
 
-/*
-|--------------------------------------------------------------------
-|  PHP & SQL
-|--------------------------------------------------------------------
-*/
+// PHP / SQL
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 /* Copy PHP & SQL files across and keep their directory structure intact */
 gulp.task("php", function() {
@@ -347,11 +362,8 @@ gulp.task("php", function() {
 });
 
 
-/*
-|--------------------------------------------------------------------
-|  MISC
-|--------------------------------------------------------------------
-*/
+// MISC
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 // Copy Misc Files Task
 gulp.task('copy', function() {
@@ -369,13 +381,14 @@ gulp.task('copy', function() {
 	.pipe(gulp.dest('dist/'));
 });
 
-/*
-|--------------------------------------------------------------------
-|  PRODUCTION FUNCTIONS
-|--------------------------------------------------------------------
-*/
 
-// Here we pull everything together into generic watch and build functions
+//--------------------------------------------------------------------------------------------------------------------------------------
+// PRODUCTION FUNCTIONS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Here we pull everything together into generic watch and build functions
+*/
 
 // WATCH FUNCTION
 gulp.task("watch", function() {
