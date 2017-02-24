@@ -29,13 +29,42 @@ This command:-
 2. Adds an [OrionCSS](https://github.com/WebDevLuke/OrionCSS) compatible `main.scss` to your SASS dev directory, though if you've modified the default SASS directory structure you may then need to edit the `@import` paths to correctly point to `node_modules`.
 3. Adds a sample SASS component `sample.component.mycomponent` to the `06 - components` directory.
 
-
-
-
 ## Configuration
 
+In `gulpfile.js` you can configure various options to tweak the behaviour of gulp tasks.
 
-## Using Gulp
+`minify` - if `true` then CSS & JS will be minified once compiled and will have a .min suffix before the file extension. For example `style.min.css`.
+
+`lint` - If `true` then SASS will be linted by [stylelint](https://github.com/stylelint/stylelint) to enforce style guidelines. These rules can be tweaked in `.stylelintrc`.
+
+You can also configure the paths used by Gulp to align with your project's directory structure. By default, these paths are:-
+
+```js
+// Source code root
+const dev = "dev";
+
+// Compile code root
+const dist = "dist";
+
+// HTML directories
+const htmlDev = "dev/html";
+const htmlDist = dist;
+
+// Image directories
+const imgDev = "dev/img";
+const imgDist = "dist/img";
+
+// Source SASS directory
+const sassDev = "dev/sass";
+const sassDist = "dist/css";
+
+// Source JS directory
+const jsDev = "dev/js";
+const jsDist = "dist/js";
+```
+
+
+## Gulp Tasks
 - Explain all different tasks
 
 

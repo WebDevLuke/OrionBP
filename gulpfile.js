@@ -1,4 +1,61 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
+// GULP OPTIONS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Tweak various options to suit the needs of your project
+*/
+
+// MINIFY
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+If minify is true then CSS & JS will be minified once compiled and will have a .min suffix before the file extension.
+For example 'style.min.css'.
+*/
+const minify = true;
+
+
+// SASS LINTING
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+If lint is true then SASS will be linted by stylelint to enforce style guidelines. These rules can be tweaked in '.stylelintrc'.
+*/
+const lint = true;
+
+
+// CONFIGURE PATHS
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Here you can configure the paths used by Gulp to align with your project's directory structure.
+*/
+
+// Source code root
+const dev = "dev";
+
+// Compile code root
+const dist = "dist";
+
+// HTML directories
+const htmlDev = "dev/html";
+const htmlDist = dist;
+
+// Image directories
+const imgDev = "dev/img";
+const imgDist = "dist/img";
+
+// Source SASS directory
+const sassDev = "dev/sass";
+const sassDist = "dist/css";
+
+// Source JS directory
+const jsDev = "dev/js";
+const jsDist = "dist/js";
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------
 // SET DEPENDENCIES
 //--------------------------------------------------------------------------------------------------------------------------------------
 
@@ -40,64 +97,6 @@ const inject = require('gulp-inject');
 const nunjucks = require('gulp-nunjucks');
 // Used to make directories
 const mkdirp = require('mkdirp');
-
-
-//--------------------------------------------------------------------------------------------------------------------------------------
-// OPTIONS
-//--------------------------------------------------------------------------------------------------------------------------------------
-
-/*
-Tweak various options to suit the needs of your project
-*/
-
-
-// MINIFY
-//--------------------------------------------------------------------------------------------------------------------------------------
-
-/*
-If minify is true then CSS & JS will be minified
-This is in case the code needs to be maintained by a less-technical developer
-*/
-const minify = true;
-
-
-// SASS LINTING
-//--------------------------------------------------------------------------------------------------------------------------------------
-
-/*
-If lint then SASS will be linted to enforce style guidelines
-*/
-const lint = true;
-
-
-// CONFIGURE PATHS
-//--------------------------------------------------------------------------------------------------------------------------------------
-
-/*
-Here you can configure paths to fit your project's directory structure
-*/
-
-// Source code root
-const dev = "dev";
-
-// Compile code root
-const dist = "dist";
-
-// HTML directories
-const htmlDev = "dev/html";
-const htmlDist = dist;
-
-// Image directories
-const imgDev = "dev/img";
-const imgDist = "dist/img";
-
-// Source SASS directory
-const sassDev = "dev/sass";
-const sassDist = "dist/css";
-
-// Source JS directory
-const jsDev = "dev/js";
-const jsDist = "dist/js";
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------
