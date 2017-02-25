@@ -2,6 +2,8 @@
 	 <img height="67" width="391" src="https://cdn.rawgit.com/WebDevLuke/Orion-Framework/master/misc/orionbp-logo.svg">
 </h1>
 
+[![CircleCI](https://circleci.com/gh/WebDevLuke/OrionBP/tree/master.svg?style=shield)](https://circleci.com/gh/WebDevLuke/OrionBP/tree/master)
+
 OrionBP is a simple front-end boilerplate for projects using [OrionCSS](https://github.com/WebDevLuke/OrionCSS). It includes a suite of useful Gulp tasks allowing you to compile, compress and concatenate your SASS, JS and image assets.
 
 ## Getting Started
