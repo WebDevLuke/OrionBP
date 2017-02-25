@@ -152,6 +152,11 @@ gulp.task('setup', function(){
 	.pipe(gulp.dest(sassDev + '/06 - components/'));
 });
 
+// Developer task to clear content added by setup task so we don't accidently commit it.
+gulp.task('unsetup', function(){
+	return del(sassDev);
+});
+
 
 // DELETE DIST DIRECTORY
 //--------------------------------------------------------------------------------------------------------------------------------------
