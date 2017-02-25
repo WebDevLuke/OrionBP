@@ -77,32 +77,32 @@ During a build, the following happens:-
 - Any existing builds are deleted
 
 #### HTML
-- HTML is copied from its development directory (default: `dev/html`) to its dist directory (default: `dist`).
-- OrionBP supports [nunjucks](https://mozilla.github.io/nunjucks/), so if any relevant syntax is found its also compiled.
+- HTML is copied from its development directory (default: `dev/html`) to its dist directory (default: `dist`)
+- OrionBP supports [nunjucks](https://mozilla.github.io/nunjucks/), so if any relevant syntax is found its also compiled
 
 #### PHP / SQL
-- PHP is left intact; copied with its directory structure intact from dev directory to the dist directory.
+- PHP is left intact; copied with its directory structure from dev directory to the dist directory
 
 #### SASS
-- SASS is compiled, minified (if `minifiy` is true)
+- SASS is compiled and minified (if `minify` is true)
 - It is then autoprefixed using [autoprefixer](https://github.com/postcss/autoprefixer)
 - It is then linted for errors using [stylelint](https://github.com/stylelint/stylelint) (if `lint` is true)
 - Unused CSS classes are removed using [UNCSS](https://github.com/giakki/uncss)
-- A compiled CSS file is created in the sass dist directory (default: `dist/css`).
+- A compiled CSS file is created in the sass dist directory (default: `dist/css`)
 
 #### JS
 - Gulp looks for files in the root development JS directory (default: `dev/js`)
-- [Browerify](http://browserify.org/) grabs all dependencies and bundles everthing together into one file.
+- [Browerify](http://browserify.org/) grabs all dependencies and bundles everthing together into one file
 - The bundle is minified (If `minify` is true)
 - It's deposited in the js dist directory (default: `dist/js`)
 
 #### Misc
-- Any miscellaneous files with a xml, txt or json file extention found in the dev directory are copied with their directory structure intact to the dist directory.
-- If a `fonts` directory is found in the dev directory, it's copied to the dist directory with its contents.
-- If a `.htaccess` file is found in the dev directory, it's copied to the dist directory.
+- Any miscellaneous files with a xml, txt or json file extention found in the dev directory are copied with their directory structure intact to the dist directory
+- If a `fonts` directory is found in the dev directory, it's copied to the dist directory with its contents
+- If a `.htaccess` file is found in the dev directory, it's copied to the dist directory
 
 #### Images
-- Bitmap images are copied to the image dist directory (default: `dist/images`) and optimised using [imagemin](https://github.com/imagemin/imagemin).
+- Bitmap images are copied to the image dist directory (default: `dist/images`) and optimised using [imagemin](https://github.com/imagemin/imagemin)
 - SVG images are concatenated into one and embed directly in the HTML as an icon system. [More info](https://css-tricks.com/svg-sprites-use-better-icon-fonts/)
 
 ### Watch
