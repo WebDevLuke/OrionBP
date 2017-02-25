@@ -40,10 +40,10 @@ In `gulpfile.js` you can configure various options to tweak the behaviour of gul
 You can also configure the paths used by Gulp to align with your project's directory structure. By default, these paths are:-
 
 ```js
-// Source code root
+// Development root
 const dev = "dev";
 
-// Compiled code root
+// Distribution root
 const dist = "dist";
 
 // HTML directories
@@ -69,26 +69,12 @@ A breakdown of the production Gulp tasks included with OrionBP can be found belo
 
 ### Build
 
-`gulp build` generates a freshly compiled build of your project in your compiled code root directory (default: `dist`).
+`gulp build` generates a freshly compiled build of your project in your chosen distribution directory (default: `dist`).
 
 During a build, the following happens:-
 
 #### Cleanup
 - Any existing builds are deleted
-
-#### SASS
-- SASS is compiled, minified (if `minifiy` is true)
-- It is then autoprefixed using [autoprefixer](https://github.com/postcss/autoprefixer)
-- It is then linted for errors using [stylelint](https://github.com/stylelint/stylelint)
-- Unused CSS classes are removed using [UNCSS](https://github.com/giakki/uncss)
-- A compiled CSS file is created in the sass dist folder (default: `dist/css`).
-
-#### Images
-- Bitmap images are copied to the image dist directory (default: `dist/images`) and optimised using [imagemin](https://github.com/imagemin/imagemin).
-- SVG images are concatenated into one and embed directly in the HTML as an icon system. [More info](https://css-tricks.com/svg-sprites-use-better-icon-fonts/)
-
-#### JS
-- 
 
 #### HTML
 - HTML is copied from its development directory (default: `dev/html`) to its dist directory (default: `dist`).
@@ -97,20 +83,38 @@ During a build, the following happens:-
 #### PHP / SQL
 - PHP is left intact; copied with its directory structure intact from dev directory to the dist directory.
 
-#### Misc
-- Any miscellaneous supporting files with a xml, txt or json file extention found in the dev directory are copied with their directory structure intact to the dist directory.
-- If a `fonts` directory is found in the dev directory, it's copied to the dist directory.
+#### SASS
+- SASS is compiled, minified (if `minifiy` is true)
+- It is then autoprefixed using [autoprefixer](https://github.com/postcss/autoprefixer)
+- It is then linted for errors using [stylelint](https://github.com/stylelint/stylelint) (if `lint` is true)
+- Unused CSS classes are removed using [UNCSS](https://github.com/giakki/uncss)
+- A compiled CSS file is created in the sass dist directory (default: `dist/css`).
 
+#### JS
+- Gulp looks for files in the root development JS directory (default: `dev/js`)
+- [Browerify](http://browserify.org/) grabs all dependencies and bundles everthing together into one file.
+- The bundle is minified (If `minify` is true)
+- It's deposited in the js dist directory (default: `dist/js`)
+
+#### Misc
+- Any miscellaneous files with a xml, txt or json file extention found in the dev directory are copied with their directory structure intact to the dist directory.
+- If a `fonts` directory is found in the dev directory, it's copied to the dist directory with its contents.
+- If a `.htaccess` file is found in the dev directory, it's copied to the dist directory.
+
+#### Images
+- Bitmap images are copied to the image dist directory (default: `dist/images`) and optimised using [imagemin](https://github.com/imagemin/imagemin).
+- SVG images are concatenated into one and embed directly in the HTML as an icon system. [More info](https://css-tricks.com/svg-sprites-use-better-icon-fonts/)
 
 ### Watch
 
+`gulp watch` watches for any file changes and if detected runs a relevant gulp task. For example if `gulp watch` is active and any `.scss` files change, a SASS task will then automatically run to compile the changes.
 
+**Note** - The SASS watch task doesn't run UNCSS. This is simply to speed it up a little as UNCSS is quite a taxing process when there are many pages to process.
 
+### Debug Tasks
 
-
-- Watch
-- sass-debug
-- sass-build-debug
+- `gulp sass-debug` - Generates a non-minified build of your SASS.
+- `gulp sass-build-debug` - The same as above, but also runs UNCSS and lint (if `lint` is true).
 
 ## About the Developer
 I'm Luke Harrison, a Sheffield-based Web Designer &amp; Developer from the UK, currently working at [Evolution Funding](https://github.com/EvolutionFunding). Read more about me at [lukeharrison.net](http://www.lukeharrison.net) and/or follow me on twitter at [@WebDevLuke](https://twitter.com/WebDevLuke).

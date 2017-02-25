@@ -10,9 +10,10 @@ Tweak various options to suit the needs of your project
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-If minify is true then CSS & JS will be minified once compiled and will have a .min suffix before the file extension.
-For example 'style.min.css'.
+If minify is true then CSS & JS will be minified once compiled and will have a .min suffix before the file
+extension. For example 'style.min.css'.
 */
+
 const minify = true;
 
 
@@ -20,8 +21,10 @@ const minify = true;
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 /*
-If lint is true then SASS will be linted by stylelint to enforce style guidelines. These rules can be tweaked in '.stylelintrc'.
+If lint is true then SASS will be linted by stylelint to enforce style guidelines. These rules can be tweaked 
+in '.stylelintrc'.
 */
+
 const lint = true;
 
 
@@ -32,10 +35,10 @@ const lint = true;
 Here you can configure the paths used by Gulp to align with your project's directory structure.
 */
 
-// Source code root
+// Development root
 const dev = "dev";
 
-// Compiled code root
+// Distribution root
 const dist = "dist";
 
 // HTML directories
@@ -163,9 +166,14 @@ gulp.task('deleteDist', function(){
 // SASS
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-// Compile SASS, add autoprefixer and filter out unused CSS styles
-// That way we can have unlimited utility classes and only have the ones we're actually using in our compiled CSS file
-// We also tell uncss to ignore styles with stateful modifiers as these are typically added into the DOM dynamically which UNCSS is unable to detect
+/*
+Compile SASS, add autoprefixer and filter out unused CSS styles, that way we can have unlimited utility
+classes and only have the ones we're actually using in our compiled CSS file.
+
+We also tell uncss to ignore styles with stateful modifiers as these are typically added into the DOM
+dynamically which UNCSS is unable to detect.
+*/
+
 gulp.task('sass', function () {
 	return gulp.src(sassDev + '/*.scss')
 	.pipe(sassGlob())
@@ -179,7 +187,8 @@ gulp.task('sass', function () {
 	.pipe(gulp.dest('./' + sassDist))
 });
 
-// A SASS task for debug use. Compiles an unminified stylesheet but uses canon naming structure as per minify variable so no links are broken on the page
+// A SASS task for debug use. Compiles an unminified stylesheet but uses canon naming structure as
+// per minify variable so no links are broken on the page
 gulp.task('sass-debug', function () {
 	return gulp.src(sassDev + '/*.scss')
 	.pipe(sassGlob())
@@ -367,7 +376,8 @@ gulp.task('html-copy', function() {
 
 /*
 HTML task need to also run SVG task as SVG task copies master file into html document.
-It also needs to run SASS task as new CSS classes may have been used which need to be added to the compiled CSS file
+It also needs to run SASS task as new CSS classes may have been used which need to be added to
+the compiled CSS file.
 */
 
 gulp.task('html', function(){
