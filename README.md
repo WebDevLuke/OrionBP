@@ -84,28 +84,30 @@ During a build, the following happens:-
 - A compiled CSS file is created in the sass dist folder (default: `dist/css`).
 
 #### Images
-- Bitmap images are copied to the image dist folder (default: `dist/images`) and optimised using [imagemin](https://github.com/imagemin/imagemin).
+- Bitmap images are copied to the image dist directory (default: `dist/images`) and optimised using [imagemin](https://github.com/imagemin/imagemin).
 - SVG images are concatenated into one and embed directly in the HTML as an icon system. [More info](https://css-tricks.com/svg-sprites-use-better-icon-fonts/)
 
 #### JS
-
+- 
 
 #### HTML
-
+- HTML is copied from its development directory (default: `dev/html`) to its dist directory (default: `dist`).
+- OrionBP supports [nunjucks](https://mozilla.github.io/nunjucks/), so if any relevant syntax is found its also compiled.
 
 #### PHP / SQL
-
+- PHP is left intact; copied with its directory structure intact from dev directory to the dist directory.
 
 #### Misc
+- Any miscellaneous supporting files with a xml, txt or json file extention found in the dev directory are copied with their directory structure intact to the dist directory.
+- If a `fonts` directory is found in the dev directory, it's copied to the dist directory.
+
+
+### Watch
 
 
 
 
 
-
-
-
-- Build
 - Watch
 - sass-debug
 - sass-build-debug
