@@ -4,7 +4,7 @@
 
 [![CircleCI](https://circleci.com/gh/WebDevLuke/OrionBP/tree/master.svg?style=shield)](https://circleci.com/gh/WebDevLuke/OrionBP/tree/master)
 
-OrionBP is a simple front-end boilerplate for projects using [OrionCSS](https://github.com/WebDevLuke/OrionCSS). It includes a suite of useful Gulp tasks allowing you to compile, compress and concatenate your SASS, JS and image assets.
+OrionBP is a simple front-end boilerplate for projects using [OrionCSS](https://github.com/WebDevLuke/OrionCSS) and [OrionJS](https://github.com/WebDevLuke/OrionJS). It includes a suite of useful Gulp tasks allowing you to compile, compress and concatenate your SASS, JS and image assets.
 
 ## Getting Started
 OrionBP uses [Gulp](http://gulpjs.com/) as its build system. If you've never used Gulp before, you need to first install its client using NPM:-
@@ -13,7 +13,7 @@ OrionBP uses [Gulp](http://gulpjs.com/) as its build system. If you've never use
 npm install --global gulp-cli
 ``` 
 
-Next you need to install OrionBP's dependencies, which includes [OrionCSS](https://github.com/WebDevLuke/OrionCSS):-
+Next you need to install OrionBP's dependencies, which includes [OrionCSS](https://github.com/WebDevLuke/OrionCSS) and [OrionJS](https://github.com/WebDevLuke/OrionJS):-
 
 ```
 npm install
@@ -30,6 +30,7 @@ This command:-
 1. Generates all required [OrionCSS](https://github.com/WebDevLuke/OrionCSS) directories in your dev directory.
 2. Adds an [OrionCSS](https://github.com/WebDevLuke/OrionCSS) compatible `main.scss` to your SASS dev directory, though if you've modified the default SASS directory structure you may then need to edit the `@import` paths to correctly point to `node_modules`.
 3. Adds a sample SASS component `sample.component.mycomponent` to the `06 - components` directory.
+4. Creates your JS directory and adds a `main.js` starter file with [OrionJS](https://github.com/WebDevLuke/OrionJS) imports.
 
 ## Configuration
 

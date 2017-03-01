@@ -132,10 +132,11 @@ const folders = [
 	sassDev + "/05 - objects",
 	sassDev + "/06 - components",
 	sassDev + "/07 - utilities",
+	jsDev
 ]
 
 gulp.task('setup', function(){
-	// Generate ITCSS directories
+	// Generate directories
 	for(var i = 0; i < folders.length; i++) {
 		mkdirp(folders[i], function (err) {
 			if(err){
@@ -150,11 +151,16 @@ gulp.task('setup', function(){
 	// Grab sample component and move to new components dir
 	gulp.src('node_modules/orioncss/06 - components/_sample.component.mycomponent.scss')
 	.pipe(gulp.dest(sassDev + '/06 - components/'));
+	// Gram sample JS main, rename and then 
+	gulp.src('node_modules/orionjs/sample.main.js')
+	.pipe(rename('main.js'))
+	.pipe(gulp.dest(jsDev))
 });
 
 // Developer task to clear content added by setup task so we don't accidently commit it.
 gulp.task('unsetup', function(){
-	return del(sassDev);
+	del(sassDev);
+	del(jsDev);
 });
 
 
