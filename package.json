@@ -1,6 +1,6 @@
 {
   "name": "OrionBP",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "author": "Luke Harrison",
   "description": "OrionBP is a simple front-end boilerplate for projects using OrionCSS. It includes a suite of powerful Gulp tasks allowing you to compile, compress and concatenate your SASS, JS and image assets.",
   "homepage": "http://www.lukeharrison.net",
@@ -37,7 +37,7 @@
     "gulp-uglify": "^1.5.2",
     "gulp-uncss": "^1.0.6",
     "mkdirp": "^0.5.1",
-    "orioncss": "^1.0.1",
+    "orioncss": "^2.0.0",
     "orionjs": "^1.0.0",
     "run-sequence": "^1.1.5",
     "stylelint-scss": "^1.4.3",
