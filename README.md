@@ -90,6 +90,7 @@ During a build, the following happens:-
 - SASS is compiled and minified (if `minify` is true)
 - It is then autoprefixed using [autoprefixer](https://github.com/postcss/autoprefixer)
 - It is then linted for errors using [stylelint](https://github.com/stylelint/stylelint) (if `lint` is true)
+- A source map is generated using [gulp-sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps) and appended to the minified CSS
 - Unused CSS classes are removed using [UNCSS](https://github.com/giakki/uncss)
 - A compiled CSS file is created in the sass dist directory (default: `dist/css`)
 
