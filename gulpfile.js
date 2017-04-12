@@ -66,6 +66,8 @@ const jsDist = "dist/js";
 const gulp = require('gulp');
 // Required for SASS tags
 const sass = require('gulp-sass');
+// Required for SASS sourcemaps
+const sourcemaps = require('gulp-sourcemaps');
 // Used to lint SASS
 const gulpStylelint = require('gulp-stylelint');
 // Adds support for SASS globbing
@@ -188,6 +190,7 @@ dynamically which UNCSS is unable to detect.
 gulp.task('sass', function () {
 	return gulp.src(sassDev + '/*.scss')
 	.pipe(sassGlob())
+	.pipe(sourcemaps.init())
 	.pipe(gulpif(minify, sass({outputStyle: 'compressed', precision: 8}), sass({outputStyle: 'expanded', precision: 8})))
 	.pipe(gulpif(minify, rename({ suffix: '.min' })))
 	.on('error', sass.logError)
@@ -195,6 +198,7 @@ gulp.task('sass', function () {
 		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
 		cascade: false
 	}))
+	.pipe(sourcemaps.write())
 	.pipe(gulp.dest('./' + sassDist))
 });
 
@@ -203,6 +207,7 @@ gulp.task('sass', function () {
 gulp.task('sass-debug', function () {
 	return gulp.src(sassDev + '/*.scss')
 	.pipe(sassGlob())
+	.pipe(sourcemaps.init())
 	.pipe(sass({outputStyle: 'expanded', precision: 8}))
 	.pipe(gulpif(minify, rename({ suffix: '.min' })))
 	.on('error', sass.logError)
@@ -210,6 +215,7 @@ gulp.task('sass-debug', function () {
 		browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
 		cascade: false
 	}))
+	.pipe(sourcemaps.write())
 	.pipe(gulp.dest('./' + sassDist))
 });
 
@@ -235,7 +241,11 @@ gulp.task('uncss', function () {
 		ignore: [
 			/\.is-*/,
 			/\.has-*/,
-			/\.in-*/	
+			/\.in-*/,
+			/\#icon-*/,
+			/\.js-*/,
+			/\.ua-*/,
+			/\.no-*/
 		]
 	}))
 	.pipe(gulp.dest('./' + sassDist))
