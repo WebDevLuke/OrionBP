@@ -1,5 +1,7 @@
 /node_modules
 /reports
+/dev/js
+/dev/sass
 /dist
 /dev/sass/06 - components/sample.component.mycomponent.scss
 **npm-debug.log**
