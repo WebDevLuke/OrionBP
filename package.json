@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/WebDevLuke/Orion-Framework.git"
+    "url": "https://github.com/WebDevLuke/OrionBP.git"
   },
   "babel": {
     "presets": [
@@ -38,7 +38,7 @@
     "gulp-uglify": "^1.5.2",
     "gulp-uncss": "^1.0.6",
     "mkdirp": "^0.5.1",
-    "orioncss": "^2.4.0",
+    "orioncss": "^2.10.2",
     "orionjs": "^2.0.1",
     "run-sequence": "^1.1.5",
     "stylelint-scss": "^1.4.3",

@@ -147,7 +147,7 @@ gulp.task('setup', function(){
 		});
 	}
 	// Grab main sample and move to SASS root
-	gulp.src('node_modules/orioncss/sample.main-orion-framework.scss')
+	gulp.src('node_modules/orioncss/sample.main-orion-bp.scss')
 	.pipe(rename('main.scss'))
 	.pipe(gulp.dest(sassDev))
 	// Grab sample component and move to new components dir

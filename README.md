@@ -1,5 +1,5 @@
 <h1>
-	 <img height="67" width="391" src="https://cdn.rawgit.com/WebDevLuke/Orion-Framework/master/misc/orionbp-logo.svg">
+	 <img height="67" width="391" src="https://cdn.rawgit.com/WebDevLuke/OrionBP/master/misc/orionbp-logo.svg">
 </h1>
 
 [![CircleCI](https://circleci.com/gh/WebDevLuke/OrionBP/tree/master.svg?style=shield)](https://circleci.com/gh/WebDevLuke/OrionBP/tree/master)
